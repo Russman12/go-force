@@ -1,0 +1,13 @@
+{
+  "gitRepoId": "go-force",
+  "gitUserId": "russman12",
+  "importMappings": {
+    "io.ReadCloser": "io"
+  },
+  "typeMappings": {
+    "file": "io.ReadCloser"
+  },
+  "templateDir": "out",
+  "generatorName": "go",
+  "inputSpec": "api/openapi.yaml"
+}

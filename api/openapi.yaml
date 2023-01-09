@@ -1,0 +1,1166 @@
+openapi: 3.0.0
+info:
+  title: Salesforce Platform APIs
+  version: "56.0"
+servers:
+- url: http://{endpoint}
+paths:
+  /services/data/v{version}/jobs/query/{jobId}:
+    delete:
+      operationId: jobDelete
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successful response
+      summary: Delete Job Query
+      tags:
+      - Bulk v2 > Query
+    get:
+      operationId: jobStatus
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bulkQueryJobStatusResponseBody'
+          description: Successful response
+      summary: Get Job Info Query
+      tags:
+      - Bulk v2 > Query
+    patch:
+      operationId: jobAbort
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/bulkQueryAbortRequestBody'
+        content:
+          application/json:
+            schema:
+              example: '{\n\t\"state\":\"Aborted\"\n}'
+              properties:
+                state:
+                  enum:
+                  - Aborted
+                  type: string
+              title: bulkQueryAbortRequestBody
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bulkQueryAbortResponseBody'
+          description: Successful response
+      summary: Abort a Job Query
+      tags:
+      - Bulk v2 Query
+  /services/data/v{version}/jobs/query/{jobId}/results:
+    get:
+      operationId: jobResults
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: text/csv
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: |
+          A string that identifies a specific set of query results. Providing a value for this parameter returns only that set of results.
+          Omitting this parameter returns the first set of results.
+
+          You can find the locator string for the next set of results in the response of each request. See Example and Rules and Guidelines.
+
+          As long as the associated job exists, the locator string for a set of results does not change. You can use the locator to retrieve a set of results multiple times.
+        explode: true
+        in: query
+        name: locator
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: |
+          The maximum number of records to retrieve per set of results for the query. The request is still subject to the size limits.
+          If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size.
+
+          If you don’t provide a value for this parameter, the server uses a default value based on the service.
+        explode: true
+        in: query
+        name: maxRecords
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            text/csv:
+              schema:
+                format: binary
+                type: string
+          description: Successful response
+          headers:
+            Sforce-NumberOfRecords:
+              description: The number of records in this set.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Sforce-Locator:
+              description: |
+                The locator for the next set of results (if there are any). Use this value in other GET request to retrieve the next set of query results.
+                This value is a pseudo random string (for example, MTAwMDA). The length of this string varies depending on how many sets of results there are.
+
+                If there are no more sets of query results, this value is the string ‘null’.
+
+                See Example and Rules and Guidelines.
+              explode: false
+              schema:
+                type: string
+              style: simple
+      summary: Get Job Query Result
+      tags:
+      - Bulk v2 > Query
+  /services/data/v{version}/jobs/query:
+    get:
+      operationId: jobs
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: If set to true, the request only returns information about jobs
+          where PK Chunking is enabled
+        example: "false"
+        explode: true
+        in: query
+        name: isPkChunkingEnabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: BigObjectIngest Classic V2Query
+        explode: true
+        in: query
+        name: jobType
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: serial parallel
+        explode: true
+        in: query
+        name: concurrencyMode
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: use the value from the nextRecordsUrl from the previous set
+        explode: true
+        in: query
+        name: queryLocator
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bulkQueryJobsResponseBody'
+          description: Successful response
+      summary: Get All Query Jobs
+      tags:
+      - Bulk v2 > Query
+    post:
+      operationId: createQueryJob
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/bulkCreateQueryJobRequestBody'
+        content:
+          application/json:
+            schema:
+              example: '"{\n  \"operation\" : \"query\",\n  \"query\" : \"SELECT fields
+                FROM object WHERE filter\",\n  \"contentType\" : \"CSV\",\n  \"columnDelimiter\"
+                : \"BACKQUOTE | CARET | COMMA | PIPE | SEMICOLON | TAB\",\n  \"lineEnding\"
+                : \"CRLF | LF\"\n} "'
+              properties:
+                operation:
+                  type: string
+                query:
+                  type: string
+                contentType:
+                  type: string
+                columnDelimiter:
+                  type: string
+                lineEnding:
+                  type: string
+              required:
+              - operation
+              - query
+              title: bulkCreateQueryJobRequestBody
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bulkCreateQueryJobResponseBody'
+          description: Successful response
+      summary: Create job Query
+      tags:
+      - Bulk v2 > Query
+  /services/data/v{version}/jobs/ingest:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+      summary: Get All Jobs
+      tags:
+      - Bulk v2
+    post:
+      operationId: createJob
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/bulkCreateJobRequestBody'
+        content:
+          application/json:
+            schema:
+              example: '"{\n    \"object\": \"Asset\",\n    \"operation\": \"update\"\n}"'
+              properties:
+                assignmentRuleId:
+                  type: string
+                columnDelimiter:
+                  enum:
+                  - BACKQUOTE
+                  - CARET
+                  - COMMA
+                  - PIPE
+                  - SEMICOLON
+                  - TAB
+                  type: string
+                contentType:
+                  enum:
+                  - CSV
+                  type: string
+                externalIdFieldName:
+                  type: string
+                lineEnding:
+                  enum:
+                  - LF
+                  - CRLF
+                  type: string
+                object:
+                  type: string
+                operation:
+                  enum:
+                  - insert
+                  - delete
+                  - hardDelete
+                  - update
+                  - upsert
+                  type: string
+              required:
+              - object
+              - operation
+              title: bulkCreateJobRequestBody
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/bulkCreateJobResponseBody'
+          description: Successful response
+      summary: Create job
+      tags:
+      - Bulk v2
+  /services/data/v{version}/jobs/ingest/{jobId}/batches:
+    put:
+      operationId: uploadJobData
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          text/csv:
+            schema:
+              format: binary
+              type: string
+      responses:
+        "201":
+          description: Successful response
+      summary: Upload Job Data
+      tags:
+      - Bulk v2
+  /services/data/v{version}/jobs/ingest/{jobId}:
+    delete:
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/closeOrAbortJobResponse'
+          description: Successful response
+      summary: Delete Job
+      tags:
+      - Bulk v2
+    get:
+      operationId: getJobInfo
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkJobInfoResponseBody'
+          description: Successful response
+      summary: Get Job Info
+      tags:
+      - Bulk v2
+    patch:
+      operationId: closeOrAbortJob
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/closeOrAbortJobRequest'
+        content:
+          application/json:
+            schema:
+              example: '{\n\t\"state\":\"UploadComplete\"\n}'
+              properties:
+                state:
+                  enum:
+                  - UploadComplete
+                  - Aborted
+                  type: string
+              required:
+              - state
+              title: closeOrAbortJobRequest
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+      summary: Close or Abort a Job
+      tags:
+      - Bulk v2
+  /services/data/v{version}/jobs/ingest/{jobId}/successfulResults:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+      summary: Get Job Successful Record Results
+      tags:
+      - Bulk v2
+  /services/data/v{version}/jobs/ingest/{jobId}/failedResults:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+      summary: Get Job Failed Record Results
+      tags:
+      - Bulk v2
+  /services/data/v{version}/jobs/ingest/{jobId}/unprocessedrecords:
+    get:
+      parameters:
+      - explode: false
+        in: path
+        name: version
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+      summary: Get Job Unprocessed Record Results
+      tags:
+      - Bulk v2
+components:
+  parameters:
+    apiVersion:
+      explode: false
+      in: path
+      name: version
+      required: true
+      schema:
+        type: string
+      style: simple
+    bulkV2QueryJobId:
+      explode: false
+      in: path
+      name: jobId
+      required: true
+      schema:
+        type: string
+      style: simple
+    bulkV2IngestJobId:
+      explode: false
+      in: path
+      name: jobId
+      required: true
+      schema:
+        type: string
+      style: simple
+  requestBodies:
+    bulkQueryAbortRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bulkQueryAbortRequestBody'
+    closeOrAbortJobRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/closeOrAbortJobRequest'
+    bulkCreateJobRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bulkCreateJobRequestBody'
+    bulkCreateQueryJobRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/bulkCreateQueryJobRequestBody'
+  schemas:
+    bulkQueryAbortRequestBody:
+      example: '{\n\t\"state\":\"Aborted\"\n}'
+      properties:
+        state:
+          enum:
+          - Aborted
+          type: string
+      title: bulkQueryAbortRequestBody
+      type: object
+    bulkQueryJobsResponseBody:
+      example:
+        nextRecordsUrl: nextRecordsUrl
+        records:
+        - lineEnding: lineEnding
+          systemModstamp: systemModstamp
+          concurrencyMode: concurrencyMode
+          createdDate: createdDate
+          apiVersion: 0
+          id: id
+          state: state
+          jobType: jobType
+          operation: operation
+          contentType: contentType
+          createdById: createdById
+          object: object
+          columnDelimiter: columnDelimiter
+        - lineEnding: lineEnding
+          systemModstamp: systemModstamp
+          concurrencyMode: concurrencyMode
+          createdDate: createdDate
+          apiVersion: 0
+          id: id
+          state: state
+          jobType: jobType
+          operation: operation
+          contentType: contentType
+          createdById: createdById
+          object: object
+          columnDelimiter: columnDelimiter
+        done: true
+      properties:
+        done:
+          type: boolean
+        records:
+          items:
+            $ref: '#/components/schemas/bulkQueryJobsResponseBody_records'
+          type: array
+        nextRecordsUrl:
+          type: string
+      title: bulkQueryJobsResponseBody
+      type: object
+    bulkQueryJobStatusResponseBody:
+      example: |
+        {
+          "id" : "750R0000000zlh9IAA",
+          "operation" : "query",
+          "object" : "Account",
+          "createdById" : "005R0000000GiwjIAC",
+          "createdDate" : "2018-12-10T17:50:19.000+0000",
+          "systemModstamp" : "2018-12-10T17:51:27.000+0000",
+          "state" : "JobComplete",
+          "concurrencyMode" : "Parallel",
+          "contentType" : "CSV",
+          "apiVersion" : 46.0,
+          "jobType" : "V2Query",
+          "lineEnding" : "LF",
+          "columnDelimiter" : "COMMA",
+          "numberRecordsProcessed" : 500,
+          "retries" : 0,
+          "totalProcessingTime" : 334
+        }
+      properties:
+        id:
+          type: string
+        operation:
+          type: string
+        object:
+          type: string
+        createdById:
+          type: string
+        createdDate:
+          type: string
+        systemModstamp:
+          type: string
+        state:
+          enum:
+          - UploadComplete
+          - InProgress
+          - Aborted
+          - JobComplete
+          - Failed
+          type: string
+        concurrencyMode:
+          type: string
+        contentType:
+          type: string
+        apiVersion:
+          type: number
+        jobType:
+          type: string
+        lineEnding:
+          type: string
+        columnDelimiter:
+          type: string
+        numberRecordsProcessed:
+          format: int32
+          type: integer
+        retries:
+          format: int32
+          type: integer
+        totalProcessingTime:
+          format: int32
+          type: integer
+      title: bulkQueryJobStatusResponseBody
+      type: object
+    bulkCreateQueryJobResponseBody:
+      example: |
+        {
+          "id": "750R0000000zlh9IAA",
+          "operation": "query",
+          "object": "Account",
+          "createdById": "005R0000000GiwjIAC",
+          "createdDate": "2018-12-10T17:50:19.000+0000",
+          "systemModstamp": "2018-12-10T17:50:19.000+0000",
+          "state": "UploadComplete",
+          "concurrencyMode": "Parallel",
+          "contentType": "CSV",
+          "apiVersion": 46.0,
+          "lineEnding": "LF",
+          "columnDelimiter": "COMMA"
+        }
+      properties:
+        id:
+          type: string
+        operation:
+          type: string
+        object:
+          type: string
+        createdById:
+          type: string
+        createdDate:
+          type: string
+        systemModstamp:
+          type: string
+        state:
+          type: string
+        concurrencyMode:
+          type: string
+        contentType:
+          type: string
+        apiVersion:
+          type: number
+        lineEnding:
+          type: string
+        columnDelimiter:
+          type: string
+      title: bulkCreateQueryJobResponseBody
+      type: object
+    closeOrAbortJobRequest:
+      example: '{\n\t\"state\":\"UploadComplete\"\n}'
+      properties:
+        state:
+          enum:
+          - UploadComplete
+          - Aborted
+          type: string
+      required:
+      - state
+      title: closeOrAbortJobRequest
+      type: object
+    bulkQueryAbortResponseBody:
+      example:
+        createdDate: createdDate
+        apiVersion: 0
+        systemModstamp: systemModstamp
+        id: id
+        state: state
+        operation: operation
+        contentType: contentType
+        createdById: createdById
+        object: object
+        concurrencyMode: concurrencyMode
+      properties:
+        id:
+          type: string
+        operation:
+          type: string
+        object:
+          type: string
+        createdById:
+          type: string
+        createdDate:
+          type: string
+        systemModstamp:
+          type: string
+        state:
+          type: string
+        concurrencyMode:
+          type: string
+        contentType:
+          type: string
+        apiVersion:
+          format: int32
+          type: integer
+      title: bulkQueryAbortResponseBody
+      type: object
+    bulkCreateJobRequestBody:
+      example: '"{\n    \"object\": \"Asset\",\n    \"operation\": \"update\"\n}"'
+      properties:
+        assignmentRuleId:
+          type: string
+        columnDelimiter:
+          enum:
+          - BACKQUOTE
+          - CARET
+          - COMMA
+          - PIPE
+          - SEMICOLON
+          - TAB
+          type: string
+        contentType:
+          enum:
+          - CSV
+          type: string
+        externalIdFieldName:
+          type: string
+        lineEnding:
+          enum:
+          - LF
+          - CRLF
+          type: string
+        object:
+          type: string
+        operation:
+          enum:
+          - insert
+          - delete
+          - hardDelete
+          - update
+          - upsert
+          type: string
+      required:
+      - object
+      - operation
+      title: bulkCreateJobRequestBody
+      type: object
+    BulkJobInfoResponseBody:
+      example:
+        lineEnding: lineEnding
+        numberRecordsProcessed: 2
+        systemModstamp: systemModstamp
+        apiActiveProcessingTime: 5
+        concurrencyMode: concurrencyMode
+        retries: 6
+        apexProcessingTime: 5
+        contentUrl: contentUrl
+        createdDate: createdDate
+        apiVersion: 0
+        id: id
+        state: Open
+        jobType: jobType
+        totalProcessingTime: 1
+        operation: operation
+        contentType: contentType
+        createdById: createdById
+        object: object
+        columnDelimiter: columnDelimiter
+      properties:
+        id:
+          type: string
+        operation:
+          type: string
+        object:
+          type: string
+        createdById:
+          type: string
+        createdDate:
+          type: string
+        systemModstamp:
+          type: string
+        state:
+          enum:
+          - Open
+          - UploadComplete
+          - InProgress
+          - Aborted
+          - JobComplete
+          - Failed
+          type: string
+        concurrencyMode:
+          type: string
+        contentType:
+          type: string
+        apiVersion:
+          format: int32
+          type: integer
+        jobType:
+          type: string
+        contentUrl:
+          type: string
+        lineEnding:
+          type: string
+        columnDelimiter:
+          type: string
+        retries:
+          format: int32
+          type: integer
+        totalProcessingTime:
+          format: int32
+          type: integer
+        apiActiveProcessingTime:
+          format: int32
+          type: integer
+        apexProcessingTime:
+          format: int32
+          type: integer
+        numberRecordsProcessed:
+          format: int64
+          type: integer
+      title: BulkJobInfoResponseBody
+      type: object
+    closeOrAbortJobResponse:
+      example:
+        lineEnding: lineEnding
+        externalIdFieldName: externalIdFieldName
+        systemModstamp: systemModstamp
+        concurrencyMode: concurrencyMode
+        contentUrl: contentUrl
+        apiVersion: 0.8008281904610115
+        createdDate: createdDate
+        assignmentRuleId: assignmentRuleId
+        id: id
+        state: state
+        jobType: jobType
+        contentType: contentType
+        operation: operation
+        createdById: createdById
+        columnDelimiter: columnDelimiter
+        object: object
+      properties:
+        apiVersion:
+          type: number
+        assignmentRuleId:
+          type: string
+        columnDelimiter:
+          type: string
+        concurrencyMode:
+          type: string
+        contentType:
+          type: string
+        contentUrl:
+          type: string
+        createdById:
+          type: string
+        createdDate:
+          type: string
+        externalIdFieldName:
+          type: string
+        id:
+          type: string
+        jobType:
+          type: string
+        lineEnding:
+          type: string
+        object:
+          type: string
+        operation:
+          type: string
+        state:
+          type: string
+        systemModstamp:
+          type: string
+      title: closeOrAbortJobResponse
+      type: object
+    bulkCreateQueryJobRequestBody:
+      example: '"{\n  \"operation\" : \"query\",\n  \"query\" : \"SELECT fields FROM
+        object WHERE filter\",\n  \"contentType\" : \"CSV\",\n  \"columnDelimiter\"
+        : \"BACKQUOTE | CARET | COMMA | PIPE | SEMICOLON | TAB\",\n  \"lineEnding\"
+        : \"CRLF | LF\"\n} "'
+      properties:
+        operation:
+          type: string
+        query:
+          type: string
+        contentType:
+          type: string
+        columnDelimiter:
+          type: string
+        lineEnding:
+          type: string
+      required:
+      - operation
+      - query
+      title: bulkCreateQueryJobRequestBody
+      type: object
+    bulkQueryJobsResponseBody_records:
+      example:
+        lineEnding: lineEnding
+        systemModstamp: systemModstamp
+        concurrencyMode: concurrencyMode
+        createdDate: createdDate
+        apiVersion: 0
+        id: id
+        state: state
+        jobType: jobType
+        operation: operation
+        contentType: contentType
+        createdById: createdById
+        object: object
+        columnDelimiter: columnDelimiter
+      properties:
+        id:
+          type: string
+        operation:
+          type: string
+        object:
+          type: string
+        createdById:
+          type: string
+        createdDate:
+          type: string
+        systemModstamp:
+          type: string
+        state:
+          type: string
+        concurrencyMode:
+          type: string
+        contentType:
+          type: string
+        apiVersion:
+          format: int32
+          type: integer
+        jobType:
+          type: string
+        lineEnding:
+          type: string
+        columnDelimiter:
+          type: string
+      type: object
+    bulkCreateJobResponseBody:
+      example:
+        lineEnding: lineEnding
+        externalIdFieldName: externalIdFieldName
+        systemModstamp: systemModstamp
+        concurrencyMode: concurrencyMode
+        contentUrl: contentUrl
+        apiVersion: 0.8008281904610115
+        createdDate: createdDate
+        assignmentRuleId: assignmentRuleId
+        id: id
+        state: state
+        jobType: jobType
+        contentType: contentType
+        operation: operation
+        createdById: createdById
+        columnDelimiter: columnDelimiter
+        object: object
+      properties:
+        apiVersion:
+          description: The API version that the job was created in.
+          type: number
+        assignmentRuleId:
+          description: The ID of the assignment rule. This property is only shown
+            if an assignment rule is specified when the job is created.
+          type: string
+        columnDelimiter:
+          description: The column delimiter used for CSV job data.
+          type: string
+        concurrencyMode:
+          description: For future use. How the request was processed. Currently only
+            parallel mode is supported. (When other modes are added, the mode will
+            be chosen automatically by the API and will not be user configurable.)
+          type: string
+        contentType:
+          description: The format of the data being processed. Only CSV is supported.
+          type: string
+        contentUrl:
+          description: The URL to use for Upload Job Data requests for this job. Only
+            valid if the job is in Open state.
+          type: string
+        createdById:
+          description: The ID of the user who created the job.
+          type: string
+        createdDate:
+          description: The date and time in the UTC time zone when the job was created.
+          type: string
+        externalIdFieldName:
+          description: The name of the external ID field for an upsert.
+          type: string
+        id:
+          description: Unique ID for this job.
+          type: string
+        jobType:
+          description: The job’s type.
+          type: string
+        lineEnding:
+          description: The line ending used for CSV job data.
+          type: string
+        object:
+          description: The object type for the data being processed.
+          type: string
+        operation:
+          description: The processing operation for the job.
+          type: string
+        state:
+          description: The current state of processing for the job.
+          type: string
+        systemModstamp:
+          description: Date and time in the UTC time zone when the job finished.
+          type: string
+      required:
+      - id
+      title: bulkCreateJobResponseBody
+      type: object
