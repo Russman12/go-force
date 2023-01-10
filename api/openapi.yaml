@@ -1,21 +1,50 @@
 openapi: 3.0.0
 info:
+  contact:
+    email: russell-laboe@outlook.com
+    name: Russell Laboe
   title: Salesforce Platform APIs
   version: "56.0"
 servers:
-- url: http://{endpoint}
+- description: Salesforce domain
+  url: "{instanceUrl}/services/data/v{apiVersion}"
+  variables:
+    instanceUrl:
+      default: https://test.salesforce.com
+      description: Salesforce server domain
+    apiVersion:
+      default: "56.0"
+      description: Salesforce api version
 paths:
-  /services/data/v{version}/jobs/query/{jobId}:
+  /oauth2/token:
+    post:
+      operationId: oAuthUserPass
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/oAuthUserPass'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authResponse'
+          description: Successful response
+      servers:
+      - description: Sandbox login server.
+        url: https://test.salesforce.com/services
+      - description: production login server.
+        url: https://login.salesforce.com/services
+      - description: Custom login server.
+        url: "https://{domain}/services"
+      summary: Get OAuth2 token
+      tags:
+      - OAuth
+  /jobs/query/{jobId}:
     delete:
-      operationId: jobDelete
+      operationId: bulkQueryDeleteJob
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -30,15 +59,8 @@ paths:
       tags:
       - Bulk v2 > Query
     get:
-      operationId: jobStatus
+      operationId: bulkQueryJobInfo
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -51,21 +73,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/bulkQueryJobStatusResponseBody'
+                $ref: '#/components/schemas/bulkQueryJobInfo'
           description: Successful response
       summary: Get Job Info Query
       tags:
       - Bulk v2 > Query
     patch:
-      operationId: jobAbort
+      operationId: bulkQueryAbortJob
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -73,48 +88,22 @@ paths:
         schema:
           type: string
         style: simple
-      - example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
       requestBody:
-        $ref: '#/components/requestBodies/bulkQueryAbortRequestBody'
-        content:
-          application/json:
-            schema:
-              example: '{\n\t\"state\":\"Aborted\"\n}'
-              properties:
-                state:
-                  enum:
-                  - Aborted
-                  type: string
-              title: bulkQueryAbortRequestBody
-              type: object
+        $ref: '#/components/requestBodies/bulkQueryAbortJobRequest'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/bulkQueryAbortResponseBody'
+                $ref: '#/components/schemas/bulkQueryJobInfo'
           description: Successful response
       summary: Abort a Job Query
       tags:
       - Bulk v2 Query
-  /services/data/v{version}/jobs/query/{jobId}/results:
+  /jobs/query/{jobId}/results:
     get:
-      operationId: jobResults
+      operationId: bulkQueryJobResults
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -194,27 +183,12 @@ paths:
       summary: Get Job Query Result
       tags:
       - Bulk v2 > Query
-  /services/data/v{version}/jobs/query:
+  /jobs/query:
     get:
-      operationId: jobs
+      operationId: bulkQueryJobs
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
-      - example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: If set to true, the request only returns information about jobs
-          where PK Chunking is enabled
+      - description: "If set to true, the request only returns information about jobs\
+          \ where PK Chunking is enabled."
         example: "false"
         explode: true
         in: query
@@ -223,20 +197,28 @@ paths:
         schema:
           type: boolean
         style: form
-      - description: BigObjectIngest Classic V2Query
+      - description: Gets information only about jobs matching the specified job type.
         explode: true
         in: query
         name: jobType
         required: false
         schema:
+          enum:
+          - Classic
+          - V2Query
+          - V2Ingest
           type: string
         style: form
-      - description: serial parallel
+      - description: For future use. Gets information only about jobs matching the
+          specified concurrency mode. Possible values are serial and parallel.
         explode: true
         in: query
         name: concurrencyMode
         required: false
         schema:
+          enum:
+          - serial
+          - parallel
           type: string
         style: form
       - description: use the value from the nextRecordsUrl from the previous set
@@ -252,21 +234,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/bulkQueryJobsResponseBody'
+                $ref: '#/components/schemas/bulkQueryJobsInfos'
           description: Successful response
       summary: Get All Query Jobs
       tags:
       - Bulk v2 > Query
     post:
-      operationId: createQueryJob
+      operationId: bulkQueryCreateJob
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - example: application/json
         explode: false
         in: header
@@ -277,49 +252,48 @@ paths:
         style: simple
       requestBody:
         $ref: '#/components/requestBodies/bulkCreateQueryJobRequestBody'
-        content:
-          application/json:
-            schema:
-              example: '"{\n  \"operation\" : \"query\",\n  \"query\" : \"SELECT fields
-                FROM object WHERE filter\",\n  \"contentType\" : \"CSV\",\n  \"columnDelimiter\"
-                : \"BACKQUOTE | CARET | COMMA | PIPE | SEMICOLON | TAB\",\n  \"lineEnding\"
-                : \"CRLF | LF\"\n} "'
-              properties:
-                operation:
-                  type: string
-                query:
-                  type: string
-                contentType:
-                  type: string
-                columnDelimiter:
-                  type: string
-                lineEnding:
-                  type: string
-              required:
-              - operation
-              - query
-              title: bulkCreateQueryJobRequestBody
-              type: object
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/bulkCreateQueryJobResponseBody'
+                $ref: '#/components/schemas/bulkQueryJobInfo'
           description: Successful response
       summary: Create job Query
       tags:
       - Bulk v2 > Query
-  /services/data/v{version}/jobs/ingest:
+  /jobs/ingest:
     get:
+      operationId: bulkJobs
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
+      - explode: true
+        in: query
+        name: isPkChunkingEnabled
+        required: false
         schema:
+          description: "If set to true, filters jobs with PK chunking enabled."
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: jobType
+        required: false
+        schema:
+          description: Filters jobs based on job type
+          enum:
+          - BigObjectIngest
+          - Classic
+          - V2Ingest
           type: string
-        style: simple
+        style: form
+      - explode: true
+        in: query
+        name: queryLocator
+        required: false
+        schema:
+          format: uri
+          type: string
+        style: form
       responses:
         "200":
           content:
@@ -332,79 +306,22 @@ paths:
       - Bulk v2
     post:
       operationId: createJob
-      parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       requestBody:
         $ref: '#/components/requestBodies/bulkCreateJobRequestBody'
-        content:
-          application/json:
-            schema:
-              example: '"{\n    \"object\": \"Asset\",\n    \"operation\": \"update\"\n}"'
-              properties:
-                assignmentRuleId:
-                  type: string
-                columnDelimiter:
-                  enum:
-                  - BACKQUOTE
-                  - CARET
-                  - COMMA
-                  - PIPE
-                  - SEMICOLON
-                  - TAB
-                  type: string
-                contentType:
-                  enum:
-                  - CSV
-                  type: string
-                externalIdFieldName:
-                  type: string
-                lineEnding:
-                  enum:
-                  - LF
-                  - CRLF
-                  type: string
-                object:
-                  type: string
-                operation:
-                  enum:
-                  - insert
-                  - delete
-                  - hardDelete
-                  - update
-                  - upsert
-                  type: string
-              required:
-              - object
-              - operation
-              title: bulkCreateJobRequestBody
-              type: object
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/bulkCreateJobResponseBody'
+                $ref: '#/components/schemas/bulkJobInfo'
           description: Successful response
       summary: Create job
       tags:
       - Bulk v2
-  /services/data/v{version}/jobs/ingest/{jobId}/batches:
+  /jobs/ingest/{jobId}/batches:
     put:
       operationId: uploadJobData
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -424,16 +341,10 @@ paths:
       summary: Upload Job Data
       tags:
       - Bulk v2
-  /services/data/v{version}/jobs/ingest/{jobId}:
+  /jobs/ingest/{jobId}:
     delete:
+      operationId: bulkDeleteJob
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -443,10 +354,7 @@ paths:
         style: simple
       responses:
         "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/closeOrAbortJobResponse'
+          content: {}
           description: Successful response
       summary: Delete Job
       tags:
@@ -456,13 +364,6 @@ paths:
       parameters:
       - explode: false
         in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
         name: jobId
         required: true
         schema:
@@ -473,21 +374,14 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BulkJobInfoResponseBody'
+                $ref: '#/components/schemas/bulkJobInfo'
           description: Successful response
       summary: Get Job Info
       tags:
       - Bulk v2
     patch:
-      operationId: closeOrAbortJob
+      operationId: bulkCloseOrAbortJob
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -496,41 +390,21 @@ paths:
           type: string
         style: simple
       requestBody:
-        $ref: '#/components/requestBodies/closeOrAbortJobRequest'
-        content:
-          application/json:
-            schema:
-              example: '{\n\t\"state\":\"UploadComplete\"\n}'
-              properties:
-                state:
-                  enum:
-                  - UploadComplete
-                  - Aborted
-                  type: string
-              required:
-              - state
-              title: closeOrAbortJobRequest
-              type: object
+        $ref: '#/components/requestBodies/bulkCloseOrAbortJobRequest'
       responses:
         "200":
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/bulkJobInfo'
           description: Successful response
       summary: Close or Abort a Job
       tags:
       - Bulk v2
-  /services/data/v{version}/jobs/ingest/{jobId}/successfulResults:
+  /jobs/ingest/{jobId}/successfulResults:
     get:
+      operationId: bulkJobSuccessfulResults
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -541,23 +415,18 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/csv:
               schema:
-                type: object
+                format: binary
+                type: string
           description: Successful response
       summary: Get Job Successful Record Results
       tags:
       - Bulk v2
-  /services/data/v{version}/jobs/ingest/{jobId}/failedResults:
+  /jobs/ingest/{jobId}/failedResults:
     get:
+      operationId: bulkJobFailedResults
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -568,23 +437,18 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/csv:
               schema:
-                type: object
+                format: binary
+                type: string
           description: Successful response
       summary: Get Job Failed Record Results
       tags:
       - Bulk v2
-  /services/data/v{version}/jobs/ingest/{jobId}/unprocessedrecords:
+  /jobs/ingest/{jobId}/unprocessedrecords:
     get:
+      operationId: bulkJobUnprocessedRecords
       parameters:
-      - explode: false
-        in: path
-        name: version
-        required: true
-        schema:
-          type: string
-        style: simple
       - explode: false
         in: path
         name: jobId
@@ -595,23 +459,50 @@ paths:
       responses:
         "200":
           content:
-            application/json:
+            text/csv:
               schema:
-                type: object
+                format: binary
+                type: string
           description: Successful response
       summary: Get Job Unprocessed Record Results
       tags:
       - Bulk v2
+  /sobjects:
+    get:
+      operationId: sObjects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sObjectDescribes'
+          description: Successful response
+      tags:
+      - SObject
+  /sobjects/{sObject}/describe:
+    get:
+      operationId: sObjectDescribe
+      parameters:
+      - description: SObject name
+        example: Contact
+        explode: false
+        in: path
+        name: sObject
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sObjectDescribe'
+          description: Successful response
+      tags:
+      - SObject
 components:
   parameters:
-    apiVersion:
-      explode: false
-      in: path
-      name: version
-      required: true
-      schema:
-        type: string
-      style: simple
     bulkV2QueryJobId:
       explode: false
       in: path
@@ -629,112 +520,133 @@ components:
         type: string
       style: simple
   requestBodies:
-    bulkQueryAbortRequestBody:
+    bulkQueryAbortJobRequest:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/bulkQueryAbortRequestBody'
-    closeOrAbortJobRequest:
+            $ref: '#/components/schemas/bulkQueryJobInfo'
+    bulkCloseOrAbortJobRequest:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/closeOrAbortJobRequest'
+            $ref: '#/components/schemas/bulkCloseOrAbortJobRequest'
     bulkCreateJobRequestBody:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/bulkCreateJobRequestBody'
+            $ref: '#/components/schemas/bulkJob'
     bulkCreateQueryJobRequestBody:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/bulkCreateQueryJobRequestBody'
+            $ref: '#/components/schemas/bulkQueryJobCreateRequest'
   schemas:
-    bulkQueryAbortRequestBody:
-      example: '{\n\t\"state\":\"Aborted\"\n}'
-      properties:
-        state:
-          enum:
-          - Aborted
-          type: string
-      title: bulkQueryAbortRequestBody
-      type: object
-    bulkQueryJobsResponseBody:
+    authResponse:
       example:
-        nextRecordsUrl: nextRecordsUrl
-        records:
-        - lineEnding: lineEnding
-          systemModstamp: systemModstamp
-          concurrencyMode: concurrencyMode
-          createdDate: createdDate
-          apiVersion: 0
-          id: id
-          state: state
-          jobType: jobType
-          operation: operation
-          contentType: contentType
-          createdById: createdById
-          object: object
-          columnDelimiter: columnDelimiter
-        - lineEnding: lineEnding
-          systemModstamp: systemModstamp
-          concurrencyMode: concurrencyMode
-          createdDate: createdDate
-          apiVersion: 0
-          id: id
-          state: state
-          jobType: jobType
-          operation: operation
-          contentType: contentType
-          createdById: createdById
-          object: object
-          columnDelimiter: columnDelimiter
-        done: true
+        access_token: access_token
+        signature: signature
+        instance_url: instance_url
+        id: id
+        token_type: token_type
+        issued_at: issued_at
       properties:
-        done:
-          type: boolean
-        records:
-          items:
-            $ref: '#/components/schemas/bulkQueryJobsResponseBody_records'
-          type: array
-        nextRecordsUrl:
+        access_token:
           type: string
-      title: bulkQueryJobsResponseBody
-      type: object
-    bulkQueryJobStatusResponseBody:
-      example: |
-        {
-          "id" : "750R0000000zlh9IAA",
-          "operation" : "query",
-          "object" : "Account",
-          "createdById" : "005R0000000GiwjIAC",
-          "createdDate" : "2018-12-10T17:50:19.000+0000",
-          "systemModstamp" : "2018-12-10T17:51:27.000+0000",
-          "state" : "JobComplete",
-          "concurrencyMode" : "Parallel",
-          "contentType" : "CSV",
-          "apiVersion" : 46.0,
-          "jobType" : "V2Query",
-          "lineEnding" : "LF",
-          "columnDelimiter" : "COMMA",
-          "numberRecordsProcessed" : 500,
-          "retries" : 0,
-          "totalProcessingTime" : 334
-        }
-      properties:
+        instance_url:
+          type: string
         id:
           type: string
+        token_type:
+          type: string
+        issued_at:
+          type: string
+        signature:
+          type: string
+      required:
+      - access_token
+      - id
+      - instance_url
+      - issued_at
+      - signature
+      - token_type
+    oAuthUserPass:
+      properties:
+        grant_type:
+          default: password
+          description: Sets the value of this parameter to password.
+          enum:
+          - password
+          type: string
+        client_id:
+          description: The consumer key provided in the connected app.
+          type: string
+        client_secret:
+          description: The consumer secret provided in the connected app.
+          type: string
+        username:
+          description: Your Salesforce username.
+          type: string
+        password:
+          description: Your Salesforce password.
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - password
+      - username
+      type: object
+    bulkQueryJob:
+      properties:
         operation:
+          description: The type of query.
+          enum:
+          - query
+          - queryAll
+          type: string
+        contentType:
+          description: The format that is used for the results. Currently the only
+            supported value is CSV.
+          enum:
+          - CSV
+          type: string
+        columnDelimiter:
+          description: The column delimiter used for CSV job data. The default value
+            is COMMA.
+          enum:
+          - BACKQUOTE
+          - CARET
+          - COMMA
+          - PIPE
+          - SEMICOLON
+          - TAB
+          type: string
+        lineEnding:
+          description: "The line ending used for CSV job data, marking the end of\
+            \ a data row. The default is LF."
+          enum:
+          - LF
+          - CRLF
+          type: string
+      type: object
+    bulkQueryJobInfoExt:
+      properties:
+        id:
+          description: The unique ID for this job.
           type: string
         object:
+          description: The object type being queried.
           type: string
         createdById:
+          description: The ID of the user who created the job.
           type: string
         createdDate:
+          description: The UTC date and time when the job was created.
           type: string
         systemModstamp:
+          description: The UTC date and time when the API last updated the job information.
           type: string
         state:
+          description: The current state of processing for the job.
           enum:
           - UploadComplete
           - InProgress
@@ -743,125 +655,96 @@ components:
           - Failed
           type: string
         concurrencyMode:
-          type: string
-        contentType:
+          description: "Reserved for future use. How the request is processed. Currently\
+            \ only parallel mode is supported. (When other modes are added, the API\
+            \ chooses the mode automatically. The mode isn’t user configurable.)"
           type: string
         apiVersion:
+          description: The API version that the job was created in.
           type: number
         jobType:
-          type: string
-        lineEnding:
-          type: string
-        columnDelimiter:
+          description: "The job’s type. For a query job, the type is always V2Query."
+          enum:
+          - V2Query
           type: string
         numberRecordsProcessed:
-          format: int32
+          description: The number of records processed in this job.
+          format: int64
           type: integer
         retries:
+          description: The number of times that Salesforce attempted to save the results
+            of an operation. Repeated attempts indicate a problem such as a lock contention.
           format: int32
           type: integer
         totalProcessingTime:
-          format: int32
+          description: The number of milliseconds taken to process the job.
+          format: int64
           type: integer
-      title: bulkQueryJobStatusResponseBody
       type: object
-    bulkCreateQueryJobResponseBody:
-      example: |
-        {
-          "id": "750R0000000zlh9IAA",
-          "operation": "query",
-          "object": "Account",
-          "createdById": "005R0000000GiwjIAC",
-          "createdDate": "2018-12-10T17:50:19.000+0000",
-          "systemModstamp": "2018-12-10T17:50:19.000+0000",
-          "state": "UploadComplete",
-          "concurrencyMode": "Parallel",
-          "contentType": "CSV",
-          "apiVersion": 46.0,
-          "lineEnding": "LF",
-          "columnDelimiter": "COMMA"
-        }
+    bulkQueryJobInfo:
+      allOf:
+      - $ref: '#/components/schemas/bulkQueryJobInfoExt'
+      - $ref: '#/components/schemas/bulkQueryJob'
+      required:
+      - apiVersion
+      - concurrencyMode
+      - contentType
+      - createdById
+      - createdDate
+      - id
+      - object
+      - operation
+      - state
+      - systemModstamp
+    bulkQueryJobsInfos:
+      example:
+        nextRecordsUrl: https://openapi-generator.tech
+        records:
+        - null
+        - null
+        done: true
       properties:
-        id:
-          type: string
-        operation:
-          type: string
-        object:
-          type: string
-        createdById:
-          type: string
-        createdDate:
-          type: string
-        systemModstamp:
-          type: string
-        state:
-          type: string
-        concurrencyMode:
-          type: string
-        contentType:
-          type: string
-        apiVersion:
-          type: number
-        lineEnding:
-          type: string
-        columnDelimiter:
-          type: string
-      title: bulkCreateQueryJobResponseBody
-      type: object
-    closeOrAbortJobRequest:
-      example: '{\n\t\"state\":\"UploadComplete\"\n}'
-      properties:
-        state:
-          enum:
-          - UploadComplete
-          - Aborted
+        done:
+          description: This is true if this is the last (or only) set of results.
+            It is false if there are more records to fetch.
+          type: boolean
+        records:
+          description: An array of record objects.
+          items:
+            $ref: '#/components/schemas/bulkQueryJobInfo'
+          type: array
+        nextRecordsUrl:
+          description: |
+            The URI to get the next set of records (if there are any).
+            This method returns up to 1,000 result rows per request. If there are more than 1,000 records, use the nextRecordsUrl to get the next set of records.
+            This parameter is null if there are no more records to fetch.
+          format: uri
           type: string
       required:
-      - state
-      title: closeOrAbortJobRequest
-      type: object
-    bulkQueryAbortResponseBody:
-      example:
-        createdDate: createdDate
-        apiVersion: 0
-        systemModstamp: systemModstamp
-        id: id
-        state: state
-        operation: operation
-        contentType: contentType
-        createdById: createdById
-        object: object
-        concurrencyMode: concurrencyMode
+      - done
+      - records
+    bulkQueryJobCreateRequest:
+      allOf:
+      - $ref: '#/components/schemas/bulkQueryJob'
+      - $ref: '#/components/schemas/bulkQueryJobCreateRequestExt'
+      required:
+      - operation
+      - query
+    bulkQueryJobCreateRequestExt:
       properties:
-        id:
+        query:
+          description: The query to be performed.
           type: string
-        operation:
-          type: string
-        object:
-          type: string
-        createdById:
-          type: string
-        createdDate:
-          type: string
-        systemModstamp:
-          type: string
-        state:
-          type: string
-        concurrencyMode:
-          type: string
-        contentType:
-          type: string
-        apiVersion:
-          format: int32
-          type: integer
-      title: bulkQueryAbortResponseBody
       type: object
-    bulkCreateJobRequestBody:
-      example: '"{\n    \"object\": \"Asset\",\n    \"operation\": \"update\"\n}"'
+      example: null
+    bulkJob:
       properties:
         assignmentRuleId:
+          description: The ID of the assignment rule. This property is only shown
+            if an assignment rule is specified when the job is created.
           type: string
         columnDelimiter:
+          description: The column delimiter used for CSV job data.
           enum:
           - BACKQUOTE
           - CARET
@@ -871,19 +754,24 @@ components:
           - TAB
           type: string
         contentType:
+          description: The format of the data being processed. Only CSV is supported.
           enum:
           - CSV
           type: string
         externalIdFieldName:
+          description: The name of the external ID field for an upsert.
           type: string
         lineEnding:
+          description: The line ending used for CSV job data.
           enum:
           - LF
           - CRLF
           type: string
         object:
+          description: The object type for the data being processed.
           type: string
         operation:
+          description: The processing operation for the job.
           enum:
           - insert
           - delete
@@ -894,237 +782,17 @@ components:
       required:
       - object
       - operation
-      title: bulkCreateJobRequestBody
+      title: bulkJob
       type: object
-    BulkJobInfoResponseBody:
-      example:
-        lineEnding: lineEnding
-        numberRecordsProcessed: 2
-        systemModstamp: systemModstamp
-        apiActiveProcessingTime: 5
-        concurrencyMode: concurrencyMode
-        retries: 6
-        apexProcessingTime: 5
-        contentUrl: contentUrl
-        createdDate: createdDate
-        apiVersion: 0
-        id: id
-        state: Open
-        jobType: jobType
-        totalProcessingTime: 1
-        operation: operation
-        contentType: contentType
-        createdById: createdById
-        object: object
-        columnDelimiter: columnDelimiter
-      properties:
-        id:
-          type: string
-        operation:
-          type: string
-        object:
-          type: string
-        createdById:
-          type: string
-        createdDate:
-          type: string
-        systemModstamp:
-          type: string
-        state:
-          enum:
-          - Open
-          - UploadComplete
-          - InProgress
-          - Aborted
-          - JobComplete
-          - Failed
-          type: string
-        concurrencyMode:
-          type: string
-        contentType:
-          type: string
-        apiVersion:
-          format: int32
-          type: integer
-        jobType:
-          type: string
-        contentUrl:
-          type: string
-        lineEnding:
-          type: string
-        columnDelimiter:
-          type: string
-        retries:
-          format: int32
-          type: integer
-        totalProcessingTime:
-          format: int32
-          type: integer
-        apiActiveProcessingTime:
-          format: int32
-          type: integer
-        apexProcessingTime:
-          format: int32
-          type: integer
-        numberRecordsProcessed:
-          format: int64
-          type: integer
-      title: BulkJobInfoResponseBody
-      type: object
-    closeOrAbortJobResponse:
-      example:
-        lineEnding: lineEnding
-        externalIdFieldName: externalIdFieldName
-        systemModstamp: systemModstamp
-        concurrencyMode: concurrencyMode
-        contentUrl: contentUrl
-        apiVersion: 0.8008281904610115
-        createdDate: createdDate
-        assignmentRuleId: assignmentRuleId
-        id: id
-        state: state
-        jobType: jobType
-        contentType: contentType
-        operation: operation
-        createdById: createdById
-        columnDelimiter: columnDelimiter
-        object: object
-      properties:
-        apiVersion:
-          type: number
-        assignmentRuleId:
-          type: string
-        columnDelimiter:
-          type: string
-        concurrencyMode:
-          type: string
-        contentType:
-          type: string
-        contentUrl:
-          type: string
-        createdById:
-          type: string
-        createdDate:
-          type: string
-        externalIdFieldName:
-          type: string
-        id:
-          type: string
-        jobType:
-          type: string
-        lineEnding:
-          type: string
-        object:
-          type: string
-        operation:
-          type: string
-        state:
-          type: string
-        systemModstamp:
-          type: string
-      title: closeOrAbortJobResponse
-      type: object
-    bulkCreateQueryJobRequestBody:
-      example: '"{\n  \"operation\" : \"query\",\n  \"query\" : \"SELECT fields FROM
-        object WHERE filter\",\n  \"contentType\" : \"CSV\",\n  \"columnDelimiter\"
-        : \"BACKQUOTE | CARET | COMMA | PIPE | SEMICOLON | TAB\",\n  \"lineEnding\"
-        : \"CRLF | LF\"\n} "'
-      properties:
-        operation:
-          type: string
-        query:
-          type: string
-        contentType:
-          type: string
-        columnDelimiter:
-          type: string
-        lineEnding:
-          type: string
-      required:
-      - operation
-      - query
-      title: bulkCreateQueryJobRequestBody
-      type: object
-    bulkQueryJobsResponseBody_records:
-      example:
-        lineEnding: lineEnding
-        systemModstamp: systemModstamp
-        concurrencyMode: concurrencyMode
-        createdDate: createdDate
-        apiVersion: 0
-        id: id
-        state: state
-        jobType: jobType
-        operation: operation
-        contentType: contentType
-        createdById: createdById
-        object: object
-        columnDelimiter: columnDelimiter
-      properties:
-        id:
-          type: string
-        operation:
-          type: string
-        object:
-          type: string
-        createdById:
-          type: string
-        createdDate:
-          type: string
-        systemModstamp:
-          type: string
-        state:
-          type: string
-        concurrencyMode:
-          type: string
-        contentType:
-          type: string
-        apiVersion:
-          format: int32
-          type: integer
-        jobType:
-          type: string
-        lineEnding:
-          type: string
-        columnDelimiter:
-          type: string
-      type: object
-    bulkCreateJobResponseBody:
-      example:
-        lineEnding: lineEnding
-        externalIdFieldName: externalIdFieldName
-        systemModstamp: systemModstamp
-        concurrencyMode: concurrencyMode
-        contentUrl: contentUrl
-        apiVersion: 0.8008281904610115
-        createdDate: createdDate
-        assignmentRuleId: assignmentRuleId
-        id: id
-        state: state
-        jobType: jobType
-        contentType: contentType
-        operation: operation
-        createdById: createdById
-        columnDelimiter: columnDelimiter
-        object: object
+    bulkJobInfoExt:
       properties:
         apiVersion:
           description: The API version that the job was created in.
           type: number
-        assignmentRuleId:
-          description: The ID of the assignment rule. This property is only shown
-            if an assignment rule is specified when the job is created.
-          type: string
-        columnDelimiter:
-          description: The column delimiter used for CSV job data.
-          type: string
         concurrencyMode:
-          description: For future use. How the request was processed. Currently only
-            parallel mode is supported. (When other modes are added, the mode will
-            be chosen automatically by the API and will not be user configurable.)
-          type: string
-        contentType:
-          description: The format of the data being processed. Only CSV is supported.
+          description: "For future use. How the request was processed. Currently only\
+            \ parallel mode is supported. (When other modes are added, the mode will\
+            \ be chosen automatically by the API and will not be user configurable.)"
           type: string
         contentUrl:
           description: The URL to use for Upload Job Data requests for this job. Only
@@ -1136,31 +804,886 @@ components:
         createdDate:
           description: The date and time in the UTC time zone when the job was created.
           type: string
-        externalIdFieldName:
-          description: The name of the external ID field for an upsert.
-          type: string
         id:
           description: Unique ID for this job.
           type: string
         jobType:
           description: The job’s type.
-          type: string
-        lineEnding:
-          description: The line ending used for CSV job data.
-          type: string
-        object:
-          description: The object type for the data being processed.
-          type: string
-        operation:
-          description: The processing operation for the job.
-          type: string
-        state:
-          description: The current state of processing for the job.
+          enum:
+          - BigObjectIngest
+          - Classic
+          - V2Ingest
           type: string
         systemModstamp:
           description: Date and time in the UTC time zone when the job finished.
           type: string
-      required:
-      - id
-      title: bulkCreateJobResponseBody
+        state:
+          description: The current state of processing for the job.
+          enum:
+          - open
+          - UploadComplete
+          - Aborted
+          - JobComplete
+          type: string
+        apexProcessingTime:
+          description: "The number of milliseconds taken to process triggers and other\
+            \ processes related to the job data. This doesn't include the time used\
+            \ for processing asynchronous and batch Apex operations. If there are\
+            \ no triggers, the value is 0."
+          format: int64
+          type: integer
+        apiActiveProcessingTime:
+          description: "The number of milliseconds taken to actively process the job\
+            \ and includes apexProcessingTime, but doesn't include the time the job\
+            \ waited in the queue to be processed or the time required for serialization\
+            \ and deserialization."
+          format: int64
+          type: integer
+        errorMessage:
+          description: The error message shown for jobs with errors.
+          type: string
+        numberRecordsFailed:
+          description: The number of records that were not processed successfully
+            in this job.
+          format: int64
+          type: integer
+        numberRecordsProcessed:
+          description: The number of records already processed.
+          format: int64
+          type: integer
+        retries:
+          description: "The number of times that Salesforce attempted to save the\
+            \ results of an operation. The repeated attempts are due to a problem,\
+            \ such as a lock contention."
+          format: int32
+          type: integer
+        totalProcessingTime:
+          description: The number of milliseconds taken to process the job.
+          format: int64
+          type: integer
       type: object
+    bulkJobInfo:
+      allOf:
+      - $ref: '#/components/schemas/bulkJob'
+      - $ref: '#/components/schemas/bulkJobInfoExt'
+      required:
+      - apiVersion
+      - assignmentRuleId
+      - columnDelimiter
+      - concurrencyMode
+      - contentType
+      - contentUrl
+      - createdById
+      - createdDate
+      - externalIdFieldName
+      - id
+      - jobType
+      - lineEnding
+      - object
+      - operation
+      - state
+      - systemModstamp
+    bulkJobs:
+      properties:
+        done:
+          description: "Indicates whether there are more jobs to get. If false, use\
+            \ the nextRecordsUrl value to retrieve the next group of jobs."
+          type: boolean
+        records:
+          description: Contains information for each retrieved job.
+          items:
+            $ref: '#/components/schemas/bulkJobInfo'
+          type: array
+        nextRecordsUrl:
+          description: A URL that contains a query locator used to get the next set
+            of results in a subsequent request if done isn’t true.
+          format: uri
+          type: string
+      required:
+      - done
+      - records
+    bulkCloseOrAbortJobRequest:
+      example:
+        state: UploadComplete
+      properties:
+        state:
+          description: "The state to update the job to. Use UploadComplete to close\
+            \ a job, or Aborted to abort a job."
+          enum:
+          - UploadComplete
+          - Aborted
+          type: string
+      required:
+      - state
+      title: bulkCloseOrAbortJobRequest
+      type: object
+    sObjectDescribe:
+      example:
+        mruEnabled: true
+        updateable: true
+        activateable: true
+        childRelationships:
+        - relationshipName: Accounts__r
+          field: Primary_Contact__c
+          deprecatedAndHidden: true
+          junctionReferenceTo:
+          - "{}"
+          - "{}"
+          junctionIdListNames:
+          - "{}"
+          - "{}"
+          childSObject: Account
+          cascadeDelete: true
+          restrictedDelete: true
+        - relationshipName: Accounts__r
+          field: Primary_Contact__c
+          deprecatedAndHidden: true
+          junctionReferenceTo:
+          - "{}"
+          - "{}"
+          junctionIdListNames:
+          - "{}"
+          - "{}"
+          childSObject: Account
+          cascadeDelete: true
+          restrictedDelete: true
+        recordTypeInfos:
+        - defaultRecordTypeMapping: true
+          urls:
+            layout: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+          recordTypeId: 012000000000000AAA
+          available: true
+          name: Master
+          active: true
+          developerName: Master
+          master: true
+        - defaultRecordTypeMapping: true
+          urls:
+            layout: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+          recordTypeId: 012000000000000AAA
+          available: true
+          name: Master
+          active: true
+          developerName: Master
+          master: true
+        deprecatedAndHidden: true
+        supportedScopes:
+        - name: everything
+          label: All contacts
+        - name: everything
+          label: All contacts
+        searchLayoutable: true
+        sobjectDescribeOption: FULL
+        deletable: true
+        replicateable: true
+        actionOverrides:
+        - formFactor: LARGE
+          name: View
+          pageId: 0M03b000000PGADCA4
+          url: url
+          isAvailableInTouch: true
+        - formFactor: LARGE
+          name: View
+          pageId: 0M03b000000PGADCA4
+          url: url
+          isAvailableInTouch: true
+        isSubtype: true
+        lookupLayoutable: lookupLayoutable
+        listviewable: listviewable
+        mergeable: true
+        urls: "{}"
+        compactLayoutable: true
+        feedEnabled: true
+        extendsInterfaces: extendsInterfaces
+        networkScopeFieldName: networkScopeFieldName
+        customSetting: true
+        isInterface: true
+        implementedBy: implementedBy
+        implementsInterfaces: implementsInterfaces
+        extendedBy: extendedBy
+        defaultImplementation: defaultImplementation
+        deepCloneable: true
+        layoutable: true
+        custom: true
+        associateParentEntity: associateParentEntity
+        undeletable: true
+        label: Contact
+        keyPrefix: "3"
+        searchable: true
+        namedLayoutInfos:
+        - ""
+        - ""
+        queryable: true
+        createable: true
+        retrieveable: true
+        associateEntityType: associateEntityType
+        hasSubtypes: true
+        name: Contact
+        fields:
+        - defaultValue: defaultValue
+          precision: 0
+          compoundFieldName: compoundFieldName
+          nameField: true
+          type: id
+          restrictedDelete: true
+          relationshipName: relationshipName
+          calculatedFormula: calculatedFormula
+          controllerName: controllerName
+          namePointing: true
+          defaultValueFormula: defaultValueFormula
+          calculated: true
+          writeRequiresMasterRead: true
+          inlineHelpText: inlineHelpText
+          picklistValues:
+          - validFor: validFor
+            defaultValue: true
+            active: true
+            label: Bishop
+            value: Bishop
+          - validFor: validFor
+            defaultValue: true
+            active: true
+            label: Bishop
+            value: Bishop
+          aiPredictionField: true
+          filterable: true
+          maskType: maskType
+          queryByDistance: true
+          caseSensitive: true
+          aggregatable: true
+          referenceTo:
+          - User
+          - User
+          soapType: tns:ID
+          unique: true
+          name: Id
+          highScaleNumber: true
+          idLookup: true
+          displayLocationInDecimal: true
+          defaultedOnCreate: true
+          updateable: true
+          deprecatedAndHidden: true
+          byteLength: 18
+          scale: 0
+          polymorphicForeignKey: true
+          nillable: true
+          htmlFormatted: true
+          referenceTargetField: referenceTargetField
+          cascadeDelete: true
+          mask: mask
+          permissionable: true
+          relationshipOrder: relationshipOrder
+          custom: true
+          length: 18
+          externalId: true
+          dependentPicklist: true
+          label: Contact ID
+          sortable: true
+          autoNumber: true
+          filteredLookupInfo: filteredLookupInfo
+          restrictedPicklist: true
+          createable: true
+          encrypted: true
+          searchPrefilterable: true
+          extraTypeInfo: extraTypeInfo
+          groupable: true
+          digits: 0
+          formulaTreatNullNumberAsZero: true
+        - defaultValue: defaultValue
+          precision: 0
+          compoundFieldName: compoundFieldName
+          nameField: true
+          type: id
+          restrictedDelete: true
+          relationshipName: relationshipName
+          calculatedFormula: calculatedFormula
+          controllerName: controllerName
+          namePointing: true
+          defaultValueFormula: defaultValueFormula
+          calculated: true
+          writeRequiresMasterRead: true
+          inlineHelpText: inlineHelpText
+          picklistValues:
+          - validFor: validFor
+            defaultValue: true
+            active: true
+            label: Bishop
+            value: Bishop
+          - validFor: validFor
+            defaultValue: true
+            active: true
+            label: Bishop
+            value: Bishop
+          aiPredictionField: true
+          filterable: true
+          maskType: maskType
+          queryByDistance: true
+          caseSensitive: true
+          aggregatable: true
+          referenceTo:
+          - User
+          - User
+          soapType: tns:ID
+          unique: true
+          name: Id
+          highScaleNumber: true
+          idLookup: true
+          displayLocationInDecimal: true
+          defaultedOnCreate: true
+          updateable: true
+          deprecatedAndHidden: true
+          byteLength: 18
+          scale: 0
+          polymorphicForeignKey: true
+          nillable: true
+          htmlFormatted: true
+          referenceTargetField: referenceTargetField
+          cascadeDelete: true
+          mask: mask
+          permissionable: true
+          relationshipOrder: relationshipOrder
+          custom: true
+          length: 18
+          externalId: true
+          dependentPicklist: true
+          label: Contact ID
+          sortable: true
+          autoNumber: true
+          filteredLookupInfo: filteredLookupInfo
+          restrictedPicklist: true
+          createable: true
+          encrypted: true
+          searchPrefilterable: true
+          extraTypeInfo: extraTypeInfo
+          groupable: true
+          digits: 0
+          formulaTreatNullNumberAsZero: true
+        labelPlural: Contacts
+        triggerable: true
+      properties:
+        activateable:
+          type: boolean
+        associateEntityType:
+          nullable: true
+          type: string
+        associateParentEntity:
+          nullable: true
+          type: string
+        compactLayoutable:
+          type: boolean
+        createable:
+          type: boolean
+        custom:
+          type: boolean
+        customSetting:
+          type: boolean
+        deepCloneable:
+          type: boolean
+        defaultImplementation:
+          nullable: true
+          type: string
+        deletable:
+          type: boolean
+        deprecatedAndHidden:
+          type: boolean
+        extendedBy:
+          nullable: true
+          type: string
+        extendsInterfaces:
+          nullable: true
+          type: string
+        feedEnabled:
+          type: boolean
+        hasSubtypes:
+          type: boolean
+        implementedBy:
+          nullable: true
+          type: string
+        implementsInterfaces:
+          nullable: true
+          type: string
+        isInterface:
+          type: boolean
+        isSubtype:
+          type: boolean
+        keyPrefix:
+          example: "3"
+          type: string
+        label:
+          example: Contact
+          type: string
+        labelPlural:
+          example: Contacts
+          type: string
+        layoutable:
+          type: boolean
+        listviewable:
+          nullable: true
+          type: string
+        lookupLayoutable:
+          nullable: true
+          type: string
+        mergeable:
+          type: boolean
+        mruEnabled:
+          type: boolean
+        name:
+          example: Contact
+          type: string
+        networkScopeFieldName:
+          nullable: true
+          type: string
+        queryable:
+          type: boolean
+        replicateable:
+          type: boolean
+        retrieveable:
+          type: boolean
+        searchLayoutable:
+          type: boolean
+        searchable:
+          type: boolean
+        sobjectDescribeOption:
+          example: FULL
+          type: string
+        triggerable:
+          type: boolean
+        undeletable:
+          type: boolean
+        updateable:
+          type: boolean
+        namedLayoutInfos:
+          items: {}
+          type: array
+        actionOverrides:
+          items:
+            $ref: '#/components/schemas/sObjectDescribeActionOverrides'
+          type: array
+        childRelationships:
+          items:
+            $ref: '#/components/schemas/sObjectDescribeChildRelationships'
+          type: array
+        recordTypeInfos:
+          items:
+            $ref: '#/components/schemas/sObjectRecordTypeInfo'
+          type: array
+        supportedScopes:
+          items:
+            $ref: '#/components/schemas/sObjectDescribeSupportedScopes'
+          type: array
+        urls:
+          type: object
+        fields:
+          items:
+            $ref: '#/components/schemas/sObjectFieldDescribe'
+          type: array
+      required:
+      - keyPrefix
+      - label
+      - labelPlural
+      - name
+      title: sObjectDescribe
+      type: object
+    sObjectDescribeActionOverrides:
+      example:
+        formFactor: LARGE
+        name: View
+        pageId: 0M03b000000PGADCA4
+        url: url
+        isAvailableInTouch: true
+      properties:
+        formFactor:
+          example: LARGE
+          type: string
+        isAvailableInTouch:
+          type: boolean
+        name:
+          example: View
+          type: string
+        pageId:
+          example: 0M03b000000PGADCA4
+          type: string
+        url:
+          nullable: true
+          type: string
+      type: object
+    sObjectDescribeChildRelationships:
+      example:
+        relationshipName: Accounts__r
+        field: Primary_Contact__c
+        deprecatedAndHidden: true
+        junctionReferenceTo:
+        - "{}"
+        - "{}"
+        junctionIdListNames:
+        - "{}"
+        - "{}"
+        childSObject: Account
+        cascadeDelete: true
+        restrictedDelete: true
+      properties:
+        cascadeDelete:
+          type: boolean
+        childSObject:
+          example: Account
+          type: string
+        deprecatedAndHidden:
+          type: boolean
+        field:
+          example: Primary_Contact__c
+          type: string
+        junctionIdListNames:
+          items:
+            type: string
+          type: array
+        junctionReferenceTo:
+          items:
+            type: string
+          type: array
+        relationshipName:
+          example: Accounts__r
+          type: string
+        restrictedDelete:
+          type: boolean
+      type: object
+    sObjectRecordTypeInfoUrls:
+      example:
+        layout: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+      properties:
+        layout:
+          example: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+          type: string
+      type: object
+    sObjectRecordTypeInfo:
+      example:
+        defaultRecordTypeMapping: true
+        urls:
+          layout: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+        recordTypeId: 012000000000000AAA
+        available: true
+        name: Master
+        active: true
+        developerName: Master
+        master: true
+      properties:
+        active:
+          type: boolean
+        available:
+          type: boolean
+        defaultRecordTypeMapping:
+          type: boolean
+        developerName:
+          example: Master
+          type: string
+        master:
+          type: boolean
+        name:
+          example: Master
+          type: string
+        recordTypeId:
+          example: 012000000000000AAA
+          type: string
+        urls:
+          $ref: '#/components/schemas/sObjectRecordTypeInfoUrls'
+      type: object
+    sObjectDescribeSupportedScopes:
+      example:
+        name: everything
+        label: All contacts
+      properties:
+        label:
+          example: All contacts
+          type: string
+        name:
+          example: everything
+          type: string
+      type: object
+    sObjectFieldDescribePicklist:
+      example:
+        validFor: validFor
+        defaultValue: true
+        active: true
+        label: Bishop
+        value: Bishop
+      properties:
+        active:
+          type: boolean
+        defaultValue:
+          type: boolean
+        label:
+          example: Bishop
+          type: string
+        validFor:
+          nullable: true
+          type: string
+        value:
+          example: Bishop
+          type: string
+      type: object
+    sObjectFieldDescribe:
+      example:
+        defaultValue: defaultValue
+        precision: 0
+        compoundFieldName: compoundFieldName
+        nameField: true
+        type: id
+        restrictedDelete: true
+        relationshipName: relationshipName
+        calculatedFormula: calculatedFormula
+        controllerName: controllerName
+        namePointing: true
+        defaultValueFormula: defaultValueFormula
+        calculated: true
+        writeRequiresMasterRead: true
+        inlineHelpText: inlineHelpText
+        picklistValues:
+        - validFor: validFor
+          defaultValue: true
+          active: true
+          label: Bishop
+          value: Bishop
+        - validFor: validFor
+          defaultValue: true
+          active: true
+          label: Bishop
+          value: Bishop
+        aiPredictionField: true
+        filterable: true
+        maskType: maskType
+        queryByDistance: true
+        caseSensitive: true
+        aggregatable: true
+        referenceTo:
+        - User
+        - User
+        soapType: tns:ID
+        unique: true
+        name: Id
+        highScaleNumber: true
+        idLookup: true
+        displayLocationInDecimal: true
+        defaultedOnCreate: true
+        updateable: true
+        deprecatedAndHidden: true
+        byteLength: 18
+        scale: 0
+        polymorphicForeignKey: true
+        nillable: true
+        htmlFormatted: true
+        referenceTargetField: referenceTargetField
+        cascadeDelete: true
+        mask: mask
+        permissionable: true
+        relationshipOrder: relationshipOrder
+        custom: true
+        length: 18
+        externalId: true
+        dependentPicklist: true
+        label: Contact ID
+        sortable: true
+        autoNumber: true
+        filteredLookupInfo: filteredLookupInfo
+        restrictedPicklist: true
+        createable: true
+        encrypted: true
+        searchPrefilterable: true
+        extraTypeInfo: extraTypeInfo
+        groupable: true
+        digits: 0
+        formulaTreatNullNumberAsZero: true
+      properties:
+        aggregatable:
+          type: boolean
+        aiPredictionField:
+          type: boolean
+        autoNumber:
+          type: boolean
+        byteLength:
+          example: 18
+          format: int32
+          type: integer
+        calculated:
+          type: boolean
+        calculatedFormula:
+          nullable: true
+          type: string
+        cascadeDelete:
+          type: boolean
+        caseSensitive:
+          type: boolean
+        compoundFieldName:
+          nullable: true
+          type: string
+        controllerName:
+          nullable: true
+          type: string
+        createable:
+          type: boolean
+        custom:
+          type: boolean
+        defaultValue: {}
+        defaultValueFormula:
+          nullable: true
+          type: string
+        defaultedOnCreate:
+          type: boolean
+        dependentPicklist:
+          type: boolean
+        deprecatedAndHidden:
+          type: boolean
+        digits:
+          example: 0
+          format: int32
+          type: integer
+        displayLocationInDecimal:
+          type: boolean
+        encrypted:
+          type: boolean
+        externalId:
+          type: boolean
+        extraTypeInfo:
+          nullable: true
+          type: string
+        filterable:
+          type: boolean
+        filteredLookupInfo:
+          nullable: true
+          type: object
+        formulaTreatNullNumberAsZero:
+          type: boolean
+        groupable:
+          type: boolean
+        highScaleNumber:
+          type: boolean
+        htmlFormatted:
+          type: boolean
+        idLookup:
+          type: boolean
+        inlineHelpText:
+          nullable: true
+          type: string
+        label:
+          example: Contact ID
+          type: string
+        length:
+          example: 18
+          format: int32
+          type: integer
+        mask:
+          nullable: true
+          type: string
+        maskType:
+          nullable: true
+          type: string
+        name:
+          example: Id
+          type: string
+        nameField:
+          type: boolean
+        namePointing:
+          type: boolean
+        nillable:
+          type: boolean
+        permissionable:
+          type: boolean
+        picklistValues:
+          items:
+            $ref: '#/components/schemas/sObjectFieldDescribePicklist'
+          type: array
+        polymorphicForeignKey:
+          type: boolean
+        precision:
+          example: 0
+          format: int32
+          type: integer
+        queryByDistance:
+          type: boolean
+        referenceTargetField:
+          nullable: true
+          type: string
+        referenceTo:
+          items:
+            example: User
+            type: string
+          type: array
+        relationshipName:
+          nullable: true
+          type: string
+        relationshipOrder:
+          format: int32
+          nullable: true
+          type: integer
+        restrictedDelete:
+          type: boolean
+        restrictedPicklist:
+          type: boolean
+        scale:
+          example: 0
+          format: int32
+          type: integer
+        searchPrefilterable:
+          type: boolean
+        soapType:
+          example: tns:ID
+          type: string
+        sortable:
+          type: boolean
+        type:
+          enum:
+          - address
+          - anytype
+          - base64
+          - boolean
+          - combobox
+          - currency
+          - datacategorygroupreference
+          - date
+          - datetime
+          - double
+          - email
+          - encryptedstring
+          - id
+          - integer
+          - location
+          - long
+          - multipicklist
+          - percent
+          - phone
+          - picklist
+          - reference
+          - string
+          - textarea
+          - time
+          - url
+          example: id
+          type: string
+        unique:
+          type: boolean
+        updateable:
+          type: boolean
+        writeRequiresMasterRead:
+          type: boolean
+      type: object
+    sObjectDescribes:
+      example:
+        maxBatchSize: 200
+        sobjects:
+        - null
+        - null
+        encoding: UTF-8
+      properties:
+        encoding:
+          example: UTF-8
+          type: string
+        maxBatchSize:
+          example: 200
+          format: int32
+          type: integer
+        sobjects:
+          items:
+            $ref: '#/components/schemas/sObjectDescribe'
+          type: array
+      required:
+      - encoding
+      - maxBatchSize
+      - sobjects
