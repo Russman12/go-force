@@ -9,5 +9,6 @@
   },
   "templateDir": "out",
   "generatorName": "go",
-  "inputSpec": "api/openapi.yaml"
+  "inputSpec": "api/openapi.yaml",
+  "packageName": "goforce"
 }
