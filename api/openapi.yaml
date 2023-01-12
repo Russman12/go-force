@@ -15,6 +15,10 @@ servers:
     apiVersion:
       default: "56.0"
       description: Salesforce api version
+security:
+- OAuth2:
+  - read
+  - write
 paths:
   /oauth2/token:
     post:
@@ -1687,3 +1691,17 @@ components:
       - encoding
       - maxBatchSize
       - sobjects
+  securitySchemes:
+    BearerAuth:
+      scheme: bearer
+      type: http
+    OAuth2:
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          scopes:
+            read: Grants read access
+            write: Grants write access
+            admin: Grants access to admin operations
+          tokenUrl: https://example.com/oauth/token
+      type: oauth2
