@@ -1,0 +1,89 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: russell-laboe@outlook.com
+    name: Russell Laboe
+  title: Salesforce Platform Auth APIs
+  version: "56.0"
+servers:
+- description: Sandbox login server.
+  url: https://test.salesforce.com/services
+- description: production login server.
+  url: https://login.salesforce.com/services
+- description: Custom login server.
+  url: "https://{domain}/services"
+paths:
+  /oauth2/token:
+    post:
+      operationId: oAuthUserPass
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/oAuthUserPass'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/authResponse'
+          description: Successful response
+      summary: Get OAuth2 token
+      tags:
+      - OAuth
+components:
+  schemas:
+    authResponse:
+      example:
+        access_token: access_token
+        signature: signature
+        instance_url: instance_url
+        id: id
+        token_type: token_type
+        issued_at: issued_at
+      properties:
+        access_token:
+          type: string
+        instance_url:
+          type: string
+        id:
+          type: string
+        token_type:
+          type: string
+        issued_at:
+          type: string
+        signature:
+          type: string
+      required:
+      - access_token
+      - id
+      - instance_url
+      - issued_at
+      - signature
+      - token_type
+    oAuthUserPass:
+      properties:
+        grant_type:
+          default: password
+          description: Sets the value of this parameter to password.
+          enum:
+          - password
+          type: string
+        client_id:
+          description: The consumer key provided in the connected app.
+          type: string
+        client_secret:
+          description: The consumer secret provided in the connected app.
+          type: string
+        username:
+          description: Your Salesforce username.
+          type: string
+        password:
+          description: Your Salesforce password.
+          type: string
+      required:
+      - client_id
+      - client_secret
+      - password
+      - username
+      type: object

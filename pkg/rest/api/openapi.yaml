@@ -1,0 +1,836 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: russell-laboe@outlook.com
+    name: Russell Laboe
+  title: Salesforce Platform REST APIs
+  version: "56.0"
+servers:
+- description: Salesforce domain
+  url: "{instanceUrl}/services/data/v{apiVersion}"
+  variables:
+    instanceUrl:
+      default: https://test.salesforce.com
+      description: Salesforce server domain
+    apiVersion:
+      default: "56.0"
+      description: Salesforce api version
+paths:
+  /sobjects:
+    get:
+      operationId: sObjects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sObjectDescribes'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      tags:
+      - SObject
+  /sobjects/{sObject}/describe:
+    get:
+      operationId: sObjectDescribe
+      parameters:
+      - description: SObject name
+        example: Contact
+        explode: false
+        in: path
+        name: sObject
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/sObjectDescribe'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      tags:
+      - SObject
+components:
+  schemas:
+    sObjectDescribe:
+      example:
+        mruEnabled: true
+        updateable: true
+        activateable: true
+        childRelationships:
+        - relationshipName: Accounts__r
+          field: Primary_Contact__c
+          deprecatedAndHidden: true
+          junctionReferenceTo:
+          - "{}"
+          - "{}"
+          junctionIdListNames:
+          - "{}"
+          - "{}"
+          childSObject: Account
+          cascadeDelete: true
+          restrictedDelete: true
+        - relationshipName: Accounts__r
+          field: Primary_Contact__c
+          deprecatedAndHidden: true
+          junctionReferenceTo:
+          - "{}"
+          - "{}"
+          junctionIdListNames:
+          - "{}"
+          - "{}"
+          childSObject: Account
+          cascadeDelete: true
+          restrictedDelete: true
+        recordTypeInfos:
+        - defaultRecordTypeMapping: true
+          urls:
+            layout: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+          recordTypeId: 012000000000000AAA
+          available: true
+          name: Master
+          active: true
+          developerName: Master
+          master: true
+        - defaultRecordTypeMapping: true
+          urls:
+            layout: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+          recordTypeId: 012000000000000AAA
+          available: true
+          name: Master
+          active: true
+          developerName: Master
+          master: true
+        deprecatedAndHidden: true
+        supportedScopes:
+        - name: everything
+          label: All contacts
+        - name: everything
+          label: All contacts
+        searchLayoutable: true
+        sobjectDescribeOption: FULL
+        deletable: true
+        replicateable: true
+        actionOverrides:
+        - formFactor: LARGE
+          name: View
+          pageId: 0M03b000000PGADCA4
+          url: url
+          isAvailableInTouch: true
+        - formFactor: LARGE
+          name: View
+          pageId: 0M03b000000PGADCA4
+          url: url
+          isAvailableInTouch: true
+        isSubtype: true
+        lookupLayoutable: lookupLayoutable
+        listviewable: listviewable
+        mergeable: true
+        urls: "{}"
+        compactLayoutable: true
+        feedEnabled: true
+        extendsInterfaces: extendsInterfaces
+        networkScopeFieldName: networkScopeFieldName
+        customSetting: true
+        isInterface: true
+        implementedBy: implementedBy
+        implementsInterfaces: implementsInterfaces
+        extendedBy: extendedBy
+        defaultImplementation: defaultImplementation
+        deepCloneable: true
+        layoutable: true
+        custom: true
+        associateParentEntity: associateParentEntity
+        undeletable: true
+        label: Contact
+        keyPrefix: "3"
+        searchable: true
+        namedLayoutInfos:
+        - ""
+        - ""
+        queryable: true
+        createable: true
+        retrieveable: true
+        associateEntityType: associateEntityType
+        hasSubtypes: true
+        name: Contact
+        fields:
+        - defaultValue: defaultValue
+          precision: 0
+          compoundFieldName: compoundFieldName
+          nameField: true
+          type: id
+          restrictedDelete: true
+          relationshipName: relationshipName
+          calculatedFormula: calculatedFormula
+          controllerName: controllerName
+          namePointing: true
+          defaultValueFormula: defaultValueFormula
+          calculated: true
+          writeRequiresMasterRead: true
+          inlineHelpText: inlineHelpText
+          picklistValues:
+          - validFor: validFor
+            defaultValue: true
+            active: true
+            label: Bishop
+            value: Bishop
+          - validFor: validFor
+            defaultValue: true
+            active: true
+            label: Bishop
+            value: Bishop
+          aiPredictionField: true
+          filterable: true
+          maskType: maskType
+          queryByDistance: true
+          caseSensitive: true
+          aggregatable: true
+          referenceTo:
+          - User
+          - User
+          soapType: tns:ID
+          unique: true
+          name: Id
+          highScaleNumber: true
+          idLookup: true
+          displayLocationInDecimal: true
+          defaultedOnCreate: true
+          updateable: true
+          deprecatedAndHidden: true
+          byteLength: 18
+          scale: 0
+          polymorphicForeignKey: true
+          nillable: true
+          htmlFormatted: true
+          referenceTargetField: referenceTargetField
+          cascadeDelete: true
+          mask: mask
+          permissionable: true
+          relationshipOrder: relationshipOrder
+          custom: true
+          length: 18
+          externalId: true
+          dependentPicklist: true
+          label: Contact ID
+          sortable: true
+          autoNumber: true
+          filteredLookupInfo: filteredLookupInfo
+          restrictedPicklist: true
+          createable: true
+          encrypted: true
+          searchPrefilterable: true
+          extraTypeInfo: extraTypeInfo
+          groupable: true
+          digits: 0
+          formulaTreatNullNumberAsZero: true
+        - defaultValue: defaultValue
+          precision: 0
+          compoundFieldName: compoundFieldName
+          nameField: true
+          type: id
+          restrictedDelete: true
+          relationshipName: relationshipName
+          calculatedFormula: calculatedFormula
+          controllerName: controllerName
+          namePointing: true
+          defaultValueFormula: defaultValueFormula
+          calculated: true
+          writeRequiresMasterRead: true
+          inlineHelpText: inlineHelpText
+          picklistValues:
+          - validFor: validFor
+            defaultValue: true
+            active: true
+            label: Bishop
+            value: Bishop
+          - validFor: validFor
+            defaultValue: true
+            active: true
+            label: Bishop
+            value: Bishop
+          aiPredictionField: true
+          filterable: true
+          maskType: maskType
+          queryByDistance: true
+          caseSensitive: true
+          aggregatable: true
+          referenceTo:
+          - User
+          - User
+          soapType: tns:ID
+          unique: true
+          name: Id
+          highScaleNumber: true
+          idLookup: true
+          displayLocationInDecimal: true
+          defaultedOnCreate: true
+          updateable: true
+          deprecatedAndHidden: true
+          byteLength: 18
+          scale: 0
+          polymorphicForeignKey: true
+          nillable: true
+          htmlFormatted: true
+          referenceTargetField: referenceTargetField
+          cascadeDelete: true
+          mask: mask
+          permissionable: true
+          relationshipOrder: relationshipOrder
+          custom: true
+          length: 18
+          externalId: true
+          dependentPicklist: true
+          label: Contact ID
+          sortable: true
+          autoNumber: true
+          filteredLookupInfo: filteredLookupInfo
+          restrictedPicklist: true
+          createable: true
+          encrypted: true
+          searchPrefilterable: true
+          extraTypeInfo: extraTypeInfo
+          groupable: true
+          digits: 0
+          formulaTreatNullNumberAsZero: true
+        labelPlural: Contacts
+        triggerable: true
+      properties:
+        activateable:
+          type: boolean
+        associateEntityType:
+          nullable: true
+          type: string
+        associateParentEntity:
+          nullable: true
+          type: string
+        compactLayoutable:
+          type: boolean
+        createable:
+          type: boolean
+        custom:
+          type: boolean
+        customSetting:
+          type: boolean
+        deepCloneable:
+          type: boolean
+        defaultImplementation:
+          nullable: true
+          type: string
+        deletable:
+          type: boolean
+        deprecatedAndHidden:
+          type: boolean
+        extendedBy:
+          nullable: true
+          type: string
+        extendsInterfaces:
+          nullable: true
+          type: string
+        feedEnabled:
+          type: boolean
+        hasSubtypes:
+          type: boolean
+        implementedBy:
+          nullable: true
+          type: string
+        implementsInterfaces:
+          nullable: true
+          type: string
+        isInterface:
+          type: boolean
+        isSubtype:
+          type: boolean
+        keyPrefix:
+          example: "3"
+          type: string
+        label:
+          example: Contact
+          type: string
+        labelPlural:
+          example: Contacts
+          type: string
+        layoutable:
+          type: boolean
+        listviewable:
+          nullable: true
+          type: string
+        lookupLayoutable:
+          nullable: true
+          type: string
+        mergeable:
+          type: boolean
+        mruEnabled:
+          type: boolean
+        name:
+          example: Contact
+          type: string
+        networkScopeFieldName:
+          nullable: true
+          type: string
+        queryable:
+          type: boolean
+        replicateable:
+          type: boolean
+        retrieveable:
+          type: boolean
+        searchLayoutable:
+          type: boolean
+        searchable:
+          type: boolean
+        sobjectDescribeOption:
+          example: FULL
+          type: string
+        triggerable:
+          type: boolean
+        undeletable:
+          type: boolean
+        updateable:
+          type: boolean
+        namedLayoutInfos:
+          items: {}
+          type: array
+        actionOverrides:
+          items:
+            $ref: '#/components/schemas/sObjectDescribeActionOverrides'
+          type: array
+        childRelationships:
+          items:
+            $ref: '#/components/schemas/sObjectDescribeChildRelationships'
+          type: array
+        recordTypeInfos:
+          items:
+            $ref: '#/components/schemas/sObjectRecordTypeInfo'
+          type: array
+        supportedScopes:
+          items:
+            $ref: '#/components/schemas/sObjectDescribeSupportedScopes'
+          type: array
+        urls:
+          type: object
+        fields:
+          items:
+            $ref: '#/components/schemas/sObjectFieldDescribe'
+          type: array
+      required:
+      - keyPrefix
+      - label
+      - labelPlural
+      - name
+      title: sObjectDescribe
+      type: object
+    sObjectDescribeActionOverrides:
+      example:
+        formFactor: LARGE
+        name: View
+        pageId: 0M03b000000PGADCA4
+        url: url
+        isAvailableInTouch: true
+      properties:
+        formFactor:
+          example: LARGE
+          type: string
+        isAvailableInTouch:
+          type: boolean
+        name:
+          example: View
+          type: string
+        pageId:
+          example: 0M03b000000PGADCA4
+          type: string
+        url:
+          nullable: true
+          type: string
+      type: object
+    sObjectDescribeChildRelationships:
+      example:
+        relationshipName: Accounts__r
+        field: Primary_Contact__c
+        deprecatedAndHidden: true
+        junctionReferenceTo:
+        - "{}"
+        - "{}"
+        junctionIdListNames:
+        - "{}"
+        - "{}"
+        childSObject: Account
+        cascadeDelete: true
+        restrictedDelete: true
+      properties:
+        cascadeDelete:
+          type: boolean
+        childSObject:
+          example: Account
+          type: string
+        deprecatedAndHidden:
+          type: boolean
+        field:
+          example: Primary_Contact__c
+          type: string
+        junctionIdListNames:
+          items:
+            type: string
+          type: array
+        junctionReferenceTo:
+          items:
+            type: string
+          type: array
+        relationshipName:
+          example: Accounts__r
+          type: string
+        restrictedDelete:
+          type: boolean
+      type: object
+    sObjectRecordTypeInfoUrls:
+      example:
+        layout: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+      properties:
+        layout:
+          example: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+          type: string
+      type: object
+    sObjectRecordTypeInfo:
+      example:
+        defaultRecordTypeMapping: true
+        urls:
+          layout: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
+        recordTypeId: 012000000000000AAA
+        available: true
+        name: Master
+        active: true
+        developerName: Master
+        master: true
+      properties:
+        active:
+          type: boolean
+        available:
+          type: boolean
+        defaultRecordTypeMapping:
+          type: boolean
+        developerName:
+          example: Master
+          type: string
+        master:
+          type: boolean
+        name:
+          example: Master
+          type: string
+        recordTypeId:
+          example: 012000000000000AAA
+          type: string
+        urls:
+          $ref: '#/components/schemas/sObjectRecordTypeInfoUrls'
+      type: object
+    sObjectDescribeSupportedScopes:
+      example:
+        name: everything
+        label: All contacts
+      properties:
+        label:
+          example: All contacts
+          type: string
+        name:
+          example: everything
+          type: string
+      type: object
+    sObjectFieldDescribePicklist:
+      example:
+        validFor: validFor
+        defaultValue: true
+        active: true
+        label: Bishop
+        value: Bishop
+      properties:
+        active:
+          type: boolean
+        defaultValue:
+          type: boolean
+        label:
+          example: Bishop
+          type: string
+        validFor:
+          nullable: true
+          type: string
+        value:
+          example: Bishop
+          type: string
+      type: object
+    sObjectFieldDescribe:
+      example:
+        defaultValue: defaultValue
+        precision: 0
+        compoundFieldName: compoundFieldName
+        nameField: true
+        type: id
+        restrictedDelete: true
+        relationshipName: relationshipName
+        calculatedFormula: calculatedFormula
+        controllerName: controllerName
+        namePointing: true
+        defaultValueFormula: defaultValueFormula
+        calculated: true
+        writeRequiresMasterRead: true
+        inlineHelpText: inlineHelpText
+        picklistValues:
+        - validFor: validFor
+          defaultValue: true
+          active: true
+          label: Bishop
+          value: Bishop
+        - validFor: validFor
+          defaultValue: true
+          active: true
+          label: Bishop
+          value: Bishop
+        aiPredictionField: true
+        filterable: true
+        maskType: maskType
+        queryByDistance: true
+        caseSensitive: true
+        aggregatable: true
+        referenceTo:
+        - User
+        - User
+        soapType: tns:ID
+        unique: true
+        name: Id
+        highScaleNumber: true
+        idLookup: true
+        displayLocationInDecimal: true
+        defaultedOnCreate: true
+        updateable: true
+        deprecatedAndHidden: true
+        byteLength: 18
+        scale: 0
+        polymorphicForeignKey: true
+        nillable: true
+        htmlFormatted: true
+        referenceTargetField: referenceTargetField
+        cascadeDelete: true
+        mask: mask
+        permissionable: true
+        relationshipOrder: relationshipOrder
+        custom: true
+        length: 18
+        externalId: true
+        dependentPicklist: true
+        label: Contact ID
+        sortable: true
+        autoNumber: true
+        filteredLookupInfo: filteredLookupInfo
+        restrictedPicklist: true
+        createable: true
+        encrypted: true
+        searchPrefilterable: true
+        extraTypeInfo: extraTypeInfo
+        groupable: true
+        digits: 0
+        formulaTreatNullNumberAsZero: true
+      properties:
+        aggregatable:
+          type: boolean
+        aiPredictionField:
+          type: boolean
+        autoNumber:
+          type: boolean
+        byteLength:
+          example: 18
+          format: int32
+          type: integer
+        calculated:
+          type: boolean
+        calculatedFormula:
+          nullable: true
+          type: string
+        cascadeDelete:
+          type: boolean
+        caseSensitive:
+          type: boolean
+        compoundFieldName:
+          nullable: true
+          type: string
+        controllerName:
+          nullable: true
+          type: string
+        createable:
+          type: boolean
+        custom:
+          type: boolean
+        defaultValue: {}
+        defaultValueFormula:
+          nullable: true
+          type: string
+        defaultedOnCreate:
+          type: boolean
+        dependentPicklist:
+          type: boolean
+        deprecatedAndHidden:
+          type: boolean
+        digits:
+          example: 0
+          format: int32
+          type: integer
+        displayLocationInDecimal:
+          type: boolean
+        encrypted:
+          type: boolean
+        externalId:
+          type: boolean
+        extraTypeInfo:
+          nullable: true
+          type: string
+        filterable:
+          type: boolean
+        filteredLookupInfo:
+          nullable: true
+          type: object
+        formulaTreatNullNumberAsZero:
+          type: boolean
+        groupable:
+          type: boolean
+        highScaleNumber:
+          type: boolean
+        htmlFormatted:
+          type: boolean
+        idLookup:
+          type: boolean
+        inlineHelpText:
+          nullable: true
+          type: string
+        label:
+          example: Contact ID
+          type: string
+        length:
+          example: 18
+          format: int32
+          type: integer
+        mask:
+          nullable: true
+          type: string
+        maskType:
+          nullable: true
+          type: string
+        name:
+          example: Id
+          type: string
+        nameField:
+          type: boolean
+        namePointing:
+          type: boolean
+        nillable:
+          type: boolean
+        permissionable:
+          type: boolean
+        picklistValues:
+          items:
+            $ref: '#/components/schemas/sObjectFieldDescribePicklist'
+          type: array
+        polymorphicForeignKey:
+          type: boolean
+        precision:
+          example: 0
+          format: int32
+          type: integer
+        queryByDistance:
+          type: boolean
+        referenceTargetField:
+          nullable: true
+          type: string
+        referenceTo:
+          items:
+            example: User
+            type: string
+          type: array
+        relationshipName:
+          nullable: true
+          type: string
+        relationshipOrder:
+          format: int32
+          nullable: true
+          type: integer
+        restrictedDelete:
+          type: boolean
+        restrictedPicklist:
+          type: boolean
+        scale:
+          example: 0
+          format: int32
+          type: integer
+        searchPrefilterable:
+          type: boolean
+        soapType:
+          example: tns:ID
+          type: string
+        sortable:
+          type: boolean
+        type:
+          enum:
+          - address
+          - anytype
+          - base64
+          - boolean
+          - combobox
+          - currency
+          - datacategorygroupreference
+          - date
+          - datetime
+          - double
+          - email
+          - encryptedstring
+          - id
+          - integer
+          - location
+          - long
+          - multipicklist
+          - percent
+          - phone
+          - picklist
+          - reference
+          - string
+          - textarea
+          - time
+          - url
+          example: id
+          type: string
+        unique:
+          type: boolean
+        updateable:
+          type: boolean
+        writeRequiresMasterRead:
+          type: boolean
+      type: object
+    sObjectDescribes:
+      example:
+        maxBatchSize: 200
+        sobjects:
+        - null
+        - null
+        encoding: UTF-8
+      properties:
+        encoding:
+          example: UTF-8
+          type: string
+        maxBatchSize:
+          example: 200
+          format: int32
+          type: integer
+        sobjects:
+          items:
+            $ref: '#/components/schemas/sObjectDescribe'
+          type: array
+      required:
+      - encoding
+      - maxBatchSize
+      - sobjects

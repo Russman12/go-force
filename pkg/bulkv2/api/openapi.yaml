@@ -1,0 +1,898 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: russell-laboe@outlook.com
+    name: Russell Laboe
+  title: Salesforce Platform Bulk V2 APIs
+  version: "56.0"
+servers:
+- description: Salesforce domain
+  url: "{instanceUrl}/services/data/v{apiVersion}"
+  variables:
+    instanceUrl:
+      default: https://test.salesforce.com
+      description: Salesforce server domain
+    apiVersion:
+      default: "56.0"
+      description: Salesforce api version
+paths:
+  /jobs/query/{jobId}:
+    delete:
+      operationId: QueryDeleteJob
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Delete Job Query
+      tags:
+      - Query
+    get:
+      operationId: QueryJobInfo
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryJobInfo'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Get Job Info Query
+      tags:
+      - Query
+    patch:
+      operationId: QueryAbortJob
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/QueryAbortJobRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryJobInfo'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Abort a Job Query
+      tags:
+      - Query
+  /jobs/query/{jobId}/results:
+    get:
+      operationId: QueryJobResults
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      - example: text/csv
+        explode: false
+        in: header
+        name: Accept
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: |
+          A string that identifies a specific set of query results. Providing a value for this parameter returns only that set of results.
+          Omitting this parameter returns the first set of results.
+
+          You can find the locator string for the next set of results in the response of each request. See Example and Rules and Guidelines.
+
+          As long as the associated job exists, the locator string for a set of results does not change. You can use the locator to retrieve a set of results multiple times.
+        explode: true
+        in: query
+        name: locator
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: |
+          The maximum number of records to retrieve per set of results for the query. The request is still subject to the size limits.
+          If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size.
+
+          If you don’t provide a value for this parameter, the server uses a default value based on the service.
+        explode: true
+        in: query
+        name: maxRecords
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            text/csv:
+              schema:
+                format: binary
+                type: string
+          description: Successful response
+          headers:
+            Sforce-NumberOfRecords:
+              description: The number of records in this set.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            Sforce-Locator:
+              description: |
+                The locator for the next set of results (if there are any). Use this value in other GET request to retrieve the next set of query results.
+                This value is a pseudo random string (for example, MTAwMDA). The length of this string varies depending on how many sets of results there are.
+
+                If there are no more sets of query results, this value is the string ‘null’.
+
+                See Example and Rules and Guidelines.
+              explode: false
+              schema:
+                type: string
+              style: simple
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Get Job Query Result
+      tags:
+      - Query
+  /jobs/query:
+    get:
+      operationId: QueryJobs
+      parameters:
+      - description: "If set to true, the request only returns information about jobs\
+          \ where PK Chunking is enabled."
+        example: "false"
+        explode: true
+        in: query
+        name: isPkChunkingEnabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Gets information only about jobs matching the specified job type.
+        explode: true
+        in: query
+        name: jobType
+        required: false
+        schema:
+          enum:
+          - Classic
+          - V2Query
+          - V2Ingest
+          type: string
+        style: form
+      - description: For future use. Gets information only about jobs matching the
+          specified concurrency mode. Possible values are serial and parallel.
+        explode: true
+        in: query
+        name: concurrencyMode
+        required: false
+        schema:
+          enum:
+          - serial
+          - parallel
+          type: string
+        style: form
+      - description: use the value from the nextRecordsUrl from the previous set
+        explode: true
+        in: query
+        name: queryLocator
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryJobsInfos'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Get All Query Jobs
+      tags:
+      - Query
+    post:
+      operationId: QueryCreateJob
+      parameters:
+      - example: application/json
+        explode: false
+        in: header
+        name: Content-Type
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CreateQueryJobRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryJobInfo'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Create job Query
+      tags:
+      - Query
+  /jobs/ingest:
+    get:
+      operationId: Jobs
+      parameters:
+      - explode: true
+        in: query
+        name: isPkChunkingEnabled
+        required: false
+        schema:
+          description: "If set to true, filters jobs with PK chunking enabled."
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: jobType
+        required: false
+        schema:
+          description: Filters jobs based on job type
+          enum:
+          - BigObjectIngest
+          - Classic
+          - V2Ingest
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: queryLocator
+        required: false
+        schema:
+          format: uri
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+      summary: Get All Jobs
+      tags:
+      - Job
+    post:
+      operationId: createJob
+      requestBody:
+        $ref: '#/components/requestBodies/CreateJobRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobInfo'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Create job
+      tags:
+      - Job
+  /jobs/ingest/{jobId}/batches:
+    put:
+      operationId: uploadJobData
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          text/csv:
+            schema:
+              format: binary
+              type: string
+      responses:
+        "201":
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Upload Job Data
+      tags:
+      - Job
+  /jobs/ingest/{jobId}:
+    delete:
+      operationId: DeleteJob
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content: {}
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Delete Job
+      tags:
+      - Job
+    get:
+      operationId: getJobInfo
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobInfo'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Get Job Info
+      tags:
+      - Job
+    patch:
+      operationId: CloseOrAbortJob
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CloseOrAbortJobRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobInfo'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Close or Abort a Job
+      tags:
+      - Job
+  /jobs/ingest/{jobId}/successfulResults:
+    get:
+      operationId: JobSuccessfulResults
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/csv:
+              schema:
+                format: binary
+                type: string
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Get Job Successful Record Results
+      tags:
+      - Job
+  /jobs/ingest/{jobId}/failedResults:
+    get:
+      operationId: JobFailedResults
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/csv:
+              schema:
+                format: binary
+                type: string
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Get Job Failed Record Results
+      tags:
+      - Job
+  /jobs/ingest/{jobId}/unprocessedrecords:
+    get:
+      operationId: JobUnprocessedRecords
+      parameters:
+      - explode: false
+        in: path
+        name: jobId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            text/csv:
+              schema:
+                format: binary
+                type: string
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Get Job Unprocessed Record Results
+      tags:
+      - Job
+components:
+  parameters:
+    V2QueryJobId:
+      explode: false
+      in: path
+      name: jobId
+      required: true
+      schema:
+        type: string
+      style: simple
+    V2IngestJobId:
+      explode: false
+      in: path
+      name: jobId
+      required: true
+      schema:
+        type: string
+      style: simple
+  requestBodies:
+    QueryAbortJobRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/QueryJobInfo'
+    CloseOrAbortJobRequest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CloseOrAbortJobRequest'
+    CreateJobRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Job'
+    CreateQueryJobRequestBody:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/QueryJobCreateRequest'
+  schemas:
+    QueryJob:
+      properties:
+        operation:
+          description: The type of query.
+          enum:
+          - query
+          - queryAll
+          type: string
+        contentType:
+          description: The format that is used for the results. Currently the only
+            supported value is CSV.
+          enum:
+          - CSV
+          type: string
+        columnDelimiter:
+          description: The column delimiter used for CSV job data. The default value
+            is COMMA.
+          enum:
+          - BACKQUOTE
+          - CARET
+          - COMMA
+          - PIPE
+          - SEMICOLON
+          - TAB
+          type: string
+        lineEnding:
+          description: "The line ending used for CSV job data, marking the end of\
+            \ a data row. The default is LF."
+          enum:
+          - LF
+          - CRLF
+          type: string
+      type: object
+    QueryJobInfoExt:
+      properties:
+        id:
+          description: The unique ID for this job.
+          type: string
+        object:
+          description: The object type being queried.
+          type: string
+        createdById:
+          description: The ID of the user who created the job.
+          type: string
+        createdDate:
+          description: The UTC date and time when the job was created.
+          type: string
+        systemModstamp:
+          description: The UTC date and time when the API last updated the job information.
+          type: string
+        state:
+          description: The current state of processing for the job.
+          enum:
+          - UploadComplete
+          - InProgress
+          - Aborted
+          - JobComplete
+          - Failed
+          type: string
+        concurrencyMode:
+          description: "Reserved for future use. How the request is processed. Currently\
+            \ only parallel mode is supported. (When other modes are added, the API\
+            \ chooses the mode automatically. The mode isn’t user configurable.)"
+          type: string
+        apiVersion:
+          description: The API version that the job was created in.
+          type: number
+        jobType:
+          description: "The job’s type. For a query job, the type is always V2Query."
+          enum:
+          - V2Query
+          type: string
+        numberRecordsProcessed:
+          description: The number of records processed in this job.
+          format: int64
+          type: integer
+        retries:
+          description: The number of times that Salesforce attempted to save the results
+            of an operation. Repeated attempts indicate a problem such as a lock contention.
+          format: int32
+          type: integer
+        totalProcessingTime:
+          description: The number of milliseconds taken to process the job.
+          format: int64
+          type: integer
+      type: object
+    QueryJobInfo:
+      allOf:
+      - $ref: '#/components/schemas/QueryJobInfoExt'
+      - $ref: '#/components/schemas/QueryJob'
+      required:
+      - apiVersion
+      - concurrencyMode
+      - contentType
+      - createdById
+      - createdDate
+      - id
+      - object
+      - operation
+      - state
+      - systemModstamp
+    QueryJobsInfos:
+      example:
+        nextRecordsUrl: https://openapi-generator.tech
+        records:
+        - null
+        - null
+        done: true
+      properties:
+        done:
+          description: This is true if this is the last (or only) set of results.
+            It is false if there are more records to fetch.
+          type: boolean
+        records:
+          description: An array of record objects.
+          items:
+            $ref: '#/components/schemas/QueryJobInfo'
+          type: array
+        nextRecordsUrl:
+          description: |
+            The URI to get the next set of records (if there are any).
+            This method returns up to 1,000 result rows per request. If there are more than 1,000 records, use the nextRecordsUrl to get the next set of records.
+            This parameter is null if there are no more records to fetch.
+          format: uri
+          type: string
+      required:
+      - done
+      - records
+    QueryJobCreateRequest:
+      allOf:
+      - $ref: '#/components/schemas/QueryJob'
+      - $ref: '#/components/schemas/QueryJobCreateRequestExt'
+      required:
+      - operation
+      - query
+    QueryJobCreateRequestExt:
+      properties:
+        query:
+          description: The query to be performed.
+          type: string
+      type: object
+      example: null
+    Job:
+      example:
+        lineEnding: LF
+        externalIdFieldName: externalIdFieldName
+        assignmentRuleId: assignmentRuleId
+        contentType: CSV
+        operation: insert
+        columnDelimiter: BACKQUOTE
+        object: object
+      properties:
+        assignmentRuleId:
+          description: The ID of the assignment rule. This property is only shown
+            if an assignment rule is specified when the job is created.
+          type: string
+        columnDelimiter:
+          description: The column delimiter used for CSV job data.
+          enum:
+          - BACKQUOTE
+          - CARET
+          - COMMA
+          - PIPE
+          - SEMICOLON
+          - TAB
+          type: string
+        contentType:
+          description: The format of the data being processed. Only CSV is supported.
+          enum:
+          - CSV
+          type: string
+        externalIdFieldName:
+          description: The name of the external ID field for an upsert.
+          type: string
+        lineEnding:
+          description: The line ending used for CSV job data.
+          enum:
+          - LF
+          - CRLF
+          type: string
+        object:
+          description: The object type for the data being processed.
+          type: string
+        operation:
+          description: The processing operation for the job.
+          enum:
+          - insert
+          - delete
+          - hardDelete
+          - update
+          - upsert
+          type: string
+      required:
+      - object
+      - operation
+      title: Job
+      type: object
+    JobInfoExt:
+      properties:
+        apiVersion:
+          description: The API version that the job was created in.
+          type: number
+        concurrencyMode:
+          description: "For future use. How the request was processed. Currently only\
+            \ parallel mode is supported. (When other modes are added, the mode will\
+            \ be chosen automatically by the API and will not be user configurable.)"
+          type: string
+        contentUrl:
+          description: The URL to use for Upload Job Data requests for this job. Only
+            valid if the job is in Open state.
+          type: string
+        createdById:
+          description: The ID of the user who created the job.
+          type: string
+        createdDate:
+          description: The date and time in the UTC time zone when the job was created.
+          type: string
+        id:
+          description: Unique ID for this job.
+          type: string
+        jobType:
+          description: The job’s type.
+          enum:
+          - BigObjectIngest
+          - Classic
+          - V2Ingest
+          type: string
+        systemModstamp:
+          description: Date and time in the UTC time zone when the job finished.
+          type: string
+        state:
+          description: The current state of processing for the job.
+          enum:
+          - open
+          - UploadComplete
+          - Aborted
+          - JobComplete
+          type: string
+        apexProcessingTime:
+          description: "The number of milliseconds taken to process triggers and other\
+            \ processes related to the job data. This doesn't include the time used\
+            \ for processing asynchronous and batch Apex operations. If there are\
+            \ no triggers, the value is 0."
+          format: int64
+          type: integer
+        apiActiveProcessingTime:
+          description: "The number of milliseconds taken to actively process the job\
+            \ and includes apexProcessingTime, but doesn't include the time the job\
+            \ waited in the queue to be processed or the time required for serialization\
+            \ and deserialization."
+          format: int64
+          type: integer
+        errorMessage:
+          description: The error message shown for jobs with errors.
+          type: string
+        numberRecordsFailed:
+          description: The number of records that were not processed successfully
+            in this job.
+          format: int64
+          type: integer
+        numberRecordsProcessed:
+          description: The number of records already processed.
+          format: int64
+          type: integer
+        retries:
+          description: "The number of times that Salesforce attempted to save the\
+            \ results of an operation. The repeated attempts are due to a problem,\
+            \ such as a lock contention."
+          format: int32
+          type: integer
+        totalProcessingTime:
+          description: The number of milliseconds taken to process the job.
+          format: int64
+          type: integer
+      type: object
+    JobInfo:
+      allOf:
+      - $ref: '#/components/schemas/Job'
+      - $ref: '#/components/schemas/JobInfoExt'
+      required:
+      - apiVersion
+      - assignmentRuleId
+      - columnDelimiter
+      - concurrencyMode
+      - contentType
+      - contentUrl
+      - createdById
+      - createdDate
+      - externalIdFieldName
+      - id
+      - jobType
+      - lineEnding
+      - object
+      - operation
+      - state
+      - systemModstamp
+    Jobs:
+      properties:
+        done:
+          description: "Indicates whether there are more jobs to get. If false, use\
+            \ the nextRecordsUrl value to retrieve the next group of jobs."
+          type: boolean
+        records:
+          description: Contains information for each retrieved job.
+          items:
+            $ref: '#/components/schemas/JobInfo'
+          type: array
+        nextRecordsUrl:
+          description: A URL that contains a query locator used to get the next set
+            of results in a subsequent request if done isn’t true.
+          format: uri
+          type: string
+      required:
+      - done
+      - records
+    CloseOrAbortJobRequest:
+      example:
+        state: UploadComplete
+      properties:
+        state:
+          description: "The state to update the job to. Use UploadComplete to close\
+            \ a job, or Aborted to abort a job."
+          enum:
+          - UploadComplete
+          - Aborted
+          type: string
+      required:
+      - state
+      title: CloseOrAbortJobRequest
+      type: object

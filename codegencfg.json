@@ -9,6 +9,5 @@
   },
   "templateDir": "out",
   "generatorName": "go",
-  "inputSpec": "api/openapi.yaml",
-  "packageName": "goforce"
+  "isGoSubmodule": true
 }

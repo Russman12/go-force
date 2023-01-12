@@ -1,0 +1,10 @@
+README.md
+api/openapi.yaml
+api_o_auth.go
+client.go
+configuration.go
+docs/AuthResponse.md
+docs/OAuthApi.md
+model_auth_response.go
+response.go
+utils.go
