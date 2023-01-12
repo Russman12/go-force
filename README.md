@@ -76,26 +76,26 @@ ctx = context.WithValue(context.Background(), goforce.ContextOperationServerVari
 
 All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*BulkV2Api* | [**BulkCloseOrAbortJob**](docs/BulkV2Api.md#bulkcloseorabortjob) | **Patch** /jobs/ingest/{jobId} | Close or Abort a Job
-*BulkV2Api* | [**BulkDeleteJob**](docs/BulkV2Api.md#bulkdeletejob) | **Delete** /jobs/ingest/{jobId} | Delete Job
-*BulkV2Api* | [**BulkJobFailedResults**](docs/BulkV2Api.md#bulkjobfailedresults) | **Get** /jobs/ingest/{jobId}/failedResults | Get Job Failed Record Results
-*BulkV2Api* | [**BulkJobSuccessfulResults**](docs/BulkV2Api.md#bulkjobsuccessfulresults) | **Get** /jobs/ingest/{jobId}/successfulResults | Get Job Successful Record Results
-*BulkV2Api* | [**BulkJobUnprocessedRecords**](docs/BulkV2Api.md#bulkjobunprocessedrecords) | **Get** /jobs/ingest/{jobId}/unprocessedrecords | Get Job Unprocessed Record Results
-*BulkV2Api* | [**BulkJobs**](docs/BulkV2Api.md#bulkjobs) | **Get** /jobs/ingest | Get All Jobs
-*BulkV2Api* | [**CreateJob**](docs/BulkV2Api.md#createjob) | **Post** /jobs/ingest | Create job
-*BulkV2Api* | [**GetJobInfo**](docs/BulkV2Api.md#getjobinfo) | **Get** /jobs/ingest/{jobId} | Get Job Info
-*BulkV2Api* | [**UploadJobData**](docs/BulkV2Api.md#uploadjobdata) | **Put** /jobs/ingest/{jobId}/batches | Upload Job Data
-*BulkV2QueryApi* | [**BulkQueryAbortJob**](docs/BulkV2QueryApi.md#bulkqueryabortjob) | **Patch** /jobs/query/{jobId} | Abort a Job Query
-*BulkV2QueryApi* | [**BulkQueryCreateJob**](docs/BulkV2QueryApi.md#bulkquerycreatejob) | **Post** /jobs/query | Create job Query
-*BulkV2QueryApi* | [**BulkQueryDeleteJob**](docs/BulkV2QueryApi.md#bulkquerydeletejob) | **Delete** /jobs/query/{jobId} | Delete Job Query
-*BulkV2QueryApi* | [**BulkQueryJobInfo**](docs/BulkV2QueryApi.md#bulkqueryjobinfo) | **Get** /jobs/query/{jobId} | Get Job Info Query
-*BulkV2QueryApi* | [**BulkQueryJobResults**](docs/BulkV2QueryApi.md#bulkqueryjobresults) | **Get** /jobs/query/{jobId}/results | Get Job Query Result
-*BulkV2QueryApi* | [**BulkQueryJobs**](docs/BulkV2QueryApi.md#bulkqueryjobs) | **Get** /jobs/query | Get All Query Jobs
-*OAuthApi* | [**OAuthUserPass**](docs/OAuthApi.md#oauthuserpass) | **Post** /oauth2/token | Get OAuth2 token
-*SObjectApi* | [**SObjectDescribe**](docs/SObjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe | 
-*SObjectApi* | [**SObjects**](docs/SObjectApi.md#sobjects) | **Get** /sobjects | 
+| Class        | Method        | HTTP request  | Description   |
+| ------------ | ------------- | ------------- | ------------- |
+| *BulkV2Api* | [**BulkCloseOrAbortJob**](docs/BulkV2Api.md#bulkcloseorabortjob) | **Patch** /jobs/ingest/{jobId} | Close or Abort a Job |
+| *BulkV2Api* | [**BulkDeleteJob**](docs/BulkV2Api.md#bulkdeletejob) | **Delete** /jobs/ingest/{jobId} | Delete Job |
+| *BulkV2Api* | [**BulkJobFailedResults**](docs/BulkV2Api.md#bulkjobfailedresults) | **Get** /jobs/ingest/{jobId}/failedResults | Get Job Failed Record Results |
+| *BulkV2Api* | [**BulkJobSuccessfulResults**](docs/BulkV2Api.md#bulkjobsuccessfulresults) | **Get** /jobs/ingest/{jobId}/successfulResults | Get Job Successful Record Results |
+| *BulkV2Api* | [**BulkJobUnprocessedRecords**](docs/BulkV2Api.md#bulkjobunprocessedrecords) | **Get** /jobs/ingest/{jobId}/unprocessedrecords | Get Job Unprocessed Record Results |
+| *BulkV2Api* | [**BulkJobs**](docs/BulkV2Api.md#bulkjobs) | **Get** /jobs/ingest | Get All Jobs |
+| *BulkV2Api* | [**CreateJob**](docs/BulkV2Api.md#createjob) | **Post** /jobs/ingest | Create job |
+| *BulkV2Api* | [**GetJobInfo**](docs/BulkV2Api.md#getjobinfo) | **Get** /jobs/ingest/{jobId} | Get Job Info |
+| *BulkV2Api* | [**UploadJobData**](docs/BulkV2Api.md#uploadjobdata) | **Put** /jobs/ingest/{jobId}/batches | Upload Job Data |
+| *BulkV2QueryApi* | [**BulkQueryAbortJob**](docs/BulkV2QueryApi.md#bulkqueryabortjob) | **Patch** /jobs/query/{jobId} | Abort a Job Query |
+| *BulkV2QueryApi* | [**BulkQueryCreateJob**](docs/BulkV2QueryApi.md#bulkquerycreatejob) | **Post** /jobs/query | Create job Query |
+| *BulkV2QueryApi* | [**BulkQueryDeleteJob**](docs/BulkV2QueryApi.md#bulkquerydeletejob) | **Delete** /jobs/query/{jobId} | Delete Job Query |
+| *BulkV2QueryApi* | [**BulkQueryJobInfo**](docs/BulkV2QueryApi.md#bulkqueryjobinfo) | **Get** /jobs/query/{jobId} | Get Job Info Query |
+| *BulkV2QueryApi* | [**BulkQueryJobResults**](docs/BulkV2QueryApi.md#bulkqueryjobresults) | **Get** /jobs/query/{jobId}/results | Get Job Query Result |
+| *BulkV2QueryApi* | [**BulkQueryJobs**](docs/BulkV2QueryApi.md#bulkqueryjobs) | **Get** /jobs/query | Get All Query Jobs |
+| *OAuthApi* | [**OAuthUserPass**](docs/OAuthApi.md#oauthuserpass) | **Post** /oauth2/token | Get OAuth2 token |
+| *SObjectApi* | [**SObjectDescribe**](docs/SObjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe |  |
+| *SObjectApi* | [**SObjects**](docs/SObjectApi.md#sobjects) | **Get** /sobjects |  |
 
 
 ## Documentation For Models
