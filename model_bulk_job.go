@@ -65,7 +65,7 @@ func (o *BulkJob) GetAssignmentRuleId() string {
 // and a boolean to check if the value has been set.
 func (o *BulkJob) GetAssignmentRuleIdOk() (*string, bool) {
 	if o == nil || isNil(o.AssignmentRuleId) {
-    return nil, false
+		return nil, false
 	}
 	return o.AssignmentRuleId, true
 }
@@ -97,7 +97,7 @@ func (o *BulkJob) GetColumnDelimiter() string {
 // and a boolean to check if the value has been set.
 func (o *BulkJob) GetColumnDelimiterOk() (*string, bool) {
 	if o == nil || isNil(o.ColumnDelimiter) {
-    return nil, false
+		return nil, false
 	}
 	return o.ColumnDelimiter, true
 }
@@ -129,7 +129,7 @@ func (o *BulkJob) GetContentType() string {
 // and a boolean to check if the value has been set.
 func (o *BulkJob) GetContentTypeOk() (*string, bool) {
 	if o == nil || isNil(o.ContentType) {
-    return nil, false
+		return nil, false
 	}
 	return o.ContentType, true
 }
@@ -161,7 +161,7 @@ func (o *BulkJob) GetExternalIdFieldName() string {
 // and a boolean to check if the value has been set.
 func (o *BulkJob) GetExternalIdFieldNameOk() (*string, bool) {
 	if o == nil || isNil(o.ExternalIdFieldName) {
-    return nil, false
+		return nil, false
 	}
 	return o.ExternalIdFieldName, true
 }
@@ -193,7 +193,7 @@ func (o *BulkJob) GetLineEnding() string {
 // and a boolean to check if the value has been set.
 func (o *BulkJob) GetLineEndingOk() (*string, bool) {
 	if o == nil || isNil(o.LineEnding) {
-    return nil, false
+		return nil, false
 	}
 	return o.LineEnding, true
 }
@@ -226,7 +226,7 @@ func (o *BulkJob) GetObject() string {
 // and a boolean to check if the value has been set.
 func (o *BulkJob) GetObjectOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Object, true
 }
@@ -250,7 +250,7 @@ func (o *BulkJob) GetOperation() string {
 // and a boolean to check if the value has been set.
 func (o *BulkJob) GetOperationOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Operation, true
 }
@@ -321,5 +321,3 @@ func (v *NullableBulkJob) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

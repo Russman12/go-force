@@ -78,9 +78,9 @@ type ServerVariable struct {
 
 // ServerConfiguration stores the information about a server
 type ServerConfiguration struct {
-	URL string
+	URL         string
 	Description string
-	Variables map[string]ServerVariable
+	Variables   map[string]ServerVariable
 }
 
 // ServerConfigurations stores multiple ServerConfiguration items
@@ -101,20 +101,20 @@ type Configuration struct {
 // NewConfiguration returns a new Configuration object
 func NewConfiguration() *Configuration {
 	cfg := &Configuration{
-		DefaultHeader:    make(map[string]string),
-		UserAgent:        "OpenAPI-Generator/1.0.0/go",
-		Debug:            false,
-		Servers:          ServerConfigurations{
+		DefaultHeader: make(map[string]string),
+		UserAgent:     "OpenAPI-Generator/1.0.0/go",
+		Debug:         false,
+		Servers: ServerConfigurations{
 			{
-				URL: "{instanceUrl}/services/data/v{apiVersion}",
+				URL:         "{instanceUrl}/services/data/v{apiVersion}",
 				Description: "Salesforce domain",
 				Variables: map[string]ServerVariable{
 					"instanceUrl": ServerVariable{
-						Description: "Salesforce server domain",
+						Description:  "Salesforce server domain",
 						DefaultValue: "https://test.salesforce.com",
 					},
 					"apiVersion": ServerVariable{
-						Description: "Salesforce api version",
+						Description:  "Salesforce api version",
 						DefaultValue: "56.0",
 					},
 				},
@@ -123,15 +123,15 @@ func NewConfiguration() *Configuration {
 		OperationServers: map[string]ServerConfigurations{
 			"OAuthApiService.OAuthUserPass": {
 				{
-					URL: "https://test.salesforce.com/services",
+					URL:         "https://test.salesforce.com/services",
 					Description: "Sandbox login server.",
 				},
 				{
-					URL: "https://login.salesforce.com/services",
+					URL:         "https://login.salesforce.com/services",
 					Description: "production login server.",
 				},
 				{
-					URL: "https://{domain}/services",
+					URL:         "https://{domain}/services",
 					Description: "Custom login server.",
 				},
 			},

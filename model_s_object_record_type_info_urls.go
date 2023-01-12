@@ -50,7 +50,7 @@ func (o *SObjectRecordTypeInfoUrls) GetLayout() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectRecordTypeInfoUrls) GetLayoutOk() (*string, bool) {
 	if o == nil || isNil(o.Layout) {
-    return nil, false
+		return nil, false
 	}
 	return o.Layout, true
 }
@@ -112,5 +112,3 @@ func (v *NullableSObjectRecordTypeInfoUrls) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

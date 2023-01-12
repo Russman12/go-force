@@ -51,7 +51,7 @@ func (o *BulkQueryJobCreateRequestExt) GetQuery() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobCreateRequestExt) GetQueryOk() (*string, bool) {
 	if o == nil || isNil(o.Query) {
-    return nil, false
+		return nil, false
 	}
 	return o.Query, true
 }
@@ -113,5 +113,3 @@ func (v *NullableBulkQueryJobCreateRequestExt) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

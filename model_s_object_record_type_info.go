@@ -17,14 +17,14 @@ import (
 
 // SObjectRecordTypeInfo struct for SObjectRecordTypeInfo
 type SObjectRecordTypeInfo struct {
-	Active *bool `json:"active,omitempty"`
-	Available *bool `json:"available,omitempty"`
-	DefaultRecordTypeMapping *bool `json:"defaultRecordTypeMapping,omitempty"`
-	DeveloperName *string `json:"developerName,omitempty"`
-	Master *bool `json:"master,omitempty"`
-	Name *string `json:"name,omitempty"`
-	RecordTypeId *string `json:"recordTypeId,omitempty"`
-	Urls *SObjectRecordTypeInfoUrls `json:"urls,omitempty"`
+	Active                   *bool                      `json:"active,omitempty"`
+	Available                *bool                      `json:"available,omitempty"`
+	DefaultRecordTypeMapping *bool                      `json:"defaultRecordTypeMapping,omitempty"`
+	DeveloperName            *string                    `json:"developerName,omitempty"`
+	Master                   *bool                      `json:"master,omitempty"`
+	Name                     *string                    `json:"name,omitempty"`
+	RecordTypeId             *string                    `json:"recordTypeId,omitempty"`
+	Urls                     *SObjectRecordTypeInfoUrls `json:"urls,omitempty"`
 }
 
 // NewSObjectRecordTypeInfo instantiates a new SObjectRecordTypeInfo object
@@ -57,7 +57,7 @@ func (o *SObjectRecordTypeInfo) GetActive() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectRecordTypeInfo) GetActiveOk() (*bool, bool) {
 	if o == nil || isNil(o.Active) {
-    return nil, false
+		return nil, false
 	}
 	return o.Active, true
 }
@@ -89,7 +89,7 @@ func (o *SObjectRecordTypeInfo) GetAvailable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectRecordTypeInfo) GetAvailableOk() (*bool, bool) {
 	if o == nil || isNil(o.Available) {
-    return nil, false
+		return nil, false
 	}
 	return o.Available, true
 }
@@ -121,7 +121,7 @@ func (o *SObjectRecordTypeInfo) GetDefaultRecordTypeMapping() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectRecordTypeInfo) GetDefaultRecordTypeMappingOk() (*bool, bool) {
 	if o == nil || isNil(o.DefaultRecordTypeMapping) {
-    return nil, false
+		return nil, false
 	}
 	return o.DefaultRecordTypeMapping, true
 }
@@ -153,7 +153,7 @@ func (o *SObjectRecordTypeInfo) GetDeveloperName() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectRecordTypeInfo) GetDeveloperNameOk() (*string, bool) {
 	if o == nil || isNil(o.DeveloperName) {
-    return nil, false
+		return nil, false
 	}
 	return o.DeveloperName, true
 }
@@ -185,7 +185,7 @@ func (o *SObjectRecordTypeInfo) GetMaster() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectRecordTypeInfo) GetMasterOk() (*bool, bool) {
 	if o == nil || isNil(o.Master) {
-    return nil, false
+		return nil, false
 	}
 	return o.Master, true
 }
@@ -217,7 +217,7 @@ func (o *SObjectRecordTypeInfo) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectRecordTypeInfo) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
-    return nil, false
+		return nil, false
 	}
 	return o.Name, true
 }
@@ -249,7 +249,7 @@ func (o *SObjectRecordTypeInfo) GetRecordTypeId() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectRecordTypeInfo) GetRecordTypeIdOk() (*string, bool) {
 	if o == nil || isNil(o.RecordTypeId) {
-    return nil, false
+		return nil, false
 	}
 	return o.RecordTypeId, true
 }
@@ -281,7 +281,7 @@ func (o *SObjectRecordTypeInfo) GetUrls() SObjectRecordTypeInfoUrls {
 // and a boolean to check if the value has been set.
 func (o *SObjectRecordTypeInfo) GetUrlsOk() (*SObjectRecordTypeInfoUrls, bool) {
 	if o == nil || isNil(o.Urls) {
-    return nil, false
+		return nil, false
 	}
 	return o.Urls, true
 }
@@ -364,5 +364,3 @@ func (v *NullableSObjectRecordTypeInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

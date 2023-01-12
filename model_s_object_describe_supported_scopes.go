@@ -18,7 +18,7 @@ import (
 // SObjectDescribeSupportedScopes struct for SObjectDescribeSupportedScopes
 type SObjectDescribeSupportedScopes struct {
 	Label *string `json:"label,omitempty"`
-	Name *string `json:"name,omitempty"`
+	Name  *string `json:"name,omitempty"`
 }
 
 // NewSObjectDescribeSupportedScopes instantiates a new SObjectDescribeSupportedScopes object
@@ -51,7 +51,7 @@ func (o *SObjectDescribeSupportedScopes) GetLabel() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeSupportedScopes) GetLabelOk() (*string, bool) {
 	if o == nil || isNil(o.Label) {
-    return nil, false
+		return nil, false
 	}
 	return o.Label, true
 }
@@ -83,7 +83,7 @@ func (o *SObjectDescribeSupportedScopes) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeSupportedScopes) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
-    return nil, false
+		return nil, false
 	}
 	return o.Name, true
 }
@@ -148,5 +148,3 @@ func (v *NullableSObjectDescribeSupportedScopes) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

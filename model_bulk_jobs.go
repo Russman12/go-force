@@ -58,7 +58,7 @@ func (o *BulkJobs) GetDone() bool {
 // and a boolean to check if the value has been set.
 func (o *BulkJobs) GetDoneOk() (*bool, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Done, true
 }
@@ -82,7 +82,7 @@ func (o *BulkJobs) GetRecords() []BulkJobInfo {
 // and a boolean to check if the value has been set.
 func (o *BulkJobs) GetRecordsOk() ([]BulkJobInfo, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Records, true
 }
@@ -105,7 +105,7 @@ func (o *BulkJobs) GetNextRecordsUrl() string {
 // and a boolean to check if the value has been set.
 func (o *BulkJobs) GetNextRecordsUrlOk() (*string, bool) {
 	if o == nil || isNil(o.NextRecordsUrl) {
-    return nil, false
+		return nil, false
 	}
 	return o.NextRecordsUrl, true
 }
@@ -173,5 +173,3 @@ func (v *NullableBulkJobs) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

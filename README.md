@@ -125,7 +125,49 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 ## Documentation For Authorization
 
- Endpoints do not require authorization.
+
+
+### BearerAuth
+
+- **Type**: HTTP Bearer token authentication
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "BEARER_TOKEN_STRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+
+### OAuth2
+
+
+- **Type**: OAuth
+- **Flow**: accessCode
+- **Authorization URL**: https://example.com/oauth/authorize
+- **Scopes**: 
+ - **read**: Grants read access
+ - **write**: Grants write access
+ - **admin**: Grants access to admin operations
+
+Example
+
+```golang
+auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
+r, err := client.Service.Operation(auth, args)
+```
+
+Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+
+```golang
+import "golang.org/x/oauth2"
+
+/* Perform OAuth2 round trip request and obtain a token */
+
+tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
+auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
+r, err := client.Service.Operation(auth, args)
+```
 
 
 ## Documentation for Utility Methods

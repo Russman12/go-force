@@ -17,14 +17,14 @@ import (
 
 // SObjectDescribeChildRelationships struct for SObjectDescribeChildRelationships
 type SObjectDescribeChildRelationships struct {
-	CascadeDelete *bool `json:"cascadeDelete,omitempty"`
-	ChildSObject *string `json:"childSObject,omitempty"`
-	DeprecatedAndHidden *bool `json:"deprecatedAndHidden,omitempty"`
-	Field *string `json:"field,omitempty"`
+	CascadeDelete       *bool    `json:"cascadeDelete,omitempty"`
+	ChildSObject        *string  `json:"childSObject,omitempty"`
+	DeprecatedAndHidden *bool    `json:"deprecatedAndHidden,omitempty"`
+	Field               *string  `json:"field,omitempty"`
 	JunctionIdListNames []string `json:"junctionIdListNames,omitempty"`
 	JunctionReferenceTo []string `json:"junctionReferenceTo,omitempty"`
-	RelationshipName *string `json:"relationshipName,omitempty"`
-	RestrictedDelete *bool `json:"restrictedDelete,omitempty"`
+	RelationshipName    *string  `json:"relationshipName,omitempty"`
+	RestrictedDelete    *bool    `json:"restrictedDelete,omitempty"`
 }
 
 // NewSObjectDescribeChildRelationships instantiates a new SObjectDescribeChildRelationships object
@@ -57,7 +57,7 @@ func (o *SObjectDescribeChildRelationships) GetCascadeDelete() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeChildRelationships) GetCascadeDeleteOk() (*bool, bool) {
 	if o == nil || isNil(o.CascadeDelete) {
-    return nil, false
+		return nil, false
 	}
 	return o.CascadeDelete, true
 }
@@ -89,7 +89,7 @@ func (o *SObjectDescribeChildRelationships) GetChildSObject() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeChildRelationships) GetChildSObjectOk() (*string, bool) {
 	if o == nil || isNil(o.ChildSObject) {
-    return nil, false
+		return nil, false
 	}
 	return o.ChildSObject, true
 }
@@ -121,7 +121,7 @@ func (o *SObjectDescribeChildRelationships) GetDeprecatedAndHidden() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeChildRelationships) GetDeprecatedAndHiddenOk() (*bool, bool) {
 	if o == nil || isNil(o.DeprecatedAndHidden) {
-    return nil, false
+		return nil, false
 	}
 	return o.DeprecatedAndHidden, true
 }
@@ -153,7 +153,7 @@ func (o *SObjectDescribeChildRelationships) GetField() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeChildRelationships) GetFieldOk() (*string, bool) {
 	if o == nil || isNil(o.Field) {
-    return nil, false
+		return nil, false
 	}
 	return o.Field, true
 }
@@ -185,7 +185,7 @@ func (o *SObjectDescribeChildRelationships) GetJunctionIdListNames() []string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeChildRelationships) GetJunctionIdListNamesOk() ([]string, bool) {
 	if o == nil || isNil(o.JunctionIdListNames) {
-    return nil, false
+		return nil, false
 	}
 	return o.JunctionIdListNames, true
 }
@@ -217,7 +217,7 @@ func (o *SObjectDescribeChildRelationships) GetJunctionReferenceTo() []string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeChildRelationships) GetJunctionReferenceToOk() ([]string, bool) {
 	if o == nil || isNil(o.JunctionReferenceTo) {
-    return nil, false
+		return nil, false
 	}
 	return o.JunctionReferenceTo, true
 }
@@ -249,7 +249,7 @@ func (o *SObjectDescribeChildRelationships) GetRelationshipName() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeChildRelationships) GetRelationshipNameOk() (*string, bool) {
 	if o == nil || isNil(o.RelationshipName) {
-    return nil, false
+		return nil, false
 	}
 	return o.RelationshipName, true
 }
@@ -281,7 +281,7 @@ func (o *SObjectDescribeChildRelationships) GetRestrictedDelete() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeChildRelationships) GetRestrictedDeleteOk() (*bool, bool) {
 	if o == nil || isNil(o.RestrictedDelete) {
-    return nil, false
+		return nil, false
 	}
 	return o.RestrictedDelete, true
 }
@@ -364,5 +364,3 @@ func (v *NullableSObjectDescribeChildRelationships) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

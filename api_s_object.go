@@ -17,17 +17,16 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
-    "strings"
+	"strings"
 )
-
 
 // SObjectApiService SObjectApi service
 type SObjectApiService service
 
 type ApiSObjectDescribeRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SObjectApiService
-	sObject string
+	sObject    string
 }
 
 func (r ApiSObjectDescribeRequest) Execute() (*SObjectDescribe, *http.Response, error) {
@@ -37,26 +36,27 @@ func (r ApiSObjectDescribeRequest) Execute() (*SObjectDescribe, *http.Response, 
 /*
 SObjectDescribe Method for SObjectDescribe
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param sObject SObject name
- @return ApiSObjectDescribeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sObject SObject name
+	@return ApiSObjectDescribeRequest
 */
 func (a *SObjectApiService) SObjectDescribe(ctx context.Context, sObject string) ApiSObjectDescribeRequest {
 	return ApiSObjectDescribeRequest{
 		ApiService: a,
-		ctx: ctx,
-		sObject: sObject,
+		ctx:        ctx,
+		sObject:    sObject,
 	}
 }
 
 // Execute executes the request
-//  @return SObjectDescribe
+//
+//	@return SObjectDescribe
 func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) (*SObjectDescribe, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SObjectDescribe
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SObjectDescribe
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SObjectApiService.SObjectDescribe")
@@ -99,12 +99,12 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -112,12 +112,12 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-    localVarHTTPResponse.Body.Close()
-    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-    if err != nil {
-        return localVarReturnValue, localVarHTTPResponse, err
-    }
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := &GenericOpenAPIError{
@@ -127,11 +127,11 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiSObjectsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *SObjectApiService
 }
 
@@ -142,24 +142,25 @@ func (r ApiSObjectsRequest) Execute() (*SObjectDescribes, *http.Response, error)
 /*
 SObjects Method for SObjects
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSObjectsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSObjectsRequest
 */
 func (a *SObjectApiService) SObjects(ctx context.Context) ApiSObjectsRequest {
 	return ApiSObjectsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SObjectDescribes
+//
+//	@return SObjectDescribes
 func (a *SObjectApiService) SObjectsExecute(r ApiSObjectsRequest) (*SObjectDescribes, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SObjectDescribes
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SObjectDescribes
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SObjectApiService.SObjects")
@@ -201,12 +202,12 @@ func (a *SObjectApiService) SObjectsExecute(r ApiSObjectsRequest) (*SObjectDescr
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -214,12 +215,12 @@ func (a *SObjectApiService) SObjectsExecute(r ApiSObjectsRequest) (*SObjectDescr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-    localVarHTTPResponse.Body.Close()
-    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-    if err != nil {
-        return localVarReturnValue, localVarHTTPResponse, err
-    }
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := &GenericOpenAPIError{
@@ -229,5 +230,5 @@ func (a *SObjectApiService) SObjectsExecute(r ApiSObjectsRequest) (*SObjectDescr
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

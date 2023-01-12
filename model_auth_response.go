@@ -19,10 +19,10 @@ import (
 type AuthResponse struct {
 	AccessToken string `json:"access_token"`
 	InstanceUrl string `json:"instance_url"`
-	Id string `json:"id"`
-	TokenType string `json:"token_type"`
-	IssuedAt string `json:"issued_at"`
-	Signature string `json:"signature"`
+	Id          string `json:"id"`
+	TokenType   string `json:"token_type"`
+	IssuedAt    string `json:"issued_at"`
+	Signature   string `json:"signature"`
 }
 
 // NewAuthResponse instantiates a new AuthResponse object
@@ -62,7 +62,7 @@ func (o *AuthResponse) GetAccessToken() string {
 // and a boolean to check if the value has been set.
 func (o *AuthResponse) GetAccessTokenOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.AccessToken, true
 }
@@ -86,7 +86,7 @@ func (o *AuthResponse) GetInstanceUrl() string {
 // and a boolean to check if the value has been set.
 func (o *AuthResponse) GetInstanceUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.InstanceUrl, true
 }
@@ -110,7 +110,7 @@ func (o *AuthResponse) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *AuthResponse) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -134,7 +134,7 @@ func (o *AuthResponse) GetTokenType() string {
 // and a boolean to check if the value has been set.
 func (o *AuthResponse) GetTokenTypeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.TokenType, true
 }
@@ -158,7 +158,7 @@ func (o *AuthResponse) GetIssuedAt() string {
 // and a boolean to check if the value has been set.
 func (o *AuthResponse) GetIssuedAtOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.IssuedAt, true
 }
@@ -182,7 +182,7 @@ func (o *AuthResponse) GetSignature() string {
 // and a boolean to check if the value has been set.
 func (o *AuthResponse) GetSignatureOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Signature, true
 }
@@ -250,5 +250,3 @@ func (v *NullableAuthResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

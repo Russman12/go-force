@@ -17,63 +17,63 @@ import (
 
 // SObjectFieldDescribe struct for SObjectFieldDescribe
 type SObjectFieldDescribe struct {
-	Aggregatable *bool `json:"aggregatable,omitempty"`
-	AiPredictionField *bool `json:"aiPredictionField,omitempty"`
-	AutoNumber *bool `json:"autoNumber,omitempty"`
-	ByteLength *int32 `json:"byteLength,omitempty"`
-	Calculated *bool `json:"calculated,omitempty"`
-	CalculatedFormula NullableString `json:"calculatedFormula,omitempty"`
-	CascadeDelete *bool `json:"cascadeDelete,omitempty"`
-	CaseSensitive *bool `json:"caseSensitive,omitempty"`
-	CompoundFieldName NullableString `json:"compoundFieldName,omitempty"`
-	ControllerName NullableString `json:"controllerName,omitempty"`
-	Createable *bool `json:"createable,omitempty"`
-	Custom *bool `json:"custom,omitempty"`
-	DefaultValue interface{} `json:"defaultValue,omitempty"`
-	DefaultValueFormula NullableString `json:"defaultValueFormula,omitempty"`
-	DefaultedOnCreate *bool `json:"defaultedOnCreate,omitempty"`
-	DependentPicklist *bool `json:"dependentPicklist,omitempty"`
-	DeprecatedAndHidden *bool `json:"deprecatedAndHidden,omitempty"`
-	Digits *int32 `json:"digits,omitempty"`
-	DisplayLocationInDecimal *bool `json:"displayLocationInDecimal,omitempty"`
-	Encrypted *bool `json:"encrypted,omitempty"`
-	ExternalId *bool `json:"externalId,omitempty"`
-	ExtraTypeInfo NullableString `json:"extraTypeInfo,omitempty"`
-	Filterable *bool `json:"filterable,omitempty"`
-	FilteredLookupInfo map[string]interface{} `json:"filteredLookupInfo,omitempty"`
-	FormulaTreatNullNumberAsZero *bool `json:"formulaTreatNullNumberAsZero,omitempty"`
-	Groupable *bool `json:"groupable,omitempty"`
-	HighScaleNumber *bool `json:"highScaleNumber,omitempty"`
-	HtmlFormatted *bool `json:"htmlFormatted,omitempty"`
-	IdLookup *bool `json:"idLookup,omitempty"`
-	InlineHelpText NullableString `json:"inlineHelpText,omitempty"`
-	Label *string `json:"label,omitempty"`
-	Length *int32 `json:"length,omitempty"`
-	Mask NullableString `json:"mask,omitempty"`
-	MaskType NullableString `json:"maskType,omitempty"`
-	Name *string `json:"name,omitempty"`
-	NameField *bool `json:"nameField,omitempty"`
-	NamePointing *bool `json:"namePointing,omitempty"`
-	Nillable *bool `json:"nillable,omitempty"`
-	Permissionable *bool `json:"permissionable,omitempty"`
-	PicklistValues []SObjectFieldDescribePicklist `json:"picklistValues,omitempty"`
-	PolymorphicForeignKey *bool `json:"polymorphicForeignKey,omitempty"`
-	Precision *int32 `json:"precision,omitempty"`
-	QueryByDistance *bool `json:"queryByDistance,omitempty"`
-	ReferenceTargetField NullableString `json:"referenceTargetField,omitempty"`
-	ReferenceTo []string `json:"referenceTo,omitempty"`
-	RelationshipName NullableString `json:"relationshipName,omitempty"`
-	RelationshipOrder NullableInt32 `json:"relationshipOrder,omitempty"`
-	RestrictedDelete *bool `json:"restrictedDelete,omitempty"`
-	RestrictedPicklist *bool `json:"restrictedPicklist,omitempty"`
-	Scale *int32 `json:"scale,omitempty"`
-	SearchPrefilterable *bool `json:"searchPrefilterable,omitempty"`
-	SoapType *string `json:"soapType,omitempty"`
-	Sortable *bool `json:"sortable,omitempty"`
-	Type *string `json:"type,omitempty"`
-	Unique *bool `json:"unique,omitempty"`
-	Updateable *bool `json:"updateable,omitempty"`
-	WriteRequiresMasterRead *bool `json:"writeRequiresMasterRead,omitempty"`
+	Aggregatable                 *bool                          `json:"aggregatable,omitempty"`
+	AiPredictionField            *bool                          `json:"aiPredictionField,omitempty"`
+	AutoNumber                   *bool                          `json:"autoNumber,omitempty"`
+	ByteLength                   *int32                         `json:"byteLength,omitempty"`
+	Calculated                   *bool                          `json:"calculated,omitempty"`
+	CalculatedFormula            NullableString                 `json:"calculatedFormula,omitempty"`
+	CascadeDelete                *bool                          `json:"cascadeDelete,omitempty"`
+	CaseSensitive                *bool                          `json:"caseSensitive,omitempty"`
+	CompoundFieldName            NullableString                 `json:"compoundFieldName,omitempty"`
+	ControllerName               NullableString                 `json:"controllerName,omitempty"`
+	Createable                   *bool                          `json:"createable,omitempty"`
+	Custom                       *bool                          `json:"custom,omitempty"`
+	DefaultValue                 interface{}                    `json:"defaultValue,omitempty"`
+	DefaultValueFormula          NullableString                 `json:"defaultValueFormula,omitempty"`
+	DefaultedOnCreate            *bool                          `json:"defaultedOnCreate,omitempty"`
+	DependentPicklist            *bool                          `json:"dependentPicklist,omitempty"`
+	DeprecatedAndHidden          *bool                          `json:"deprecatedAndHidden,omitempty"`
+	Digits                       *int32                         `json:"digits,omitempty"`
+	DisplayLocationInDecimal     *bool                          `json:"displayLocationInDecimal,omitempty"`
+	Encrypted                    *bool                          `json:"encrypted,omitempty"`
+	ExternalId                   *bool                          `json:"externalId,omitempty"`
+	ExtraTypeInfo                NullableString                 `json:"extraTypeInfo,omitempty"`
+	Filterable                   *bool                          `json:"filterable,omitempty"`
+	FilteredLookupInfo           map[string]interface{}         `json:"filteredLookupInfo,omitempty"`
+	FormulaTreatNullNumberAsZero *bool                          `json:"formulaTreatNullNumberAsZero,omitempty"`
+	Groupable                    *bool                          `json:"groupable,omitempty"`
+	HighScaleNumber              *bool                          `json:"highScaleNumber,omitempty"`
+	HtmlFormatted                *bool                          `json:"htmlFormatted,omitempty"`
+	IdLookup                     *bool                          `json:"idLookup,omitempty"`
+	InlineHelpText               NullableString                 `json:"inlineHelpText,omitempty"`
+	Label                        *string                        `json:"label,omitempty"`
+	Length                       *int32                         `json:"length,omitempty"`
+	Mask                         NullableString                 `json:"mask,omitempty"`
+	MaskType                     NullableString                 `json:"maskType,omitempty"`
+	Name                         *string                        `json:"name,omitempty"`
+	NameField                    *bool                          `json:"nameField,omitempty"`
+	NamePointing                 *bool                          `json:"namePointing,omitempty"`
+	Nillable                     *bool                          `json:"nillable,omitempty"`
+	Permissionable               *bool                          `json:"permissionable,omitempty"`
+	PicklistValues               []SObjectFieldDescribePicklist `json:"picklistValues,omitempty"`
+	PolymorphicForeignKey        *bool                          `json:"polymorphicForeignKey,omitempty"`
+	Precision                    *int32                         `json:"precision,omitempty"`
+	QueryByDistance              *bool                          `json:"queryByDistance,omitempty"`
+	ReferenceTargetField         NullableString                 `json:"referenceTargetField,omitempty"`
+	ReferenceTo                  []string                       `json:"referenceTo,omitempty"`
+	RelationshipName             NullableString                 `json:"relationshipName,omitempty"`
+	RelationshipOrder            NullableInt32                  `json:"relationshipOrder,omitempty"`
+	RestrictedDelete             *bool                          `json:"restrictedDelete,omitempty"`
+	RestrictedPicklist           *bool                          `json:"restrictedPicklist,omitempty"`
+	Scale                        *int32                         `json:"scale,omitempty"`
+	SearchPrefilterable          *bool                          `json:"searchPrefilterable,omitempty"`
+	SoapType                     *string                        `json:"soapType,omitempty"`
+	Sortable                     *bool                          `json:"sortable,omitempty"`
+	Type                         *string                        `json:"type,omitempty"`
+	Unique                       *bool                          `json:"unique,omitempty"`
+	Updateable                   *bool                          `json:"updateable,omitempty"`
+	WriteRequiresMasterRead      *bool                          `json:"writeRequiresMasterRead,omitempty"`
 }
 
 // NewSObjectFieldDescribe instantiates a new SObjectFieldDescribe object
@@ -106,7 +106,7 @@ func (o *SObjectFieldDescribe) GetAggregatable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetAggregatableOk() (*bool, bool) {
 	if o == nil || isNil(o.Aggregatable) {
-    return nil, false
+		return nil, false
 	}
 	return o.Aggregatable, true
 }
@@ -138,7 +138,7 @@ func (o *SObjectFieldDescribe) GetAiPredictionField() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetAiPredictionFieldOk() (*bool, bool) {
 	if o == nil || isNil(o.AiPredictionField) {
-    return nil, false
+		return nil, false
 	}
 	return o.AiPredictionField, true
 }
@@ -170,7 +170,7 @@ func (o *SObjectFieldDescribe) GetAutoNumber() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetAutoNumberOk() (*bool, bool) {
 	if o == nil || isNil(o.AutoNumber) {
-    return nil, false
+		return nil, false
 	}
 	return o.AutoNumber, true
 }
@@ -202,7 +202,7 @@ func (o *SObjectFieldDescribe) GetByteLength() int32 {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetByteLengthOk() (*int32, bool) {
 	if o == nil || isNil(o.ByteLength) {
-    return nil, false
+		return nil, false
 	}
 	return o.ByteLength, true
 }
@@ -234,7 +234,7 @@ func (o *SObjectFieldDescribe) GetCalculated() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetCalculatedOk() (*bool, bool) {
 	if o == nil || isNil(o.Calculated) {
-    return nil, false
+		return nil, false
 	}
 	return o.Calculated, true
 }
@@ -267,7 +267,7 @@ func (o *SObjectFieldDescribe) GetCalculatedFormula() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetCalculatedFormulaOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.CalculatedFormula.Get(), o.CalculatedFormula.IsSet()
 }
@@ -285,6 +285,7 @@ func (o *SObjectFieldDescribe) HasCalculatedFormula() bool {
 func (o *SObjectFieldDescribe) SetCalculatedFormula(v string) {
 	o.CalculatedFormula.Set(&v)
 }
+
 // SetCalculatedFormulaNil sets the value for CalculatedFormula to be an explicit nil
 func (o *SObjectFieldDescribe) SetCalculatedFormulaNil() {
 	o.CalculatedFormula.Set(nil)
@@ -308,7 +309,7 @@ func (o *SObjectFieldDescribe) GetCascadeDelete() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetCascadeDeleteOk() (*bool, bool) {
 	if o == nil || isNil(o.CascadeDelete) {
-    return nil, false
+		return nil, false
 	}
 	return o.CascadeDelete, true
 }
@@ -340,7 +341,7 @@ func (o *SObjectFieldDescribe) GetCaseSensitive() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetCaseSensitiveOk() (*bool, bool) {
 	if o == nil || isNil(o.CaseSensitive) {
-    return nil, false
+		return nil, false
 	}
 	return o.CaseSensitive, true
 }
@@ -373,7 +374,7 @@ func (o *SObjectFieldDescribe) GetCompoundFieldName() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetCompoundFieldNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.CompoundFieldName.Get(), o.CompoundFieldName.IsSet()
 }
@@ -391,6 +392,7 @@ func (o *SObjectFieldDescribe) HasCompoundFieldName() bool {
 func (o *SObjectFieldDescribe) SetCompoundFieldName(v string) {
 	o.CompoundFieldName.Set(&v)
 }
+
 // SetCompoundFieldNameNil sets the value for CompoundFieldName to be an explicit nil
 func (o *SObjectFieldDescribe) SetCompoundFieldNameNil() {
 	o.CompoundFieldName.Set(nil)
@@ -415,7 +417,7 @@ func (o *SObjectFieldDescribe) GetControllerName() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetControllerNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.ControllerName.Get(), o.ControllerName.IsSet()
 }
@@ -433,6 +435,7 @@ func (o *SObjectFieldDescribe) HasControllerName() bool {
 func (o *SObjectFieldDescribe) SetControllerName(v string) {
 	o.ControllerName.Set(&v)
 }
+
 // SetControllerNameNil sets the value for ControllerName to be an explicit nil
 func (o *SObjectFieldDescribe) SetControllerNameNil() {
 	o.ControllerName.Set(nil)
@@ -456,7 +459,7 @@ func (o *SObjectFieldDescribe) GetCreateable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetCreateableOk() (*bool, bool) {
 	if o == nil || isNil(o.Createable) {
-    return nil, false
+		return nil, false
 	}
 	return o.Createable, true
 }
@@ -488,7 +491,7 @@ func (o *SObjectFieldDescribe) GetCustom() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetCustomOk() (*bool, bool) {
 	if o == nil || isNil(o.Custom) {
-    return nil, false
+		return nil, false
 	}
 	return o.Custom, true
 }
@@ -521,7 +524,7 @@ func (o *SObjectFieldDescribe) GetDefaultValue() interface{} {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetDefaultValueOk() (*interface{}, bool) {
 	if o == nil || isNil(o.DefaultValue) {
-    return nil, false
+		return nil, false
 	}
 	return &o.DefaultValue, true
 }
@@ -554,7 +557,7 @@ func (o *SObjectFieldDescribe) GetDefaultValueFormula() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetDefaultValueFormulaOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.DefaultValueFormula.Get(), o.DefaultValueFormula.IsSet()
 }
@@ -572,6 +575,7 @@ func (o *SObjectFieldDescribe) HasDefaultValueFormula() bool {
 func (o *SObjectFieldDescribe) SetDefaultValueFormula(v string) {
 	o.DefaultValueFormula.Set(&v)
 }
+
 // SetDefaultValueFormulaNil sets the value for DefaultValueFormula to be an explicit nil
 func (o *SObjectFieldDescribe) SetDefaultValueFormulaNil() {
 	o.DefaultValueFormula.Set(nil)
@@ -595,7 +599,7 @@ func (o *SObjectFieldDescribe) GetDefaultedOnCreate() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetDefaultedOnCreateOk() (*bool, bool) {
 	if o == nil || isNil(o.DefaultedOnCreate) {
-    return nil, false
+		return nil, false
 	}
 	return o.DefaultedOnCreate, true
 }
@@ -627,7 +631,7 @@ func (o *SObjectFieldDescribe) GetDependentPicklist() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetDependentPicklistOk() (*bool, bool) {
 	if o == nil || isNil(o.DependentPicklist) {
-    return nil, false
+		return nil, false
 	}
 	return o.DependentPicklist, true
 }
@@ -659,7 +663,7 @@ func (o *SObjectFieldDescribe) GetDeprecatedAndHidden() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetDeprecatedAndHiddenOk() (*bool, bool) {
 	if o == nil || isNil(o.DeprecatedAndHidden) {
-    return nil, false
+		return nil, false
 	}
 	return o.DeprecatedAndHidden, true
 }
@@ -691,7 +695,7 @@ func (o *SObjectFieldDescribe) GetDigits() int32 {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetDigitsOk() (*int32, bool) {
 	if o == nil || isNil(o.Digits) {
-    return nil, false
+		return nil, false
 	}
 	return o.Digits, true
 }
@@ -723,7 +727,7 @@ func (o *SObjectFieldDescribe) GetDisplayLocationInDecimal() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetDisplayLocationInDecimalOk() (*bool, bool) {
 	if o == nil || isNil(o.DisplayLocationInDecimal) {
-    return nil, false
+		return nil, false
 	}
 	return o.DisplayLocationInDecimal, true
 }
@@ -755,7 +759,7 @@ func (o *SObjectFieldDescribe) GetEncrypted() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetEncryptedOk() (*bool, bool) {
 	if o == nil || isNil(o.Encrypted) {
-    return nil, false
+		return nil, false
 	}
 	return o.Encrypted, true
 }
@@ -787,7 +791,7 @@ func (o *SObjectFieldDescribe) GetExternalId() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetExternalIdOk() (*bool, bool) {
 	if o == nil || isNil(o.ExternalId) {
-    return nil, false
+		return nil, false
 	}
 	return o.ExternalId, true
 }
@@ -820,7 +824,7 @@ func (o *SObjectFieldDescribe) GetExtraTypeInfo() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetExtraTypeInfoOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.ExtraTypeInfo.Get(), o.ExtraTypeInfo.IsSet()
 }
@@ -838,6 +842,7 @@ func (o *SObjectFieldDescribe) HasExtraTypeInfo() bool {
 func (o *SObjectFieldDescribe) SetExtraTypeInfo(v string) {
 	o.ExtraTypeInfo.Set(&v)
 }
+
 // SetExtraTypeInfoNil sets the value for ExtraTypeInfo to be an explicit nil
 func (o *SObjectFieldDescribe) SetExtraTypeInfoNil() {
 	o.ExtraTypeInfo.Set(nil)
@@ -861,7 +866,7 @@ func (o *SObjectFieldDescribe) GetFilterable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetFilterableOk() (*bool, bool) {
 	if o == nil || isNil(o.Filterable) {
-    return nil, false
+		return nil, false
 	}
 	return o.Filterable, true
 }
@@ -894,7 +899,7 @@ func (o *SObjectFieldDescribe) GetFilteredLookupInfo() map[string]interface{} {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetFilteredLookupInfoOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.FilteredLookupInfo) {
-    return map[string]interface{}{}, false
+		return map[string]interface{}{}, false
 	}
 	return o.FilteredLookupInfo, true
 }
@@ -926,7 +931,7 @@ func (o *SObjectFieldDescribe) GetFormulaTreatNullNumberAsZero() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetFormulaTreatNullNumberAsZeroOk() (*bool, bool) {
 	if o == nil || isNil(o.FormulaTreatNullNumberAsZero) {
-    return nil, false
+		return nil, false
 	}
 	return o.FormulaTreatNullNumberAsZero, true
 }
@@ -958,7 +963,7 @@ func (o *SObjectFieldDescribe) GetGroupable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetGroupableOk() (*bool, bool) {
 	if o == nil || isNil(o.Groupable) {
-    return nil, false
+		return nil, false
 	}
 	return o.Groupable, true
 }
@@ -990,7 +995,7 @@ func (o *SObjectFieldDescribe) GetHighScaleNumber() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetHighScaleNumberOk() (*bool, bool) {
 	if o == nil || isNil(o.HighScaleNumber) {
-    return nil, false
+		return nil, false
 	}
 	return o.HighScaleNumber, true
 }
@@ -1022,7 +1027,7 @@ func (o *SObjectFieldDescribe) GetHtmlFormatted() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetHtmlFormattedOk() (*bool, bool) {
 	if o == nil || isNil(o.HtmlFormatted) {
-    return nil, false
+		return nil, false
 	}
 	return o.HtmlFormatted, true
 }
@@ -1054,7 +1059,7 @@ func (o *SObjectFieldDescribe) GetIdLookup() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetIdLookupOk() (*bool, bool) {
 	if o == nil || isNil(o.IdLookup) {
-    return nil, false
+		return nil, false
 	}
 	return o.IdLookup, true
 }
@@ -1087,7 +1092,7 @@ func (o *SObjectFieldDescribe) GetInlineHelpText() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetInlineHelpTextOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.InlineHelpText.Get(), o.InlineHelpText.IsSet()
 }
@@ -1105,6 +1110,7 @@ func (o *SObjectFieldDescribe) HasInlineHelpText() bool {
 func (o *SObjectFieldDescribe) SetInlineHelpText(v string) {
 	o.InlineHelpText.Set(&v)
 }
+
 // SetInlineHelpTextNil sets the value for InlineHelpText to be an explicit nil
 func (o *SObjectFieldDescribe) SetInlineHelpTextNil() {
 	o.InlineHelpText.Set(nil)
@@ -1128,7 +1134,7 @@ func (o *SObjectFieldDescribe) GetLabel() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetLabelOk() (*string, bool) {
 	if o == nil || isNil(o.Label) {
-    return nil, false
+		return nil, false
 	}
 	return o.Label, true
 }
@@ -1160,7 +1166,7 @@ func (o *SObjectFieldDescribe) GetLength() int32 {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetLengthOk() (*int32, bool) {
 	if o == nil || isNil(o.Length) {
-    return nil, false
+		return nil, false
 	}
 	return o.Length, true
 }
@@ -1193,7 +1199,7 @@ func (o *SObjectFieldDescribe) GetMask() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetMaskOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Mask.Get(), o.Mask.IsSet()
 }
@@ -1211,6 +1217,7 @@ func (o *SObjectFieldDescribe) HasMask() bool {
 func (o *SObjectFieldDescribe) SetMask(v string) {
 	o.Mask.Set(&v)
 }
+
 // SetMaskNil sets the value for Mask to be an explicit nil
 func (o *SObjectFieldDescribe) SetMaskNil() {
 	o.Mask.Set(nil)
@@ -1235,7 +1242,7 @@ func (o *SObjectFieldDescribe) GetMaskType() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetMaskTypeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.MaskType.Get(), o.MaskType.IsSet()
 }
@@ -1253,6 +1260,7 @@ func (o *SObjectFieldDescribe) HasMaskType() bool {
 func (o *SObjectFieldDescribe) SetMaskType(v string) {
 	o.MaskType.Set(&v)
 }
+
 // SetMaskTypeNil sets the value for MaskType to be an explicit nil
 func (o *SObjectFieldDescribe) SetMaskTypeNil() {
 	o.MaskType.Set(nil)
@@ -1276,7 +1284,7 @@ func (o *SObjectFieldDescribe) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
-    return nil, false
+		return nil, false
 	}
 	return o.Name, true
 }
@@ -1308,7 +1316,7 @@ func (o *SObjectFieldDescribe) GetNameField() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetNameFieldOk() (*bool, bool) {
 	if o == nil || isNil(o.NameField) {
-    return nil, false
+		return nil, false
 	}
 	return o.NameField, true
 }
@@ -1340,7 +1348,7 @@ func (o *SObjectFieldDescribe) GetNamePointing() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetNamePointingOk() (*bool, bool) {
 	if o == nil || isNil(o.NamePointing) {
-    return nil, false
+		return nil, false
 	}
 	return o.NamePointing, true
 }
@@ -1372,7 +1380,7 @@ func (o *SObjectFieldDescribe) GetNillable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetNillableOk() (*bool, bool) {
 	if o == nil || isNil(o.Nillable) {
-    return nil, false
+		return nil, false
 	}
 	return o.Nillable, true
 }
@@ -1404,7 +1412,7 @@ func (o *SObjectFieldDescribe) GetPermissionable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetPermissionableOk() (*bool, bool) {
 	if o == nil || isNil(o.Permissionable) {
-    return nil, false
+		return nil, false
 	}
 	return o.Permissionable, true
 }
@@ -1436,7 +1444,7 @@ func (o *SObjectFieldDescribe) GetPicklistValues() []SObjectFieldDescribePicklis
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetPicklistValuesOk() ([]SObjectFieldDescribePicklist, bool) {
 	if o == nil || isNil(o.PicklistValues) {
-    return nil, false
+		return nil, false
 	}
 	return o.PicklistValues, true
 }
@@ -1468,7 +1476,7 @@ func (o *SObjectFieldDescribe) GetPolymorphicForeignKey() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetPolymorphicForeignKeyOk() (*bool, bool) {
 	if o == nil || isNil(o.PolymorphicForeignKey) {
-    return nil, false
+		return nil, false
 	}
 	return o.PolymorphicForeignKey, true
 }
@@ -1500,7 +1508,7 @@ func (o *SObjectFieldDescribe) GetPrecision() int32 {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetPrecisionOk() (*int32, bool) {
 	if o == nil || isNil(o.Precision) {
-    return nil, false
+		return nil, false
 	}
 	return o.Precision, true
 }
@@ -1532,7 +1540,7 @@ func (o *SObjectFieldDescribe) GetQueryByDistance() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetQueryByDistanceOk() (*bool, bool) {
 	if o == nil || isNil(o.QueryByDistance) {
-    return nil, false
+		return nil, false
 	}
 	return o.QueryByDistance, true
 }
@@ -1565,7 +1573,7 @@ func (o *SObjectFieldDescribe) GetReferenceTargetField() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetReferenceTargetFieldOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.ReferenceTargetField.Get(), o.ReferenceTargetField.IsSet()
 }
@@ -1583,6 +1591,7 @@ func (o *SObjectFieldDescribe) HasReferenceTargetField() bool {
 func (o *SObjectFieldDescribe) SetReferenceTargetField(v string) {
 	o.ReferenceTargetField.Set(&v)
 }
+
 // SetReferenceTargetFieldNil sets the value for ReferenceTargetField to be an explicit nil
 func (o *SObjectFieldDescribe) SetReferenceTargetFieldNil() {
 	o.ReferenceTargetField.Set(nil)
@@ -1606,7 +1615,7 @@ func (o *SObjectFieldDescribe) GetReferenceTo() []string {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetReferenceToOk() ([]string, bool) {
 	if o == nil || isNil(o.ReferenceTo) {
-    return nil, false
+		return nil, false
 	}
 	return o.ReferenceTo, true
 }
@@ -1639,7 +1648,7 @@ func (o *SObjectFieldDescribe) GetRelationshipName() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetRelationshipNameOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.RelationshipName.Get(), o.RelationshipName.IsSet()
 }
@@ -1657,6 +1666,7 @@ func (o *SObjectFieldDescribe) HasRelationshipName() bool {
 func (o *SObjectFieldDescribe) SetRelationshipName(v string) {
 	o.RelationshipName.Set(&v)
 }
+
 // SetRelationshipNameNil sets the value for RelationshipName to be an explicit nil
 func (o *SObjectFieldDescribe) SetRelationshipNameNil() {
 	o.RelationshipName.Set(nil)
@@ -1681,7 +1691,7 @@ func (o *SObjectFieldDescribe) GetRelationshipOrder() int32 {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribe) GetRelationshipOrderOk() (*int32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.RelationshipOrder.Get(), o.RelationshipOrder.IsSet()
 }
@@ -1699,6 +1709,7 @@ func (o *SObjectFieldDescribe) HasRelationshipOrder() bool {
 func (o *SObjectFieldDescribe) SetRelationshipOrder(v int32) {
 	o.RelationshipOrder.Set(&v)
 }
+
 // SetRelationshipOrderNil sets the value for RelationshipOrder to be an explicit nil
 func (o *SObjectFieldDescribe) SetRelationshipOrderNil() {
 	o.RelationshipOrder.Set(nil)
@@ -1722,7 +1733,7 @@ func (o *SObjectFieldDescribe) GetRestrictedDelete() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetRestrictedDeleteOk() (*bool, bool) {
 	if o == nil || isNil(o.RestrictedDelete) {
-    return nil, false
+		return nil, false
 	}
 	return o.RestrictedDelete, true
 }
@@ -1754,7 +1765,7 @@ func (o *SObjectFieldDescribe) GetRestrictedPicklist() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetRestrictedPicklistOk() (*bool, bool) {
 	if o == nil || isNil(o.RestrictedPicklist) {
-    return nil, false
+		return nil, false
 	}
 	return o.RestrictedPicklist, true
 }
@@ -1786,7 +1797,7 @@ func (o *SObjectFieldDescribe) GetScale() int32 {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetScaleOk() (*int32, bool) {
 	if o == nil || isNil(o.Scale) {
-    return nil, false
+		return nil, false
 	}
 	return o.Scale, true
 }
@@ -1818,7 +1829,7 @@ func (o *SObjectFieldDescribe) GetSearchPrefilterable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetSearchPrefilterableOk() (*bool, bool) {
 	if o == nil || isNil(o.SearchPrefilterable) {
-    return nil, false
+		return nil, false
 	}
 	return o.SearchPrefilterable, true
 }
@@ -1850,7 +1861,7 @@ func (o *SObjectFieldDescribe) GetSoapType() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetSoapTypeOk() (*string, bool) {
 	if o == nil || isNil(o.SoapType) {
-    return nil, false
+		return nil, false
 	}
 	return o.SoapType, true
 }
@@ -1882,7 +1893,7 @@ func (o *SObjectFieldDescribe) GetSortable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetSortableOk() (*bool, bool) {
 	if o == nil || isNil(o.Sortable) {
-    return nil, false
+		return nil, false
 	}
 	return o.Sortable, true
 }
@@ -1914,7 +1925,7 @@ func (o *SObjectFieldDescribe) GetType() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetTypeOk() (*string, bool) {
 	if o == nil || isNil(o.Type) {
-    return nil, false
+		return nil, false
 	}
 	return o.Type, true
 }
@@ -1946,7 +1957,7 @@ func (o *SObjectFieldDescribe) GetUnique() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetUniqueOk() (*bool, bool) {
 	if o == nil || isNil(o.Unique) {
-    return nil, false
+		return nil, false
 	}
 	return o.Unique, true
 }
@@ -1978,7 +1989,7 @@ func (o *SObjectFieldDescribe) GetUpdateable() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetUpdateableOk() (*bool, bool) {
 	if o == nil || isNil(o.Updateable) {
-    return nil, false
+		return nil, false
 	}
 	return o.Updateable, true
 }
@@ -2010,7 +2021,7 @@ func (o *SObjectFieldDescribe) GetWriteRequiresMasterRead() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribe) GetWriteRequiresMasterReadOk() (*bool, bool) {
 	if o == nil || isNil(o.WriteRequiresMasterRead) {
-    return nil, false
+		return nil, false
 	}
 	return o.WriteRequiresMasterRead, true
 }
@@ -2240,5 +2251,3 @@ func (v *NullableSObjectFieldDescribe) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

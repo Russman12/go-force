@@ -17,9 +17,9 @@ import (
 
 // SObjectDescribes struct for SObjectDescribes
 type SObjectDescribes struct {
-	Encoding string `json:"encoding"`
-	MaxBatchSize int32 `json:"maxBatchSize"`
-	Sobjects []SObjectDescribe `json:"sobjects"`
+	Encoding     string            `json:"encoding"`
+	MaxBatchSize int32             `json:"maxBatchSize"`
+	Sobjects     []SObjectDescribe `json:"sobjects"`
 }
 
 // NewSObjectDescribes instantiates a new SObjectDescribes object
@@ -56,7 +56,7 @@ func (o *SObjectDescribes) GetEncoding() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribes) GetEncodingOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Encoding, true
 }
@@ -80,7 +80,7 @@ func (o *SObjectDescribes) GetMaxBatchSize() int32 {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribes) GetMaxBatchSizeOk() (*int32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.MaxBatchSize, true
 }
@@ -104,7 +104,7 @@ func (o *SObjectDescribes) GetSobjects() []SObjectDescribe {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribes) GetSobjectsOk() ([]SObjectDescribe, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Sobjects, true
 }
@@ -163,5 +163,3 @@ func (v *NullableSObjectDescribes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

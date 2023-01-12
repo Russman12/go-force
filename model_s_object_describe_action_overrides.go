@@ -17,11 +17,11 @@ import (
 
 // SObjectDescribeActionOverrides struct for SObjectDescribeActionOverrides
 type SObjectDescribeActionOverrides struct {
-	FormFactor *string `json:"formFactor,omitempty"`
-	IsAvailableInTouch *bool `json:"isAvailableInTouch,omitempty"`
-	Name *string `json:"name,omitempty"`
-	PageId *string `json:"pageId,omitempty"`
-	Url NullableString `json:"url,omitempty"`
+	FormFactor         *string        `json:"formFactor,omitempty"`
+	IsAvailableInTouch *bool          `json:"isAvailableInTouch,omitempty"`
+	Name               *string        `json:"name,omitempty"`
+	PageId             *string        `json:"pageId,omitempty"`
+	Url                NullableString `json:"url,omitempty"`
 }
 
 // NewSObjectDescribeActionOverrides instantiates a new SObjectDescribeActionOverrides object
@@ -54,7 +54,7 @@ func (o *SObjectDescribeActionOverrides) GetFormFactor() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeActionOverrides) GetFormFactorOk() (*string, bool) {
 	if o == nil || isNil(o.FormFactor) {
-    return nil, false
+		return nil, false
 	}
 	return o.FormFactor, true
 }
@@ -86,7 +86,7 @@ func (o *SObjectDescribeActionOverrides) GetIsAvailableInTouch() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeActionOverrides) GetIsAvailableInTouchOk() (*bool, bool) {
 	if o == nil || isNil(o.IsAvailableInTouch) {
-    return nil, false
+		return nil, false
 	}
 	return o.IsAvailableInTouch, true
 }
@@ -118,7 +118,7 @@ func (o *SObjectDescribeActionOverrides) GetName() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeActionOverrides) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
-    return nil, false
+		return nil, false
 	}
 	return o.Name, true
 }
@@ -150,7 +150,7 @@ func (o *SObjectDescribeActionOverrides) GetPageId() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribeActionOverrides) GetPageIdOk() (*string, bool) {
 	if o == nil || isNil(o.PageId) {
-    return nil, false
+		return nil, false
 	}
 	return o.PageId, true
 }
@@ -183,7 +183,7 @@ func (o *SObjectDescribeActionOverrides) GetUrl() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectDescribeActionOverrides) GetUrlOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Url.Get(), o.Url.IsSet()
 }
@@ -201,6 +201,7 @@ func (o *SObjectDescribeActionOverrides) HasUrl() bool {
 func (o *SObjectDescribeActionOverrides) SetUrl(v string) {
 	o.Url.Set(&v)
 }
+
 // SetUrlNil sets the value for Url to be an explicit nil
 func (o *SObjectDescribeActionOverrides) SetUrlNil() {
 	o.Url.Set(nil)
@@ -266,5 +267,3 @@ func (v *NullableSObjectDescribeActionOverrides) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

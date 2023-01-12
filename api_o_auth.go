@@ -19,18 +19,17 @@ import (
 	"net/url"
 )
 
-
 // OAuthApiService OAuthApi service
 type OAuthApiService service
 
 type ApiOAuthUserPassRequest struct {
-	ctx context.Context
-	ApiService *OAuthApiService
-	clientId *string
+	ctx          context.Context
+	ApiService   *OAuthApiService
+	clientId     *string
 	clientSecret *string
-	username *string
-	password *string
-	grantType *string
+	username     *string
+	password     *string
+	grantType    *string
 }
 
 // The consumer key provided in the connected app.
@@ -70,24 +69,25 @@ func (r ApiOAuthUserPassRequest) Execute() (*AuthResponse, *http.Response, error
 /*
 OAuthUserPass Get OAuth2 token
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiOAuthUserPassRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiOAuthUserPassRequest
 */
 func (a *OAuthApiService) OAuthUserPass(ctx context.Context) ApiOAuthUserPassRequest {
 	return ApiOAuthUserPassRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return AuthResponse
+//
+//	@return AuthResponse
 func (a *OAuthApiService) OAuthUserPassExecute(r ApiOAuthUserPassRequest) (*AuthResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AuthResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AuthResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OAuthApiService.OAuthUserPass")
@@ -148,12 +148,12 @@ func (a *OAuthApiService) OAuthUserPassExecute(r ApiOAuthUserPassRequest) (*Auth
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -161,12 +161,12 @@ func (a *OAuthApiService) OAuthUserPassExecute(r ApiOAuthUserPassRequest) (*Auth
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-    localVarHTTPResponse.Body.Close()
-    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-    if err != nil {
-        return localVarReturnValue, localVarHTTPResponse, err
-    }
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := &GenericOpenAPIError{
@@ -176,5 +176,5 @@ func (a *OAuthApiService) OAuthUserPassExecute(r ApiOAuthUserPassRequest) (*Auth
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

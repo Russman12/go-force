@@ -53,7 +53,7 @@ func (o *BulkCloseOrAbortJobRequest) GetState() string {
 // and a boolean to check if the value has been set.
 func (o *BulkCloseOrAbortJobRequest) GetStateOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.State, true
 }
@@ -106,5 +106,3 @@ func (v *NullableBulkCloseOrAbortJobRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

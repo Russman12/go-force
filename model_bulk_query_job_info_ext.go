@@ -73,7 +73,7 @@ func (o *BulkQueryJobInfoExt) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetIdOk() (*string, bool) {
 	if o == nil || isNil(o.Id) {
-    return nil, false
+		return nil, false
 	}
 	return o.Id, true
 }
@@ -105,7 +105,7 @@ func (o *BulkQueryJobInfoExt) GetObject() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetObjectOk() (*string, bool) {
 	if o == nil || isNil(o.Object) {
-    return nil, false
+		return nil, false
 	}
 	return o.Object, true
 }
@@ -137,7 +137,7 @@ func (o *BulkQueryJobInfoExt) GetCreatedById() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetCreatedByIdOk() (*string, bool) {
 	if o == nil || isNil(o.CreatedById) {
-    return nil, false
+		return nil, false
 	}
 	return o.CreatedById, true
 }
@@ -169,7 +169,7 @@ func (o *BulkQueryJobInfoExt) GetCreatedDate() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetCreatedDateOk() (*string, bool) {
 	if o == nil || isNil(o.CreatedDate) {
-    return nil, false
+		return nil, false
 	}
 	return o.CreatedDate, true
 }
@@ -201,7 +201,7 @@ func (o *BulkQueryJobInfoExt) GetSystemModstamp() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetSystemModstampOk() (*string, bool) {
 	if o == nil || isNil(o.SystemModstamp) {
-    return nil, false
+		return nil, false
 	}
 	return o.SystemModstamp, true
 }
@@ -233,7 +233,7 @@ func (o *BulkQueryJobInfoExt) GetState() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetStateOk() (*string, bool) {
 	if o == nil || isNil(o.State) {
-    return nil, false
+		return nil, false
 	}
 	return o.State, true
 }
@@ -265,7 +265,7 @@ func (o *BulkQueryJobInfoExt) GetConcurrencyMode() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetConcurrencyModeOk() (*string, bool) {
 	if o == nil || isNil(o.ConcurrencyMode) {
-    return nil, false
+		return nil, false
 	}
 	return o.ConcurrencyMode, true
 }
@@ -297,7 +297,7 @@ func (o *BulkQueryJobInfoExt) GetApiVersion() float32 {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetApiVersionOk() (*float32, bool) {
 	if o == nil || isNil(o.ApiVersion) {
-    return nil, false
+		return nil, false
 	}
 	return o.ApiVersion, true
 }
@@ -329,7 +329,7 @@ func (o *BulkQueryJobInfoExt) GetJobType() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetJobTypeOk() (*string, bool) {
 	if o == nil || isNil(o.JobType) {
-    return nil, false
+		return nil, false
 	}
 	return o.JobType, true
 }
@@ -361,7 +361,7 @@ func (o *BulkQueryJobInfoExt) GetNumberRecordsProcessed() int64 {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetNumberRecordsProcessedOk() (*int64, bool) {
 	if o == nil || isNil(o.NumberRecordsProcessed) {
-    return nil, false
+		return nil, false
 	}
 	return o.NumberRecordsProcessed, true
 }
@@ -393,7 +393,7 @@ func (o *BulkQueryJobInfoExt) GetRetries() int32 {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetRetriesOk() (*int32, bool) {
 	if o == nil || isNil(o.Retries) {
-    return nil, false
+		return nil, false
 	}
 	return o.Retries, true
 }
@@ -425,7 +425,7 @@ func (o *BulkQueryJobInfoExt) GetTotalProcessingTime() int64 {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfoExt) GetTotalProcessingTimeOk() (*int64, bool) {
 	if o == nil || isNil(o.TotalProcessingTime) {
-    return nil, false
+		return nil, false
 	}
 	return o.TotalProcessingTime, true
 }
@@ -520,5 +520,3 @@ func (v *NullableBulkQueryJobInfoExt) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

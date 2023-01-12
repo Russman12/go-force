@@ -92,7 +92,7 @@ func (o *BulkQueryJobInfo) GetId() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Id, true
 }
@@ -116,7 +116,7 @@ func (o *BulkQueryJobInfo) GetObject() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetObjectOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Object, true
 }
@@ -140,7 +140,7 @@ func (o *BulkQueryJobInfo) GetCreatedById() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetCreatedByIdOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CreatedById, true
 }
@@ -164,7 +164,7 @@ func (o *BulkQueryJobInfo) GetCreatedDate() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetCreatedDateOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.CreatedDate, true
 }
@@ -188,7 +188,7 @@ func (o *BulkQueryJobInfo) GetSystemModstamp() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetSystemModstampOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.SystemModstamp, true
 }
@@ -212,7 +212,7 @@ func (o *BulkQueryJobInfo) GetState() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetStateOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.State, true
 }
@@ -236,7 +236,7 @@ func (o *BulkQueryJobInfo) GetConcurrencyMode() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetConcurrencyModeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ConcurrencyMode, true
 }
@@ -260,7 +260,7 @@ func (o *BulkQueryJobInfo) GetApiVersion() float32 {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetApiVersionOk() (*float32, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ApiVersion, true
 }
@@ -283,7 +283,7 @@ func (o *BulkQueryJobInfo) GetJobType() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetJobTypeOk() (*string, bool) {
 	if o == nil || isNil(o.JobType) {
-    return nil, false
+		return nil, false
 	}
 	return o.JobType, true
 }
@@ -315,7 +315,7 @@ func (o *BulkQueryJobInfo) GetNumberRecordsProcessed() int64 {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetNumberRecordsProcessedOk() (*int64, bool) {
 	if o == nil || isNil(o.NumberRecordsProcessed) {
-    return nil, false
+		return nil, false
 	}
 	return o.NumberRecordsProcessed, true
 }
@@ -347,7 +347,7 @@ func (o *BulkQueryJobInfo) GetRetries() int32 {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetRetriesOk() (*int32, bool) {
 	if o == nil || isNil(o.Retries) {
-    return nil, false
+		return nil, false
 	}
 	return o.Retries, true
 }
@@ -379,7 +379,7 @@ func (o *BulkQueryJobInfo) GetTotalProcessingTime() int64 {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetTotalProcessingTimeOk() (*int64, bool) {
 	if o == nil || isNil(o.TotalProcessingTime) {
-    return nil, false
+		return nil, false
 	}
 	return o.TotalProcessingTime, true
 }
@@ -412,7 +412,7 @@ func (o *BulkQueryJobInfo) GetOperation() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetOperationOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Operation, true
 }
@@ -436,7 +436,7 @@ func (o *BulkQueryJobInfo) GetContentType() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetContentTypeOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.ContentType, true
 }
@@ -459,7 +459,7 @@ func (o *BulkQueryJobInfo) GetColumnDelimiter() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetColumnDelimiterOk() (*string, bool) {
 	if o == nil || isNil(o.ColumnDelimiter) {
-    return nil, false
+		return nil, false
 	}
 	return o.ColumnDelimiter, true
 }
@@ -491,7 +491,7 @@ func (o *BulkQueryJobInfo) GetLineEnding() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobInfo) GetLineEndingOk() (*string, bool) {
 	if o == nil || isNil(o.LineEnding) {
-    return nil, false
+		return nil, false
 	}
 	return o.LineEnding, true
 }
@@ -598,5 +598,3 @@ func (v *NullableBulkQueryJobInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

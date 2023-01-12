@@ -21,7 +21,7 @@ type BulkQueryJobsInfos struct {
 	Done bool `json:"done"`
 	// An array of record objects.
 	Records []BulkQueryJobInfo `json:"records"`
-	// The URI to get the next set of records (if there are any). This method returns up to 1,000 result rows per request. If there are more than 1,000 records, use the nextRecordsUrl to get the next set of records. This parameter is null if there are no more records to fetch. 
+	// The URI to get the next set of records (if there are any). This method returns up to 1,000 result rows per request. If there are more than 1,000 records, use the nextRecordsUrl to get the next set of records. This parameter is null if there are no more records to fetch.
 	NextRecordsUrl *string `json:"nextRecordsUrl,omitempty"`
 }
 
@@ -58,7 +58,7 @@ func (o *BulkQueryJobsInfos) GetDone() bool {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobsInfos) GetDoneOk() (*bool, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return &o.Done, true
 }
@@ -82,7 +82,7 @@ func (o *BulkQueryJobsInfos) GetRecords() []BulkQueryJobInfo {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobsInfos) GetRecordsOk() ([]BulkQueryJobInfo, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.Records, true
 }
@@ -105,7 +105,7 @@ func (o *BulkQueryJobsInfos) GetNextRecordsUrl() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJobsInfos) GetNextRecordsUrlOk() (*string, bool) {
 	if o == nil || isNil(o.NextRecordsUrl) {
-    return nil, false
+		return nil, false
 	}
 	return o.NextRecordsUrl, true
 }
@@ -173,5 +173,3 @@ func (v *NullableBulkQueryJobsInfos) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

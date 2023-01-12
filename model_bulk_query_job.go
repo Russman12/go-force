@@ -57,7 +57,7 @@ func (o *BulkQueryJob) GetOperation() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJob) GetOperationOk() (*string, bool) {
 	if o == nil || isNil(o.Operation) {
-    return nil, false
+		return nil, false
 	}
 	return o.Operation, true
 }
@@ -89,7 +89,7 @@ func (o *BulkQueryJob) GetContentType() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJob) GetContentTypeOk() (*string, bool) {
 	if o == nil || isNil(o.ContentType) {
-    return nil, false
+		return nil, false
 	}
 	return o.ContentType, true
 }
@@ -121,7 +121,7 @@ func (o *BulkQueryJob) GetColumnDelimiter() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJob) GetColumnDelimiterOk() (*string, bool) {
 	if o == nil || isNil(o.ColumnDelimiter) {
-    return nil, false
+		return nil, false
 	}
 	return o.ColumnDelimiter, true
 }
@@ -153,7 +153,7 @@ func (o *BulkQueryJob) GetLineEnding() string {
 // and a boolean to check if the value has been set.
 func (o *BulkQueryJob) GetLineEndingOk() (*string, bool) {
 	if o == nil || isNil(o.LineEnding) {
-    return nil, false
+		return nil, false
 	}
 	return o.LineEnding, true
 }
@@ -224,5 +224,3 @@ func (v *NullableBulkQueryJob) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

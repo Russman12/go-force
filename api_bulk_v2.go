@@ -14,21 +14,20 @@ package goforce
 import (
 	"bytes"
 	"context"
+	"io"
 	"io/ioutil"
 	"net/http"
 	"net/url"
-    "io"
-    "strings"
+	"strings"
 )
-
 
 // BulkV2ApiService BulkV2Api service
 type BulkV2ApiService service
 
 type ApiBulkCloseOrAbortJobRequest struct {
-	ctx context.Context
-	ApiService *BulkV2ApiService
-	jobId string
+	ctx                        context.Context
+	ApiService                 *BulkV2ApiService
+	jobId                      string
 	bulkCloseOrAbortJobRequest *BulkCloseOrAbortJobRequest
 }
 
@@ -44,26 +43,27 @@ func (r ApiBulkCloseOrAbortJobRequest) Execute() (*BulkJobInfo, *http.Response, 
 /*
 BulkCloseOrAbortJob Close or Abort a Job
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param jobId
- @return ApiBulkCloseOrAbortJobRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param jobId
+	@return ApiBulkCloseOrAbortJobRequest
 */
 func (a *BulkV2ApiService) BulkCloseOrAbortJob(ctx context.Context, jobId string) ApiBulkCloseOrAbortJobRequest {
 	return ApiBulkCloseOrAbortJobRequest{
 		ApiService: a,
-		ctx: ctx,
-		jobId: jobId,
+		ctx:        ctx,
+		jobId:      jobId,
 	}
 }
 
 // Execute executes the request
-//  @return BulkJobInfo
+//
+//	@return BulkJobInfo
 func (a *BulkV2ApiService) BulkCloseOrAbortJobExecute(r ApiBulkCloseOrAbortJobRequest) (*BulkJobInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPatch
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkJobInfo
+		localVarHTTPMethod  = http.MethodPatch
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkJobInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkV2ApiService.BulkCloseOrAbortJob")
@@ -108,12 +108,12 @@ func (a *BulkV2ApiService) BulkCloseOrAbortJobExecute(r ApiBulkCloseOrAbortJobRe
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -121,12 +121,12 @@ func (a *BulkV2ApiService) BulkCloseOrAbortJobExecute(r ApiBulkCloseOrAbortJobRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-    localVarHTTPResponse.Body.Close()
-    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-    if err != nil {
-        return localVarReturnValue, localVarHTTPResponse, err
-    }
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := &GenericOpenAPIError{
@@ -136,13 +136,13 @@ func (a *BulkV2ApiService) BulkCloseOrAbortJobExecute(r ApiBulkCloseOrAbortJobRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiBulkDeleteJobRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BulkV2ApiService
-	jobId string
+	jobId      string
 }
 
 func (r ApiBulkDeleteJobRequest) Execute() (*http.Response, error) {
@@ -152,24 +152,24 @@ func (r ApiBulkDeleteJobRequest) Execute() (*http.Response, error) {
 /*
 BulkDeleteJob Delete Job
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param jobId
- @return ApiBulkDeleteJobRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param jobId
+	@return ApiBulkDeleteJobRequest
 */
 func (a *BulkV2ApiService) BulkDeleteJob(ctx context.Context, jobId string) ApiBulkDeleteJobRequest {
 	return ApiBulkDeleteJobRequest{
 		ApiService: a,
-		ctx: ctx,
-		jobId: jobId,
+		ctx:        ctx,
+		jobId:      jobId,
 	}
 }
 
 // Execute executes the request
 func (a *BulkV2ApiService) BulkDeleteJobExecute(r ApiBulkDeleteJobRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodDelete
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodDelete
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkV2ApiService.BulkDeleteJob")
@@ -212,12 +212,12 @@ func (a *BulkV2ApiService) BulkDeleteJobExecute(r ApiBulkDeleteJobRequest) (*htt
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -225,14 +225,13 @@ func (a *BulkV2ApiService) BulkDeleteJobExecute(r ApiBulkDeleteJobRequest) (*htt
 		return localVarHTTPResponse, newErr
 	}
 
-
-    return localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }
 
 type ApiBulkJobFailedResultsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BulkV2ApiService
-	jobId string
+	jobId      string
 }
 
 func (r ApiBulkJobFailedResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
@@ -242,26 +241,27 @@ func (r ApiBulkJobFailedResultsRequest) Execute() (*io.ReadCloser, *http.Respons
 /*
 BulkJobFailedResults Get Job Failed Record Results
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param jobId
- @return ApiBulkJobFailedResultsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param jobId
+	@return ApiBulkJobFailedResultsRequest
 */
 func (a *BulkV2ApiService) BulkJobFailedResults(ctx context.Context, jobId string) ApiBulkJobFailedResultsRequest {
 	return ApiBulkJobFailedResultsRequest{
 		ApiService: a,
-		ctx: ctx,
-		jobId: jobId,
+		ctx:        ctx,
+		jobId:      jobId,
 	}
 }
 
 // Execute executes the request
-//  @return io.ReadCloser
+//
+//	@return io.ReadCloser
 func (a *BulkV2ApiService) BulkJobFailedResultsExecute(r ApiBulkJobFailedResultsRequest) (*io.ReadCloser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *io.ReadCloser
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *io.ReadCloser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkV2ApiService.BulkJobFailedResults")
@@ -304,12 +304,12 @@ func (a *BulkV2ApiService) BulkJobFailedResultsExecute(r ApiBulkJobFailedResults
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -317,13 +317,13 @@ func (a *BulkV2ApiService) BulkJobFailedResultsExecute(r ApiBulkJobFailedResults
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
+	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
 }
 
 type ApiBulkJobSuccessfulResultsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BulkV2ApiService
-	jobId string
+	jobId      string
 }
 
 func (r ApiBulkJobSuccessfulResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
@@ -333,26 +333,27 @@ func (r ApiBulkJobSuccessfulResultsRequest) Execute() (*io.ReadCloser, *http.Res
 /*
 BulkJobSuccessfulResults Get Job Successful Record Results
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param jobId
- @return ApiBulkJobSuccessfulResultsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param jobId
+	@return ApiBulkJobSuccessfulResultsRequest
 */
 func (a *BulkV2ApiService) BulkJobSuccessfulResults(ctx context.Context, jobId string) ApiBulkJobSuccessfulResultsRequest {
 	return ApiBulkJobSuccessfulResultsRequest{
 		ApiService: a,
-		ctx: ctx,
-		jobId: jobId,
+		ctx:        ctx,
+		jobId:      jobId,
 	}
 }
 
 // Execute executes the request
-//  @return io.ReadCloser
+//
+//	@return io.ReadCloser
 func (a *BulkV2ApiService) BulkJobSuccessfulResultsExecute(r ApiBulkJobSuccessfulResultsRequest) (*io.ReadCloser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *io.ReadCloser
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *io.ReadCloser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkV2ApiService.BulkJobSuccessfulResults")
@@ -395,12 +396,12 @@ func (a *BulkV2ApiService) BulkJobSuccessfulResultsExecute(r ApiBulkJobSuccessfu
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -408,13 +409,13 @@ func (a *BulkV2ApiService) BulkJobSuccessfulResultsExecute(r ApiBulkJobSuccessfu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
+	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
 }
 
 type ApiBulkJobUnprocessedRecordsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BulkV2ApiService
-	jobId string
+	jobId      string
 }
 
 func (r ApiBulkJobUnprocessedRecordsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
@@ -424,26 +425,27 @@ func (r ApiBulkJobUnprocessedRecordsRequest) Execute() (*io.ReadCloser, *http.Re
 /*
 BulkJobUnprocessedRecords Get Job Unprocessed Record Results
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param jobId
- @return ApiBulkJobUnprocessedRecordsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param jobId
+	@return ApiBulkJobUnprocessedRecordsRequest
 */
 func (a *BulkV2ApiService) BulkJobUnprocessedRecords(ctx context.Context, jobId string) ApiBulkJobUnprocessedRecordsRequest {
 	return ApiBulkJobUnprocessedRecordsRequest{
 		ApiService: a,
-		ctx: ctx,
-		jobId: jobId,
+		ctx:        ctx,
+		jobId:      jobId,
 	}
 }
 
 // Execute executes the request
-//  @return io.ReadCloser
+//
+//	@return io.ReadCloser
 func (a *BulkV2ApiService) BulkJobUnprocessedRecordsExecute(r ApiBulkJobUnprocessedRecordsRequest) (*io.ReadCloser, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *io.ReadCloser
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *io.ReadCloser
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkV2ApiService.BulkJobUnprocessedRecords")
@@ -486,12 +488,12 @@ func (a *BulkV2ApiService) BulkJobUnprocessedRecordsExecute(r ApiBulkJobUnproces
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -499,15 +501,15 @@ func (a *BulkV2ApiService) BulkJobUnprocessedRecordsExecute(r ApiBulkJobUnproces
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
+	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
 }
 
 type ApiBulkJobsRequest struct {
-	ctx context.Context
-	ApiService *BulkV2ApiService
+	ctx                 context.Context
+	ApiService          *BulkV2ApiService
 	isPkChunkingEnabled *bool
-	jobType *string
-	queryLocator *string
+	jobType             *string
+	queryLocator        *string
 }
 
 func (r ApiBulkJobsRequest) IsPkChunkingEnabled(isPkChunkingEnabled bool) ApiBulkJobsRequest {
@@ -532,24 +534,25 @@ func (r ApiBulkJobsRequest) Execute() (map[string]interface{}, *http.Response, e
 /*
 BulkJobs Get All Jobs
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiBulkJobsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiBulkJobsRequest
 */
 func (a *BulkV2ApiService) BulkJobs(ctx context.Context) ApiBulkJobsRequest {
 	return ApiBulkJobsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
+//
+//	@return map[string]interface{}
 func (a *BulkV2ApiService) BulkJobsExecute(r ApiBulkJobsRequest) (map[string]interface{}, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkV2ApiService.BulkJobs")
@@ -600,12 +603,12 @@ func (a *BulkV2ApiService) BulkJobsExecute(r ApiBulkJobsRequest) (map[string]int
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -613,12 +616,12 @@ func (a *BulkV2ApiService) BulkJobsExecute(r ApiBulkJobsRequest) (map[string]int
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-    localVarHTTPResponse.Body.Close()
-    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-    if err != nil {
-        return localVarReturnValue, localVarHTTPResponse, err
-    }
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := &GenericOpenAPIError{
@@ -628,13 +631,13 @@ func (a *BulkV2ApiService) BulkJobsExecute(r ApiBulkJobsRequest) (map[string]int
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiCreateJobRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BulkV2ApiService
-	bulkJob *BulkJob
+	bulkJob    *BulkJob
 }
 
 func (r ApiCreateJobRequest) BulkJob(bulkJob BulkJob) ApiCreateJobRequest {
@@ -649,24 +652,25 @@ func (r ApiCreateJobRequest) Execute() (*BulkJobInfo, *http.Response, error) {
 /*
 CreateJob Create job
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCreateJobRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiCreateJobRequest
 */
 func (a *BulkV2ApiService) CreateJob(ctx context.Context) ApiCreateJobRequest {
 	return ApiCreateJobRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return BulkJobInfo
+//
+//	@return BulkJobInfo
 func (a *BulkV2ApiService) CreateJobExecute(r ApiCreateJobRequest) (*BulkJobInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkJobInfo
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkJobInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkV2ApiService.CreateJob")
@@ -710,12 +714,12 @@ func (a *BulkV2ApiService) CreateJobExecute(r ApiCreateJobRequest) (*BulkJobInfo
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -723,12 +727,12 @@ func (a *BulkV2ApiService) CreateJobExecute(r ApiCreateJobRequest) (*BulkJobInfo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-    localVarHTTPResponse.Body.Close()
-    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-    if err != nil {
-        return localVarReturnValue, localVarHTTPResponse, err
-    }
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := &GenericOpenAPIError{
@@ -738,13 +742,13 @@ func (a *BulkV2ApiService) CreateJobExecute(r ApiCreateJobRequest) (*BulkJobInfo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiGetJobInfoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BulkV2ApiService
-	jobId string
+	jobId      string
 }
 
 func (r ApiGetJobInfoRequest) Execute() (*BulkJobInfo, *http.Response, error) {
@@ -754,26 +758,27 @@ func (r ApiGetJobInfoRequest) Execute() (*BulkJobInfo, *http.Response, error) {
 /*
 GetJobInfo Get Job Info
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param jobId
- @return ApiGetJobInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param jobId
+	@return ApiGetJobInfoRequest
 */
 func (a *BulkV2ApiService) GetJobInfo(ctx context.Context, jobId string) ApiGetJobInfoRequest {
 	return ApiGetJobInfoRequest{
 		ApiService: a,
-		ctx: ctx,
-		jobId: jobId,
+		ctx:        ctx,
+		jobId:      jobId,
 	}
 }
 
 // Execute executes the request
-//  @return BulkJobInfo
+//
+//	@return BulkJobInfo
 func (a *BulkV2ApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*BulkJobInfo, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *BulkJobInfo
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *BulkJobInfo
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkV2ApiService.GetJobInfo")
@@ -816,12 +821,12 @@ func (a *BulkV2ApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*BulkJobIn
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarReturnValue, localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -829,12 +834,12 @@ func (a *BulkV2ApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*BulkJobIn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-    localVarHTTPResponse.Body.Close()
-    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-    if err != nil {
-        return localVarReturnValue, localVarHTTPResponse, err
-    }
+	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
 	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 	if err != nil {
 		newErr := &GenericOpenAPIError{
@@ -844,14 +849,14 @@ func (a *BulkV2ApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*BulkJobIn
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-    return localVarReturnValue, localVarHTTPResponse, nil
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
 type ApiUploadJobDataRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *BulkV2ApiService
-	jobId string
-	body *io.ReadCloser
+	jobId      string
+	body       *io.ReadCloser
 }
 
 func (r ApiUploadJobDataRequest) Body(body io.ReadCloser) ApiUploadJobDataRequest {
@@ -866,24 +871,24 @@ func (r ApiUploadJobDataRequest) Execute() (*http.Response, error) {
 /*
 UploadJobData Upload Job Data
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param jobId
- @return ApiUploadJobDataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param jobId
+	@return ApiUploadJobDataRequest
 */
 func (a *BulkV2ApiService) UploadJobData(ctx context.Context, jobId string) ApiUploadJobDataRequest {
 	return ApiUploadJobDataRequest{
 		ApiService: a,
-		ctx: ctx,
-		jobId: jobId,
+		ctx:        ctx,
+		jobId:      jobId,
 	}
 }
 
 // Execute executes the request
 func (a *BulkV2ApiService) UploadJobDataExecute(r ApiUploadJobDataRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BulkV2ApiService.UploadJobData")
@@ -928,12 +933,12 @@ func (a *BulkV2ApiService) UploadJobDataExecute(r ApiUploadJobDataRequest) (*htt
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-        localVarHTTPResponse.Body.Close()
-        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-        if err != nil {
-            return localVarHTTPResponse, err
-        }
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarHTTPResponse, err
+		}
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
@@ -941,6 +946,5 @@ func (a *BulkV2ApiService) UploadJobDataExecute(r ApiUploadJobDataRequest) (*htt
 		return localVarHTTPResponse, newErr
 	}
 
-
-    return localVarHTTPResponse, nil
+	return localVarHTTPResponse, nil
 }

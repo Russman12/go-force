@@ -17,11 +17,11 @@ import (
 
 // SObjectFieldDescribePicklist struct for SObjectFieldDescribePicklist
 type SObjectFieldDescribePicklist struct {
-	Active *bool `json:"active,omitempty"`
-	DefaultValue *bool `json:"defaultValue,omitempty"`
-	Label *string `json:"label,omitempty"`
-	ValidFor NullableString `json:"validFor,omitempty"`
-	Value *string `json:"value,omitempty"`
+	Active       *bool          `json:"active,omitempty"`
+	DefaultValue *bool          `json:"defaultValue,omitempty"`
+	Label        *string        `json:"label,omitempty"`
+	ValidFor     NullableString `json:"validFor,omitempty"`
+	Value        *string        `json:"value,omitempty"`
 }
 
 // NewSObjectFieldDescribePicklist instantiates a new SObjectFieldDescribePicklist object
@@ -54,7 +54,7 @@ func (o *SObjectFieldDescribePicklist) GetActive() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribePicklist) GetActiveOk() (*bool, bool) {
 	if o == nil || isNil(o.Active) {
-    return nil, false
+		return nil, false
 	}
 	return o.Active, true
 }
@@ -86,7 +86,7 @@ func (o *SObjectFieldDescribePicklist) GetDefaultValue() bool {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribePicklist) GetDefaultValueOk() (*bool, bool) {
 	if o == nil || isNil(o.DefaultValue) {
-    return nil, false
+		return nil, false
 	}
 	return o.DefaultValue, true
 }
@@ -118,7 +118,7 @@ func (o *SObjectFieldDescribePicklist) GetLabel() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribePicklist) GetLabelOk() (*string, bool) {
 	if o == nil || isNil(o.Label) {
-    return nil, false
+		return nil, false
 	}
 	return o.Label, true
 }
@@ -151,7 +151,7 @@ func (o *SObjectFieldDescribePicklist) GetValidFor() string {
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *SObjectFieldDescribePicklist) GetValidForOk() (*string, bool) {
 	if o == nil {
-    return nil, false
+		return nil, false
 	}
 	return o.ValidFor.Get(), o.ValidFor.IsSet()
 }
@@ -169,6 +169,7 @@ func (o *SObjectFieldDescribePicklist) HasValidFor() bool {
 func (o *SObjectFieldDescribePicklist) SetValidFor(v string) {
 	o.ValidFor.Set(&v)
 }
+
 // SetValidForNil sets the value for ValidFor to be an explicit nil
 func (o *SObjectFieldDescribePicklist) SetValidForNil() {
 	o.ValidFor.Set(nil)
@@ -192,7 +193,7 @@ func (o *SObjectFieldDescribePicklist) GetValue() string {
 // and a boolean to check if the value has been set.
 func (o *SObjectFieldDescribePicklist) GetValueOk() (*string, bool) {
 	if o == nil || isNil(o.Value) {
-    return nil, false
+		return nil, false
 	}
 	return o.Value, true
 }
@@ -266,5 +267,3 @@ func (v *NullableSObjectFieldDescribePicklist) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
