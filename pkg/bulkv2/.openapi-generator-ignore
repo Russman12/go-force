@@ -25,7 +25,6 @@
 .travis.yml
 .gitignore
 
-test/*
 git_push.sh
 go.mod
 go.sum
