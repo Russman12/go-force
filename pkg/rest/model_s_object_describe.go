@@ -36,15 +36,15 @@ type SObjectDescribe struct {
 	ImplementsInterfaces  NullableString         `json:"implementsInterfaces,omitempty"`
 	IsInterface           *bool                  `json:"isInterface,omitempty"`
 	IsSubtype             *bool                  `json:"isSubtype,omitempty"`
-	KeyPrefix             string                 `json:"keyPrefix"`
-	Label                 string                 `json:"label"`
-	LabelPlural           string                 `json:"labelPlural"`
+	KeyPrefix             *string                `json:"keyPrefix,omitempty"`
+	Label                 *string                `json:"label,omitempty"`
+	LabelPlural           *string                `json:"labelPlural,omitempty"`
 	Layoutable            *bool                  `json:"layoutable,omitempty"`
 	Listviewable          NullableString         `json:"listviewable,omitempty"`
 	LookupLayoutable      NullableString         `json:"lookupLayoutable,omitempty"`
 	Mergeable             *bool                  `json:"mergeable,omitempty"`
 	MruEnabled            *bool                  `json:"mruEnabled,omitempty"`
-	Name                  string                 `json:"name"`
+	Name                  *string                `json:"name,omitempty"`
 	NetworkScopeFieldName NullableString         `json:"networkScopeFieldName,omitempty"`
 	Queryable             *bool                  `json:"queryable,omitempty"`
 	Replicateable         *bool                  `json:"replicateable,omitempty"`
@@ -68,12 +68,8 @@ type SObjectDescribe struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSObjectDescribe(keyPrefix string, label string, labelPlural string, name string) *SObjectDescribe {
+func NewSObjectDescribe() *SObjectDescribe {
 	this := SObjectDescribe{}
-	this.KeyPrefix = keyPrefix
-	this.Label = label
-	this.LabelPlural = labelPlural
-	this.Name = name
 	return &this
 }
 
@@ -770,76 +766,100 @@ func (o *SObjectDescribe) SetIsSubtype(v bool) {
 	o.IsSubtype = &v
 }
 
-// GetKeyPrefix returns the KeyPrefix field value
+// GetKeyPrefix returns the KeyPrefix field value if set, zero value otherwise.
 func (o *SObjectDescribe) GetKeyPrefix() string {
-	if o == nil {
+	if o == nil || isNil(o.KeyPrefix) {
 		var ret string
 		return ret
 	}
-
-	return o.KeyPrefix
+	return *o.KeyPrefix
 }
 
-// GetKeyPrefixOk returns a tuple with the KeyPrefix field value
+// GetKeyPrefixOk returns a tuple with the KeyPrefix field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribe) GetKeyPrefixOk() (*string, bool) {
-	if o == nil {
+	if o == nil || isNil(o.KeyPrefix) {
 		return nil, false
 	}
-	return &o.KeyPrefix, true
+	return o.KeyPrefix, true
 }
 
-// SetKeyPrefix sets field value
+// HasKeyPrefix returns a boolean if a field has been set.
+func (o *SObjectDescribe) HasKeyPrefix() bool {
+	if o != nil && !isNil(o.KeyPrefix) {
+		return true
+	}
+
+	return false
+}
+
+// SetKeyPrefix gets a reference to the given string and assigns it to the KeyPrefix field.
 func (o *SObjectDescribe) SetKeyPrefix(v string) {
-	o.KeyPrefix = v
+	o.KeyPrefix = &v
 }
 
-// GetLabel returns the Label field value
+// GetLabel returns the Label field value if set, zero value otherwise.
 func (o *SObjectDescribe) GetLabel() string {
-	if o == nil {
+	if o == nil || isNil(o.Label) {
 		var ret string
 		return ret
 	}
-
-	return o.Label
+	return *o.Label
 }
 
-// GetLabelOk returns a tuple with the Label field value
+// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribe) GetLabelOk() (*string, bool) {
-	if o == nil {
+	if o == nil || isNil(o.Label) {
 		return nil, false
 	}
-	return &o.Label, true
+	return o.Label, true
 }
 
-// SetLabel sets field value
+// HasLabel returns a boolean if a field has been set.
+func (o *SObjectDescribe) HasLabel() bool {
+	if o != nil && !isNil(o.Label) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabel gets a reference to the given string and assigns it to the Label field.
 func (o *SObjectDescribe) SetLabel(v string) {
-	o.Label = v
+	o.Label = &v
 }
 
-// GetLabelPlural returns the LabelPlural field value
+// GetLabelPlural returns the LabelPlural field value if set, zero value otherwise.
 func (o *SObjectDescribe) GetLabelPlural() string {
-	if o == nil {
+	if o == nil || isNil(o.LabelPlural) {
 		var ret string
 		return ret
 	}
-
-	return o.LabelPlural
+	return *o.LabelPlural
 }
 
-// GetLabelPluralOk returns a tuple with the LabelPlural field value
+// GetLabelPluralOk returns a tuple with the LabelPlural field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribe) GetLabelPluralOk() (*string, bool) {
-	if o == nil {
+	if o == nil || isNil(o.LabelPlural) {
 		return nil, false
 	}
-	return &o.LabelPlural, true
+	return o.LabelPlural, true
 }
 
-// SetLabelPlural sets field value
+// HasLabelPlural returns a boolean if a field has been set.
+func (o *SObjectDescribe) HasLabelPlural() bool {
+	if o != nil && !isNil(o.LabelPlural) {
+		return true
+	}
+
+	return false
+}
+
+// SetLabelPlural gets a reference to the given string and assigns it to the LabelPlural field.
 func (o *SObjectDescribe) SetLabelPlural(v string) {
-	o.LabelPlural = v
+	o.LabelPlural = &v
 }
 
 // GetLayoutable returns the Layoutable field value if set, zero value otherwise.
@@ -1024,28 +1044,36 @@ func (o *SObjectDescribe) SetMruEnabled(v bool) {
 	o.MruEnabled = &v
 }
 
-// GetName returns the Name field value
+// GetName returns the Name field value if set, zero value otherwise.
 func (o *SObjectDescribe) GetName() string {
-	if o == nil {
+	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
 	}
-
-	return o.Name
+	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribe) GetNameOk() (*string, bool) {
-	if o == nil {
+	if o == nil || isNil(o.Name) {
 		return nil, false
 	}
-	return &o.Name, true
+	return o.Name, true
 }
 
-// SetName sets field value
+// HasName returns a boolean if a field has been set.
+func (o *SObjectDescribe) HasName() bool {
+	if o != nil && !isNil(o.Name) {
+		return true
+	}
+
+	return false
+}
+
+// SetName gets a reference to the given string and assigns it to the Name field.
 func (o *SObjectDescribe) SetName(v string) {
-	o.Name = v
+	o.Name = &v
 }
 
 // GetNetworkScopeFieldName returns the NetworkScopeFieldName field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -1662,13 +1690,13 @@ func (o SObjectDescribe) MarshalJSON() ([]byte, error) {
 	if !isNil(o.IsSubtype) {
 		toSerialize["isSubtype"] = o.IsSubtype
 	}
-	if true {
+	if !isNil(o.KeyPrefix) {
 		toSerialize["keyPrefix"] = o.KeyPrefix
 	}
-	if true {
+	if !isNil(o.Label) {
 		toSerialize["label"] = o.Label
 	}
-	if true {
+	if !isNil(o.LabelPlural) {
 		toSerialize["labelPlural"] = o.LabelPlural
 	}
 	if !isNil(o.Layoutable) {
@@ -1686,7 +1714,7 @@ func (o SObjectDescribe) MarshalJSON() ([]byte, error) {
 	if !isNil(o.MruEnabled) {
 		toSerialize["mruEnabled"] = o.MruEnabled
 	}
-	if true {
+	if !isNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
 	if o.NetworkScopeFieldName.IsSet() {

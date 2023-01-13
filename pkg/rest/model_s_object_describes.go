@@ -17,20 +17,17 @@ import (
 
 // SObjectDescribes struct for SObjectDescribes
 type SObjectDescribes struct {
-	Encoding     string            `json:"encoding"`
-	MaxBatchSize int32             `json:"maxBatchSize"`
-	Sobjects     []SObjectDescribe `json:"sobjects"`
+	Encoding     *string           `json:"encoding,omitempty"`
+	MaxBatchSize *int32            `json:"maxBatchSize,omitempty"`
+	Sobjects     []SObjectDescribe `json:"sobjects,omitempty"`
 }
 
 // NewSObjectDescribes instantiates a new SObjectDescribes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSObjectDescribes(encoding string, maxBatchSize int32, sobjects []SObjectDescribe) *SObjectDescribes {
+func NewSObjectDescribes() *SObjectDescribes {
 	this := SObjectDescribes{}
-	this.Encoding = encoding
-	this.MaxBatchSize = maxBatchSize
-	this.Sobjects = sobjects
 	return &this
 }
 
@@ -42,87 +39,111 @@ func NewSObjectDescribesWithDefaults() *SObjectDescribes {
 	return &this
 }
 
-// GetEncoding returns the Encoding field value
+// GetEncoding returns the Encoding field value if set, zero value otherwise.
 func (o *SObjectDescribes) GetEncoding() string {
-	if o == nil {
+	if o == nil || isNil(o.Encoding) {
 		var ret string
 		return ret
 	}
-
-	return o.Encoding
+	return *o.Encoding
 }
 
-// GetEncodingOk returns a tuple with the Encoding field value
+// GetEncodingOk returns a tuple with the Encoding field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribes) GetEncodingOk() (*string, bool) {
-	if o == nil {
+	if o == nil || isNil(o.Encoding) {
 		return nil, false
 	}
-	return &o.Encoding, true
+	return o.Encoding, true
 }
 
-// SetEncoding sets field value
+// HasEncoding returns a boolean if a field has been set.
+func (o *SObjectDescribes) HasEncoding() bool {
+	if o != nil && !isNil(o.Encoding) {
+		return true
+	}
+
+	return false
+}
+
+// SetEncoding gets a reference to the given string and assigns it to the Encoding field.
 func (o *SObjectDescribes) SetEncoding(v string) {
-	o.Encoding = v
+	o.Encoding = &v
 }
 
-// GetMaxBatchSize returns the MaxBatchSize field value
+// GetMaxBatchSize returns the MaxBatchSize field value if set, zero value otherwise.
 func (o *SObjectDescribes) GetMaxBatchSize() int32 {
-	if o == nil {
+	if o == nil || isNil(o.MaxBatchSize) {
 		var ret int32
 		return ret
 	}
-
-	return o.MaxBatchSize
+	return *o.MaxBatchSize
 }
 
-// GetMaxBatchSizeOk returns a tuple with the MaxBatchSize field value
+// GetMaxBatchSizeOk returns a tuple with the MaxBatchSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribes) GetMaxBatchSizeOk() (*int32, bool) {
-	if o == nil {
+	if o == nil || isNil(o.MaxBatchSize) {
 		return nil, false
 	}
-	return &o.MaxBatchSize, true
+	return o.MaxBatchSize, true
 }
 
-// SetMaxBatchSize sets field value
+// HasMaxBatchSize returns a boolean if a field has been set.
+func (o *SObjectDescribes) HasMaxBatchSize() bool {
+	if o != nil && !isNil(o.MaxBatchSize) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxBatchSize gets a reference to the given int32 and assigns it to the MaxBatchSize field.
 func (o *SObjectDescribes) SetMaxBatchSize(v int32) {
-	o.MaxBatchSize = v
+	o.MaxBatchSize = &v
 }
 
-// GetSobjects returns the Sobjects field value
+// GetSobjects returns the Sobjects field value if set, zero value otherwise.
 func (o *SObjectDescribes) GetSobjects() []SObjectDescribe {
-	if o == nil {
+	if o == nil || isNil(o.Sobjects) {
 		var ret []SObjectDescribe
 		return ret
 	}
-
 	return o.Sobjects
 }
 
-// GetSobjectsOk returns a tuple with the Sobjects field value
+// GetSobjectsOk returns a tuple with the Sobjects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *SObjectDescribes) GetSobjectsOk() ([]SObjectDescribe, bool) {
-	if o == nil {
+	if o == nil || isNil(o.Sobjects) {
 		return nil, false
 	}
 	return o.Sobjects, true
 }
 
-// SetSobjects sets field value
+// HasSobjects returns a boolean if a field has been set.
+func (o *SObjectDescribes) HasSobjects() bool {
+	if o != nil && !isNil(o.Sobjects) {
+		return true
+	}
+
+	return false
+}
+
+// SetSobjects gets a reference to the given []SObjectDescribe and assigns it to the Sobjects field.
 func (o *SObjectDescribes) SetSobjects(v []SObjectDescribe) {
 	o.Sobjects = v
 }
 
 func (o SObjectDescribes) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if !isNil(o.Encoding) {
 		toSerialize["encoding"] = o.Encoding
 	}
-	if true {
+	if !isNil(o.MaxBatchSize) {
 		toSerialize["maxBatchSize"] = o.MaxBatchSize
 	}
-	if true {
+	if !isNil(o.Sobjects) {
 		toSerialize["sobjects"] = o.Sobjects
 	}
 	return json.Marshal(toSerialize)

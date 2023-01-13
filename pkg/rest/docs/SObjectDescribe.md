@@ -23,15 +23,15 @@ Name | Type | Description | Notes
 **ImplementsInterfaces** | Pointer to **NullableString** |  | [optional] 
 **IsInterface** | Pointer to **bool** |  | [optional] 
 **IsSubtype** | Pointer to **bool** |  | [optional] 
-**KeyPrefix** | **string** |  | 
-**Label** | **string** |  | 
-**LabelPlural** | **string** |  | 
+**KeyPrefix** | Pointer to **string** |  | [optional] 
+**Label** | Pointer to **string** |  | [optional] 
+**LabelPlural** | Pointer to **string** |  | [optional] 
 **Layoutable** | Pointer to **bool** |  | [optional] 
 **Listviewable** | Pointer to **NullableString** |  | [optional] 
 **LookupLayoutable** | Pointer to **NullableString** |  | [optional] 
 **Mergeable** | Pointer to **bool** |  | [optional] 
 **MruEnabled** | Pointer to **bool** |  | [optional] 
-**Name** | **string** |  | 
+**Name** | Pointer to **string** |  | [optional] 
 **NetworkScopeFieldName** | Pointer to **NullableString** |  | [optional] 
 **Queryable** | Pointer to **bool** |  | [optional] 
 **Replicateable** | Pointer to **bool** |  | [optional] 
@@ -54,7 +54,7 @@ Name | Type | Description | Notes
 
 ### NewSObjectDescribe
 
-`func NewSObjectDescribe(keyPrefix string, label string, labelPlural string, name string, ) *SObjectDescribe`
+`func NewSObjectDescribe() *SObjectDescribe`
 
 NewSObjectDescribe instantiates a new SObjectDescribe object
 This constructor will assign default values to properties that have it defined,
@@ -633,6 +633,11 @@ and a boolean to check if the value has been set.
 
 SetKeyPrefix sets KeyPrefix field to given value.
 
+### HasKeyPrefix
+
+`func (o *SObjectDescribe) HasKeyPrefix() bool`
+
+HasKeyPrefix returns a boolean if a field has been set.
 
 ### GetLabel
 
@@ -653,6 +658,11 @@ and a boolean to check if the value has been set.
 
 SetLabel sets Label field to given value.
 
+### HasLabel
+
+`func (o *SObjectDescribe) HasLabel() bool`
+
+HasLabel returns a boolean if a field has been set.
 
 ### GetLabelPlural
 
@@ -673,6 +683,11 @@ and a boolean to check if the value has been set.
 
 SetLabelPlural sets LabelPlural field to given value.
 
+### HasLabelPlural
+
+`func (o *SObjectDescribe) HasLabelPlural() bool`
+
+HasLabelPlural returns a boolean if a field has been set.
 
 ### GetLayoutable
 
@@ -838,6 +853,11 @@ and a boolean to check if the value has been set.
 
 SetName sets Name field to given value.
 
+### HasName
+
+`func (o *SObjectDescribe) HasName() bool`
+
+HasName returns a boolean if a field has been set.
 
 ### GetNetworkScopeFieldName
 

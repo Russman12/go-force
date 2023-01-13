@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Encoding** | **string** |  | 
-**MaxBatchSize** | **int32** |  | 
-**Sobjects** | [**[]SObjectDescribe**](SObjectDescribe.md) |  | 
+**Encoding** | Pointer to **string** |  | [optional] 
+**MaxBatchSize** | Pointer to **int32** |  | [optional] 
+**Sobjects** | Pointer to [**[]SObjectDescribe**](SObjectDescribe.md) |  | [optional] 
 
 ## Methods
 
 ### NewSObjectDescribes
 
-`func NewSObjectDescribes(encoding string, maxBatchSize int32, sobjects []SObjectDescribe, ) *SObjectDescribes`
+`func NewSObjectDescribes() *SObjectDescribes`
 
 NewSObjectDescribes instantiates a new SObjectDescribes object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +46,11 @@ and a boolean to check if the value has been set.
 
 SetEncoding sets Encoding field to given value.
 
+### HasEncoding
+
+`func (o *SObjectDescribes) HasEncoding() bool`
+
+HasEncoding returns a boolean if a field has been set.
 
 ### GetMaxBatchSize
 
@@ -66,6 +71,11 @@ and a boolean to check if the value has been set.
 
 SetMaxBatchSize sets MaxBatchSize field to given value.
 
+### HasMaxBatchSize
+
+`func (o *SObjectDescribes) HasMaxBatchSize() bool`
+
+HasMaxBatchSize returns a boolean if a field has been set.
 
 ### GetSobjects
 
@@ -86,6 +96,11 @@ and a boolean to check if the value has been set.
 
 SetSobjects sets Sobjects field to given value.
 
+### HasSobjects
+
+`func (o *SObjectDescribes) HasSobjects() bool`
+
+HasSobjects returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

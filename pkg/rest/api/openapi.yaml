@@ -424,11 +424,6 @@ components:
           items:
             $ref: '#/components/schemas/fieldDescribe'
           type: array
-      required:
-      - keyPrefix
-      - label
-      - labelPlural
-      - name
       type: object
     actionOverrides:
       example:
@@ -802,10 +797,6 @@ components:
           items:
             $ref: '#/components/schemas/sObjectDescribe'
           type: array
-      required:
-      - encoding
-      - maxBatchSize
-      - sobjects
     fieldType:
       enum:
       - address
