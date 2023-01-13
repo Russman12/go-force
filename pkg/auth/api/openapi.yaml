@@ -3,7 +3,7 @@ info:
   contact:
     email: russell-laboe@outlook.com
     name: Russell Laboe
-  title: Salesforce Platform Auth APIs
+  title: Salesforce Platform Auth API
   version: "56.0"
 servers:
 - description: Sandbox login server.

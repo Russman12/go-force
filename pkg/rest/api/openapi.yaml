@@ -3,7 +3,7 @@ info:
   contact:
     email: russell-laboe@outlook.com
     name: Russell Laboe
-  title: Salesforce Platform REST APIs
+  title: Salesforce Platform REST API
   version: "56.0"
 servers:
 - description: Salesforce domain
