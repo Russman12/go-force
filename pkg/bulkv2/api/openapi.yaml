@@ -76,7 +76,7 @@ paths:
           type: string
         style: simple
       requestBody:
-        $ref: '#/components/requestBodies/QueryAbortJobRequest'
+        $ref: '#/components/requestBodies/AbortQueryJobRequest'
       responses:
         "200":
           content:
@@ -545,11 +545,11 @@ components:
         type: string
       style: simple
   requestBodies:
-    QueryAbortJobRequest:
+    AbortQueryJobRequest:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/QueryJobInfo'
+            $ref: '#/components/schemas/AbortQueryJobRequest'
     CloseOrAbortJobRequest:
       content:
         application/json:
@@ -559,7 +559,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Job'
+            $ref: '#/components/schemas/CreateJobRequest'
     CreateQueryJobRequestBody:
       content:
         application/json:
@@ -569,36 +569,13 @@ components:
     QueryJob:
       properties:
         operation:
-          description: The type of query.
-          enum:
-          - query
-          - queryAll
-          type: string
+          $ref: '#/components/schemas/QueryOperation'
         contentType:
-          description: The format that is used for the results. Currently the only
-            supported value is CSV.
-          enum:
-          - CSV
-          type: string
+          $ref: '#/components/schemas/ContentType'
         columnDelimiter:
-          description: The column delimiter used for CSV job data. The default value
-            is COMMA.
-          enum:
-          - BACKQUOTE
-          - CARET
-          - COMMA
-          - PIPE
-          - SEMICOLON
-          - TAB
-          nullable: true
-          type: string
+          $ref: '#/components/schemas/ColumnDelimiter'
         lineEnding:
-          description: "The line ending used for CSV job data, marking the end of\
-            \ a data row. The default is LF."
-          enum:
-          - LF
-          - CRLF
-          type: string
+          $ref: '#/components/schemas/LineEnding'
       type: object
     QueryJobInfoExt:
       properties:
@@ -618,14 +595,7 @@ components:
           description: The UTC date and time when the API last updated the job information.
           type: string
         state:
-          description: The current state of processing for the job.
-          enum:
-          - UploadComplete
-          - InProgress
-          - Aborted
-          - JobComplete
-          - Failed
-          type: string
+          $ref: '#/components/schemas/QueryJobState'
         concurrencyMode:
           description: "Reserved for future use. How the request is processed. Currently\
             \ only parallel mode is supported. (When other modes are added, the API\
@@ -635,10 +605,7 @@ components:
           description: The API version that the job was created in.
           type: number
         jobType:
-          description: "The job’s type. For a query job, the type is always V2Query."
-          enum:
-          - V2Query
-          type: string
+          $ref: '#/components/schemas/QueryJobType'
         numberRecordsProcessed:
           description: The number of records processed in this job.
           format: int64
@@ -653,21 +620,16 @@ components:
           format: int64
           type: integer
       type: object
+    AbortQueryJobRequest:
+      example:
+        state: Aborted
+      properties:
+        state:
+          $ref: '#/components/schemas/QueryAbortState'
     QueryJobInfo:
       allOf:
       - $ref: '#/components/schemas/QueryJobInfoExt'
       - $ref: '#/components/schemas/QueryJob'
-      required:
-      - apiVersion
-      - concurrencyMode
-      - contentType
-      - createdById
-      - createdDate
-      - id
-      - object
-      - operation
-      - state
-      - systemModstamp
     QueryJobInfos:
       example:
         nextRecordsUrl: https://openapi-generator.tech
@@ -692,9 +654,6 @@ components:
             This parameter is null if there are no more records to fetch.
           format: uri
           type: string
-      required:
-      - done
-      - records
     CreateQueryJobRequest:
       allOf:
       - $ref: '#/components/schemas/QueryJob'
@@ -724,47 +683,27 @@ components:
             if an assignment rule is specified when the job is created.
           type: string
         columnDelimiter:
-          description: The column delimiter used for CSV job data.
-          enum:
-          - BACKQUOTE
-          - CARET
-          - COMMA
-          - PIPE
-          - SEMICOLON
-          - TAB
-          nullable: true
-          type: string
+          $ref: '#/components/schemas/ColumnDelimiter'
         contentType:
-          description: The format of the data being processed. Only CSV is supported.
-          enum:
-          - CSV
-          type: string
+          $ref: '#/components/schemas/ContentType'
         externalIdFieldName:
           description: The name of the external ID field for an upsert.
           type: string
         lineEnding:
-          description: The line ending used for CSV job data.
-          enum:
-          - LF
-          - CRLF
-          type: string
+          $ref: '#/components/schemas/LineEnding'
         object:
           description: The object type for the data being processed.
           type: string
         operation:
-          description: The processing operation for the job.
-          enum:
-          - insert
-          - delete
-          - hardDelete
-          - update
-          - upsert
-          type: string
+          $ref: '#/components/schemas/JobOperation'
+      title: Job
+      type: object
+    CreateJobRequest:
+      allOf:
+      - $ref: '#/components/schemas/Job'
       required:
       - object
       - operation
-      title: Job
-      type: object
     JobInfoExt:
       properties:
         apiVersion:
@@ -789,23 +728,12 @@ components:
           description: Unique ID for this job.
           type: string
         jobType:
-          description: The job’s type.
-          enum:
-          - BigObjectIngest
-          - Classic
-          - V2Ingest
-          type: string
+          $ref: '#/components/schemas/JobType'
         systemModstamp:
           description: Date and time in the UTC time zone when the job finished.
           type: string
         state:
-          description: The current state of processing for the job.
-          enum:
-          - open
-          - UploadComplete
-          - Aborted
-          - JobComplete
-          type: string
+          $ref: '#/components/schemas/JobState'
         apexProcessingTime:
           description: "The number of milliseconds taken to process triggers and other\
             \ processes related to the job data. This doesn't include the time used\
@@ -847,23 +775,6 @@ components:
       allOf:
       - $ref: '#/components/schemas/Job'
       - $ref: '#/components/schemas/JobInfoExt'
-      required:
-      - apiVersion
-      - assignmentRuleId
-      - columnDelimiter
-      - concurrencyMode
-      - contentType
-      - contentUrl
-      - createdById
-      - createdDate
-      - externalIdFieldName
-      - id
-      - jobType
-      - lineEnding
-      - object
-      - operation
-      - state
-      - systemModstamp
     Jobs:
       properties:
         done:
@@ -880,21 +791,91 @@ components:
             of results in a subsequent request if done isn’t true.
           format: uri
           type: string
-      required:
-      - done
-      - records
     CloseOrAbortJobRequest:
       example:
         state: UploadComplete
       properties:
         state:
-          description: "The state to update the job to. Use UploadComplete to close\
-            \ a job, or Aborted to abort a job."
-          enum:
-          - UploadComplete
-          - Aborted
-          type: string
+          $ref: '#/components/schemas/JobCloseAbortState'
       required:
       - state
       title: CloseOrAbortJobRequest
       type: object
+    JobState:
+      description: The current state of processing for the job.
+      enum:
+      - Open
+      - UploadComplete
+      - InProgress
+      - Aborted
+      - JobComplete
+      - Failed
+      type: string
+    QueryJobState:
+      description: The current state of processing for the job.
+      enum:
+      - UploadComplete
+      - InProgress
+      - Aborted
+      - JobComplete
+      - Failed
+      type: string
+    JobType:
+      description: The job’s type.
+      enum:
+      - BigObjectIngest
+      - Classic
+      - V2Ingest
+      type: string
+    ColumnDelimiter:
+      description: The column delimiter used for CSV job data.
+      enum:
+      - BACKQUOTE
+      - CARET
+      - COMMA
+      - PIPE
+      - SEMICOLON
+      - TAB
+      type: string
+    ContentType:
+      description: The format of the data being processed. Only CSV is supported.
+      enum:
+      - CSV
+      type: string
+    LineEnding:
+      description: The line ending used for CSV job data.
+      enum:
+      - LF
+      - CRLF
+      type: string
+    JobOperation:
+      description: The processing operation for the job.
+      enum:
+      - insert
+      - delete
+      - hardDelete
+      - update
+      - upsert
+      type: string
+    QueryOperation:
+      description: The type of query.
+      enum:
+      - query
+      - queryAll
+      type: string
+    QueryJobType:
+      description: "The job’s type. For a query job, the type is always V2Query."
+      enum:
+      - V2Query
+      type: string
+    QueryAbortState:
+      enum:
+      - Aborted
+      type: string
+    JobCloseAbortState:
+      description: "The state to update the job to. Use UploadComplete to close a\
+        \ job, or Aborted to abort a job."
+      enum:
+      - UploadComplete
+      - Aborted
+      type: string

@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Done** | **bool** | Indicates whether there are more jobs to get. If false, use the nextRecordsUrl value to retrieve the next group of jobs. | 
-**Records** | [**[]JobInfo**](JobInfo.md) | Contains information for each retrieved job. | 
+**Done** | Pointer to **bool** | Indicates whether there are more jobs to get. If false, use the nextRecordsUrl value to retrieve the next group of jobs. | [optional] 
+**Records** | Pointer to [**[]JobInfo**](JobInfo.md) | Contains information for each retrieved job. | [optional] 
 **NextRecordsUrl** | Pointer to **string** | A URL that contains a query locator used to get the next set of results in a subsequent request if done isn’t true. | [optional] 
 
 ## Methods
 
 ### NewJobs
 
-`func NewJobs(done bool, records []JobInfo, ) *Jobs`
+`func NewJobs() *Jobs`
 
 NewJobs instantiates a new Jobs object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +46,11 @@ and a boolean to check if the value has been set.
 
 SetDone sets Done field to given value.
 
+### HasDone
+
+`func (o *Jobs) HasDone() bool`
+
+HasDone returns a boolean if a field has been set.
 
 ### GetRecords
 
@@ -66,6 +71,11 @@ and a boolean to check if the value has been set.
 
 SetRecords sets Records field to given value.
 
+### HasRecords
+
+`func (o *Jobs) HasRecords() bool`
+
+HasRecords returns a boolean if a field has been set.
 
 ### GetNextRecordsUrl
 

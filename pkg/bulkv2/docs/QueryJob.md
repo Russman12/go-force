@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Operation** | Pointer to **string** | The type of query. | [optional] 
-**ContentType** | Pointer to **string** | The format that is used for the results. Currently the only supported value is CSV. | [optional] 
-**ColumnDelimiter** | Pointer to **NullableString** | The column delimiter used for CSV job data. The default value is COMMA. | [optional] 
-**LineEnding** | Pointer to **string** | The line ending used for CSV job data, marking the end of a data row. The default is LF. | [optional] 
+**Operation** | Pointer to [**QueryOperation**](QueryOperation.md) |  | [optional] 
+**ContentType** | Pointer to [**ContentType**](ContentType.md) |  | [optional] 
+**ColumnDelimiter** | Pointer to [**ColumnDelimiter**](ColumnDelimiter.md) |  | [optional] 
+**LineEnding** | Pointer to [**LineEnding**](LineEnding.md) |  | [optional] 
 
 ## Methods
 
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetOperation
 
-`func (o *QueryJob) GetOperation() string`
+`func (o *QueryJob) GetOperation() QueryOperation`
 
 GetOperation returns the Operation field if non-nil, zero value otherwise.
 
 ### GetOperationOk
 
-`func (o *QueryJob) GetOperationOk() (*string, bool)`
+`func (o *QueryJob) GetOperationOk() (*QueryOperation, bool)`
 
 GetOperationOk returns a tuple with the Operation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperation
 
-`func (o *QueryJob) SetOperation(v string)`
+`func (o *QueryJob) SetOperation(v QueryOperation)`
 
 SetOperation sets Operation field to given value.
 
@@ -55,20 +55,20 @@ HasOperation returns a boolean if a field has been set.
 
 ### GetContentType
 
-`func (o *QueryJob) GetContentType() string`
+`func (o *QueryJob) GetContentType() ContentType`
 
 GetContentType returns the ContentType field if non-nil, zero value otherwise.
 
 ### GetContentTypeOk
 
-`func (o *QueryJob) GetContentTypeOk() (*string, bool)`
+`func (o *QueryJob) GetContentTypeOk() (*ContentType, bool)`
 
 GetContentTypeOk returns a tuple with the ContentType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContentType
 
-`func (o *QueryJob) SetContentType(v string)`
+`func (o *QueryJob) SetContentType(v ContentType)`
 
 SetContentType sets ContentType field to given value.
 
@@ -80,20 +80,20 @@ HasContentType returns a boolean if a field has been set.
 
 ### GetColumnDelimiter
 
-`func (o *QueryJob) GetColumnDelimiter() string`
+`func (o *QueryJob) GetColumnDelimiter() ColumnDelimiter`
 
 GetColumnDelimiter returns the ColumnDelimiter field if non-nil, zero value otherwise.
 
 ### GetColumnDelimiterOk
 
-`func (o *QueryJob) GetColumnDelimiterOk() (*string, bool)`
+`func (o *QueryJob) GetColumnDelimiterOk() (*ColumnDelimiter, bool)`
 
 GetColumnDelimiterOk returns a tuple with the ColumnDelimiter field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetColumnDelimiter
 
-`func (o *QueryJob) SetColumnDelimiter(v string)`
+`func (o *QueryJob) SetColumnDelimiter(v ColumnDelimiter)`
 
 SetColumnDelimiter sets ColumnDelimiter field to given value.
 
@@ -103,32 +103,22 @@ SetColumnDelimiter sets ColumnDelimiter field to given value.
 
 HasColumnDelimiter returns a boolean if a field has been set.
 
-### SetColumnDelimiterNil
-
-`func (o *QueryJob) SetColumnDelimiterNil(b bool)`
-
- SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
-
-### UnsetColumnDelimiter
-`func (o *QueryJob) UnsetColumnDelimiter()`
-
-UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
 ### GetLineEnding
 
-`func (o *QueryJob) GetLineEnding() string`
+`func (o *QueryJob) GetLineEnding() LineEnding`
 
 GetLineEnding returns the LineEnding field if non-nil, zero value otherwise.
 
 ### GetLineEndingOk
 
-`func (o *QueryJob) GetLineEndingOk() (*string, bool)`
+`func (o *QueryJob) GetLineEndingOk() (*LineEnding, bool)`
 
 GetLineEndingOk returns a tuple with the LineEnding field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLineEnding
 
-`func (o *QueryJob) SetLineEnding(v string)`
+`func (o *QueryJob) SetLineEnding(v LineEnding)`
 
 SetLineEnding sets LineEnding field to given value.
 

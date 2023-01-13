@@ -13,190 +13,28 @@ package bulkv2
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // Job struct for Job
-
-type JobColumnDelimiter int
-
-const (
-	JOB_COLUMN_DELIMITER_BACKQUOTE JobColumnDelimiter = iota
-	JOB_COLUMN_DELIMITER_CARET
-	JOB_COLUMN_DELIMITER_COMMA
-	JOB_COLUMN_DELIMITER_PIPE
-	JOB_COLUMN_DELIMITER_SEMICOLON
-	JOB_COLUMN_DELIMITER_TAB
-)
-
-func (e *JobColumnDelimiter) String() *string {
-	s := []string{"BACKQUOTE", "CARET", "COMMA", "PIPE", "SEMICOLON", "TAB"}[*e]
-	return &s
-}
-func (e *JobColumnDelimiter) Get() *string {
-	return e.String()
-}
-func (e *JobColumnDelimiter) IsSet() bool {
-	return e != nil
-}
-func (e *JobColumnDelimiter) Set(val *JobColumnDelimiter) {
-	e = val
-}
-func (e *JobColumnDelimiter) Unset() {
-	e.Set(nil)
-}
-func (e JobColumnDelimiter) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *JobColumnDelimiter) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := JobColumnDelimiterParse(str)
-
-	return err
-}
-func JobColumnDelimiterParse(s string) (*JobColumnDelimiter, error) {
-	for i, e := range []string{"BACKQUOTE", "CARET", "COMMA", "PIPE", "SEMICOLON", "TAB"} {
-		if s == e {
-			enum := JobColumnDelimiter(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid JobColumnDelimiter", s)
-}
-
-type JobContentType int
-
-const (
-	JOB_CONTENT_TYPE_CSV JobContentType = iota
-)
-
-func (e *JobContentType) String() string {
-	s := []string{"CSV"}[*e]
-	return s
-}
-func (e JobContentType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *JobContentType) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := JobContentTypeParse(str)
-
-	return err
-}
-func JobContentTypeParse(s string) (*JobContentType, error) {
-	for i, e := range []string{"CSV"} {
-		if s == e {
-			enum := JobContentType(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid JobContentType", s)
-}
-
-type JobLineEnding int
-
-const (
-	JOB_LINE_ENDING_LF JobLineEnding = iota
-	JOB_LINE_ENDING_CRLF
-)
-
-func (e *JobLineEnding) String() string {
-	s := []string{"LF", "CRLF"}[*e]
-	return s
-}
-func (e JobLineEnding) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *JobLineEnding) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := JobLineEndingParse(str)
-
-	return err
-}
-func JobLineEndingParse(s string) (*JobLineEnding, error) {
-	for i, e := range []string{"LF", "CRLF"} {
-		if s == e {
-			enum := JobLineEnding(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid JobLineEnding", s)
-}
-
-type JobOperation int
-
-const (
-	JOB_OPERATION_INSERT JobOperation = iota
-	JOB_OPERATION_DELETE
-	JOB_OPERATION_HARD_DELETE
-	JOB_OPERATION_UPDATE
-	JOB_OPERATION_UPSERT
-)
-
-func (e *JobOperation) String() string {
-	s := []string{"insert", "delete", "hardDelete", "update", "upsert"}[*e]
-	return s
-}
-func (e JobOperation) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *JobOperation) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := JobOperationParse(str)
-
-	return err
-}
-func JobOperationParse(s string) (*JobOperation, error) {
-	for i, e := range []string{"insert", "delete", "hardDelete", "update", "upsert"} {
-		if s == e {
-			enum := JobOperation(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid JobOperation", s)
-}
-
 type Job struct {
 	// The ID of the assignment rule. This property is only shown if an assignment rule is specified when the job is created.
-	AssignmentRuleId *string `json:"assignmentRuleId,omitempty"`
-	// The column delimiter used for CSV job data.
-	ColumnDelimiter JobColumnDelimiter `json:"columnDelimiter,omitempty"`
-	// The format of the data being processed. Only CSV is supported.
-	ContentType *JobContentType `json:"contentType,omitempty"`
+	AssignmentRuleId *string          `json:"assignmentRuleId,omitempty"`
+	ColumnDelimiter  *ColumnDelimiter `json:"columnDelimiter,omitempty"`
+	ContentType      *ContentType     `json:"contentType,omitempty"`
 	// The name of the external ID field for an upsert.
-	ExternalIdFieldName *string `json:"externalIdFieldName,omitempty"`
-	// The line ending used for CSV job data.
-	LineEnding *JobLineEnding `json:"lineEnding,omitempty"`
+	ExternalIdFieldName *string     `json:"externalIdFieldName,omitempty"`
+	LineEnding          *LineEnding `json:"lineEnding,omitempty"`
 	// The object type for the data being processed.
-	Object string `json:"object"`
-	// The processing operation for the job.
-	Operation JobOperation `json:"operation"`
+	Object    *string       `json:"object,omitempty"`
+	Operation *JobOperation `json:"operation,omitempty"`
 }
 
 // NewJob instantiates a new Job object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewJob(object string, operation JobOperation) *Job {
+func NewJob() *Job {
 	this := Job{}
-	this.Object = object
-	this.Operation = operation
 	return &this
 }
 
@@ -240,66 +78,54 @@ func (o *Job) SetAssignmentRuleId(v string) {
 	o.AssignmentRuleId = &v
 }
 
-// GetColumnDelimiter returns the ColumnDelimiter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Job) GetColumnDelimiter() string {
-	if o == nil || isNil(o.ColumnDelimiter.Get()) {
-		var ret string
+// GetColumnDelimiter returns the ColumnDelimiter field value if set, zero value otherwise.
+func (o *Job) GetColumnDelimiter() ColumnDelimiter {
+	if o == nil || isNil(o.ColumnDelimiter) {
+		var ret ColumnDelimiter
 		return ret
 	}
-	return *o.ColumnDelimiter.Get()
+	return *o.ColumnDelimiter
 }
 
 // GetColumnDelimiterOk returns a tuple with the ColumnDelimiter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Job) GetColumnDelimiterOk() (*string, bool) {
-	if o == nil {
+func (o *Job) GetColumnDelimiterOk() (*ColumnDelimiter, bool) {
+	if o == nil || isNil(o.ColumnDelimiter) {
 		return nil, false
 	}
-	return o.ColumnDelimiter.Get(), o.ColumnDelimiter.IsSet()
+	return o.ColumnDelimiter, true
 }
 
 // HasColumnDelimiter returns a boolean if a field has been set.
 func (o *Job) HasColumnDelimiter() bool {
-	if o != nil && o.ColumnDelimiter.IsSet() {
+	if o != nil && !isNil(o.ColumnDelimiter) {
 		return true
 	}
 
 	return false
 }
 
-// SetColumnDelimiter gets a reference to the given NullableString and assigns it to the ColumnDelimiter field.
-func (o *Job) SetColumnDelimiter(v JobColumnDelimiter) {
-	o.ColumnDelimiter.Set(&v)
-}
-
-// SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
-func (o *Job) SetColumnDelimiterNil() {
-	o.ColumnDelimiter.Set(nil)
-}
-
-// UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
-func (o *Job) UnsetColumnDelimiter() {
-	o.ColumnDelimiter.Unset()
+// SetColumnDelimiter gets a reference to the given ColumnDelimiter and assigns it to the ColumnDelimiter field.
+func (o *Job) SetColumnDelimiter(v ColumnDelimiter) {
+	o.ColumnDelimiter = &v
 }
 
 // GetContentType returns the ContentType field value if set, zero value otherwise.
-func (o *Job) GetContentType() string {
+func (o *Job) GetContentType() ContentType {
 	if o == nil || isNil(o.ContentType) {
-		var ret string
+		var ret ContentType
 		return ret
 	}
-	return o.ContentType.String()
+	return *o.ContentType
 }
 
 // GetContentTypeOk returns a tuple with the ContentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Job) GetContentTypeOk() (*string, bool) {
+func (o *Job) GetContentTypeOk() (*ContentType, bool) {
 	if o == nil || isNil(o.ContentType) {
 		return nil, false
 	}
-	s := o.ContentType.String()
-	return &s, true
+	return o.ContentType, true
 }
 
 // HasContentType returns a boolean if a field has been set.
@@ -311,8 +137,8 @@ func (o *Job) HasContentType() bool {
 	return false
 }
 
-// SetContentType gets a reference to the given string and assigns it to the ContentType field.
-func (o *Job) SetContentType(v JobContentType) {
+// SetContentType gets a reference to the given ContentType and assigns it to the ContentType field.
+func (o *Job) SetContentType(v ContentType) {
 	o.ContentType = &v
 }
 
@@ -349,22 +175,21 @@ func (o *Job) SetExternalIdFieldName(v string) {
 }
 
 // GetLineEnding returns the LineEnding field value if set, zero value otherwise.
-func (o *Job) GetLineEnding() string {
+func (o *Job) GetLineEnding() LineEnding {
 	if o == nil || isNil(o.LineEnding) {
-		var ret string
+		var ret LineEnding
 		return ret
 	}
-	return o.LineEnding.String()
+	return *o.LineEnding
 }
 
 // GetLineEndingOk returns a tuple with the LineEnding field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Job) GetLineEndingOk() (*string, bool) {
+func (o *Job) GetLineEndingOk() (*LineEnding, bool) {
 	if o == nil || isNil(o.LineEnding) {
 		return nil, false
 	}
-	s := o.LineEnding.String()
-	return &s, true
+	return o.LineEnding, true
 }
 
 // HasLineEnding returns a boolean if a field has been set.
@@ -376,58 +201,73 @@ func (o *Job) HasLineEnding() bool {
 	return false
 }
 
-// SetLineEnding gets a reference to the given string and assigns it to the LineEnding field.
-func (o *Job) SetLineEnding(v JobLineEnding) {
+// SetLineEnding gets a reference to the given LineEnding and assigns it to the LineEnding field.
+func (o *Job) SetLineEnding(v LineEnding) {
 	o.LineEnding = &v
 }
 
-// GetObject returns the Object field value
+// GetObject returns the Object field value if set, zero value otherwise.
 func (o *Job) GetObject() string {
-	if o == nil {
+	if o == nil || isNil(o.Object) {
 		var ret string
 		return ret
 	}
-
-	return o.Object
+	return *o.Object
 }
 
-// GetObjectOk returns a tuple with the Object field value
+// GetObjectOk returns a tuple with the Object field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Job) GetObjectOk() (*string, bool) {
-	if o == nil {
+	if o == nil || isNil(o.Object) {
 		return nil, false
 	}
-	return &o.Object, true
+	return o.Object, true
 }
 
-// SetObject sets field value
+// HasObject returns a boolean if a field has been set.
+func (o *Job) HasObject() bool {
+	if o != nil && !isNil(o.Object) {
+		return true
+	}
+
+	return false
+}
+
+// SetObject gets a reference to the given string and assigns it to the Object field.
 func (o *Job) SetObject(v string) {
-	o.Object = v
+	o.Object = &v
 }
 
-// GetOperation returns the Operation field value
-func (o *Job) GetOperation() string {
-	if o == nil {
-		var ret string
+// GetOperation returns the Operation field value if set, zero value otherwise.
+func (o *Job) GetOperation() JobOperation {
+	if o == nil || isNil(o.Operation) {
+		var ret JobOperation
 		return ret
 	}
-
-	return o.Operation.String()
+	return *o.Operation
 }
 
-// GetOperationOk returns a tuple with the Operation field value
+// GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Job) GetOperationOk() (*string, bool) {
-	if o == nil {
+func (o *Job) GetOperationOk() (*JobOperation, bool) {
+	if o == nil || isNil(o.Operation) {
 		return nil, false
 	}
-	s := o.Operation.String()
-	return &s, true
+	return o.Operation, true
 }
 
-// SetOperation sets field value
+// HasOperation returns a boolean if a field has been set.
+func (o *Job) HasOperation() bool {
+	if o != nil && !isNil(o.Operation) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperation gets a reference to the given JobOperation and assigns it to the Operation field.
 func (o *Job) SetOperation(v JobOperation) {
-	o.Operation = v
+	o.Operation = &v
 }
 
 func (o Job) MarshalJSON() ([]byte, error) {
@@ -435,8 +275,8 @@ func (o Job) MarshalJSON() ([]byte, error) {
 	if !isNil(o.AssignmentRuleId) {
 		toSerialize["assignmentRuleId"] = o.AssignmentRuleId
 	}
-	if o.ColumnDelimiter.IsSet() {
-		toSerialize["columnDelimiter"] = o.ColumnDelimiter.Get()
+	if !isNil(o.ColumnDelimiter) {
+		toSerialize["columnDelimiter"] = o.ColumnDelimiter
 	}
 	if !isNil(o.ContentType) {
 		toSerialize["contentType"] = o.ContentType
@@ -447,10 +287,10 @@ func (o Job) MarshalJSON() ([]byte, error) {
 	if !isNil(o.LineEnding) {
 		toSerialize["lineEnding"] = o.LineEnding
 	}
-	if true {
+	if !isNil(o.Object) {
 		toSerialize["object"] = o.Object
 	}
-	if true {
+	if !isNil(o.Operation) {
 		toSerialize["operation"] = o.Operation
 	}
 	return json.Marshal(toSerialize)

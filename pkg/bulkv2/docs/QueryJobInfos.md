@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Done** | **bool** | This is true if this is the last (or only) set of results. It is false if there are more records to fetch. | 
-**Records** | [**[]QueryJobInfo**](QueryJobInfo.md) | An array of record objects. | 
+**Done** | Pointer to **bool** | This is true if this is the last (or only) set of results. It is false if there are more records to fetch. | [optional] 
+**Records** | Pointer to [**[]QueryJobInfo**](QueryJobInfo.md) | An array of record objects. | [optional] 
 **NextRecordsUrl** | Pointer to **string** | The URI to get the next set of records (if there are any). This method returns up to 1,000 result rows per request. If there are more than 1,000 records, use the nextRecordsUrl to get the next set of records. This parameter is null if there are no more records to fetch.  | [optional] 
 
 ## Methods
 
 ### NewQueryJobInfos
 
-`func NewQueryJobInfos(done bool, records []QueryJobInfo, ) *QueryJobInfos`
+`func NewQueryJobInfos() *QueryJobInfos`
 
 NewQueryJobInfos instantiates a new QueryJobInfos object
 This constructor will assign default values to properties that have it defined,
@@ -46,6 +46,11 @@ and a boolean to check if the value has been set.
 
 SetDone sets Done field to given value.
 
+### HasDone
+
+`func (o *QueryJobInfos) HasDone() bool`
+
+HasDone returns a boolean if a field has been set.
 
 ### GetRecords
 
@@ -66,6 +71,11 @@ and a boolean to check if the value has been set.
 
 SetRecords sets Records field to given value.
 
+### HasRecords
+
+`func (o *QueryJobInfos) HasRecords() bool`
+
+HasRecords returns a boolean if a field has been set.
 
 ### GetNextRecordsUrl
 

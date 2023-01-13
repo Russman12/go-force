@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **CreatedById** | Pointer to **string** | The ID of the user who created the job. | [optional] 
 **CreatedDate** | Pointer to **string** | The date and time in the UTC time zone when the job was created. | [optional] 
 **Id** | Pointer to **string** | Unique ID for this job. | [optional] 
-**JobType** | Pointer to **string** | The job’s type. | [optional] 
+**JobType** | Pointer to [**JobType**](JobType.md) |  | [optional] 
 **SystemModstamp** | Pointer to **string** | Date and time in the UTC time zone when the job finished. | [optional] 
-**State** | Pointer to **string** | The current state of processing for the job. | [optional] 
+**State** | Pointer to [**JobState**](JobState.md) |  | [optional] 
 **ApexProcessingTime** | Pointer to **int64** | The number of milliseconds taken to process triggers and other processes related to the job data. This doesn&#39;t include the time used for processing asynchronous and batch Apex operations. If there are no triggers, the value is 0. | [optional] 
 **ApiActiveProcessingTime** | Pointer to **int64** | The number of milliseconds taken to actively process the job and includes apexProcessingTime, but doesn&#39;t include the time the job waited in the queue to be processed or the time required for serialization and deserialization. | [optional] 
 **ErrorMessage** | Pointer to **string** | The error message shown for jobs with errors. | [optional] 
@@ -192,20 +192,20 @@ HasId returns a boolean if a field has been set.
 
 ### GetJobType
 
-`func (o *JobInfoExt) GetJobType() string`
+`func (o *JobInfoExt) GetJobType() JobType`
 
 GetJobType returns the JobType field if non-nil, zero value otherwise.
 
 ### GetJobTypeOk
 
-`func (o *JobInfoExt) GetJobTypeOk() (*string, bool)`
+`func (o *JobInfoExt) GetJobTypeOk() (*JobType, bool)`
 
 GetJobTypeOk returns a tuple with the JobType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetJobType
 
-`func (o *JobInfoExt) SetJobType(v string)`
+`func (o *JobInfoExt) SetJobType(v JobType)`
 
 SetJobType sets JobType field to given value.
 
@@ -242,20 +242,20 @@ HasSystemModstamp returns a boolean if a field has been set.
 
 ### GetState
 
-`func (o *JobInfoExt) GetState() string`
+`func (o *JobInfoExt) GetState() JobState`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *JobInfoExt) GetStateOk() (*string, bool)`
+`func (o *JobInfoExt) GetStateOk() (*JobState, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *JobInfoExt) SetState(v string)`
+`func (o *JobInfoExt) SetState(v JobState)`
 
 SetState sets State field to given value.
 

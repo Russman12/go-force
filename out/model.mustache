@@ -3,13 +3,12 @@ package {{packageName}}
 
 {{#models}}
 import (
+{{^model.allOf}}
 	"encoding/json"
+{{/model.allOf}}
 {{#imports}}
 	"{{import}}"
 {{/imports}}
-{{#model.hasEnums}}
-    "fmt"
-{{/model.hasEnums}}
 )
 
 {{#model}}
@@ -17,7 +16,7 @@ import (
 {{>model_enum}}
 {{/isEnum}}
 {{^isEnum}}
-{{#oneOf}}{{#-first}}{{>model_oneof}}{{/-first}}{{/oneOf}}{{^oneOf}}{{#anyOf}}{{#-first}}{{>model_anyof}}{{/-first}}{{/anyOf}}{{^anyOf}}{{>model_simple}}{{/anyOf}}{{/oneOf}}
+{{#oneOf}}{{#-first}}{{>model_oneof}}{{/-first}}{{/oneOf}}{{^oneOf}}{{#anyOf}}{{#-first}}{{>model_anyof}}{{/-first}}{{/anyOf}}{{^anyOf}}{{#allOf}}{{#-first}}{{>model_allOf}}{{/-first}}{{/allOf}}{{^allOf}}{{>model_simple}}{{/allOf}}{{/anyOf}}{{/oneOf}}
 {{/isEnum}}
 {{/model}}
 {{/models}}

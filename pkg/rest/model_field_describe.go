@@ -13,68 +13,9 @@ package rest
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // FieldDescribe struct for FieldDescribe
-
-type FieldDescribeType int
-
-const (
-	FIELD_DESCRIBE_TYPE_ADDRESS FieldDescribeType = iota
-	FIELD_DESCRIBE_TYPE_ANYTYPE
-	FIELD_DESCRIBE_TYPE_BASE64
-	FIELD_DESCRIBE_TYPE_BOOLEAN
-	FIELD_DESCRIBE_TYPE_COMBOBOX
-	FIELD_DESCRIBE_TYPE_CURRENCY
-	FIELD_DESCRIBE_TYPE_DATACATEGORYGROUPREFERENCE
-	FIELD_DESCRIBE_TYPE_DATE
-	FIELD_DESCRIBE_TYPE_DATETIME
-	FIELD_DESCRIBE_TYPE_DOUBLE
-	FIELD_DESCRIBE_TYPE_EMAIL
-	FIELD_DESCRIBE_TYPE_ENCRYPTEDSTRING
-	FIELD_DESCRIBE_TYPE_ID
-	FIELD_DESCRIBE_TYPE_INTEGER
-	FIELD_DESCRIBE_TYPE_LOCATION
-	FIELD_DESCRIBE_TYPE_LONG
-	FIELD_DESCRIBE_TYPE_MULTIPICKLIST
-	FIELD_DESCRIBE_TYPE_PERCENT
-	FIELD_DESCRIBE_TYPE_PHONE
-	FIELD_DESCRIBE_TYPE_PICKLIST
-	FIELD_DESCRIBE_TYPE_REFERENCE
-	FIELD_DESCRIBE_TYPE_STRING
-	FIELD_DESCRIBE_TYPE_TEXTAREA
-	FIELD_DESCRIBE_TYPE_TIME
-	FIELD_DESCRIBE_TYPE_URL
-)
-
-func (e *FieldDescribeType) String() string {
-	s := []string{"address", "anytype", "base64", "boolean", "combobox", "currency", "datacategorygroupreference", "date", "datetime", "double", "email", "encryptedstring", "id", "integer", "location", "long", "multipicklist", "percent", "phone", "picklist", "reference", "string", "textarea", "time", "url"}[*e]
-	return s
-}
-func (e FieldDescribeType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *FieldDescribeType) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := FieldDescribeTypeParse(str)
-
-	return err
-}
-func FieldDescribeTypeParse(s string) (*FieldDescribeType, error) {
-	for i, e := range []string{"address", "anytype", "base64", "boolean", "combobox", "currency", "datacategorygroupreference", "date", "datetime", "double", "email", "encryptedstring", "id", "integer", "location", "long", "multipicklist", "percent", "phone", "picklist", "reference", "string", "textarea", "time", "url"} {
-		if s == e {
-			enum := FieldDescribeType(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid FieldDescribeType", s)
-}
-
 type FieldDescribe struct {
 	Aggregatable                 *bool                   `json:"aggregatable,omitempty"`
 	AiPredictionField            *bool                   `json:"aiPredictionField,omitempty"`
@@ -129,7 +70,7 @@ type FieldDescribe struct {
 	SearchPrefilterable          *bool                   `json:"searchPrefilterable,omitempty"`
 	SoapType                     *string                 `json:"soapType,omitempty"`
 	Sortable                     *bool                   `json:"sortable,omitempty"`
-	Type                         *FieldDescribeType      `json:"type,omitempty"`
+	Type                         *string                 `json:"type,omitempty"`
 	Unique                       *bool                   `json:"unique,omitempty"`
 	Updateable                   *bool                   `json:"updateable,omitempty"`
 	WriteRequiresMasterRead      *bool                   `json:"writeRequiresMasterRead,omitempty"`
@@ -1977,7 +1918,7 @@ func (o *FieldDescribe) GetType() string {
 		var ret string
 		return ret
 	}
-	return o.Type.String()
+	return *o.Type
 }
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
@@ -1986,8 +1927,7 @@ func (o *FieldDescribe) GetTypeOk() (*string, bool) {
 	if o == nil || isNil(o.Type) {
 		return nil, false
 	}
-	s := o.Type.String()
-	return &s, true
+	return o.Type, true
 }
 
 // HasType returns a boolean if a field has been set.
@@ -2000,7 +1940,7 @@ func (o *FieldDescribe) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *FieldDescribe) SetType(v FieldDescribeType) {
+func (o *FieldDescribe) SetType(v string) {
 	o.Type = &v
 }
 

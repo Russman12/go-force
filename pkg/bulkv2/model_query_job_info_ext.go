@@ -13,81 +13,9 @@ package bulkv2
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // QueryJobInfoExt struct for QueryJobInfoExt
-
-type QueryJobInfoExtState int
-
-const (
-	QUERY_JOB_INFO_EXT_STATE_UPLOAD_COMPLETE QueryJobInfoExtState = iota
-	QUERY_JOB_INFO_EXT_STATE_IN_PROGRESS
-	QUERY_JOB_INFO_EXT_STATE_ABORTED
-	QUERY_JOB_INFO_EXT_STATE_JOB_COMPLETE
-	QUERY_JOB_INFO_EXT_STATE_FAILED
-)
-
-func (e *QueryJobInfoExtState) String() string {
-	s := []string{"UploadComplete", "InProgress", "Aborted", "JobComplete", "Failed"}[*e]
-	return s
-}
-func (e QueryJobInfoExtState) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *QueryJobInfoExtState) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := QueryJobInfoExtStateParse(str)
-
-	return err
-}
-func QueryJobInfoExtStateParse(s string) (*QueryJobInfoExtState, error) {
-	for i, e := range []string{"UploadComplete", "InProgress", "Aborted", "JobComplete", "Failed"} {
-		if s == e {
-			enum := QueryJobInfoExtState(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid QueryJobInfoExtState", s)
-}
-
-type QueryJobInfoExtJobType int
-
-const (
-	QUERY_JOB_INFO_EXT_JOB_TYPE_V2_QUERY QueryJobInfoExtJobType = iota
-)
-
-func (e *QueryJobInfoExtJobType) String() string {
-	s := []string{"V2Query"}[*e]
-	return s
-}
-func (e QueryJobInfoExtJobType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *QueryJobInfoExtJobType) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := QueryJobInfoExtJobTypeParse(str)
-
-	return err
-}
-func QueryJobInfoExtJobTypeParse(s string) (*QueryJobInfoExtJobType, error) {
-	for i, e := range []string{"V2Query"} {
-		if s == e {
-			enum := QueryJobInfoExtJobType(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid QueryJobInfoExtJobType", s)
-}
-
 type QueryJobInfoExt struct {
 	// The unique ID for this job.
 	Id *string `json:"id,omitempty"`
@@ -98,15 +26,13 @@ type QueryJobInfoExt struct {
 	// The UTC date and time when the job was created.
 	CreatedDate *string `json:"createdDate,omitempty"`
 	// The UTC date and time when the API last updated the job information.
-	SystemModstamp *string `json:"systemModstamp,omitempty"`
-	// The current state of processing for the job.
-	State *QueryJobInfoExtState `json:"state,omitempty"`
+	SystemModstamp *string        `json:"systemModstamp,omitempty"`
+	State          *QueryJobState `json:"state,omitempty"`
 	// Reserved for future use. How the request is processed. Currently only parallel mode is supported. (When other modes are added, the API chooses the mode automatically. The mode isn’t user configurable.)
 	ConcurrencyMode *string `json:"concurrencyMode,omitempty"`
 	// The API version that the job was created in.
-	ApiVersion *float32 `json:"apiVersion,omitempty"`
-	// The job’s type. For a query job, the type is always V2Query.
-	JobType *QueryJobInfoExtJobType `json:"jobType,omitempty"`
+	ApiVersion *float32      `json:"apiVersion,omitempty"`
+	JobType    *QueryJobType `json:"jobType,omitempty"`
 	// The number of records processed in this job.
 	NumberRecordsProcessed *int64 `json:"numberRecordsProcessed,omitempty"`
 	// The number of times that Salesforce attempted to save the results of an operation. Repeated attempts indicate a problem such as a lock contention.
@@ -293,22 +219,21 @@ func (o *QueryJobInfoExt) SetSystemModstamp(v string) {
 }
 
 // GetState returns the State field value if set, zero value otherwise.
-func (o *QueryJobInfoExt) GetState() string {
+func (o *QueryJobInfoExt) GetState() QueryJobState {
 	if o == nil || isNil(o.State) {
-		var ret string
+		var ret QueryJobState
 		return ret
 	}
-	return o.State.String()
+	return *o.State
 }
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryJobInfoExt) GetStateOk() (*string, bool) {
+func (o *QueryJobInfoExt) GetStateOk() (*QueryJobState, bool) {
 	if o == nil || isNil(o.State) {
 		return nil, false
 	}
-	s := o.State.String()
-	return &s, true
+	return o.State, true
 }
 
 // HasState returns a boolean if a field has been set.
@@ -320,8 +245,8 @@ func (o *QueryJobInfoExt) HasState() bool {
 	return false
 }
 
-// SetState gets a reference to the given string and assigns it to the State field.
-func (o *QueryJobInfoExt) SetState(v QueryJobInfoExtState) {
+// SetState gets a reference to the given QueryJobState and assigns it to the State field.
+func (o *QueryJobInfoExt) SetState(v QueryJobState) {
 	o.State = &v
 }
 
@@ -390,22 +315,21 @@ func (o *QueryJobInfoExt) SetApiVersion(v float32) {
 }
 
 // GetJobType returns the JobType field value if set, zero value otherwise.
-func (o *QueryJobInfoExt) GetJobType() string {
+func (o *QueryJobInfoExt) GetJobType() QueryJobType {
 	if o == nil || isNil(o.JobType) {
-		var ret string
+		var ret QueryJobType
 		return ret
 	}
-	return o.JobType.String()
+	return *o.JobType
 }
 
 // GetJobTypeOk returns a tuple with the JobType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryJobInfoExt) GetJobTypeOk() (*string, bool) {
+func (o *QueryJobInfoExt) GetJobTypeOk() (*QueryJobType, bool) {
 	if o == nil || isNil(o.JobType) {
 		return nil, false
 	}
-	s := o.JobType.String()
-	return &s, true
+	return o.JobType, true
 }
 
 // HasJobType returns a boolean if a field has been set.
@@ -417,8 +341,8 @@ func (o *QueryJobInfoExt) HasJobType() bool {
 	return false
 }
 
-// SetJobType gets a reference to the given string and assigns it to the JobType field.
-func (o *QueryJobInfoExt) SetJobType(v QueryJobInfoExtJobType) {
+// SetJobType gets a reference to the given QueryJobType and assigns it to the JobType field.
+func (o *QueryJobInfoExt) SetJobType(v QueryJobType) {
 	o.JobType = &v
 }
 

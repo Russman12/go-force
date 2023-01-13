@@ -140,13 +140,13 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 }
 
 type ApiCreateJobRequest struct {
-	ctx        context.Context
-	ApiService *JobApiService
-	job        *Job
+	ctx              context.Context
+	ApiService       *JobApiService
+	createJobRequest *CreateJobRequest
 }
 
-func (r ApiCreateJobRequest) Job(job Job) ApiCreateJobRequest {
-	r.job = &job
+func (r ApiCreateJobRequest) CreateJobRequest(createJobRequest CreateJobRequest) ApiCreateJobRequest {
+	r.createJobRequest = &createJobRequest
 	return r
 }
 
@@ -207,7 +207,7 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.job
+	localVarPostBody = r.createJobRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

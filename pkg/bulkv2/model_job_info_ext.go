@@ -13,82 +13,9 @@ package bulkv2
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // JobInfoExt struct for JobInfoExt
-
-type JobInfoExtJobType int
-
-const (
-	JOB_INFO_EXT_JOB_TYPE_BIG_OBJECT_INGEST JobInfoExtJobType = iota
-	JOB_INFO_EXT_JOB_TYPE_CLASSIC
-	JOB_INFO_EXT_JOB_TYPE_V2_INGEST
-)
-
-func (e *JobInfoExtJobType) String() string {
-	s := []string{"BigObjectIngest", "Classic", "V2Ingest"}[*e]
-	return s
-}
-func (e JobInfoExtJobType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *JobInfoExtJobType) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := JobInfoExtJobTypeParse(str)
-
-	return err
-}
-func JobInfoExtJobTypeParse(s string) (*JobInfoExtJobType, error) {
-	for i, e := range []string{"BigObjectIngest", "Classic", "V2Ingest"} {
-		if s == e {
-			enum := JobInfoExtJobType(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid JobInfoExtJobType", s)
-}
-
-type JobInfoExtState int
-
-const (
-	JOB_INFO_EXT_STATE_OPEN JobInfoExtState = iota
-	JOB_INFO_EXT_STATE_UPLOAD_COMPLETE
-	JOB_INFO_EXT_STATE_ABORTED
-	JOB_INFO_EXT_STATE_JOB_COMPLETE
-)
-
-func (e *JobInfoExtState) String() string {
-	s := []string{"open", "UploadComplete", "Aborted", "JobComplete"}[*e]
-	return s
-}
-func (e JobInfoExtState) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *JobInfoExtState) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := JobInfoExtStateParse(str)
-
-	return err
-}
-func JobInfoExtStateParse(s string) (*JobInfoExtState, error) {
-	for i, e := range []string{"open", "UploadComplete", "Aborted", "JobComplete"} {
-		if s == e {
-			enum := JobInfoExtState(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid JobInfoExtState", s)
-}
-
 type JobInfoExt struct {
 	// The API version that the job was created in.
 	ApiVersion *float32 `json:"apiVersion,omitempty"`
@@ -101,13 +28,11 @@ type JobInfoExt struct {
 	// The date and time in the UTC time zone when the job was created.
 	CreatedDate *string `json:"createdDate,omitempty"`
 	// Unique ID for this job.
-	Id *string `json:"id,omitempty"`
-	// The job’s type.
-	JobType *JobInfoExtJobType `json:"jobType,omitempty"`
+	Id      *string  `json:"id,omitempty"`
+	JobType *JobType `json:"jobType,omitempty"`
 	// Date and time in the UTC time zone when the job finished.
-	SystemModstamp *string `json:"systemModstamp,omitempty"`
-	// The current state of processing for the job.
-	State *JobInfoExtState `json:"state,omitempty"`
+	SystemModstamp *string   `json:"systemModstamp,omitempty"`
+	State          *JobState `json:"state,omitempty"`
 	// The number of milliseconds taken to process triggers and other processes related to the job data. This doesn't include the time used for processing asynchronous and batch Apex operations. If there are no triggers, the value is 0.
 	ApexProcessingTime *int64 `json:"apexProcessingTime,omitempty"`
 	// The number of milliseconds taken to actively process the job and includes apexProcessingTime, but doesn't include the time the job waited in the queue to be processed or the time required for serialization and deserialization.
@@ -334,22 +259,21 @@ func (o *JobInfoExt) SetId(v string) {
 }
 
 // GetJobType returns the JobType field value if set, zero value otherwise.
-func (o *JobInfoExt) GetJobType() string {
+func (o *JobInfoExt) GetJobType() JobType {
 	if o == nil || isNil(o.JobType) {
-		var ret string
+		var ret JobType
 		return ret
 	}
-	return o.JobType.String()
+	return *o.JobType
 }
 
 // GetJobTypeOk returns a tuple with the JobType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *JobInfoExt) GetJobTypeOk() (*string, bool) {
+func (o *JobInfoExt) GetJobTypeOk() (*JobType, bool) {
 	if o == nil || isNil(o.JobType) {
 		return nil, false
 	}
-	s := o.JobType.String()
-	return &s, true
+	return o.JobType, true
 }
 
 // HasJobType returns a boolean if a field has been set.
@@ -361,8 +285,8 @@ func (o *JobInfoExt) HasJobType() bool {
 	return false
 }
 
-// SetJobType gets a reference to the given string and assigns it to the JobType field.
-func (o *JobInfoExt) SetJobType(v JobInfoExtJobType) {
+// SetJobType gets a reference to the given JobType and assigns it to the JobType field.
+func (o *JobInfoExt) SetJobType(v JobType) {
 	o.JobType = &v
 }
 
@@ -399,22 +323,21 @@ func (o *JobInfoExt) SetSystemModstamp(v string) {
 }
 
 // GetState returns the State field value if set, zero value otherwise.
-func (o *JobInfoExt) GetState() string {
+func (o *JobInfoExt) GetState() JobState {
 	if o == nil || isNil(o.State) {
-		var ret string
+		var ret JobState
 		return ret
 	}
-	return o.State.String()
+	return *o.State
 }
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *JobInfoExt) GetStateOk() (*string, bool) {
+func (o *JobInfoExt) GetStateOk() (*JobState, bool) {
 	if o == nil || isNil(o.State) {
 		return nil, false
 	}
-	s := o.State.String()
-	return &s, true
+	return o.State, true
 }
 
 // HasState returns a boolean if a field has been set.
@@ -426,8 +349,8 @@ func (o *JobInfoExt) HasState() bool {
 	return false
 }
 
-// SetState gets a reference to the given string and assigns it to the State field.
-func (o *JobInfoExt) SetState(v JobInfoExtState) {
+// SetState gets a reference to the given JobState and assigns it to the State field.
+func (o *JobInfoExt) SetState(v JobState) {
 	o.State = &v
 }
 

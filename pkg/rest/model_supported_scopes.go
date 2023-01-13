@@ -16,7 +16,6 @@ import (
 )
 
 // SupportedScopes struct for SupportedScopes
-
 type SupportedScopes struct {
 	Label *string `json:"label,omitempty"`
 	Name  *string `json:"name,omitempty"`

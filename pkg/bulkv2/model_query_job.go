@@ -13,171 +13,14 @@ package bulkv2
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // QueryJob struct for QueryJob
-
-type QueryJobOperation int
-
-const (
-	QUERY_JOB_OPERATION_QUERY QueryJobOperation = iota
-	QUERY_JOB_OPERATION_QUERY_ALL
-)
-
-func (e *QueryJobOperation) String() string {
-	s := []string{"query", "queryAll"}[*e]
-	return s
-}
-func (e QueryJobOperation) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *QueryJobOperation) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := QueryJobOperationParse(str)
-
-	return err
-}
-func QueryJobOperationParse(s string) (*QueryJobOperation, error) {
-	for i, e := range []string{"query", "queryAll"} {
-		if s == e {
-			enum := QueryJobOperation(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid QueryJobOperation", s)
-}
-
-type QueryJobContentType int
-
-const (
-	QUERY_JOB_CONTENT_TYPE_CSV QueryJobContentType = iota
-)
-
-func (e *QueryJobContentType) String() string {
-	s := []string{"CSV"}[*e]
-	return s
-}
-func (e QueryJobContentType) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *QueryJobContentType) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := QueryJobContentTypeParse(str)
-
-	return err
-}
-func QueryJobContentTypeParse(s string) (*QueryJobContentType, error) {
-	for i, e := range []string{"CSV"} {
-		if s == e {
-			enum := QueryJobContentType(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid QueryJobContentType", s)
-}
-
-type QueryJobColumnDelimiter int
-
-const (
-	QUERY_JOB_COLUMN_DELIMITER_BACKQUOTE QueryJobColumnDelimiter = iota
-	QUERY_JOB_COLUMN_DELIMITER_CARET
-	QUERY_JOB_COLUMN_DELIMITER_COMMA
-	QUERY_JOB_COLUMN_DELIMITER_PIPE
-	QUERY_JOB_COLUMN_DELIMITER_SEMICOLON
-	QUERY_JOB_COLUMN_DELIMITER_TAB
-)
-
-func (e *QueryJobColumnDelimiter) String() *string {
-	s := []string{"BACKQUOTE", "CARET", "COMMA", "PIPE", "SEMICOLON", "TAB"}[*e]
-	return &s
-}
-func (e *QueryJobColumnDelimiter) Get() *string {
-	return e.String()
-}
-func (e *QueryJobColumnDelimiter) IsSet() bool {
-	return e != nil
-}
-func (e *QueryJobColumnDelimiter) Set(val *QueryJobColumnDelimiter) {
-	e = val
-}
-func (e *QueryJobColumnDelimiter) Unset() {
-	e.Set(nil)
-}
-func (e QueryJobColumnDelimiter) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *QueryJobColumnDelimiter) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := QueryJobColumnDelimiterParse(str)
-
-	return err
-}
-func QueryJobColumnDelimiterParse(s string) (*QueryJobColumnDelimiter, error) {
-	for i, e := range []string{"BACKQUOTE", "CARET", "COMMA", "PIPE", "SEMICOLON", "TAB"} {
-		if s == e {
-			enum := QueryJobColumnDelimiter(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid QueryJobColumnDelimiter", s)
-}
-
-type QueryJobLineEnding int
-
-const (
-	QUERY_JOB_LINE_ENDING_LF QueryJobLineEnding = iota
-	QUERY_JOB_LINE_ENDING_CRLF
-)
-
-func (e *QueryJobLineEnding) String() string {
-	s := []string{"LF", "CRLF"}[*e]
-	return s
-}
-func (e QueryJobLineEnding) MarshalJSON() ([]byte, error) {
-	return json.Marshal(e.String())
-}
-
-func (e *QueryJobLineEnding) UnmarshalJSON(data []byte) error {
-	var str string
-	if err := json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	e, err := QueryJobLineEndingParse(str)
-
-	return err
-}
-func QueryJobLineEndingParse(s string) (*QueryJobLineEnding, error) {
-	for i, e := range []string{"LF", "CRLF"} {
-		if s == e {
-			enum := QueryJobLineEnding(i)
-			return &enum, nil
-		}
-	}
-	return nil, fmt.Errorf("%q is not a valid QueryJobLineEnding", s)
-}
-
 type QueryJob struct {
-	// The type of query.
-	Operation *QueryJobOperation `json:"operation,omitempty"`
-	// The format that is used for the results. Currently the only supported value is CSV.
-	ContentType *QueryJobContentType `json:"contentType,omitempty"`
-	// The column delimiter used for CSV job data. The default value is COMMA.
-	ColumnDelimiter QueryJobColumnDelimiter `json:"columnDelimiter,omitempty"`
-	// The line ending used for CSV job data, marking the end of a data row. The default is LF.
-	LineEnding *QueryJobLineEnding `json:"lineEnding,omitempty"`
+	Operation       *QueryOperation  `json:"operation,omitempty"`
+	ContentType     *ContentType     `json:"contentType,omitempty"`
+	ColumnDelimiter *ColumnDelimiter `json:"columnDelimiter,omitempty"`
+	LineEnding      *LineEnding      `json:"lineEnding,omitempty"`
 }
 
 // NewQueryJob instantiates a new QueryJob object
@@ -198,22 +41,21 @@ func NewQueryJobWithDefaults() *QueryJob {
 }
 
 // GetOperation returns the Operation field value if set, zero value otherwise.
-func (o *QueryJob) GetOperation() string {
+func (o *QueryJob) GetOperation() QueryOperation {
 	if o == nil || isNil(o.Operation) {
-		var ret string
+		var ret QueryOperation
 		return ret
 	}
-	return o.Operation.String()
+	return *o.Operation
 }
 
 // GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryJob) GetOperationOk() (*string, bool) {
+func (o *QueryJob) GetOperationOk() (*QueryOperation, bool) {
 	if o == nil || isNil(o.Operation) {
 		return nil, false
 	}
-	s := o.Operation.String()
-	return &s, true
+	return o.Operation, true
 }
 
 // HasOperation returns a boolean if a field has been set.
@@ -225,28 +67,27 @@ func (o *QueryJob) HasOperation() bool {
 	return false
 }
 
-// SetOperation gets a reference to the given string and assigns it to the Operation field.
-func (o *QueryJob) SetOperation(v QueryJobOperation) {
+// SetOperation gets a reference to the given QueryOperation and assigns it to the Operation field.
+func (o *QueryJob) SetOperation(v QueryOperation) {
 	o.Operation = &v
 }
 
 // GetContentType returns the ContentType field value if set, zero value otherwise.
-func (o *QueryJob) GetContentType() string {
+func (o *QueryJob) GetContentType() ContentType {
 	if o == nil || isNil(o.ContentType) {
-		var ret string
+		var ret ContentType
 		return ret
 	}
-	return o.ContentType.String()
+	return *o.ContentType
 }
 
 // GetContentTypeOk returns a tuple with the ContentType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryJob) GetContentTypeOk() (*string, bool) {
+func (o *QueryJob) GetContentTypeOk() (*ContentType, bool) {
 	if o == nil || isNil(o.ContentType) {
 		return nil, false
 	}
-	s := o.ContentType.String()
-	return &s, true
+	return o.ContentType, true
 }
 
 // HasContentType returns a boolean if a field has been set.
@@ -258,71 +99,59 @@ func (o *QueryJob) HasContentType() bool {
 	return false
 }
 
-// SetContentType gets a reference to the given string and assigns it to the ContentType field.
-func (o *QueryJob) SetContentType(v QueryJobContentType) {
+// SetContentType gets a reference to the given ContentType and assigns it to the ContentType field.
+func (o *QueryJob) SetContentType(v ContentType) {
 	o.ContentType = &v
 }
 
-// GetColumnDelimiter returns the ColumnDelimiter field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *QueryJob) GetColumnDelimiter() string {
-	if o == nil || isNil(o.ColumnDelimiter.Get()) {
-		var ret string
+// GetColumnDelimiter returns the ColumnDelimiter field value if set, zero value otherwise.
+func (o *QueryJob) GetColumnDelimiter() ColumnDelimiter {
+	if o == nil || isNil(o.ColumnDelimiter) {
+		var ret ColumnDelimiter
 		return ret
 	}
-	return *o.ColumnDelimiter.Get()
+	return *o.ColumnDelimiter
 }
 
 // GetColumnDelimiterOk returns a tuple with the ColumnDelimiter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *QueryJob) GetColumnDelimiterOk() (*string, bool) {
-	if o == nil {
+func (o *QueryJob) GetColumnDelimiterOk() (*ColumnDelimiter, bool) {
+	if o == nil || isNil(o.ColumnDelimiter) {
 		return nil, false
 	}
-	return o.ColumnDelimiter.Get(), o.ColumnDelimiter.IsSet()
+	return o.ColumnDelimiter, true
 }
 
 // HasColumnDelimiter returns a boolean if a field has been set.
 func (o *QueryJob) HasColumnDelimiter() bool {
-	if o != nil && o.ColumnDelimiter.IsSet() {
+	if o != nil && !isNil(o.ColumnDelimiter) {
 		return true
 	}
 
 	return false
 }
 
-// SetColumnDelimiter gets a reference to the given NullableString and assigns it to the ColumnDelimiter field.
-func (o *QueryJob) SetColumnDelimiter(v QueryJobColumnDelimiter) {
-	o.ColumnDelimiter.Set(&v)
-}
-
-// SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
-func (o *QueryJob) SetColumnDelimiterNil() {
-	o.ColumnDelimiter.Set(nil)
-}
-
-// UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
-func (o *QueryJob) UnsetColumnDelimiter() {
-	o.ColumnDelimiter.Unset()
+// SetColumnDelimiter gets a reference to the given ColumnDelimiter and assigns it to the ColumnDelimiter field.
+func (o *QueryJob) SetColumnDelimiter(v ColumnDelimiter) {
+	o.ColumnDelimiter = &v
 }
 
 // GetLineEnding returns the LineEnding field value if set, zero value otherwise.
-func (o *QueryJob) GetLineEnding() string {
+func (o *QueryJob) GetLineEnding() LineEnding {
 	if o == nil || isNil(o.LineEnding) {
-		var ret string
+		var ret LineEnding
 		return ret
 	}
-	return o.LineEnding.String()
+	return *o.LineEnding
 }
 
 // GetLineEndingOk returns a tuple with the LineEnding field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryJob) GetLineEndingOk() (*string, bool) {
+func (o *QueryJob) GetLineEndingOk() (*LineEnding, bool) {
 	if o == nil || isNil(o.LineEnding) {
 		return nil, false
 	}
-	s := o.LineEnding.String()
-	return &s, true
+	return o.LineEnding, true
 }
 
 // HasLineEnding returns a boolean if a field has been set.
@@ -334,8 +163,8 @@ func (o *QueryJob) HasLineEnding() bool {
 	return false
 }
 
-// SetLineEnding gets a reference to the given string and assigns it to the LineEnding field.
-func (o *QueryJob) SetLineEnding(v QueryJobLineEnding) {
+// SetLineEnding gets a reference to the given LineEnding and assigns it to the LineEnding field.
+func (o *QueryJob) SetLineEnding(v LineEnding) {
 	o.LineEnding = &v
 }
 
@@ -347,8 +176,8 @@ func (o QueryJob) MarshalJSON() ([]byte, error) {
 	if !isNil(o.ContentType) {
 		toSerialize["contentType"] = o.ContentType
 	}
-	if o.ColumnDelimiter.IsSet() {
-		toSerialize["columnDelimiter"] = o.ColumnDelimiter.Get()
+	if !isNil(o.ColumnDelimiter) {
+		toSerialize["columnDelimiter"] = o.ColumnDelimiter
 	}
 	if !isNil(o.LineEnding) {
 		toSerialize["lineEnding"] = o.LineEnding

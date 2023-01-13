@@ -4,28 +4,28 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **string** | The unique ID for this job. | 
-**Object** | **string** | The object type being queried. | 
-**CreatedById** | **string** | The ID of the user who created the job. | 
-**CreatedDate** | **string** | The UTC date and time when the job was created. | 
-**SystemModstamp** | **string** | The UTC date and time when the API last updated the job information. | 
-**State** | **string** | The current state of processing for the job. | 
-**ConcurrencyMode** | **string** | Reserved for future use. How the request is processed. Currently only parallel mode is supported. (When other modes are added, the API chooses the mode automatically. The mode isn’t user configurable.) | 
-**ApiVersion** | **float32** | The API version that the job was created in. | 
-**JobType** | Pointer to **string** | The job’s type. For a query job, the type is always V2Query. | [optional] 
+**Id** | Pointer to **string** | The unique ID for this job. | [optional] 
+**Object** | Pointer to **string** | The object type being queried. | [optional] 
+**CreatedById** | Pointer to **string** | The ID of the user who created the job. | [optional] 
+**CreatedDate** | Pointer to **string** | The UTC date and time when the job was created. | [optional] 
+**SystemModstamp** | Pointer to **string** | The UTC date and time when the API last updated the job information. | [optional] 
+**State** | Pointer to [**QueryJobState**](QueryJobState.md) |  | [optional] 
+**ConcurrencyMode** | Pointer to **string** | Reserved for future use. How the request is processed. Currently only parallel mode is supported. (When other modes are added, the API chooses the mode automatically. The mode isn’t user configurable.) | [optional] 
+**ApiVersion** | Pointer to **float32** | The API version that the job was created in. | [optional] 
+**JobType** | Pointer to [**QueryJobType**](QueryJobType.md) |  | [optional] 
 **NumberRecordsProcessed** | Pointer to **int64** | The number of records processed in this job. | [optional] 
 **Retries** | Pointer to **int32** | The number of times that Salesforce attempted to save the results of an operation. Repeated attempts indicate a problem such as a lock contention. | [optional] 
 **TotalProcessingTime** | Pointer to **int64** | The number of milliseconds taken to process the job. | [optional] 
-**Operation** | **string** | The type of query. | 
-**ContentType** | **string** | The format that is used for the results. Currently the only supported value is CSV. | 
-**ColumnDelimiter** | Pointer to **NullableString** | The column delimiter used for CSV job data. The default value is COMMA. | [optional] 
-**LineEnding** | Pointer to **string** | The line ending used for CSV job data, marking the end of a data row. The default is LF. | [optional] 
+**Operation** | Pointer to [**QueryOperation**](QueryOperation.md) |  | [optional] 
+**ContentType** | Pointer to [**ContentType**](ContentType.md) |  | [optional] 
+**ColumnDelimiter** | Pointer to [**ColumnDelimiter**](ColumnDelimiter.md) |  | [optional] 
+**LineEnding** | Pointer to [**LineEnding**](LineEnding.md) |  | [optional] 
 
 ## Methods
 
 ### NewQueryJobInfo
 
-`func NewQueryJobInfo(id string, object string, createdById string, createdDate string, systemModstamp string, state string, concurrencyMode string, apiVersion float32, operation string, contentType string, ) *QueryJobInfo`
+`func NewQueryJobInfo() *QueryJobInfo`
 
 NewQueryJobInfo instantiates a new QueryJobInfo object
 This constructor will assign default values to properties that have it defined,
@@ -59,6 +59,11 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+### HasId
+
+`func (o *QueryJobInfo) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetObject
 
@@ -79,6 +84,11 @@ and a boolean to check if the value has been set.
 
 SetObject sets Object field to given value.
 
+### HasObject
+
+`func (o *QueryJobInfo) HasObject() bool`
+
+HasObject returns a boolean if a field has been set.
 
 ### GetCreatedById
 
@@ -99,6 +109,11 @@ and a boolean to check if the value has been set.
 
 SetCreatedById sets CreatedById field to given value.
 
+### HasCreatedById
+
+`func (o *QueryJobInfo) HasCreatedById() bool`
+
+HasCreatedById returns a boolean if a field has been set.
 
 ### GetCreatedDate
 
@@ -119,6 +134,11 @@ and a boolean to check if the value has been set.
 
 SetCreatedDate sets CreatedDate field to given value.
 
+### HasCreatedDate
+
+`func (o *QueryJobInfo) HasCreatedDate() bool`
+
+HasCreatedDate returns a boolean if a field has been set.
 
 ### GetSystemModstamp
 
@@ -139,26 +159,36 @@ and a boolean to check if the value has been set.
 
 SetSystemModstamp sets SystemModstamp field to given value.
 
+### HasSystemModstamp
+
+`func (o *QueryJobInfo) HasSystemModstamp() bool`
+
+HasSystemModstamp returns a boolean if a field has been set.
 
 ### GetState
 
-`func (o *QueryJobInfo) GetState() string`
+`func (o *QueryJobInfo) GetState() QueryJobState`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *QueryJobInfo) GetStateOk() (*string, bool)`
+`func (o *QueryJobInfo) GetStateOk() (*QueryJobState, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *QueryJobInfo) SetState(v string)`
+`func (o *QueryJobInfo) SetState(v QueryJobState)`
 
 SetState sets State field to given value.
 
+### HasState
+
+`func (o *QueryJobInfo) HasState() bool`
+
+HasState returns a boolean if a field has been set.
 
 ### GetConcurrencyMode
 
@@ -179,6 +209,11 @@ and a boolean to check if the value has been set.
 
 SetConcurrencyMode sets ConcurrencyMode field to given value.
 
+### HasConcurrencyMode
+
+`func (o *QueryJobInfo) HasConcurrencyMode() bool`
+
+HasConcurrencyMode returns a boolean if a field has been set.
 
 ### GetApiVersion
 
@@ -199,23 +234,28 @@ and a boolean to check if the value has been set.
 
 SetApiVersion sets ApiVersion field to given value.
 
+### HasApiVersion
+
+`func (o *QueryJobInfo) HasApiVersion() bool`
+
+HasApiVersion returns a boolean if a field has been set.
 
 ### GetJobType
 
-`func (o *QueryJobInfo) GetJobType() string`
+`func (o *QueryJobInfo) GetJobType() QueryJobType`
 
 GetJobType returns the JobType field if non-nil, zero value otherwise.
 
 ### GetJobTypeOk
 
-`func (o *QueryJobInfo) GetJobTypeOk() (*string, bool)`
+`func (o *QueryJobInfo) GetJobTypeOk() (*QueryJobType, bool)`
 
 GetJobTypeOk returns a tuple with the JobType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetJobType
 
-`func (o *QueryJobInfo) SetJobType(v string)`
+`func (o *QueryJobInfo) SetJobType(v QueryJobType)`
 
 SetJobType sets JobType field to given value.
 
@@ -302,60 +342,70 @@ HasTotalProcessingTime returns a boolean if a field has been set.
 
 ### GetOperation
 
-`func (o *QueryJobInfo) GetOperation() string`
+`func (o *QueryJobInfo) GetOperation() QueryOperation`
 
 GetOperation returns the Operation field if non-nil, zero value otherwise.
 
 ### GetOperationOk
 
-`func (o *QueryJobInfo) GetOperationOk() (*string, bool)`
+`func (o *QueryJobInfo) GetOperationOk() (*QueryOperation, bool)`
 
 GetOperationOk returns a tuple with the Operation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperation
 
-`func (o *QueryJobInfo) SetOperation(v string)`
+`func (o *QueryJobInfo) SetOperation(v QueryOperation)`
 
 SetOperation sets Operation field to given value.
 
+### HasOperation
+
+`func (o *QueryJobInfo) HasOperation() bool`
+
+HasOperation returns a boolean if a field has been set.
 
 ### GetContentType
 
-`func (o *QueryJobInfo) GetContentType() string`
+`func (o *QueryJobInfo) GetContentType() ContentType`
 
 GetContentType returns the ContentType field if non-nil, zero value otherwise.
 
 ### GetContentTypeOk
 
-`func (o *QueryJobInfo) GetContentTypeOk() (*string, bool)`
+`func (o *QueryJobInfo) GetContentTypeOk() (*ContentType, bool)`
 
 GetContentTypeOk returns a tuple with the ContentType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContentType
 
-`func (o *QueryJobInfo) SetContentType(v string)`
+`func (o *QueryJobInfo) SetContentType(v ContentType)`
 
 SetContentType sets ContentType field to given value.
 
+### HasContentType
+
+`func (o *QueryJobInfo) HasContentType() bool`
+
+HasContentType returns a boolean if a field has been set.
 
 ### GetColumnDelimiter
 
-`func (o *QueryJobInfo) GetColumnDelimiter() string`
+`func (o *QueryJobInfo) GetColumnDelimiter() ColumnDelimiter`
 
 GetColumnDelimiter returns the ColumnDelimiter field if non-nil, zero value otherwise.
 
 ### GetColumnDelimiterOk
 
-`func (o *QueryJobInfo) GetColumnDelimiterOk() (*string, bool)`
+`func (o *QueryJobInfo) GetColumnDelimiterOk() (*ColumnDelimiter, bool)`
 
 GetColumnDelimiterOk returns a tuple with the ColumnDelimiter field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetColumnDelimiter
 
-`func (o *QueryJobInfo) SetColumnDelimiter(v string)`
+`func (o *QueryJobInfo) SetColumnDelimiter(v ColumnDelimiter)`
 
 SetColumnDelimiter sets ColumnDelimiter field to given value.
 
@@ -365,32 +415,22 @@ SetColumnDelimiter sets ColumnDelimiter field to given value.
 
 HasColumnDelimiter returns a boolean if a field has been set.
 
-### SetColumnDelimiterNil
-
-`func (o *QueryJobInfo) SetColumnDelimiterNil(b bool)`
-
- SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
-
-### UnsetColumnDelimiter
-`func (o *QueryJobInfo) UnsetColumnDelimiter()`
-
-UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
 ### GetLineEnding
 
-`func (o *QueryJobInfo) GetLineEnding() string`
+`func (o *QueryJobInfo) GetLineEnding() LineEnding`
 
 GetLineEnding returns the LineEnding field if non-nil, zero value otherwise.
 
 ### GetLineEndingOk
 
-`func (o *QueryJobInfo) GetLineEndingOk() (*string, bool)`
+`func (o *QueryJobInfo) GetLineEndingOk() (*LineEnding, bool)`
 
 GetLineEndingOk returns a tuple with the LineEnding field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLineEnding
 
-`func (o *QueryJobInfo) SetLineEnding(v string)`
+`func (o *QueryJobInfo) SetLineEnding(v LineEnding)`
 
 SetLineEnding sets LineEnding field to given value.
 

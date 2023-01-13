@@ -16,7 +16,6 @@ import (
 )
 
 // ChildRelationships struct for ChildRelationships
-
 type ChildRelationships struct {
 	CascadeDelete       *bool    `json:"cascadeDelete,omitempty"`
 	ChildSObject        *string  `json:"childSObject,omitempty"`

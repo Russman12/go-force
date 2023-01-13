@@ -1,5 +1,4 @@
 // {{classname}} {{{description}}}{{^description}}struct for {{{classname}}}{{/description}}
-{{>model_partial_enum}}
 type {{classname}} struct {
 {{#parent}}
 {{^isMap}}
@@ -20,7 +19,7 @@ type {{classname}} struct {
 {{#deprecated}}
 	// Deprecated
 {{/deprecated}}
-	{{name}} {{^required}}{{^isNullable}}{{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}{{/isNullable}}{{/required}}{{^isEnum}}{{dataType}}{{/isEnum}}{{#isEnum}}{{classname}}{{name}}{{/isEnum}} `json:"{{baseName}}{{^required}},omitempty{{/required}}"{{#withXml}} xml:"{{baseName}}{{#isXmlAttribute}},attr{{/isXmlAttribute}}"{{/withXml}}{{#vendorExtensions.x-go-custom-tag}} {{{.}}}{{/vendorExtensions.x-go-custom-tag}}`
+	{{name}} {{^required}}{{^isNullable}}{{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}{{/isNullable}}{{/required}}{{{dataType}}} `json:"{{baseName}}{{^required}},omitempty{{/required}}"{{#withXml}} xml:"{{baseName}}{{#isXmlAttribute}},attr{{/isXmlAttribute}}"{{/withXml}}{{#vendorExtensions.x-go-custom-tag}} {{{.}}}{{/vendorExtensions.x-go-custom-tag}}`
 {{/vars}}
 {{#isAdditionalPropertiesTrue}}
 	AdditionalProperties map[string]interface{}
@@ -35,7 +34,7 @@ type _{{{classname}}} {{{classname}}}
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func New{{classname}}({{#requiredVars}}{{nameInCamelCase}} {{^isEnum}}{{dataType}}{{/isEnum}}{{#isEnum}}{{classname}}{{name}}{{/isEnum}}{{^-last}}, {{/-last}}{{/requiredVars}}) *{{classname}} {
+func New{{classname}}({{#requiredVars}}{{nameInCamelCase}} {{dataType}}{{^-last}}, {{/-last}}{{/requiredVars}}) *{{classname}} {
 	this := {{classname}}{}
 {{#allVars}}
 {{#required}}
@@ -103,14 +102,14 @@ func (o *{{classname}}) Get{{name}}() {{vendorExtensions.x-go-base-type}} {
 
 {{#isNullable}}
 {{#vendorExtensions.x-golang-is-container}}
-	return o.{{name}}{{#isEnum}}.String(){{/isEnum}}
+	return o.{{name}}
 {{/vendorExtensions.x-golang-is-container}}
 {{^vendorExtensions.x-golang-is-container}}
 	return *o.{{name}}.Get()
 {{/vendorExtensions.x-golang-is-container}}
 {{/isNullable}}
 {{^isNullable}}
-    return o.{{name}}{{#isEnum}}.String(){{/isEnum}}
+	return o.{{name}}
 {{/isNullable}}
 }
 
@@ -133,24 +132,14 @@ func (o *{{classname}}) Get{{name}}Ok() ({{^isArray}}{{^isFreeFormObject}}*{{/is
 	}
 {{#isNullable}}
 {{#vendorExtensions.x-golang-is-container}}
-    {{#enum}}
-        s := o.{{name}}.String()
-        return &s, true
-    {{/enum}}
-	return {{^isArray}}{{^isFreeFormObject}}{{^enum}}&{{/enum}}{{/isFreeFormObject}}{{/isArray}}o.{{name}}{{#isEnum}}.String(){{/isEnum}}, true
+	return {{^isArray}}{{^isFreeFormObject}}&{{/isFreeFormObject}}{{/isArray}}o.{{name}}, true
 {{/vendorExtensions.x-golang-is-container}}
 {{^vendorExtensions.x-golang-is-container}}
 	return o.{{name}}.Get(), o.{{name}}.IsSet()
 {{/vendorExtensions.x-golang-is-container}}
 {{/isNullable}}
 {{^isNullable}}
-{{#isEnum}}
-    s := o.{{name}}.String()
-    return &s, true
-{{/isEnum}}
-{{^isEnum}}
-	return {{^isArray}}{{^isFreeFormObject}}{{^enum}}&{{/enum}}{{/isFreeFormObject}}{{/isArray}}o.{{name}}{{#isEnum}}.String(){{/isEnum}}, true
-{{/isEnum}}
+	return {{^isArray}}{{^isFreeFormObject}}&{{/isFreeFormObject}}{{/isArray}}o.{{name}}, true
 {{/isNullable}}
 }
 
@@ -158,7 +147,7 @@ func (o *{{classname}}) Get{{name}}Ok() ({{^isArray}}{{^isFreeFormObject}}*{{/is
 {{#deprecated}}
 // Deprecated
 {{/deprecated}}
-func (o *{{classname}}) Set{{name}}(v {{^isEnum}}{{vendorExtensions.x-go-base-type}}{{/isEnum}}{{#isEnum}}{{classname}}{{name}}{{/isEnum}}) {
+func (o *{{classname}}) Set{{name}}(v {{vendorExtensions.x-go-base-type}}) {
 {{#isNullable}}
 {{#vendorExtensions.x-golang-is-container}}
 	o.{{name}} = v
@@ -185,14 +174,14 @@ func (o *{{classname}}) Get{{name}}() {{vendorExtensions.x-go-base-type}} {
 	}
 {{#isNullable}}
 {{#vendorExtensions.x-golang-is-container}}
-	return o.{{name}}{{#isEnum}}.String(){{/isEnum}}
+	return o.{{name}}
 {{/vendorExtensions.x-golang-is-container}}
 {{^vendorExtensions.x-golang-is-container}}
 	return *o.{{name}}.Get()
 {{/vendorExtensions.x-golang-is-container}}
 {{/isNullable}}
 {{^isNullable}}
-	return {{^isEnum}}{{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}{{/isEnum}}o.{{name}}{{#isEnum}}.String(){{/isEnum}}
+	return {{^isArray}}{{^isFreeFormObject}}*{{/isFreeFormObject}}{{/isArray}}o.{{name}}
 {{/isNullable}}
 }
 
@@ -215,20 +204,14 @@ func (o *{{classname}}) Get{{name}}Ok() ({{^isArray}}{{^isFreeFormObject}}*{{/is
 	}
 {{#isNullable}}
 {{#vendorExtensions.x-golang-is-container}}
-	return {{^isArray}}{{^isFreeFormObject}}&{{/isFreeFormObject}}{{/isArray}}o.{{name}}{{#isEnum}}.String(){{/isEnum}}, true
+	return {{^isArray}}{{^isFreeFormObject}}&{{/isFreeFormObject}}{{/isArray}}o.{{name}}, true
 {{/vendorExtensions.x-golang-is-container}}
 {{^vendorExtensions.x-golang-is-container}}
 	return o.{{name}}.Get(), o.{{name}}.IsSet()
 {{/vendorExtensions.x-golang-is-container}}
 {{/isNullable}}
 {{^isNullable}}
-{{#isEnum}}
-    s := o.{{name}}.String()
-    return &s, true
-{{/isEnum}}
-{{^isEnum}}
-    return o.{{name}}, true
-{{/isEnum}}
+	return o.{{name}}, true
 {{/isNullable}}
 }
 
@@ -245,7 +228,7 @@ func (o *{{classname}}) Has{{name}}() bool {
 {{#deprecated}}
 // Deprecated
 {{/deprecated}}
-func (o *{{classname}}) Set{{name}}(v {{^isEnum}}{{vendorExtensions.x-go-base-type}}{{/isEnum}}{{#isEnum}}{{classname}}{{name}}{{/isEnum}}) {
+func (o *{{classname}}) Set{{name}}(v {{vendorExtensions.x-go-base-type}}) {
 {{#isNullable}}
 {{#vendorExtensions.x-golang-is-container}}
 	o.{{name}} = v

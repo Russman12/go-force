@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **CreatedById** | Pointer to **string** | The ID of the user who created the job. | [optional] 
 **CreatedDate** | Pointer to **string** | The UTC date and time when the job was created. | [optional] 
 **SystemModstamp** | Pointer to **string** | The UTC date and time when the API last updated the job information. | [optional] 
-**State** | Pointer to **string** | The current state of processing for the job. | [optional] 
+**State** | Pointer to [**QueryJobState**](QueryJobState.md) |  | [optional] 
 **ConcurrencyMode** | Pointer to **string** | Reserved for future use. How the request is processed. Currently only parallel mode is supported. (When other modes are added, the API chooses the mode automatically. The mode isn’t user configurable.) | [optional] 
 **ApiVersion** | Pointer to **float32** | The API version that the job was created in. | [optional] 
-**JobType** | Pointer to **string** | The job’s type. For a query job, the type is always V2Query. | [optional] 
+**JobType** | Pointer to [**QueryJobType**](QueryJobType.md) |  | [optional] 
 **NumberRecordsProcessed** | Pointer to **int64** | The number of records processed in this job. | [optional] 
 **Retries** | Pointer to **int32** | The number of times that Salesforce attempted to save the results of an operation. Repeated attempts indicate a problem such as a lock contention. | [optional] 
 **TotalProcessingTime** | Pointer to **int64** | The number of milliseconds taken to process the job. | [optional] 
@@ -163,20 +163,20 @@ HasSystemModstamp returns a boolean if a field has been set.
 
 ### GetState
 
-`func (o *QueryJobInfoExt) GetState() string`
+`func (o *QueryJobInfoExt) GetState() QueryJobState`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *QueryJobInfoExt) GetStateOk() (*string, bool)`
+`func (o *QueryJobInfoExt) GetStateOk() (*QueryJobState, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *QueryJobInfoExt) SetState(v string)`
+`func (o *QueryJobInfoExt) SetState(v QueryJobState)`
 
 SetState sets State field to given value.
 
@@ -238,20 +238,20 @@ HasApiVersion returns a boolean if a field has been set.
 
 ### GetJobType
 
-`func (o *QueryJobInfoExt) GetJobType() string`
+`func (o *QueryJobInfoExt) GetJobType() QueryJobType`
 
 GetJobType returns the JobType field if non-nil, zero value otherwise.
 
 ### GetJobTypeOk
 
-`func (o *QueryJobInfoExt) GetJobTypeOk() (*string, bool)`
+`func (o *QueryJobInfoExt) GetJobTypeOk() (*QueryJobType, bool)`
 
 GetJobTypeOk returns a tuple with the JobType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetJobType
 
-`func (o *QueryJobInfoExt) SetJobType(v string)`
+`func (o *QueryJobInfoExt) SetJobType(v QueryJobType)`
 
 SetJobType sets JobType field to given value.
 

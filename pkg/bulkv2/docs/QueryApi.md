@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## AbortQueryJob
 
-> QueryJobInfo AbortQueryJob(ctx, jobId).QueryJobInfo(queryJobInfo).Execute()
+> QueryJobInfo AbortQueryJob(ctx, jobId).AbortQueryJobRequest(abortQueryJobRequest).Execute()
 
 Abort a Job Query
 
@@ -33,11 +33,11 @@ import (
 
 func main() {
     jobId := "jobId_example" // string | 
-    queryJobInfo := *openapiclient.NewQueryJobInfo("Id_example", "Object_example", "CreatedById_example", "CreatedDate_example", "SystemModstamp_example", "State_example", "ConcurrencyMode_example", float32(123), "Operation_example", "ContentType_example") // QueryJobInfo |  (optional)
+    abortQueryJobRequest := *openapiclient.NewAbortQueryJobRequest() // AbortQueryJobRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QueryApi.AbortQueryJob(context.Background(), jobId).QueryJobInfo(queryJobInfo).Execute()
+    resp, r, err := apiClient.QueryApi.AbortQueryJob(context.Background(), jobId).AbortQueryJobRequest(abortQueryJobRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.AbortQueryJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -63,7 +63,7 @@ Other parameters are passed through a pointer to a apiAbortQueryJobRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **queryJobInfo** | [**QueryJobInfo**](QueryJobInfo.md) |  | 
+ **abortQueryJobRequest** | [**AbortQueryJobRequest**](AbortQueryJobRequest.md) |  | 
 
 ### Return type
 
@@ -103,7 +103,7 @@ import (
 
 func main() {
     contentType := "application/json" // string |  (optional)
-    createQueryJobRequest := *openapiclient.NewCreateQueryJobRequest("Operation_example", "Query_example") // CreateQueryJobRequest |  (optional)
+    createQueryJobRequest := *openapiclient.NewCreateQueryJobRequest(openapiclient.QueryOperation("query"), "Query_example") // CreateQueryJobRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)

@@ -16,12 +16,11 @@ import (
 )
 
 // Jobs struct for Jobs
-
 type Jobs struct {
 	// Indicates whether there are more jobs to get. If false, use the nextRecordsUrl value to retrieve the next group of jobs.
-	Done bool `json:"done"`
+	Done *bool `json:"done,omitempty"`
 	// Contains information for each retrieved job.
-	Records []JobInfo `json:"records"`
+	Records []JobInfo `json:"records,omitempty"`
 	// A URL that contains a query locator used to get the next set of results in a subsequent request if done isn’t true.
 	NextRecordsUrl *string `json:"nextRecordsUrl,omitempty"`
 }
@@ -30,10 +29,8 @@ type Jobs struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewJobs(done bool, records []JobInfo) *Jobs {
+func NewJobs() *Jobs {
 	this := Jobs{}
-	this.Done = done
-	this.Records = records
 	return &this
 }
 
@@ -45,50 +42,66 @@ func NewJobsWithDefaults() *Jobs {
 	return &this
 }
 
-// GetDone returns the Done field value
+// GetDone returns the Done field value if set, zero value otherwise.
 func (o *Jobs) GetDone() bool {
-	if o == nil {
+	if o == nil || isNil(o.Done) {
 		var ret bool
 		return ret
 	}
-
-	return o.Done
+	return *o.Done
 }
 
-// GetDoneOk returns a tuple with the Done field value
+// GetDoneOk returns a tuple with the Done field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Jobs) GetDoneOk() (*bool, bool) {
-	if o == nil {
+	if o == nil || isNil(o.Done) {
 		return nil, false
 	}
-	return &o.Done, true
+	return o.Done, true
 }
 
-// SetDone sets field value
+// HasDone returns a boolean if a field has been set.
+func (o *Jobs) HasDone() bool {
+	if o != nil && !isNil(o.Done) {
+		return true
+	}
+
+	return false
+}
+
+// SetDone gets a reference to the given bool and assigns it to the Done field.
 func (o *Jobs) SetDone(v bool) {
-	o.Done = v
+	o.Done = &v
 }
 
-// GetRecords returns the Records field value
+// GetRecords returns the Records field value if set, zero value otherwise.
 func (o *Jobs) GetRecords() []JobInfo {
-	if o == nil {
+	if o == nil || isNil(o.Records) {
 		var ret []JobInfo
 		return ret
 	}
-
 	return o.Records
 }
 
-// GetRecordsOk returns a tuple with the Records field value
+// GetRecordsOk returns a tuple with the Records field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Jobs) GetRecordsOk() ([]JobInfo, bool) {
-	if o == nil {
+	if o == nil || isNil(o.Records) {
 		return nil, false
 	}
 	return o.Records, true
 }
 
-// SetRecords sets field value
+// HasRecords returns a boolean if a field has been set.
+func (o *Jobs) HasRecords() bool {
+	if o != nil && !isNil(o.Records) {
+		return true
+	}
+
+	return false
+}
+
+// SetRecords gets a reference to the given []JobInfo and assigns it to the Records field.
 func (o *Jobs) SetRecords(v []JobInfo) {
 	o.Records = v
 }
@@ -127,10 +140,10 @@ func (o *Jobs) SetNextRecordsUrl(v string) {
 
 func (o Jobs) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if !isNil(o.Done) {
 		toSerialize["done"] = o.Done
 	}
-	if true {
+	if !isNil(o.Records) {
 		toSerialize["records"] = o.Records
 	}
 	if !isNil(o.NextRecordsUrl) {

@@ -16,7 +16,6 @@ import (
 )
 
 // SObjectDescribe struct for SObjectDescribe
-
 type SObjectDescribe struct {
 	Activateable          *bool                  `json:"activateable,omitempty"`
 	AssociateEntityType   NullableString         `json:"associateEntityType,omitempty"`

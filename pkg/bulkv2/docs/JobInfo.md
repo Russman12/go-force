@@ -4,22 +4,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AssignmentRuleId** | **string** | The ID of the assignment rule. This property is only shown if an assignment rule is specified when the job is created. | 
-**ColumnDelimiter** | **NullableString** | The column delimiter used for CSV job data. | 
-**ContentType** | **string** | The format of the data being processed. Only CSV is supported. | 
-**ExternalIdFieldName** | **string** | The name of the external ID field for an upsert. | 
-**LineEnding** | **string** | The line ending used for CSV job data. | 
-**Object** | **string** | The object type for the data being processed. | 
-**Operation** | **string** | The processing operation for the job. | 
-**ApiVersion** | **float32** | The API version that the job was created in. | 
-**ConcurrencyMode** | **string** | For future use. How the request was processed. Currently only parallel mode is supported. (When other modes are added, the mode will be chosen automatically by the API and will not be user configurable.) | 
-**ContentUrl** | **string** | The URL to use for Upload Job Data requests for this job. Only valid if the job is in Open state. | 
-**CreatedById** | **string** | The ID of the user who created the job. | 
-**CreatedDate** | **string** | The date and time in the UTC time zone when the job was created. | 
-**Id** | **string** | Unique ID for this job. | 
-**JobType** | **string** | The job’s type. | 
-**SystemModstamp** | **string** | Date and time in the UTC time zone when the job finished. | 
-**State** | **string** | The current state of processing for the job. | 
+**AssignmentRuleId** | Pointer to **string** | The ID of the assignment rule. This property is only shown if an assignment rule is specified when the job is created. | [optional] 
+**ColumnDelimiter** | Pointer to [**ColumnDelimiter**](ColumnDelimiter.md) |  | [optional] 
+**ContentType** | Pointer to [**ContentType**](ContentType.md) |  | [optional] 
+**ExternalIdFieldName** | Pointer to **string** | The name of the external ID field for an upsert. | [optional] 
+**LineEnding** | Pointer to [**LineEnding**](LineEnding.md) |  | [optional] 
+**Object** | Pointer to **string** | The object type for the data being processed. | [optional] 
+**Operation** | Pointer to [**JobOperation**](JobOperation.md) |  | [optional] 
+**ApiVersion** | Pointer to **float32** | The API version that the job was created in. | [optional] 
+**ConcurrencyMode** | Pointer to **string** | For future use. How the request was processed. Currently only parallel mode is supported. (When other modes are added, the mode will be chosen automatically by the API and will not be user configurable.) | [optional] 
+**ContentUrl** | Pointer to **string** | The URL to use for Upload Job Data requests for this job. Only valid if the job is in Open state. | [optional] 
+**CreatedById** | Pointer to **string** | The ID of the user who created the job. | [optional] 
+**CreatedDate** | Pointer to **string** | The date and time in the UTC time zone when the job was created. | [optional] 
+**Id** | Pointer to **string** | Unique ID for this job. | [optional] 
+**JobType** | Pointer to [**JobType**](JobType.md) |  | [optional] 
+**SystemModstamp** | Pointer to **string** | Date and time in the UTC time zone when the job finished. | [optional] 
+**State** | Pointer to [**JobState**](JobState.md) |  | [optional] 
 **ApexProcessingTime** | Pointer to **int64** | The number of milliseconds taken to process triggers and other processes related to the job data. This doesn&#39;t include the time used for processing asynchronous and batch Apex operations. If there are no triggers, the value is 0. | [optional] 
 **ApiActiveProcessingTime** | Pointer to **int64** | The number of milliseconds taken to actively process the job and includes apexProcessingTime, but doesn&#39;t include the time the job waited in the queue to be processed or the time required for serialization and deserialization. | [optional] 
 **ErrorMessage** | Pointer to **string** | The error message shown for jobs with errors. | [optional] 
@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewJobInfo
 
-`func NewJobInfo(assignmentRuleId string, columnDelimiter NullableString, contentType string, externalIdFieldName string, lineEnding string, object string, operation string, apiVersion float32, concurrencyMode string, contentUrl string, createdById string, createdDate string, id string, jobType string, systemModstamp string, state string, ) *JobInfo`
+`func NewJobInfo() *JobInfo`
 
 NewJobInfo instantiates a new JobInfo object
 This constructor will assign default values to properties that have it defined,
@@ -66,56 +66,61 @@ and a boolean to check if the value has been set.
 
 SetAssignmentRuleId sets AssignmentRuleId field to given value.
 
+### HasAssignmentRuleId
+
+`func (o *JobInfo) HasAssignmentRuleId() bool`
+
+HasAssignmentRuleId returns a boolean if a field has been set.
 
 ### GetColumnDelimiter
 
-`func (o *JobInfo) GetColumnDelimiter() string`
+`func (o *JobInfo) GetColumnDelimiter() ColumnDelimiter`
 
 GetColumnDelimiter returns the ColumnDelimiter field if non-nil, zero value otherwise.
 
 ### GetColumnDelimiterOk
 
-`func (o *JobInfo) GetColumnDelimiterOk() (*string, bool)`
+`func (o *JobInfo) GetColumnDelimiterOk() (*ColumnDelimiter, bool)`
 
 GetColumnDelimiterOk returns a tuple with the ColumnDelimiter field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetColumnDelimiter
 
-`func (o *JobInfo) SetColumnDelimiter(v string)`
+`func (o *JobInfo) SetColumnDelimiter(v ColumnDelimiter)`
 
 SetColumnDelimiter sets ColumnDelimiter field to given value.
 
+### HasColumnDelimiter
 
-### SetColumnDelimiterNil
+`func (o *JobInfo) HasColumnDelimiter() bool`
 
-`func (o *JobInfo) SetColumnDelimiterNil(b bool)`
+HasColumnDelimiter returns a boolean if a field has been set.
 
- SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
-
-### UnsetColumnDelimiter
-`func (o *JobInfo) UnsetColumnDelimiter()`
-
-UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
 ### GetContentType
 
-`func (o *JobInfo) GetContentType() string`
+`func (o *JobInfo) GetContentType() ContentType`
 
 GetContentType returns the ContentType field if non-nil, zero value otherwise.
 
 ### GetContentTypeOk
 
-`func (o *JobInfo) GetContentTypeOk() (*string, bool)`
+`func (o *JobInfo) GetContentTypeOk() (*ContentType, bool)`
 
 GetContentTypeOk returns a tuple with the ContentType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContentType
 
-`func (o *JobInfo) SetContentType(v string)`
+`func (o *JobInfo) SetContentType(v ContentType)`
 
 SetContentType sets ContentType field to given value.
 
+### HasContentType
+
+`func (o *JobInfo) HasContentType() bool`
+
+HasContentType returns a boolean if a field has been set.
 
 ### GetExternalIdFieldName
 
@@ -136,26 +141,36 @@ and a boolean to check if the value has been set.
 
 SetExternalIdFieldName sets ExternalIdFieldName field to given value.
 
+### HasExternalIdFieldName
+
+`func (o *JobInfo) HasExternalIdFieldName() bool`
+
+HasExternalIdFieldName returns a boolean if a field has been set.
 
 ### GetLineEnding
 
-`func (o *JobInfo) GetLineEnding() string`
+`func (o *JobInfo) GetLineEnding() LineEnding`
 
 GetLineEnding returns the LineEnding field if non-nil, zero value otherwise.
 
 ### GetLineEndingOk
 
-`func (o *JobInfo) GetLineEndingOk() (*string, bool)`
+`func (o *JobInfo) GetLineEndingOk() (*LineEnding, bool)`
 
 GetLineEndingOk returns a tuple with the LineEnding field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLineEnding
 
-`func (o *JobInfo) SetLineEnding(v string)`
+`func (o *JobInfo) SetLineEnding(v LineEnding)`
 
 SetLineEnding sets LineEnding field to given value.
 
+### HasLineEnding
+
+`func (o *JobInfo) HasLineEnding() bool`
+
+HasLineEnding returns a boolean if a field has been set.
 
 ### GetObject
 
@@ -176,26 +191,36 @@ and a boolean to check if the value has been set.
 
 SetObject sets Object field to given value.
 
+### HasObject
+
+`func (o *JobInfo) HasObject() bool`
+
+HasObject returns a boolean if a field has been set.
 
 ### GetOperation
 
-`func (o *JobInfo) GetOperation() string`
+`func (o *JobInfo) GetOperation() JobOperation`
 
 GetOperation returns the Operation field if non-nil, zero value otherwise.
 
 ### GetOperationOk
 
-`func (o *JobInfo) GetOperationOk() (*string, bool)`
+`func (o *JobInfo) GetOperationOk() (*JobOperation, bool)`
 
 GetOperationOk returns a tuple with the Operation field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetOperation
 
-`func (o *JobInfo) SetOperation(v string)`
+`func (o *JobInfo) SetOperation(v JobOperation)`
 
 SetOperation sets Operation field to given value.
 
+### HasOperation
+
+`func (o *JobInfo) HasOperation() bool`
+
+HasOperation returns a boolean if a field has been set.
 
 ### GetApiVersion
 
@@ -216,6 +241,11 @@ and a boolean to check if the value has been set.
 
 SetApiVersion sets ApiVersion field to given value.
 
+### HasApiVersion
+
+`func (o *JobInfo) HasApiVersion() bool`
+
+HasApiVersion returns a boolean if a field has been set.
 
 ### GetConcurrencyMode
 
@@ -236,6 +266,11 @@ and a boolean to check if the value has been set.
 
 SetConcurrencyMode sets ConcurrencyMode field to given value.
 
+### HasConcurrencyMode
+
+`func (o *JobInfo) HasConcurrencyMode() bool`
+
+HasConcurrencyMode returns a boolean if a field has been set.
 
 ### GetContentUrl
 
@@ -256,6 +291,11 @@ and a boolean to check if the value has been set.
 
 SetContentUrl sets ContentUrl field to given value.
 
+### HasContentUrl
+
+`func (o *JobInfo) HasContentUrl() bool`
+
+HasContentUrl returns a boolean if a field has been set.
 
 ### GetCreatedById
 
@@ -276,6 +316,11 @@ and a boolean to check if the value has been set.
 
 SetCreatedById sets CreatedById field to given value.
 
+### HasCreatedById
+
+`func (o *JobInfo) HasCreatedById() bool`
+
+HasCreatedById returns a boolean if a field has been set.
 
 ### GetCreatedDate
 
@@ -296,6 +341,11 @@ and a boolean to check if the value has been set.
 
 SetCreatedDate sets CreatedDate field to given value.
 
+### HasCreatedDate
+
+`func (o *JobInfo) HasCreatedDate() bool`
+
+HasCreatedDate returns a boolean if a field has been set.
 
 ### GetId
 
@@ -316,26 +366,36 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+### HasId
+
+`func (o *JobInfo) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetJobType
 
-`func (o *JobInfo) GetJobType() string`
+`func (o *JobInfo) GetJobType() JobType`
 
 GetJobType returns the JobType field if non-nil, zero value otherwise.
 
 ### GetJobTypeOk
 
-`func (o *JobInfo) GetJobTypeOk() (*string, bool)`
+`func (o *JobInfo) GetJobTypeOk() (*JobType, bool)`
 
 GetJobTypeOk returns a tuple with the JobType field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetJobType
 
-`func (o *JobInfo) SetJobType(v string)`
+`func (o *JobInfo) SetJobType(v JobType)`
 
 SetJobType sets JobType field to given value.
 
+### HasJobType
+
+`func (o *JobInfo) HasJobType() bool`
+
+HasJobType returns a boolean if a field has been set.
 
 ### GetSystemModstamp
 
@@ -356,26 +416,36 @@ and a boolean to check if the value has been set.
 
 SetSystemModstamp sets SystemModstamp field to given value.
 
+### HasSystemModstamp
+
+`func (o *JobInfo) HasSystemModstamp() bool`
+
+HasSystemModstamp returns a boolean if a field has been set.
 
 ### GetState
 
-`func (o *JobInfo) GetState() string`
+`func (o *JobInfo) GetState() JobState`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *JobInfo) GetStateOk() (*string, bool)`
+`func (o *JobInfo) GetStateOk() (*JobState, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *JobInfo) SetState(v string)`
+`func (o *JobInfo) SetState(v JobState)`
 
 SetState sets State field to given value.
 
+### HasState
+
+`func (o *JobInfo) HasState() bool`
+
+HasState returns a boolean if a field has been set.
 
 ### GetApexProcessingTime
 

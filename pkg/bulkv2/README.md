@@ -34,17 +34,30 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 ## Documentation For Models
 
+ - [AbortQueryJobRequest](docs/AbortQueryJobRequest.md)
  - [CloseOrAbortJobRequest](docs/CloseOrAbortJobRequest.md)
+ - [ColumnDelimiter](docs/ColumnDelimiter.md)
+ - [ContentType](docs/ContentType.md)
+ - [CreateJobRequest](docs/CreateJobRequest.md)
  - [CreateQueryJobRequest](docs/CreateQueryJobRequest.md)
  - [Job](docs/Job.md)
+ - [JobCloseAbortState](docs/JobCloseAbortState.md)
  - [JobInfo](docs/JobInfo.md)
  - [JobInfoExt](docs/JobInfoExt.md)
+ - [JobOperation](docs/JobOperation.md)
+ - [JobState](docs/JobState.md)
+ - [JobType](docs/JobType.md)
  - [Jobs](docs/Jobs.md)
+ - [LineEnding](docs/LineEnding.md)
+ - [QueryAbortState](docs/QueryAbortState.md)
  - [QueryJob](docs/QueryJob.md)
  - [QueryJobCreateRequestExt](docs/QueryJobCreateRequestExt.md)
  - [QueryJobInfo](docs/QueryJobInfo.md)
  - [QueryJobInfoExt](docs/QueryJobInfoExt.md)
  - [QueryJobInfos](docs/QueryJobInfos.md)
+ - [QueryJobState](docs/QueryJobState.md)
+ - [QueryJobType](docs/QueryJobType.md)
+ - [QueryOperation](docs/QueryOperation.md)
 
 
 ## Documentation For Authorization

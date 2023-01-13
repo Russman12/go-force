@@ -25,14 +25,14 @@ import (
 type QueryApiService service
 
 type ApiAbortQueryJobRequest struct {
-	ctx          context.Context
-	ApiService   *QueryApiService
-	jobId        string
-	queryJobInfo *QueryJobInfo
+	ctx                  context.Context
+	ApiService           *QueryApiService
+	jobId                string
+	abortQueryJobRequest *AbortQueryJobRequest
 }
 
-func (r ApiAbortQueryJobRequest) QueryJobInfo(queryJobInfo QueryJobInfo) ApiAbortQueryJobRequest {
-	r.queryJobInfo = &queryJobInfo
+func (r ApiAbortQueryJobRequest) AbortQueryJobRequest(abortQueryJobRequest AbortQueryJobRequest) ApiAbortQueryJobRequest {
+	r.abortQueryJobRequest = &abortQueryJobRequest
 	return r
 }
 
@@ -96,7 +96,7 @@ func (a *QueryApiService) AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*Quer
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.queryJobInfo
+	localVarPostBody = r.abortQueryJobRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

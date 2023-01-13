@@ -36,7 +36,7 @@ import (
 
 func main() {
     jobId := "jobId_example" // string | 
-    closeOrAbortJobRequest := *openapiclient.NewCloseOrAbortJobRequest("State_example") // CloseOrAbortJobRequest |  (optional)
+    closeOrAbortJobRequest := *openapiclient.NewCloseOrAbortJobRequest(openapiclient.JobCloseAbortState("UploadComplete")) // CloseOrAbortJobRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -88,7 +88,7 @@ No authorization required
 
 ## CreateJob
 
-> JobInfo CreateJob(ctx).Job(job).Execute()
+> JobInfo CreateJob(ctx).CreateJobRequest(createJobRequest).Execute()
 
 Create job
 
@@ -105,11 +105,11 @@ import (
 )
 
 func main() {
-    job := *openapiclient.NewJob("Object_example", "Operation_example") // Job |  (optional)
+    createJobRequest := *openapiclient.NewCreateJobRequest("Object_example", openapiclient.JobOperation("insert")) // CreateJobRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.JobApi.CreateJob(context.Background()).Job(job).Execute()
+    resp, r, err := apiClient.JobApi.CreateJob(context.Background()).CreateJobRequest(createJobRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.CreateJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -130,7 +130,7 @@ Other parameters are passed through a pointer to a apiCreateJobRequest struct vi
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **job** | [**Job**](Job.md) |  | 
+ **createJobRequest** | [**CreateJobRequest**](CreateJobRequest.md) |  | 
 
 ### Return type
 
