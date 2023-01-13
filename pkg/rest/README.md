@@ -78,21 +78,21 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 | Class        | Method        | HTTP request  | Description   |
 | ------------ | ------------- | ------------- | ------------- |
-| *SObjectApi* | [**SObjectDescribe**](docs/SObjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe |  |
-| *SObjectApi* | [**SObjects**](docs/SObjectApi.md#sobjects) | **Get** /sobjects |  |
+| *SobjectApi* | [**GetSObjects**](docs/SobjectApi.md#getsobjects) | **Get** /sobjects |  |
+| *SobjectApi* | [**SObjectDescribe**](docs/SobjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe |  |
 
 
 ## Documentation For Models
 
- - [SObjectDescribe](docs/SObjectDescribe.md)
- - [SObjectDescribeActionOverrides](docs/SObjectDescribeActionOverrides.md)
- - [SObjectDescribeChildRelationships](docs/SObjectDescribeChildRelationships.md)
- - [SObjectDescribeSupportedScopes](docs/SObjectDescribeSupportedScopes.md)
- - [SObjectDescribes](docs/SObjectDescribes.md)
- - [SObjectFieldDescribe](docs/SObjectFieldDescribe.md)
- - [SObjectFieldDescribePicklist](docs/SObjectFieldDescribePicklist.md)
- - [SObjectRecordTypeInfo](docs/SObjectRecordTypeInfo.md)
- - [SObjectRecordTypeInfoUrls](docs/SObjectRecordTypeInfoUrls.md)
+ - [ActionOverrides](docs/ActionOverrides.md)
+ - [ChildRelationships](docs/ChildRelationships.md)
+ - [FieldDescribe](docs/FieldDescribe.md)
+ - [FieldDescribePicklist](docs/FieldDescribePicklist.md)
+ - [RecordTypeInfo](docs/RecordTypeInfo.md)
+ - [RecordTypeInfoUrls](docs/RecordTypeInfoUrls.md)
+ - [SobjectDescribe](docs/SobjectDescribe.md)
+ - [SobjectDescribes](docs/SobjectDescribes.md)
+ - [SupportedScopes](docs/SupportedScopes.md)
 
 
 ## Documentation For Authorization

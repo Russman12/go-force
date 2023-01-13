@@ -15,30 +15,30 @@ import (
 	"encoding/json"
 )
 
-// SObjectRecordTypeInfoUrls struct for SObjectRecordTypeInfoUrls
-type SObjectRecordTypeInfoUrls struct {
+// RecordTypeInfoUrls struct for RecordTypeInfoUrls
+type RecordTypeInfoUrls struct {
 	Layout *string `json:"layout,omitempty"`
 }
 
-// NewSObjectRecordTypeInfoUrls instantiates a new SObjectRecordTypeInfoUrls object
+// NewRecordTypeInfoUrls instantiates a new RecordTypeInfoUrls object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSObjectRecordTypeInfoUrls() *SObjectRecordTypeInfoUrls {
-	this := SObjectRecordTypeInfoUrls{}
+func NewRecordTypeInfoUrls() *RecordTypeInfoUrls {
+	this := RecordTypeInfoUrls{}
 	return &this
 }
 
-// NewSObjectRecordTypeInfoUrlsWithDefaults instantiates a new SObjectRecordTypeInfoUrls object
+// NewRecordTypeInfoUrlsWithDefaults instantiates a new RecordTypeInfoUrls object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSObjectRecordTypeInfoUrlsWithDefaults() *SObjectRecordTypeInfoUrls {
-	this := SObjectRecordTypeInfoUrls{}
+func NewRecordTypeInfoUrlsWithDefaults() *RecordTypeInfoUrls {
+	this := RecordTypeInfoUrls{}
 	return &this
 }
 
 // GetLayout returns the Layout field value if set, zero value otherwise.
-func (o *SObjectRecordTypeInfoUrls) GetLayout() string {
+func (o *RecordTypeInfoUrls) GetLayout() string {
 	if o == nil || isNil(o.Layout) {
 		var ret string
 		return ret
@@ -48,7 +48,7 @@ func (o *SObjectRecordTypeInfoUrls) GetLayout() string {
 
 // GetLayoutOk returns a tuple with the Layout field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectRecordTypeInfoUrls) GetLayoutOk() (*string, bool) {
+func (o *RecordTypeInfoUrls) GetLayoutOk() (*string, bool) {
 	if o == nil || isNil(o.Layout) {
 		return nil, false
 	}
@@ -56,7 +56,7 @@ func (o *SObjectRecordTypeInfoUrls) GetLayoutOk() (*string, bool) {
 }
 
 // HasLayout returns a boolean if a field has been set.
-func (o *SObjectRecordTypeInfoUrls) HasLayout() bool {
+func (o *RecordTypeInfoUrls) HasLayout() bool {
 	if o != nil && !isNil(o.Layout) {
 		return true
 	}
@@ -65,11 +65,11 @@ func (o *SObjectRecordTypeInfoUrls) HasLayout() bool {
 }
 
 // SetLayout gets a reference to the given string and assigns it to the Layout field.
-func (o *SObjectRecordTypeInfoUrls) SetLayout(v string) {
+func (o *RecordTypeInfoUrls) SetLayout(v string) {
 	o.Layout = &v
 }
 
-func (o SObjectRecordTypeInfoUrls) MarshalJSON() ([]byte, error) {
+func (o RecordTypeInfoUrls) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Layout) {
 		toSerialize["layout"] = o.Layout
@@ -77,38 +77,38 @@ func (o SObjectRecordTypeInfoUrls) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableSObjectRecordTypeInfoUrls struct {
-	value *SObjectRecordTypeInfoUrls
+type NullableRecordTypeInfoUrls struct {
+	value *RecordTypeInfoUrls
 	isSet bool
 }
 
-func (v NullableSObjectRecordTypeInfoUrls) Get() *SObjectRecordTypeInfoUrls {
+func (v NullableRecordTypeInfoUrls) Get() *RecordTypeInfoUrls {
 	return v.value
 }
 
-func (v *NullableSObjectRecordTypeInfoUrls) Set(val *SObjectRecordTypeInfoUrls) {
+func (v *NullableRecordTypeInfoUrls) Set(val *RecordTypeInfoUrls) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSObjectRecordTypeInfoUrls) IsSet() bool {
+func (v NullableRecordTypeInfoUrls) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSObjectRecordTypeInfoUrls) Unset() {
+func (v *NullableRecordTypeInfoUrls) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSObjectRecordTypeInfoUrls(val *SObjectRecordTypeInfoUrls) *NullableSObjectRecordTypeInfoUrls {
-	return &NullableSObjectRecordTypeInfoUrls{value: val, isSet: true}
+func NewNullableRecordTypeInfoUrls(val *RecordTypeInfoUrls) *NullableRecordTypeInfoUrls {
+	return &NullableRecordTypeInfoUrls{value: val, isSet: true}
 }
 
-func (v NullableSObjectRecordTypeInfoUrls) MarshalJSON() ([]byte, error) {
+func (v NullableRecordTypeInfoUrls) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSObjectRecordTypeInfoUrls) UnmarshalJSON(src []byte) error {
+func (v *NullableRecordTypeInfoUrls) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

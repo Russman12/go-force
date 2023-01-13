@@ -15,31 +15,31 @@ import (
 	"encoding/json"
 )
 
-// SObjectDescribeSupportedScopes struct for SObjectDescribeSupportedScopes
-type SObjectDescribeSupportedScopes struct {
+// SupportedScopes struct for SupportedScopes
+type SupportedScopes struct {
 	Label *string `json:"label,omitempty"`
 	Name  *string `json:"name,omitempty"`
 }
 
-// NewSObjectDescribeSupportedScopes instantiates a new SObjectDescribeSupportedScopes object
+// NewSupportedScopes instantiates a new SupportedScopes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSObjectDescribeSupportedScopes() *SObjectDescribeSupportedScopes {
-	this := SObjectDescribeSupportedScopes{}
+func NewSupportedScopes() *SupportedScopes {
+	this := SupportedScopes{}
 	return &this
 }
 
-// NewSObjectDescribeSupportedScopesWithDefaults instantiates a new SObjectDescribeSupportedScopes object
+// NewSupportedScopesWithDefaults instantiates a new SupportedScopes object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSObjectDescribeSupportedScopesWithDefaults() *SObjectDescribeSupportedScopes {
-	this := SObjectDescribeSupportedScopes{}
+func NewSupportedScopesWithDefaults() *SupportedScopes {
+	this := SupportedScopes{}
 	return &this
 }
 
 // GetLabel returns the Label field value if set, zero value otherwise.
-func (o *SObjectDescribeSupportedScopes) GetLabel() string {
+func (o *SupportedScopes) GetLabel() string {
 	if o == nil || isNil(o.Label) {
 		var ret string
 		return ret
@@ -49,7 +49,7 @@ func (o *SObjectDescribeSupportedScopes) GetLabel() string {
 
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeSupportedScopes) GetLabelOk() (*string, bool) {
+func (o *SupportedScopes) GetLabelOk() (*string, bool) {
 	if o == nil || isNil(o.Label) {
 		return nil, false
 	}
@@ -57,7 +57,7 @@ func (o *SObjectDescribeSupportedScopes) GetLabelOk() (*string, bool) {
 }
 
 // HasLabel returns a boolean if a field has been set.
-func (o *SObjectDescribeSupportedScopes) HasLabel() bool {
+func (o *SupportedScopes) HasLabel() bool {
 	if o != nil && !isNil(o.Label) {
 		return true
 	}
@@ -66,12 +66,12 @@ func (o *SObjectDescribeSupportedScopes) HasLabel() bool {
 }
 
 // SetLabel gets a reference to the given string and assigns it to the Label field.
-func (o *SObjectDescribeSupportedScopes) SetLabel(v string) {
+func (o *SupportedScopes) SetLabel(v string) {
 	o.Label = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *SObjectDescribeSupportedScopes) GetName() string {
+func (o *SupportedScopes) GetName() string {
 	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
@@ -81,7 +81,7 @@ func (o *SObjectDescribeSupportedScopes) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeSupportedScopes) GetNameOk() (*string, bool) {
+func (o *SupportedScopes) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
 		return nil, false
 	}
@@ -89,7 +89,7 @@ func (o *SObjectDescribeSupportedScopes) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *SObjectDescribeSupportedScopes) HasName() bool {
+func (o *SupportedScopes) HasName() bool {
 	if o != nil && !isNil(o.Name) {
 		return true
 	}
@@ -98,11 +98,11 @@ func (o *SObjectDescribeSupportedScopes) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *SObjectDescribeSupportedScopes) SetName(v string) {
+func (o *SupportedScopes) SetName(v string) {
 	o.Name = &v
 }
 
-func (o SObjectDescribeSupportedScopes) MarshalJSON() ([]byte, error) {
+func (o SupportedScopes) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Label) {
 		toSerialize["label"] = o.Label
@@ -113,38 +113,38 @@ func (o SObjectDescribeSupportedScopes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableSObjectDescribeSupportedScopes struct {
-	value *SObjectDescribeSupportedScopes
+type NullableSupportedScopes struct {
+	value *SupportedScopes
 	isSet bool
 }
 
-func (v NullableSObjectDescribeSupportedScopes) Get() *SObjectDescribeSupportedScopes {
+func (v NullableSupportedScopes) Get() *SupportedScopes {
 	return v.value
 }
 
-func (v *NullableSObjectDescribeSupportedScopes) Set(val *SObjectDescribeSupportedScopes) {
+func (v *NullableSupportedScopes) Set(val *SupportedScopes) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSObjectDescribeSupportedScopes) IsSet() bool {
+func (v NullableSupportedScopes) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSObjectDescribeSupportedScopes) Unset() {
+func (v *NullableSupportedScopes) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSObjectDescribeSupportedScopes(val *SObjectDescribeSupportedScopes) *NullableSObjectDescribeSupportedScopes {
-	return &NullableSObjectDescribeSupportedScopes{value: val, isSet: true}
+func NewNullableSupportedScopes(val *SupportedScopes) *NullableSupportedScopes {
+	return &NullableSupportedScopes{value: val, isSet: true}
 }
 
-func (v NullableSObjectDescribeSupportedScopes) MarshalJSON() ([]byte, error) {
+func (v NullableSupportedScopes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSObjectDescribeSupportedScopes) UnmarshalJSON(src []byte) error {
+func (v *NullableSupportedScopes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

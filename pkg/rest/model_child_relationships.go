@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// SObjectDescribeChildRelationships struct for SObjectDescribeChildRelationships
-type SObjectDescribeChildRelationships struct {
+// ChildRelationships struct for ChildRelationships
+type ChildRelationships struct {
 	CascadeDelete       *bool    `json:"cascadeDelete,omitempty"`
 	ChildSObject        *string  `json:"childSObject,omitempty"`
 	DeprecatedAndHidden *bool    `json:"deprecatedAndHidden,omitempty"`
@@ -27,25 +27,25 @@ type SObjectDescribeChildRelationships struct {
 	RestrictedDelete    *bool    `json:"restrictedDelete,omitempty"`
 }
 
-// NewSObjectDescribeChildRelationships instantiates a new SObjectDescribeChildRelationships object
+// NewChildRelationships instantiates a new ChildRelationships object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSObjectDescribeChildRelationships() *SObjectDescribeChildRelationships {
-	this := SObjectDescribeChildRelationships{}
+func NewChildRelationships() *ChildRelationships {
+	this := ChildRelationships{}
 	return &this
 }
 
-// NewSObjectDescribeChildRelationshipsWithDefaults instantiates a new SObjectDescribeChildRelationships object
+// NewChildRelationshipsWithDefaults instantiates a new ChildRelationships object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSObjectDescribeChildRelationshipsWithDefaults() *SObjectDescribeChildRelationships {
-	this := SObjectDescribeChildRelationships{}
+func NewChildRelationshipsWithDefaults() *ChildRelationships {
+	this := ChildRelationships{}
 	return &this
 }
 
 // GetCascadeDelete returns the CascadeDelete field value if set, zero value otherwise.
-func (o *SObjectDescribeChildRelationships) GetCascadeDelete() bool {
+func (o *ChildRelationships) GetCascadeDelete() bool {
 	if o == nil || isNil(o.CascadeDelete) {
 		var ret bool
 		return ret
@@ -55,7 +55,7 @@ func (o *SObjectDescribeChildRelationships) GetCascadeDelete() bool {
 
 // GetCascadeDeleteOk returns a tuple with the CascadeDelete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeChildRelationships) GetCascadeDeleteOk() (*bool, bool) {
+func (o *ChildRelationships) GetCascadeDeleteOk() (*bool, bool) {
 	if o == nil || isNil(o.CascadeDelete) {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *SObjectDescribeChildRelationships) GetCascadeDeleteOk() (*bool, bool) {
 }
 
 // HasCascadeDelete returns a boolean if a field has been set.
-func (o *SObjectDescribeChildRelationships) HasCascadeDelete() bool {
+func (o *ChildRelationships) HasCascadeDelete() bool {
 	if o != nil && !isNil(o.CascadeDelete) {
 		return true
 	}
@@ -72,12 +72,12 @@ func (o *SObjectDescribeChildRelationships) HasCascadeDelete() bool {
 }
 
 // SetCascadeDelete gets a reference to the given bool and assigns it to the CascadeDelete field.
-func (o *SObjectDescribeChildRelationships) SetCascadeDelete(v bool) {
+func (o *ChildRelationships) SetCascadeDelete(v bool) {
 	o.CascadeDelete = &v
 }
 
 // GetChildSObject returns the ChildSObject field value if set, zero value otherwise.
-func (o *SObjectDescribeChildRelationships) GetChildSObject() string {
+func (o *ChildRelationships) GetChildSObject() string {
 	if o == nil || isNil(o.ChildSObject) {
 		var ret string
 		return ret
@@ -87,7 +87,7 @@ func (o *SObjectDescribeChildRelationships) GetChildSObject() string {
 
 // GetChildSObjectOk returns a tuple with the ChildSObject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeChildRelationships) GetChildSObjectOk() (*string, bool) {
+func (o *ChildRelationships) GetChildSObjectOk() (*string, bool) {
 	if o == nil || isNil(o.ChildSObject) {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *SObjectDescribeChildRelationships) GetChildSObjectOk() (*string, bool) 
 }
 
 // HasChildSObject returns a boolean if a field has been set.
-func (o *SObjectDescribeChildRelationships) HasChildSObject() bool {
+func (o *ChildRelationships) HasChildSObject() bool {
 	if o != nil && !isNil(o.ChildSObject) {
 		return true
 	}
@@ -104,12 +104,12 @@ func (o *SObjectDescribeChildRelationships) HasChildSObject() bool {
 }
 
 // SetChildSObject gets a reference to the given string and assigns it to the ChildSObject field.
-func (o *SObjectDescribeChildRelationships) SetChildSObject(v string) {
+func (o *ChildRelationships) SetChildSObject(v string) {
 	o.ChildSObject = &v
 }
 
 // GetDeprecatedAndHidden returns the DeprecatedAndHidden field value if set, zero value otherwise.
-func (o *SObjectDescribeChildRelationships) GetDeprecatedAndHidden() bool {
+func (o *ChildRelationships) GetDeprecatedAndHidden() bool {
 	if o == nil || isNil(o.DeprecatedAndHidden) {
 		var ret bool
 		return ret
@@ -119,7 +119,7 @@ func (o *SObjectDescribeChildRelationships) GetDeprecatedAndHidden() bool {
 
 // GetDeprecatedAndHiddenOk returns a tuple with the DeprecatedAndHidden field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeChildRelationships) GetDeprecatedAndHiddenOk() (*bool, bool) {
+func (o *ChildRelationships) GetDeprecatedAndHiddenOk() (*bool, bool) {
 	if o == nil || isNil(o.DeprecatedAndHidden) {
 		return nil, false
 	}
@@ -127,7 +127,7 @@ func (o *SObjectDescribeChildRelationships) GetDeprecatedAndHiddenOk() (*bool, b
 }
 
 // HasDeprecatedAndHidden returns a boolean if a field has been set.
-func (o *SObjectDescribeChildRelationships) HasDeprecatedAndHidden() bool {
+func (o *ChildRelationships) HasDeprecatedAndHidden() bool {
 	if o != nil && !isNil(o.DeprecatedAndHidden) {
 		return true
 	}
@@ -136,12 +136,12 @@ func (o *SObjectDescribeChildRelationships) HasDeprecatedAndHidden() bool {
 }
 
 // SetDeprecatedAndHidden gets a reference to the given bool and assigns it to the DeprecatedAndHidden field.
-func (o *SObjectDescribeChildRelationships) SetDeprecatedAndHidden(v bool) {
+func (o *ChildRelationships) SetDeprecatedAndHidden(v bool) {
 	o.DeprecatedAndHidden = &v
 }
 
 // GetField returns the Field field value if set, zero value otherwise.
-func (o *SObjectDescribeChildRelationships) GetField() string {
+func (o *ChildRelationships) GetField() string {
 	if o == nil || isNil(o.Field) {
 		var ret string
 		return ret
@@ -151,7 +151,7 @@ func (o *SObjectDescribeChildRelationships) GetField() string {
 
 // GetFieldOk returns a tuple with the Field field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeChildRelationships) GetFieldOk() (*string, bool) {
+func (o *ChildRelationships) GetFieldOk() (*string, bool) {
 	if o == nil || isNil(o.Field) {
 		return nil, false
 	}
@@ -159,7 +159,7 @@ func (o *SObjectDescribeChildRelationships) GetFieldOk() (*string, bool) {
 }
 
 // HasField returns a boolean if a field has been set.
-func (o *SObjectDescribeChildRelationships) HasField() bool {
+func (o *ChildRelationships) HasField() bool {
 	if o != nil && !isNil(o.Field) {
 		return true
 	}
@@ -168,12 +168,12 @@ func (o *SObjectDescribeChildRelationships) HasField() bool {
 }
 
 // SetField gets a reference to the given string and assigns it to the Field field.
-func (o *SObjectDescribeChildRelationships) SetField(v string) {
+func (o *ChildRelationships) SetField(v string) {
 	o.Field = &v
 }
 
 // GetJunctionIdListNames returns the JunctionIdListNames field value if set, zero value otherwise.
-func (o *SObjectDescribeChildRelationships) GetJunctionIdListNames() []string {
+func (o *ChildRelationships) GetJunctionIdListNames() []string {
 	if o == nil || isNil(o.JunctionIdListNames) {
 		var ret []string
 		return ret
@@ -183,7 +183,7 @@ func (o *SObjectDescribeChildRelationships) GetJunctionIdListNames() []string {
 
 // GetJunctionIdListNamesOk returns a tuple with the JunctionIdListNames field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeChildRelationships) GetJunctionIdListNamesOk() ([]string, bool) {
+func (o *ChildRelationships) GetJunctionIdListNamesOk() ([]string, bool) {
 	if o == nil || isNil(o.JunctionIdListNames) {
 		return nil, false
 	}
@@ -191,7 +191,7 @@ func (o *SObjectDescribeChildRelationships) GetJunctionIdListNamesOk() ([]string
 }
 
 // HasJunctionIdListNames returns a boolean if a field has been set.
-func (o *SObjectDescribeChildRelationships) HasJunctionIdListNames() bool {
+func (o *ChildRelationships) HasJunctionIdListNames() bool {
 	if o != nil && !isNil(o.JunctionIdListNames) {
 		return true
 	}
@@ -200,12 +200,12 @@ func (o *SObjectDescribeChildRelationships) HasJunctionIdListNames() bool {
 }
 
 // SetJunctionIdListNames gets a reference to the given []string and assigns it to the JunctionIdListNames field.
-func (o *SObjectDescribeChildRelationships) SetJunctionIdListNames(v []string) {
+func (o *ChildRelationships) SetJunctionIdListNames(v []string) {
 	o.JunctionIdListNames = v
 }
 
 // GetJunctionReferenceTo returns the JunctionReferenceTo field value if set, zero value otherwise.
-func (o *SObjectDescribeChildRelationships) GetJunctionReferenceTo() []string {
+func (o *ChildRelationships) GetJunctionReferenceTo() []string {
 	if o == nil || isNil(o.JunctionReferenceTo) {
 		var ret []string
 		return ret
@@ -215,7 +215,7 @@ func (o *SObjectDescribeChildRelationships) GetJunctionReferenceTo() []string {
 
 // GetJunctionReferenceToOk returns a tuple with the JunctionReferenceTo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeChildRelationships) GetJunctionReferenceToOk() ([]string, bool) {
+func (o *ChildRelationships) GetJunctionReferenceToOk() ([]string, bool) {
 	if o == nil || isNil(o.JunctionReferenceTo) {
 		return nil, false
 	}
@@ -223,7 +223,7 @@ func (o *SObjectDescribeChildRelationships) GetJunctionReferenceToOk() ([]string
 }
 
 // HasJunctionReferenceTo returns a boolean if a field has been set.
-func (o *SObjectDescribeChildRelationships) HasJunctionReferenceTo() bool {
+func (o *ChildRelationships) HasJunctionReferenceTo() bool {
 	if o != nil && !isNil(o.JunctionReferenceTo) {
 		return true
 	}
@@ -232,12 +232,12 @@ func (o *SObjectDescribeChildRelationships) HasJunctionReferenceTo() bool {
 }
 
 // SetJunctionReferenceTo gets a reference to the given []string and assigns it to the JunctionReferenceTo field.
-func (o *SObjectDescribeChildRelationships) SetJunctionReferenceTo(v []string) {
+func (o *ChildRelationships) SetJunctionReferenceTo(v []string) {
 	o.JunctionReferenceTo = v
 }
 
 // GetRelationshipName returns the RelationshipName field value if set, zero value otherwise.
-func (o *SObjectDescribeChildRelationships) GetRelationshipName() string {
+func (o *ChildRelationships) GetRelationshipName() string {
 	if o == nil || isNil(o.RelationshipName) {
 		var ret string
 		return ret
@@ -247,7 +247,7 @@ func (o *SObjectDescribeChildRelationships) GetRelationshipName() string {
 
 // GetRelationshipNameOk returns a tuple with the RelationshipName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeChildRelationships) GetRelationshipNameOk() (*string, bool) {
+func (o *ChildRelationships) GetRelationshipNameOk() (*string, bool) {
 	if o == nil || isNil(o.RelationshipName) {
 		return nil, false
 	}
@@ -255,7 +255,7 @@ func (o *SObjectDescribeChildRelationships) GetRelationshipNameOk() (*string, bo
 }
 
 // HasRelationshipName returns a boolean if a field has been set.
-func (o *SObjectDescribeChildRelationships) HasRelationshipName() bool {
+func (o *ChildRelationships) HasRelationshipName() bool {
 	if o != nil && !isNil(o.RelationshipName) {
 		return true
 	}
@@ -264,12 +264,12 @@ func (o *SObjectDescribeChildRelationships) HasRelationshipName() bool {
 }
 
 // SetRelationshipName gets a reference to the given string and assigns it to the RelationshipName field.
-func (o *SObjectDescribeChildRelationships) SetRelationshipName(v string) {
+func (o *ChildRelationships) SetRelationshipName(v string) {
 	o.RelationshipName = &v
 }
 
 // GetRestrictedDelete returns the RestrictedDelete field value if set, zero value otherwise.
-func (o *SObjectDescribeChildRelationships) GetRestrictedDelete() bool {
+func (o *ChildRelationships) GetRestrictedDelete() bool {
 	if o == nil || isNil(o.RestrictedDelete) {
 		var ret bool
 		return ret
@@ -279,7 +279,7 @@ func (o *SObjectDescribeChildRelationships) GetRestrictedDelete() bool {
 
 // GetRestrictedDeleteOk returns a tuple with the RestrictedDelete field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeChildRelationships) GetRestrictedDeleteOk() (*bool, bool) {
+func (o *ChildRelationships) GetRestrictedDeleteOk() (*bool, bool) {
 	if o == nil || isNil(o.RestrictedDelete) {
 		return nil, false
 	}
@@ -287,7 +287,7 @@ func (o *SObjectDescribeChildRelationships) GetRestrictedDeleteOk() (*bool, bool
 }
 
 // HasRestrictedDelete returns a boolean if a field has been set.
-func (o *SObjectDescribeChildRelationships) HasRestrictedDelete() bool {
+func (o *ChildRelationships) HasRestrictedDelete() bool {
 	if o != nil && !isNil(o.RestrictedDelete) {
 		return true
 	}
@@ -296,11 +296,11 @@ func (o *SObjectDescribeChildRelationships) HasRestrictedDelete() bool {
 }
 
 // SetRestrictedDelete gets a reference to the given bool and assigns it to the RestrictedDelete field.
-func (o *SObjectDescribeChildRelationships) SetRestrictedDelete(v bool) {
+func (o *ChildRelationships) SetRestrictedDelete(v bool) {
 	o.RestrictedDelete = &v
 }
 
-func (o SObjectDescribeChildRelationships) MarshalJSON() ([]byte, error) {
+func (o ChildRelationships) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.CascadeDelete) {
 		toSerialize["cascadeDelete"] = o.CascadeDelete
@@ -329,38 +329,38 @@ func (o SObjectDescribeChildRelationships) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableSObjectDescribeChildRelationships struct {
-	value *SObjectDescribeChildRelationships
+type NullableChildRelationships struct {
+	value *ChildRelationships
 	isSet bool
 }
 
-func (v NullableSObjectDescribeChildRelationships) Get() *SObjectDescribeChildRelationships {
+func (v NullableChildRelationships) Get() *ChildRelationships {
 	return v.value
 }
 
-func (v *NullableSObjectDescribeChildRelationships) Set(val *SObjectDescribeChildRelationships) {
+func (v *NullableChildRelationships) Set(val *ChildRelationships) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSObjectDescribeChildRelationships) IsSet() bool {
+func (v NullableChildRelationships) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSObjectDescribeChildRelationships) Unset() {
+func (v *NullableChildRelationships) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSObjectDescribeChildRelationships(val *SObjectDescribeChildRelationships) *NullableSObjectDescribeChildRelationships {
-	return &NullableSObjectDescribeChildRelationships{value: val, isSet: true}
+func NewNullableChildRelationships(val *ChildRelationships) *NullableChildRelationships {
+	return &NullableChildRelationships{value: val, isSet: true}
 }
 
-func (v NullableSObjectDescribeChildRelationships) MarshalJSON() ([]byte, error) {
+func (v NullableChildRelationships) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSObjectDescribeChildRelationships) UnmarshalJSON(src []byte) error {
+func (v *NullableChildRelationships) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

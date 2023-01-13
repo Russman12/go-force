@@ -15,37 +15,37 @@ import (
 	"encoding/json"
 )
 
-// SObjectRecordTypeInfo struct for SObjectRecordTypeInfo
-type SObjectRecordTypeInfo struct {
-	Active                   *bool                      `json:"active,omitempty"`
-	Available                *bool                      `json:"available,omitempty"`
-	DefaultRecordTypeMapping *bool                      `json:"defaultRecordTypeMapping,omitempty"`
-	DeveloperName            *string                    `json:"developerName,omitempty"`
-	Master                   *bool                      `json:"master,omitempty"`
-	Name                     *string                    `json:"name,omitempty"`
-	RecordTypeId             *string                    `json:"recordTypeId,omitempty"`
-	Urls                     *SObjectRecordTypeInfoUrls `json:"urls,omitempty"`
+// RecordTypeInfo struct for RecordTypeInfo
+type RecordTypeInfo struct {
+	Active                   *bool               `json:"active,omitempty"`
+	Available                *bool               `json:"available,omitempty"`
+	DefaultRecordTypeMapping *bool               `json:"defaultRecordTypeMapping,omitempty"`
+	DeveloperName            *string             `json:"developerName,omitempty"`
+	Master                   *bool               `json:"master,omitempty"`
+	Name                     *string             `json:"name,omitempty"`
+	RecordTypeId             *string             `json:"recordTypeId,omitempty"`
+	Urls                     *RecordTypeInfoUrls `json:"urls,omitempty"`
 }
 
-// NewSObjectRecordTypeInfo instantiates a new SObjectRecordTypeInfo object
+// NewRecordTypeInfo instantiates a new RecordTypeInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSObjectRecordTypeInfo() *SObjectRecordTypeInfo {
-	this := SObjectRecordTypeInfo{}
+func NewRecordTypeInfo() *RecordTypeInfo {
+	this := RecordTypeInfo{}
 	return &this
 }
 
-// NewSObjectRecordTypeInfoWithDefaults instantiates a new SObjectRecordTypeInfo object
+// NewRecordTypeInfoWithDefaults instantiates a new RecordTypeInfo object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSObjectRecordTypeInfoWithDefaults() *SObjectRecordTypeInfo {
-	this := SObjectRecordTypeInfo{}
+func NewRecordTypeInfoWithDefaults() *RecordTypeInfo {
+	this := RecordTypeInfo{}
 	return &this
 }
 
 // GetActive returns the Active field value if set, zero value otherwise.
-func (o *SObjectRecordTypeInfo) GetActive() bool {
+func (o *RecordTypeInfo) GetActive() bool {
 	if o == nil || isNil(o.Active) {
 		var ret bool
 		return ret
@@ -55,7 +55,7 @@ func (o *SObjectRecordTypeInfo) GetActive() bool {
 
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectRecordTypeInfo) GetActiveOk() (*bool, bool) {
+func (o *RecordTypeInfo) GetActiveOk() (*bool, bool) {
 	if o == nil || isNil(o.Active) {
 		return nil, false
 	}
@@ -63,7 +63,7 @@ func (o *SObjectRecordTypeInfo) GetActiveOk() (*bool, bool) {
 }
 
 // HasActive returns a boolean if a field has been set.
-func (o *SObjectRecordTypeInfo) HasActive() bool {
+func (o *RecordTypeInfo) HasActive() bool {
 	if o != nil && !isNil(o.Active) {
 		return true
 	}
@@ -72,12 +72,12 @@ func (o *SObjectRecordTypeInfo) HasActive() bool {
 }
 
 // SetActive gets a reference to the given bool and assigns it to the Active field.
-func (o *SObjectRecordTypeInfo) SetActive(v bool) {
+func (o *RecordTypeInfo) SetActive(v bool) {
 	o.Active = &v
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
-func (o *SObjectRecordTypeInfo) GetAvailable() bool {
+func (o *RecordTypeInfo) GetAvailable() bool {
 	if o == nil || isNil(o.Available) {
 		var ret bool
 		return ret
@@ -87,7 +87,7 @@ func (o *SObjectRecordTypeInfo) GetAvailable() bool {
 
 // GetAvailableOk returns a tuple with the Available field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectRecordTypeInfo) GetAvailableOk() (*bool, bool) {
+func (o *RecordTypeInfo) GetAvailableOk() (*bool, bool) {
 	if o == nil || isNil(o.Available) {
 		return nil, false
 	}
@@ -95,7 +95,7 @@ func (o *SObjectRecordTypeInfo) GetAvailableOk() (*bool, bool) {
 }
 
 // HasAvailable returns a boolean if a field has been set.
-func (o *SObjectRecordTypeInfo) HasAvailable() bool {
+func (o *RecordTypeInfo) HasAvailable() bool {
 	if o != nil && !isNil(o.Available) {
 		return true
 	}
@@ -104,12 +104,12 @@ func (o *SObjectRecordTypeInfo) HasAvailable() bool {
 }
 
 // SetAvailable gets a reference to the given bool and assigns it to the Available field.
-func (o *SObjectRecordTypeInfo) SetAvailable(v bool) {
+func (o *RecordTypeInfo) SetAvailable(v bool) {
 	o.Available = &v
 }
 
 // GetDefaultRecordTypeMapping returns the DefaultRecordTypeMapping field value if set, zero value otherwise.
-func (o *SObjectRecordTypeInfo) GetDefaultRecordTypeMapping() bool {
+func (o *RecordTypeInfo) GetDefaultRecordTypeMapping() bool {
 	if o == nil || isNil(o.DefaultRecordTypeMapping) {
 		var ret bool
 		return ret
@@ -119,7 +119,7 @@ func (o *SObjectRecordTypeInfo) GetDefaultRecordTypeMapping() bool {
 
 // GetDefaultRecordTypeMappingOk returns a tuple with the DefaultRecordTypeMapping field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectRecordTypeInfo) GetDefaultRecordTypeMappingOk() (*bool, bool) {
+func (o *RecordTypeInfo) GetDefaultRecordTypeMappingOk() (*bool, bool) {
 	if o == nil || isNil(o.DefaultRecordTypeMapping) {
 		return nil, false
 	}
@@ -127,7 +127,7 @@ func (o *SObjectRecordTypeInfo) GetDefaultRecordTypeMappingOk() (*bool, bool) {
 }
 
 // HasDefaultRecordTypeMapping returns a boolean if a field has been set.
-func (o *SObjectRecordTypeInfo) HasDefaultRecordTypeMapping() bool {
+func (o *RecordTypeInfo) HasDefaultRecordTypeMapping() bool {
 	if o != nil && !isNil(o.DefaultRecordTypeMapping) {
 		return true
 	}
@@ -136,12 +136,12 @@ func (o *SObjectRecordTypeInfo) HasDefaultRecordTypeMapping() bool {
 }
 
 // SetDefaultRecordTypeMapping gets a reference to the given bool and assigns it to the DefaultRecordTypeMapping field.
-func (o *SObjectRecordTypeInfo) SetDefaultRecordTypeMapping(v bool) {
+func (o *RecordTypeInfo) SetDefaultRecordTypeMapping(v bool) {
 	o.DefaultRecordTypeMapping = &v
 }
 
 // GetDeveloperName returns the DeveloperName field value if set, zero value otherwise.
-func (o *SObjectRecordTypeInfo) GetDeveloperName() string {
+func (o *RecordTypeInfo) GetDeveloperName() string {
 	if o == nil || isNil(o.DeveloperName) {
 		var ret string
 		return ret
@@ -151,7 +151,7 @@ func (o *SObjectRecordTypeInfo) GetDeveloperName() string {
 
 // GetDeveloperNameOk returns a tuple with the DeveloperName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectRecordTypeInfo) GetDeveloperNameOk() (*string, bool) {
+func (o *RecordTypeInfo) GetDeveloperNameOk() (*string, bool) {
 	if o == nil || isNil(o.DeveloperName) {
 		return nil, false
 	}
@@ -159,7 +159,7 @@ func (o *SObjectRecordTypeInfo) GetDeveloperNameOk() (*string, bool) {
 }
 
 // HasDeveloperName returns a boolean if a field has been set.
-func (o *SObjectRecordTypeInfo) HasDeveloperName() bool {
+func (o *RecordTypeInfo) HasDeveloperName() bool {
 	if o != nil && !isNil(o.DeveloperName) {
 		return true
 	}
@@ -168,12 +168,12 @@ func (o *SObjectRecordTypeInfo) HasDeveloperName() bool {
 }
 
 // SetDeveloperName gets a reference to the given string and assigns it to the DeveloperName field.
-func (o *SObjectRecordTypeInfo) SetDeveloperName(v string) {
+func (o *RecordTypeInfo) SetDeveloperName(v string) {
 	o.DeveloperName = &v
 }
 
 // GetMaster returns the Master field value if set, zero value otherwise.
-func (o *SObjectRecordTypeInfo) GetMaster() bool {
+func (o *RecordTypeInfo) GetMaster() bool {
 	if o == nil || isNil(o.Master) {
 		var ret bool
 		return ret
@@ -183,7 +183,7 @@ func (o *SObjectRecordTypeInfo) GetMaster() bool {
 
 // GetMasterOk returns a tuple with the Master field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectRecordTypeInfo) GetMasterOk() (*bool, bool) {
+func (o *RecordTypeInfo) GetMasterOk() (*bool, bool) {
 	if o == nil || isNil(o.Master) {
 		return nil, false
 	}
@@ -191,7 +191,7 @@ func (o *SObjectRecordTypeInfo) GetMasterOk() (*bool, bool) {
 }
 
 // HasMaster returns a boolean if a field has been set.
-func (o *SObjectRecordTypeInfo) HasMaster() bool {
+func (o *RecordTypeInfo) HasMaster() bool {
 	if o != nil && !isNil(o.Master) {
 		return true
 	}
@@ -200,12 +200,12 @@ func (o *SObjectRecordTypeInfo) HasMaster() bool {
 }
 
 // SetMaster gets a reference to the given bool and assigns it to the Master field.
-func (o *SObjectRecordTypeInfo) SetMaster(v bool) {
+func (o *RecordTypeInfo) SetMaster(v bool) {
 	o.Master = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *SObjectRecordTypeInfo) GetName() string {
+func (o *RecordTypeInfo) GetName() string {
 	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
@@ -215,7 +215,7 @@ func (o *SObjectRecordTypeInfo) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectRecordTypeInfo) GetNameOk() (*string, bool) {
+func (o *RecordTypeInfo) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
 		return nil, false
 	}
@@ -223,7 +223,7 @@ func (o *SObjectRecordTypeInfo) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *SObjectRecordTypeInfo) HasName() bool {
+func (o *RecordTypeInfo) HasName() bool {
 	if o != nil && !isNil(o.Name) {
 		return true
 	}
@@ -232,12 +232,12 @@ func (o *SObjectRecordTypeInfo) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *SObjectRecordTypeInfo) SetName(v string) {
+func (o *RecordTypeInfo) SetName(v string) {
 	o.Name = &v
 }
 
 // GetRecordTypeId returns the RecordTypeId field value if set, zero value otherwise.
-func (o *SObjectRecordTypeInfo) GetRecordTypeId() string {
+func (o *RecordTypeInfo) GetRecordTypeId() string {
 	if o == nil || isNil(o.RecordTypeId) {
 		var ret string
 		return ret
@@ -247,7 +247,7 @@ func (o *SObjectRecordTypeInfo) GetRecordTypeId() string {
 
 // GetRecordTypeIdOk returns a tuple with the RecordTypeId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectRecordTypeInfo) GetRecordTypeIdOk() (*string, bool) {
+func (o *RecordTypeInfo) GetRecordTypeIdOk() (*string, bool) {
 	if o == nil || isNil(o.RecordTypeId) {
 		return nil, false
 	}
@@ -255,7 +255,7 @@ func (o *SObjectRecordTypeInfo) GetRecordTypeIdOk() (*string, bool) {
 }
 
 // HasRecordTypeId returns a boolean if a field has been set.
-func (o *SObjectRecordTypeInfo) HasRecordTypeId() bool {
+func (o *RecordTypeInfo) HasRecordTypeId() bool {
 	if o != nil && !isNil(o.RecordTypeId) {
 		return true
 	}
@@ -264,14 +264,14 @@ func (o *SObjectRecordTypeInfo) HasRecordTypeId() bool {
 }
 
 // SetRecordTypeId gets a reference to the given string and assigns it to the RecordTypeId field.
-func (o *SObjectRecordTypeInfo) SetRecordTypeId(v string) {
+func (o *RecordTypeInfo) SetRecordTypeId(v string) {
 	o.RecordTypeId = &v
 }
 
 // GetUrls returns the Urls field value if set, zero value otherwise.
-func (o *SObjectRecordTypeInfo) GetUrls() SObjectRecordTypeInfoUrls {
+func (o *RecordTypeInfo) GetUrls() RecordTypeInfoUrls {
 	if o == nil || isNil(o.Urls) {
-		var ret SObjectRecordTypeInfoUrls
+		var ret RecordTypeInfoUrls
 		return ret
 	}
 	return *o.Urls
@@ -279,7 +279,7 @@ func (o *SObjectRecordTypeInfo) GetUrls() SObjectRecordTypeInfoUrls {
 
 // GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectRecordTypeInfo) GetUrlsOk() (*SObjectRecordTypeInfoUrls, bool) {
+func (o *RecordTypeInfo) GetUrlsOk() (*RecordTypeInfoUrls, bool) {
 	if o == nil || isNil(o.Urls) {
 		return nil, false
 	}
@@ -287,7 +287,7 @@ func (o *SObjectRecordTypeInfo) GetUrlsOk() (*SObjectRecordTypeInfoUrls, bool) {
 }
 
 // HasUrls returns a boolean if a field has been set.
-func (o *SObjectRecordTypeInfo) HasUrls() bool {
+func (o *RecordTypeInfo) HasUrls() bool {
 	if o != nil && !isNil(o.Urls) {
 		return true
 	}
@@ -295,12 +295,12 @@ func (o *SObjectRecordTypeInfo) HasUrls() bool {
 	return false
 }
 
-// SetUrls gets a reference to the given SObjectRecordTypeInfoUrls and assigns it to the Urls field.
-func (o *SObjectRecordTypeInfo) SetUrls(v SObjectRecordTypeInfoUrls) {
+// SetUrls gets a reference to the given RecordTypeInfoUrls and assigns it to the Urls field.
+func (o *RecordTypeInfo) SetUrls(v RecordTypeInfoUrls) {
 	o.Urls = &v
 }
 
-func (o SObjectRecordTypeInfo) MarshalJSON() ([]byte, error) {
+func (o RecordTypeInfo) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Active) {
 		toSerialize["active"] = o.Active
@@ -329,38 +329,38 @@ func (o SObjectRecordTypeInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableSObjectRecordTypeInfo struct {
-	value *SObjectRecordTypeInfo
+type NullableRecordTypeInfo struct {
+	value *RecordTypeInfo
 	isSet bool
 }
 
-func (v NullableSObjectRecordTypeInfo) Get() *SObjectRecordTypeInfo {
+func (v NullableRecordTypeInfo) Get() *RecordTypeInfo {
 	return v.value
 }
 
-func (v *NullableSObjectRecordTypeInfo) Set(val *SObjectRecordTypeInfo) {
+func (v *NullableRecordTypeInfo) Set(val *RecordTypeInfo) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSObjectRecordTypeInfo) IsSet() bool {
+func (v NullableRecordTypeInfo) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSObjectRecordTypeInfo) Unset() {
+func (v *NullableRecordTypeInfo) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSObjectRecordTypeInfo(val *SObjectRecordTypeInfo) *NullableSObjectRecordTypeInfo {
-	return &NullableSObjectRecordTypeInfo{value: val, isSet: true}
+func NewNullableRecordTypeInfo(val *RecordTypeInfo) *NullableRecordTypeInfo {
+	return &NullableRecordTypeInfo{value: val, isSet: true}
 }
 
-func (v NullableSObjectRecordTypeInfo) MarshalJSON() ([]byte, error) {
+func (v NullableRecordTypeInfo) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSObjectRecordTypeInfo) UnmarshalJSON(src []byte) error {
+func (v *NullableRecordTypeInfo) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

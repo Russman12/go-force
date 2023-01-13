@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// SObjectDescribeActionOverrides struct for SObjectDescribeActionOverrides
-type SObjectDescribeActionOverrides struct {
+// ActionOverrides struct for ActionOverrides
+type ActionOverrides struct {
 	FormFactor         *string        `json:"formFactor,omitempty"`
 	IsAvailableInTouch *bool          `json:"isAvailableInTouch,omitempty"`
 	Name               *string        `json:"name,omitempty"`
@@ -24,25 +24,25 @@ type SObjectDescribeActionOverrides struct {
 	Url                NullableString `json:"url,omitempty"`
 }
 
-// NewSObjectDescribeActionOverrides instantiates a new SObjectDescribeActionOverrides object
+// NewActionOverrides instantiates a new ActionOverrides object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSObjectDescribeActionOverrides() *SObjectDescribeActionOverrides {
-	this := SObjectDescribeActionOverrides{}
+func NewActionOverrides() *ActionOverrides {
+	this := ActionOverrides{}
 	return &this
 }
 
-// NewSObjectDescribeActionOverridesWithDefaults instantiates a new SObjectDescribeActionOverrides object
+// NewActionOverridesWithDefaults instantiates a new ActionOverrides object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSObjectDescribeActionOverridesWithDefaults() *SObjectDescribeActionOverrides {
-	this := SObjectDescribeActionOverrides{}
+func NewActionOverridesWithDefaults() *ActionOverrides {
+	this := ActionOverrides{}
 	return &this
 }
 
 // GetFormFactor returns the FormFactor field value if set, zero value otherwise.
-func (o *SObjectDescribeActionOverrides) GetFormFactor() string {
+func (o *ActionOverrides) GetFormFactor() string {
 	if o == nil || isNil(o.FormFactor) {
 		var ret string
 		return ret
@@ -52,7 +52,7 @@ func (o *SObjectDescribeActionOverrides) GetFormFactor() string {
 
 // GetFormFactorOk returns a tuple with the FormFactor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeActionOverrides) GetFormFactorOk() (*string, bool) {
+func (o *ActionOverrides) GetFormFactorOk() (*string, bool) {
 	if o == nil || isNil(o.FormFactor) {
 		return nil, false
 	}
@@ -60,7 +60,7 @@ func (o *SObjectDescribeActionOverrides) GetFormFactorOk() (*string, bool) {
 }
 
 // HasFormFactor returns a boolean if a field has been set.
-func (o *SObjectDescribeActionOverrides) HasFormFactor() bool {
+func (o *ActionOverrides) HasFormFactor() bool {
 	if o != nil && !isNil(o.FormFactor) {
 		return true
 	}
@@ -69,12 +69,12 @@ func (o *SObjectDescribeActionOverrides) HasFormFactor() bool {
 }
 
 // SetFormFactor gets a reference to the given string and assigns it to the FormFactor field.
-func (o *SObjectDescribeActionOverrides) SetFormFactor(v string) {
+func (o *ActionOverrides) SetFormFactor(v string) {
 	o.FormFactor = &v
 }
 
 // GetIsAvailableInTouch returns the IsAvailableInTouch field value if set, zero value otherwise.
-func (o *SObjectDescribeActionOverrides) GetIsAvailableInTouch() bool {
+func (o *ActionOverrides) GetIsAvailableInTouch() bool {
 	if o == nil || isNil(o.IsAvailableInTouch) {
 		var ret bool
 		return ret
@@ -84,7 +84,7 @@ func (o *SObjectDescribeActionOverrides) GetIsAvailableInTouch() bool {
 
 // GetIsAvailableInTouchOk returns a tuple with the IsAvailableInTouch field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeActionOverrides) GetIsAvailableInTouchOk() (*bool, bool) {
+func (o *ActionOverrides) GetIsAvailableInTouchOk() (*bool, bool) {
 	if o == nil || isNil(o.IsAvailableInTouch) {
 		return nil, false
 	}
@@ -92,7 +92,7 @@ func (o *SObjectDescribeActionOverrides) GetIsAvailableInTouchOk() (*bool, bool)
 }
 
 // HasIsAvailableInTouch returns a boolean if a field has been set.
-func (o *SObjectDescribeActionOverrides) HasIsAvailableInTouch() bool {
+func (o *ActionOverrides) HasIsAvailableInTouch() bool {
 	if o != nil && !isNil(o.IsAvailableInTouch) {
 		return true
 	}
@@ -101,12 +101,12 @@ func (o *SObjectDescribeActionOverrides) HasIsAvailableInTouch() bool {
 }
 
 // SetIsAvailableInTouch gets a reference to the given bool and assigns it to the IsAvailableInTouch field.
-func (o *SObjectDescribeActionOverrides) SetIsAvailableInTouch(v bool) {
+func (o *ActionOverrides) SetIsAvailableInTouch(v bool) {
 	o.IsAvailableInTouch = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *SObjectDescribeActionOverrides) GetName() string {
+func (o *ActionOverrides) GetName() string {
 	if o == nil || isNil(o.Name) {
 		var ret string
 		return ret
@@ -116,7 +116,7 @@ func (o *SObjectDescribeActionOverrides) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeActionOverrides) GetNameOk() (*string, bool) {
+func (o *ActionOverrides) GetNameOk() (*string, bool) {
 	if o == nil || isNil(o.Name) {
 		return nil, false
 	}
@@ -124,7 +124,7 @@ func (o *SObjectDescribeActionOverrides) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *SObjectDescribeActionOverrides) HasName() bool {
+func (o *ActionOverrides) HasName() bool {
 	if o != nil && !isNil(o.Name) {
 		return true
 	}
@@ -133,12 +133,12 @@ func (o *SObjectDescribeActionOverrides) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *SObjectDescribeActionOverrides) SetName(v string) {
+func (o *ActionOverrides) SetName(v string) {
 	o.Name = &v
 }
 
 // GetPageId returns the PageId field value if set, zero value otherwise.
-func (o *SObjectDescribeActionOverrides) GetPageId() string {
+func (o *ActionOverrides) GetPageId() string {
 	if o == nil || isNil(o.PageId) {
 		var ret string
 		return ret
@@ -148,7 +148,7 @@ func (o *SObjectDescribeActionOverrides) GetPageId() string {
 
 // GetPageIdOk returns a tuple with the PageId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribeActionOverrides) GetPageIdOk() (*string, bool) {
+func (o *ActionOverrides) GetPageIdOk() (*string, bool) {
 	if o == nil || isNil(o.PageId) {
 		return nil, false
 	}
@@ -156,7 +156,7 @@ func (o *SObjectDescribeActionOverrides) GetPageIdOk() (*string, bool) {
 }
 
 // HasPageId returns a boolean if a field has been set.
-func (o *SObjectDescribeActionOverrides) HasPageId() bool {
+func (o *ActionOverrides) HasPageId() bool {
 	if o != nil && !isNil(o.PageId) {
 		return true
 	}
@@ -165,12 +165,12 @@ func (o *SObjectDescribeActionOverrides) HasPageId() bool {
 }
 
 // SetPageId gets a reference to the given string and assigns it to the PageId field.
-func (o *SObjectDescribeActionOverrides) SetPageId(v string) {
+func (o *ActionOverrides) SetPageId(v string) {
 	o.PageId = &v
 }
 
 // GetUrl returns the Url field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribeActionOverrides) GetUrl() string {
+func (o *ActionOverrides) GetUrl() string {
 	if o == nil || isNil(o.Url.Get()) {
 		var ret string
 		return ret
@@ -181,7 +181,7 @@ func (o *SObjectDescribeActionOverrides) GetUrl() string {
 // GetUrlOk returns a tuple with the Url field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribeActionOverrides) GetUrlOk() (*string, bool) {
+func (o *ActionOverrides) GetUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -189,7 +189,7 @@ func (o *SObjectDescribeActionOverrides) GetUrlOk() (*string, bool) {
 }
 
 // HasUrl returns a boolean if a field has been set.
-func (o *SObjectDescribeActionOverrides) HasUrl() bool {
+func (o *ActionOverrides) HasUrl() bool {
 	if o != nil && o.Url.IsSet() {
 		return true
 	}
@@ -198,21 +198,21 @@ func (o *SObjectDescribeActionOverrides) HasUrl() bool {
 }
 
 // SetUrl gets a reference to the given NullableString and assigns it to the Url field.
-func (o *SObjectDescribeActionOverrides) SetUrl(v string) {
+func (o *ActionOverrides) SetUrl(v string) {
 	o.Url.Set(&v)
 }
 
 // SetUrlNil sets the value for Url to be an explicit nil
-func (o *SObjectDescribeActionOverrides) SetUrlNil() {
+func (o *ActionOverrides) SetUrlNil() {
 	o.Url.Set(nil)
 }
 
 // UnsetUrl ensures that no value is present for Url, not even an explicit nil
-func (o *SObjectDescribeActionOverrides) UnsetUrl() {
+func (o *ActionOverrides) UnsetUrl() {
 	o.Url.Unset()
 }
 
-func (o SObjectDescribeActionOverrides) MarshalJSON() ([]byte, error) {
+func (o ActionOverrides) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.FormFactor) {
 		toSerialize["formFactor"] = o.FormFactor
@@ -232,38 +232,38 @@ func (o SObjectDescribeActionOverrides) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableSObjectDescribeActionOverrides struct {
-	value *SObjectDescribeActionOverrides
+type NullableActionOverrides struct {
+	value *ActionOverrides
 	isSet bool
 }
 
-func (v NullableSObjectDescribeActionOverrides) Get() *SObjectDescribeActionOverrides {
+func (v NullableActionOverrides) Get() *ActionOverrides {
 	return v.value
 }
 
-func (v *NullableSObjectDescribeActionOverrides) Set(val *SObjectDescribeActionOverrides) {
+func (v *NullableActionOverrides) Set(val *ActionOverrides) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSObjectDescribeActionOverrides) IsSet() bool {
+func (v NullableActionOverrides) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSObjectDescribeActionOverrides) Unset() {
+func (v *NullableActionOverrides) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSObjectDescribeActionOverrides(val *SObjectDescribeActionOverrides) *NullableSObjectDescribeActionOverrides {
-	return &NullableSObjectDescribeActionOverrides{value: val, isSet: true}
+func NewNullableActionOverrides(val *ActionOverrides) *NullableActionOverrides {
+	return &NullableActionOverrides{value: val, isSet: true}
 }
 
-func (v NullableSObjectDescribeActionOverrides) MarshalJSON() ([]byte, error) {
+func (v NullableActionOverrides) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSObjectDescribeActionOverrides) UnmarshalJSON(src []byte) error {
+func (v *NullableActionOverrides) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

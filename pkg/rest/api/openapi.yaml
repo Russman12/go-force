@@ -18,13 +18,13 @@ servers:
 paths:
   /sobjects:
     get:
-      operationId: sObjects
+      operationId: getSObjects
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/sObjectDescribes'
+                $ref: '#/components/schemas/sobjectDescribes'
           description: Successful response
         "401":
           content: {}
@@ -33,7 +33,7 @@ paths:
           content: {}
           description: Bad Request
       tags:
-      - SObject
+      - sobject
   /sobjects/{sObject}/describe:
     get:
       operationId: sObjectDescribe
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/sObjectDescribe'
+                $ref: '#/components/schemas/sobjectDescribe'
           description: Successful response
         "401":
           content: {}
@@ -61,10 +61,10 @@ paths:
           content: {}
           description: Bad Request
       tags:
-      - SObject
+      - sobject
 components:
   schemas:
-    sObjectDescribe:
+    sobjectDescribe:
       example:
         mruEnabled: true
         updateable: true
@@ -404,34 +404,33 @@ components:
           type: array
         actionOverrides:
           items:
-            $ref: '#/components/schemas/sObjectDescribeActionOverrides'
+            $ref: '#/components/schemas/actionOverrides'
           type: array
         childRelationships:
           items:
-            $ref: '#/components/schemas/sObjectDescribeChildRelationships'
+            $ref: '#/components/schemas/childRelationships'
           type: array
         recordTypeInfos:
           items:
-            $ref: '#/components/schemas/sObjectRecordTypeInfo'
+            $ref: '#/components/schemas/recordTypeInfo'
           type: array
         supportedScopes:
           items:
-            $ref: '#/components/schemas/sObjectDescribeSupportedScopes'
+            $ref: '#/components/schemas/supportedScopes'
           type: array
         urls:
           type: object
         fields:
           items:
-            $ref: '#/components/schemas/sObjectFieldDescribe'
+            $ref: '#/components/schemas/fieldDescribe'
           type: array
       required:
       - keyPrefix
       - label
       - labelPlural
       - name
-      title: sObjectDescribe
       type: object
-    sObjectDescribeActionOverrides:
+    actionOverrides:
       example:
         formFactor: LARGE
         name: View
@@ -454,7 +453,7 @@ components:
           nullable: true
           type: string
       type: object
-    sObjectDescribeChildRelationships:
+    childRelationships:
       example:
         relationshipName: Accounts__r
         field: Primary_Contact__c
@@ -493,7 +492,7 @@ components:
         restrictedDelete:
           type: boolean
       type: object
-    sObjectRecordTypeInfoUrls:
+    recordTypeInfoUrls:
       example:
         layout: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
       properties:
@@ -501,7 +500,7 @@ components:
           example: /services/data/v56.0/sobjects/Contact/describe/layouts/012000000000000AAA
           type: string
       type: object
-    sObjectRecordTypeInfo:
+    recordTypeInfo:
       example:
         defaultRecordTypeMapping: true
         urls:
@@ -531,9 +530,9 @@ components:
           example: 012000000000000AAA
           type: string
         urls:
-          $ref: '#/components/schemas/sObjectRecordTypeInfoUrls'
+          $ref: '#/components/schemas/recordTypeInfoUrls'
       type: object
-    sObjectDescribeSupportedScopes:
+    supportedScopes:
       example:
         name: everything
         label: All contacts
@@ -545,7 +544,7 @@ components:
           example: everything
           type: string
       type: object
-    sObjectFieldDescribePicklist:
+    fieldDescribePicklist:
       example:
         validFor: validFor
         defaultValue: true
@@ -567,7 +566,7 @@ components:
           example: Bishop
           type: string
       type: object
-    sObjectFieldDescribe:
+    fieldDescribe:
       example:
         defaultValue: defaultValue
         precision: 0
@@ -735,7 +734,7 @@ components:
           type: boolean
         picklistValues:
           items:
-            $ref: '#/components/schemas/sObjectFieldDescribePicklist'
+            $ref: '#/components/schemas/fieldDescribePicklist'
           type: array
         polymorphicForeignKey:
           type: boolean
@@ -811,7 +810,7 @@ components:
         writeRequiresMasterRead:
           type: boolean
       type: object
-    sObjectDescribes:
+    sobjectDescribes:
       example:
         maxBatchSize: 200
         sobjects:
@@ -828,7 +827,7 @@ components:
           type: integer
         sobjects:
           items:
-            $ref: '#/components/schemas/sObjectDescribe'
+            $ref: '#/components/schemas/sobjectDescribe'
           type: array
       required:
       - encoding

@@ -15,61 +15,61 @@ import (
 	"encoding/json"
 )
 
-// SObjectDescribe struct for SObjectDescribe
-type SObjectDescribe struct {
-	Activateable          *bool                               `json:"activateable,omitempty"`
-	AssociateEntityType   NullableString                      `json:"associateEntityType,omitempty"`
-	AssociateParentEntity NullableString                      `json:"associateParentEntity,omitempty"`
-	CompactLayoutable     *bool                               `json:"compactLayoutable,omitempty"`
-	Createable            *bool                               `json:"createable,omitempty"`
-	Custom                *bool                               `json:"custom,omitempty"`
-	CustomSetting         *bool                               `json:"customSetting,omitempty"`
-	DeepCloneable         *bool                               `json:"deepCloneable,omitempty"`
-	DefaultImplementation NullableString                      `json:"defaultImplementation,omitempty"`
-	Deletable             *bool                               `json:"deletable,omitempty"`
-	DeprecatedAndHidden   *bool                               `json:"deprecatedAndHidden,omitempty"`
-	ExtendedBy            NullableString                      `json:"extendedBy,omitempty"`
-	ExtendsInterfaces     NullableString                      `json:"extendsInterfaces,omitempty"`
-	FeedEnabled           *bool                               `json:"feedEnabled,omitempty"`
-	HasSubtypes           *bool                               `json:"hasSubtypes,omitempty"`
-	ImplementedBy         NullableString                      `json:"implementedBy,omitempty"`
-	ImplementsInterfaces  NullableString                      `json:"implementsInterfaces,omitempty"`
-	IsInterface           *bool                               `json:"isInterface,omitempty"`
-	IsSubtype             *bool                               `json:"isSubtype,omitempty"`
-	KeyPrefix             string                              `json:"keyPrefix"`
-	Label                 string                              `json:"label"`
-	LabelPlural           string                              `json:"labelPlural"`
-	Layoutable            *bool                               `json:"layoutable,omitempty"`
-	Listviewable          NullableString                      `json:"listviewable,omitempty"`
-	LookupLayoutable      NullableString                      `json:"lookupLayoutable,omitempty"`
-	Mergeable             *bool                               `json:"mergeable,omitempty"`
-	MruEnabled            *bool                               `json:"mruEnabled,omitempty"`
-	Name                  string                              `json:"name"`
-	NetworkScopeFieldName NullableString                      `json:"networkScopeFieldName,omitempty"`
-	Queryable             *bool                               `json:"queryable,omitempty"`
-	Replicateable         *bool                               `json:"replicateable,omitempty"`
-	Retrieveable          *bool                               `json:"retrieveable,omitempty"`
-	SearchLayoutable      *bool                               `json:"searchLayoutable,omitempty"`
-	Searchable            *bool                               `json:"searchable,omitempty"`
-	SobjectDescribeOption *string                             `json:"sobjectDescribeOption,omitempty"`
-	Triggerable           *bool                               `json:"triggerable,omitempty"`
-	Undeletable           *bool                               `json:"undeletable,omitempty"`
-	Updateable            *bool                               `json:"updateable,omitempty"`
-	NamedLayoutInfos      []interface{}                       `json:"namedLayoutInfos,omitempty"`
-	ActionOverrides       []SObjectDescribeActionOverrides    `json:"actionOverrides,omitempty"`
-	ChildRelationships    []SObjectDescribeChildRelationships `json:"childRelationships,omitempty"`
-	RecordTypeInfos       []SObjectRecordTypeInfo             `json:"recordTypeInfos,omitempty"`
-	SupportedScopes       []SObjectDescribeSupportedScopes    `json:"supportedScopes,omitempty"`
-	Urls                  map[string]interface{}              `json:"urls,omitempty"`
-	Fields                []SObjectFieldDescribe              `json:"fields,omitempty"`
+// SobjectDescribe struct for SobjectDescribe
+type SobjectDescribe struct {
+	Activateable          *bool                  `json:"activateable,omitempty"`
+	AssociateEntityType   NullableString         `json:"associateEntityType,omitempty"`
+	AssociateParentEntity NullableString         `json:"associateParentEntity,omitempty"`
+	CompactLayoutable     *bool                  `json:"compactLayoutable,omitempty"`
+	Createable            *bool                  `json:"createable,omitempty"`
+	Custom                *bool                  `json:"custom,omitempty"`
+	CustomSetting         *bool                  `json:"customSetting,omitempty"`
+	DeepCloneable         *bool                  `json:"deepCloneable,omitempty"`
+	DefaultImplementation NullableString         `json:"defaultImplementation,omitempty"`
+	Deletable             *bool                  `json:"deletable,omitempty"`
+	DeprecatedAndHidden   *bool                  `json:"deprecatedAndHidden,omitempty"`
+	ExtendedBy            NullableString         `json:"extendedBy,omitempty"`
+	ExtendsInterfaces     NullableString         `json:"extendsInterfaces,omitempty"`
+	FeedEnabled           *bool                  `json:"feedEnabled,omitempty"`
+	HasSubtypes           *bool                  `json:"hasSubtypes,omitempty"`
+	ImplementedBy         NullableString         `json:"implementedBy,omitempty"`
+	ImplementsInterfaces  NullableString         `json:"implementsInterfaces,omitempty"`
+	IsInterface           *bool                  `json:"isInterface,omitempty"`
+	IsSubtype             *bool                  `json:"isSubtype,omitempty"`
+	KeyPrefix             string                 `json:"keyPrefix"`
+	Label                 string                 `json:"label"`
+	LabelPlural           string                 `json:"labelPlural"`
+	Layoutable            *bool                  `json:"layoutable,omitempty"`
+	Listviewable          NullableString         `json:"listviewable,omitempty"`
+	LookupLayoutable      NullableString         `json:"lookupLayoutable,omitempty"`
+	Mergeable             *bool                  `json:"mergeable,omitempty"`
+	MruEnabled            *bool                  `json:"mruEnabled,omitempty"`
+	Name                  string                 `json:"name"`
+	NetworkScopeFieldName NullableString         `json:"networkScopeFieldName,omitempty"`
+	Queryable             *bool                  `json:"queryable,omitempty"`
+	Replicateable         *bool                  `json:"replicateable,omitempty"`
+	Retrieveable          *bool                  `json:"retrieveable,omitempty"`
+	SearchLayoutable      *bool                  `json:"searchLayoutable,omitempty"`
+	Searchable            *bool                  `json:"searchable,omitempty"`
+	SobjectDescribeOption *string                `json:"sobjectDescribeOption,omitempty"`
+	Triggerable           *bool                  `json:"triggerable,omitempty"`
+	Undeletable           *bool                  `json:"undeletable,omitempty"`
+	Updateable            *bool                  `json:"updateable,omitempty"`
+	NamedLayoutInfos      []interface{}          `json:"namedLayoutInfos,omitempty"`
+	ActionOverrides       []ActionOverrides      `json:"actionOverrides,omitempty"`
+	ChildRelationships    []ChildRelationships   `json:"childRelationships,omitempty"`
+	RecordTypeInfos       []RecordTypeInfo       `json:"recordTypeInfos,omitempty"`
+	SupportedScopes       []SupportedScopes      `json:"supportedScopes,omitempty"`
+	Urls                  map[string]interface{} `json:"urls,omitempty"`
+	Fields                []FieldDescribe        `json:"fields,omitempty"`
 }
 
-// NewSObjectDescribe instantiates a new SObjectDescribe object
+// NewSobjectDescribe instantiates a new SobjectDescribe object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSObjectDescribe(keyPrefix string, label string, labelPlural string, name string) *SObjectDescribe {
-	this := SObjectDescribe{}
+func NewSobjectDescribe(keyPrefix string, label string, labelPlural string, name string) *SobjectDescribe {
+	this := SobjectDescribe{}
 	this.KeyPrefix = keyPrefix
 	this.Label = label
 	this.LabelPlural = labelPlural
@@ -77,16 +77,16 @@ func NewSObjectDescribe(keyPrefix string, label string, labelPlural string, name
 	return &this
 }
 
-// NewSObjectDescribeWithDefaults instantiates a new SObjectDescribe object
+// NewSobjectDescribeWithDefaults instantiates a new SobjectDescribe object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSObjectDescribeWithDefaults() *SObjectDescribe {
-	this := SObjectDescribe{}
+func NewSobjectDescribeWithDefaults() *SobjectDescribe {
+	this := SobjectDescribe{}
 	return &this
 }
 
 // GetActivateable returns the Activateable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetActivateable() bool {
+func (o *SobjectDescribe) GetActivateable() bool {
 	if o == nil || isNil(o.Activateable) {
 		var ret bool
 		return ret
@@ -96,7 +96,7 @@ func (o *SObjectDescribe) GetActivateable() bool {
 
 // GetActivateableOk returns a tuple with the Activateable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetActivateableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetActivateableOk() (*bool, bool) {
 	if o == nil || isNil(o.Activateable) {
 		return nil, false
 	}
@@ -104,7 +104,7 @@ func (o *SObjectDescribe) GetActivateableOk() (*bool, bool) {
 }
 
 // HasActivateable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasActivateable() bool {
+func (o *SobjectDescribe) HasActivateable() bool {
 	if o != nil && !isNil(o.Activateable) {
 		return true
 	}
@@ -113,12 +113,12 @@ func (o *SObjectDescribe) HasActivateable() bool {
 }
 
 // SetActivateable gets a reference to the given bool and assigns it to the Activateable field.
-func (o *SObjectDescribe) SetActivateable(v bool) {
+func (o *SobjectDescribe) SetActivateable(v bool) {
 	o.Activateable = &v
 }
 
 // GetAssociateEntityType returns the AssociateEntityType field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetAssociateEntityType() string {
+func (o *SobjectDescribe) GetAssociateEntityType() string {
 	if o == nil || isNil(o.AssociateEntityType.Get()) {
 		var ret string
 		return ret
@@ -129,7 +129,7 @@ func (o *SObjectDescribe) GetAssociateEntityType() string {
 // GetAssociateEntityTypeOk returns a tuple with the AssociateEntityType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetAssociateEntityTypeOk() (*string, bool) {
+func (o *SobjectDescribe) GetAssociateEntityTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -137,7 +137,7 @@ func (o *SObjectDescribe) GetAssociateEntityTypeOk() (*string, bool) {
 }
 
 // HasAssociateEntityType returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasAssociateEntityType() bool {
+func (o *SobjectDescribe) HasAssociateEntityType() bool {
 	if o != nil && o.AssociateEntityType.IsSet() {
 		return true
 	}
@@ -146,22 +146,22 @@ func (o *SObjectDescribe) HasAssociateEntityType() bool {
 }
 
 // SetAssociateEntityType gets a reference to the given NullableString and assigns it to the AssociateEntityType field.
-func (o *SObjectDescribe) SetAssociateEntityType(v string) {
+func (o *SobjectDescribe) SetAssociateEntityType(v string) {
 	o.AssociateEntityType.Set(&v)
 }
 
 // SetAssociateEntityTypeNil sets the value for AssociateEntityType to be an explicit nil
-func (o *SObjectDescribe) SetAssociateEntityTypeNil() {
+func (o *SobjectDescribe) SetAssociateEntityTypeNil() {
 	o.AssociateEntityType.Set(nil)
 }
 
 // UnsetAssociateEntityType ensures that no value is present for AssociateEntityType, not even an explicit nil
-func (o *SObjectDescribe) UnsetAssociateEntityType() {
+func (o *SobjectDescribe) UnsetAssociateEntityType() {
 	o.AssociateEntityType.Unset()
 }
 
 // GetAssociateParentEntity returns the AssociateParentEntity field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetAssociateParentEntity() string {
+func (o *SobjectDescribe) GetAssociateParentEntity() string {
 	if o == nil || isNil(o.AssociateParentEntity.Get()) {
 		var ret string
 		return ret
@@ -172,7 +172,7 @@ func (o *SObjectDescribe) GetAssociateParentEntity() string {
 // GetAssociateParentEntityOk returns a tuple with the AssociateParentEntity field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetAssociateParentEntityOk() (*string, bool) {
+func (o *SobjectDescribe) GetAssociateParentEntityOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -180,7 +180,7 @@ func (o *SObjectDescribe) GetAssociateParentEntityOk() (*string, bool) {
 }
 
 // HasAssociateParentEntity returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasAssociateParentEntity() bool {
+func (o *SobjectDescribe) HasAssociateParentEntity() bool {
 	if o != nil && o.AssociateParentEntity.IsSet() {
 		return true
 	}
@@ -189,22 +189,22 @@ func (o *SObjectDescribe) HasAssociateParentEntity() bool {
 }
 
 // SetAssociateParentEntity gets a reference to the given NullableString and assigns it to the AssociateParentEntity field.
-func (o *SObjectDescribe) SetAssociateParentEntity(v string) {
+func (o *SobjectDescribe) SetAssociateParentEntity(v string) {
 	o.AssociateParentEntity.Set(&v)
 }
 
 // SetAssociateParentEntityNil sets the value for AssociateParentEntity to be an explicit nil
-func (o *SObjectDescribe) SetAssociateParentEntityNil() {
+func (o *SobjectDescribe) SetAssociateParentEntityNil() {
 	o.AssociateParentEntity.Set(nil)
 }
 
 // UnsetAssociateParentEntity ensures that no value is present for AssociateParentEntity, not even an explicit nil
-func (o *SObjectDescribe) UnsetAssociateParentEntity() {
+func (o *SobjectDescribe) UnsetAssociateParentEntity() {
 	o.AssociateParentEntity.Unset()
 }
 
 // GetCompactLayoutable returns the CompactLayoutable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetCompactLayoutable() bool {
+func (o *SobjectDescribe) GetCompactLayoutable() bool {
 	if o == nil || isNil(o.CompactLayoutable) {
 		var ret bool
 		return ret
@@ -214,7 +214,7 @@ func (o *SObjectDescribe) GetCompactLayoutable() bool {
 
 // GetCompactLayoutableOk returns a tuple with the CompactLayoutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetCompactLayoutableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetCompactLayoutableOk() (*bool, bool) {
 	if o == nil || isNil(o.CompactLayoutable) {
 		return nil, false
 	}
@@ -222,7 +222,7 @@ func (o *SObjectDescribe) GetCompactLayoutableOk() (*bool, bool) {
 }
 
 // HasCompactLayoutable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasCompactLayoutable() bool {
+func (o *SobjectDescribe) HasCompactLayoutable() bool {
 	if o != nil && !isNil(o.CompactLayoutable) {
 		return true
 	}
@@ -231,12 +231,12 @@ func (o *SObjectDescribe) HasCompactLayoutable() bool {
 }
 
 // SetCompactLayoutable gets a reference to the given bool and assigns it to the CompactLayoutable field.
-func (o *SObjectDescribe) SetCompactLayoutable(v bool) {
+func (o *SobjectDescribe) SetCompactLayoutable(v bool) {
 	o.CompactLayoutable = &v
 }
 
 // GetCreateable returns the Createable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetCreateable() bool {
+func (o *SobjectDescribe) GetCreateable() bool {
 	if o == nil || isNil(o.Createable) {
 		var ret bool
 		return ret
@@ -246,7 +246,7 @@ func (o *SObjectDescribe) GetCreateable() bool {
 
 // GetCreateableOk returns a tuple with the Createable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetCreateableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetCreateableOk() (*bool, bool) {
 	if o == nil || isNil(o.Createable) {
 		return nil, false
 	}
@@ -254,7 +254,7 @@ func (o *SObjectDescribe) GetCreateableOk() (*bool, bool) {
 }
 
 // HasCreateable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasCreateable() bool {
+func (o *SobjectDescribe) HasCreateable() bool {
 	if o != nil && !isNil(o.Createable) {
 		return true
 	}
@@ -263,12 +263,12 @@ func (o *SObjectDescribe) HasCreateable() bool {
 }
 
 // SetCreateable gets a reference to the given bool and assigns it to the Createable field.
-func (o *SObjectDescribe) SetCreateable(v bool) {
+func (o *SobjectDescribe) SetCreateable(v bool) {
 	o.Createable = &v
 }
 
 // GetCustom returns the Custom field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetCustom() bool {
+func (o *SobjectDescribe) GetCustom() bool {
 	if o == nil || isNil(o.Custom) {
 		var ret bool
 		return ret
@@ -278,7 +278,7 @@ func (o *SObjectDescribe) GetCustom() bool {
 
 // GetCustomOk returns a tuple with the Custom field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetCustomOk() (*bool, bool) {
+func (o *SobjectDescribe) GetCustomOk() (*bool, bool) {
 	if o == nil || isNil(o.Custom) {
 		return nil, false
 	}
@@ -286,7 +286,7 @@ func (o *SObjectDescribe) GetCustomOk() (*bool, bool) {
 }
 
 // HasCustom returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasCustom() bool {
+func (o *SobjectDescribe) HasCustom() bool {
 	if o != nil && !isNil(o.Custom) {
 		return true
 	}
@@ -295,12 +295,12 @@ func (o *SObjectDescribe) HasCustom() bool {
 }
 
 // SetCustom gets a reference to the given bool and assigns it to the Custom field.
-func (o *SObjectDescribe) SetCustom(v bool) {
+func (o *SobjectDescribe) SetCustom(v bool) {
 	o.Custom = &v
 }
 
 // GetCustomSetting returns the CustomSetting field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetCustomSetting() bool {
+func (o *SobjectDescribe) GetCustomSetting() bool {
 	if o == nil || isNil(o.CustomSetting) {
 		var ret bool
 		return ret
@@ -310,7 +310,7 @@ func (o *SObjectDescribe) GetCustomSetting() bool {
 
 // GetCustomSettingOk returns a tuple with the CustomSetting field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetCustomSettingOk() (*bool, bool) {
+func (o *SobjectDescribe) GetCustomSettingOk() (*bool, bool) {
 	if o == nil || isNil(o.CustomSetting) {
 		return nil, false
 	}
@@ -318,7 +318,7 @@ func (o *SObjectDescribe) GetCustomSettingOk() (*bool, bool) {
 }
 
 // HasCustomSetting returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasCustomSetting() bool {
+func (o *SobjectDescribe) HasCustomSetting() bool {
 	if o != nil && !isNil(o.CustomSetting) {
 		return true
 	}
@@ -327,12 +327,12 @@ func (o *SObjectDescribe) HasCustomSetting() bool {
 }
 
 // SetCustomSetting gets a reference to the given bool and assigns it to the CustomSetting field.
-func (o *SObjectDescribe) SetCustomSetting(v bool) {
+func (o *SobjectDescribe) SetCustomSetting(v bool) {
 	o.CustomSetting = &v
 }
 
 // GetDeepCloneable returns the DeepCloneable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetDeepCloneable() bool {
+func (o *SobjectDescribe) GetDeepCloneable() bool {
 	if o == nil || isNil(o.DeepCloneable) {
 		var ret bool
 		return ret
@@ -342,7 +342,7 @@ func (o *SObjectDescribe) GetDeepCloneable() bool {
 
 // GetDeepCloneableOk returns a tuple with the DeepCloneable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetDeepCloneableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetDeepCloneableOk() (*bool, bool) {
 	if o == nil || isNil(o.DeepCloneable) {
 		return nil, false
 	}
@@ -350,7 +350,7 @@ func (o *SObjectDescribe) GetDeepCloneableOk() (*bool, bool) {
 }
 
 // HasDeepCloneable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasDeepCloneable() bool {
+func (o *SobjectDescribe) HasDeepCloneable() bool {
 	if o != nil && !isNil(o.DeepCloneable) {
 		return true
 	}
@@ -359,12 +359,12 @@ func (o *SObjectDescribe) HasDeepCloneable() bool {
 }
 
 // SetDeepCloneable gets a reference to the given bool and assigns it to the DeepCloneable field.
-func (o *SObjectDescribe) SetDeepCloneable(v bool) {
+func (o *SobjectDescribe) SetDeepCloneable(v bool) {
 	o.DeepCloneable = &v
 }
 
 // GetDefaultImplementation returns the DefaultImplementation field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetDefaultImplementation() string {
+func (o *SobjectDescribe) GetDefaultImplementation() string {
 	if o == nil || isNil(o.DefaultImplementation.Get()) {
 		var ret string
 		return ret
@@ -375,7 +375,7 @@ func (o *SObjectDescribe) GetDefaultImplementation() string {
 // GetDefaultImplementationOk returns a tuple with the DefaultImplementation field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetDefaultImplementationOk() (*string, bool) {
+func (o *SobjectDescribe) GetDefaultImplementationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -383,7 +383,7 @@ func (o *SObjectDescribe) GetDefaultImplementationOk() (*string, bool) {
 }
 
 // HasDefaultImplementation returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasDefaultImplementation() bool {
+func (o *SobjectDescribe) HasDefaultImplementation() bool {
 	if o != nil && o.DefaultImplementation.IsSet() {
 		return true
 	}
@@ -392,22 +392,22 @@ func (o *SObjectDescribe) HasDefaultImplementation() bool {
 }
 
 // SetDefaultImplementation gets a reference to the given NullableString and assigns it to the DefaultImplementation field.
-func (o *SObjectDescribe) SetDefaultImplementation(v string) {
+func (o *SobjectDescribe) SetDefaultImplementation(v string) {
 	o.DefaultImplementation.Set(&v)
 }
 
 // SetDefaultImplementationNil sets the value for DefaultImplementation to be an explicit nil
-func (o *SObjectDescribe) SetDefaultImplementationNil() {
+func (o *SobjectDescribe) SetDefaultImplementationNil() {
 	o.DefaultImplementation.Set(nil)
 }
 
 // UnsetDefaultImplementation ensures that no value is present for DefaultImplementation, not even an explicit nil
-func (o *SObjectDescribe) UnsetDefaultImplementation() {
+func (o *SobjectDescribe) UnsetDefaultImplementation() {
 	o.DefaultImplementation.Unset()
 }
 
 // GetDeletable returns the Deletable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetDeletable() bool {
+func (o *SobjectDescribe) GetDeletable() bool {
 	if o == nil || isNil(o.Deletable) {
 		var ret bool
 		return ret
@@ -417,7 +417,7 @@ func (o *SObjectDescribe) GetDeletable() bool {
 
 // GetDeletableOk returns a tuple with the Deletable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetDeletableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetDeletableOk() (*bool, bool) {
 	if o == nil || isNil(o.Deletable) {
 		return nil, false
 	}
@@ -425,7 +425,7 @@ func (o *SObjectDescribe) GetDeletableOk() (*bool, bool) {
 }
 
 // HasDeletable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasDeletable() bool {
+func (o *SobjectDescribe) HasDeletable() bool {
 	if o != nil && !isNil(o.Deletable) {
 		return true
 	}
@@ -434,12 +434,12 @@ func (o *SObjectDescribe) HasDeletable() bool {
 }
 
 // SetDeletable gets a reference to the given bool and assigns it to the Deletable field.
-func (o *SObjectDescribe) SetDeletable(v bool) {
+func (o *SobjectDescribe) SetDeletable(v bool) {
 	o.Deletable = &v
 }
 
 // GetDeprecatedAndHidden returns the DeprecatedAndHidden field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetDeprecatedAndHidden() bool {
+func (o *SobjectDescribe) GetDeprecatedAndHidden() bool {
 	if o == nil || isNil(o.DeprecatedAndHidden) {
 		var ret bool
 		return ret
@@ -449,7 +449,7 @@ func (o *SObjectDescribe) GetDeprecatedAndHidden() bool {
 
 // GetDeprecatedAndHiddenOk returns a tuple with the DeprecatedAndHidden field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetDeprecatedAndHiddenOk() (*bool, bool) {
+func (o *SobjectDescribe) GetDeprecatedAndHiddenOk() (*bool, bool) {
 	if o == nil || isNil(o.DeprecatedAndHidden) {
 		return nil, false
 	}
@@ -457,7 +457,7 @@ func (o *SObjectDescribe) GetDeprecatedAndHiddenOk() (*bool, bool) {
 }
 
 // HasDeprecatedAndHidden returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasDeprecatedAndHidden() bool {
+func (o *SobjectDescribe) HasDeprecatedAndHidden() bool {
 	if o != nil && !isNil(o.DeprecatedAndHidden) {
 		return true
 	}
@@ -466,12 +466,12 @@ func (o *SObjectDescribe) HasDeprecatedAndHidden() bool {
 }
 
 // SetDeprecatedAndHidden gets a reference to the given bool and assigns it to the DeprecatedAndHidden field.
-func (o *SObjectDescribe) SetDeprecatedAndHidden(v bool) {
+func (o *SobjectDescribe) SetDeprecatedAndHidden(v bool) {
 	o.DeprecatedAndHidden = &v
 }
 
 // GetExtendedBy returns the ExtendedBy field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetExtendedBy() string {
+func (o *SobjectDescribe) GetExtendedBy() string {
 	if o == nil || isNil(o.ExtendedBy.Get()) {
 		var ret string
 		return ret
@@ -482,7 +482,7 @@ func (o *SObjectDescribe) GetExtendedBy() string {
 // GetExtendedByOk returns a tuple with the ExtendedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetExtendedByOk() (*string, bool) {
+func (o *SobjectDescribe) GetExtendedByOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -490,7 +490,7 @@ func (o *SObjectDescribe) GetExtendedByOk() (*string, bool) {
 }
 
 // HasExtendedBy returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasExtendedBy() bool {
+func (o *SobjectDescribe) HasExtendedBy() bool {
 	if o != nil && o.ExtendedBy.IsSet() {
 		return true
 	}
@@ -499,22 +499,22 @@ func (o *SObjectDescribe) HasExtendedBy() bool {
 }
 
 // SetExtendedBy gets a reference to the given NullableString and assigns it to the ExtendedBy field.
-func (o *SObjectDescribe) SetExtendedBy(v string) {
+func (o *SobjectDescribe) SetExtendedBy(v string) {
 	o.ExtendedBy.Set(&v)
 }
 
 // SetExtendedByNil sets the value for ExtendedBy to be an explicit nil
-func (o *SObjectDescribe) SetExtendedByNil() {
+func (o *SobjectDescribe) SetExtendedByNil() {
 	o.ExtendedBy.Set(nil)
 }
 
 // UnsetExtendedBy ensures that no value is present for ExtendedBy, not even an explicit nil
-func (o *SObjectDescribe) UnsetExtendedBy() {
+func (o *SobjectDescribe) UnsetExtendedBy() {
 	o.ExtendedBy.Unset()
 }
 
 // GetExtendsInterfaces returns the ExtendsInterfaces field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetExtendsInterfaces() string {
+func (o *SobjectDescribe) GetExtendsInterfaces() string {
 	if o == nil || isNil(o.ExtendsInterfaces.Get()) {
 		var ret string
 		return ret
@@ -525,7 +525,7 @@ func (o *SObjectDescribe) GetExtendsInterfaces() string {
 // GetExtendsInterfacesOk returns a tuple with the ExtendsInterfaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetExtendsInterfacesOk() (*string, bool) {
+func (o *SobjectDescribe) GetExtendsInterfacesOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -533,7 +533,7 @@ func (o *SObjectDescribe) GetExtendsInterfacesOk() (*string, bool) {
 }
 
 // HasExtendsInterfaces returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasExtendsInterfaces() bool {
+func (o *SobjectDescribe) HasExtendsInterfaces() bool {
 	if o != nil && o.ExtendsInterfaces.IsSet() {
 		return true
 	}
@@ -542,22 +542,22 @@ func (o *SObjectDescribe) HasExtendsInterfaces() bool {
 }
 
 // SetExtendsInterfaces gets a reference to the given NullableString and assigns it to the ExtendsInterfaces field.
-func (o *SObjectDescribe) SetExtendsInterfaces(v string) {
+func (o *SobjectDescribe) SetExtendsInterfaces(v string) {
 	o.ExtendsInterfaces.Set(&v)
 }
 
 // SetExtendsInterfacesNil sets the value for ExtendsInterfaces to be an explicit nil
-func (o *SObjectDescribe) SetExtendsInterfacesNil() {
+func (o *SobjectDescribe) SetExtendsInterfacesNil() {
 	o.ExtendsInterfaces.Set(nil)
 }
 
 // UnsetExtendsInterfaces ensures that no value is present for ExtendsInterfaces, not even an explicit nil
-func (o *SObjectDescribe) UnsetExtendsInterfaces() {
+func (o *SobjectDescribe) UnsetExtendsInterfaces() {
 	o.ExtendsInterfaces.Unset()
 }
 
 // GetFeedEnabled returns the FeedEnabled field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetFeedEnabled() bool {
+func (o *SobjectDescribe) GetFeedEnabled() bool {
 	if o == nil || isNil(o.FeedEnabled) {
 		var ret bool
 		return ret
@@ -567,7 +567,7 @@ func (o *SObjectDescribe) GetFeedEnabled() bool {
 
 // GetFeedEnabledOk returns a tuple with the FeedEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetFeedEnabledOk() (*bool, bool) {
+func (o *SobjectDescribe) GetFeedEnabledOk() (*bool, bool) {
 	if o == nil || isNil(o.FeedEnabled) {
 		return nil, false
 	}
@@ -575,7 +575,7 @@ func (o *SObjectDescribe) GetFeedEnabledOk() (*bool, bool) {
 }
 
 // HasFeedEnabled returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasFeedEnabled() bool {
+func (o *SobjectDescribe) HasFeedEnabled() bool {
 	if o != nil && !isNil(o.FeedEnabled) {
 		return true
 	}
@@ -584,12 +584,12 @@ func (o *SObjectDescribe) HasFeedEnabled() bool {
 }
 
 // SetFeedEnabled gets a reference to the given bool and assigns it to the FeedEnabled field.
-func (o *SObjectDescribe) SetFeedEnabled(v bool) {
+func (o *SobjectDescribe) SetFeedEnabled(v bool) {
 	o.FeedEnabled = &v
 }
 
 // GetHasSubtypes returns the HasSubtypes field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetHasSubtypes() bool {
+func (o *SobjectDescribe) GetHasSubtypes() bool {
 	if o == nil || isNil(o.HasSubtypes) {
 		var ret bool
 		return ret
@@ -599,7 +599,7 @@ func (o *SObjectDescribe) GetHasSubtypes() bool {
 
 // GetHasSubtypesOk returns a tuple with the HasSubtypes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetHasSubtypesOk() (*bool, bool) {
+func (o *SobjectDescribe) GetHasSubtypesOk() (*bool, bool) {
 	if o == nil || isNil(o.HasSubtypes) {
 		return nil, false
 	}
@@ -607,7 +607,7 @@ func (o *SObjectDescribe) GetHasSubtypesOk() (*bool, bool) {
 }
 
 // HasHasSubtypes returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasHasSubtypes() bool {
+func (o *SobjectDescribe) HasHasSubtypes() bool {
 	if o != nil && !isNil(o.HasSubtypes) {
 		return true
 	}
@@ -616,12 +616,12 @@ func (o *SObjectDescribe) HasHasSubtypes() bool {
 }
 
 // SetHasSubtypes gets a reference to the given bool and assigns it to the HasSubtypes field.
-func (o *SObjectDescribe) SetHasSubtypes(v bool) {
+func (o *SobjectDescribe) SetHasSubtypes(v bool) {
 	o.HasSubtypes = &v
 }
 
 // GetImplementedBy returns the ImplementedBy field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetImplementedBy() string {
+func (o *SobjectDescribe) GetImplementedBy() string {
 	if o == nil || isNil(o.ImplementedBy.Get()) {
 		var ret string
 		return ret
@@ -632,7 +632,7 @@ func (o *SObjectDescribe) GetImplementedBy() string {
 // GetImplementedByOk returns a tuple with the ImplementedBy field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetImplementedByOk() (*string, bool) {
+func (o *SobjectDescribe) GetImplementedByOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -640,7 +640,7 @@ func (o *SObjectDescribe) GetImplementedByOk() (*string, bool) {
 }
 
 // HasImplementedBy returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasImplementedBy() bool {
+func (o *SobjectDescribe) HasImplementedBy() bool {
 	if o != nil && o.ImplementedBy.IsSet() {
 		return true
 	}
@@ -649,22 +649,22 @@ func (o *SObjectDescribe) HasImplementedBy() bool {
 }
 
 // SetImplementedBy gets a reference to the given NullableString and assigns it to the ImplementedBy field.
-func (o *SObjectDescribe) SetImplementedBy(v string) {
+func (o *SobjectDescribe) SetImplementedBy(v string) {
 	o.ImplementedBy.Set(&v)
 }
 
 // SetImplementedByNil sets the value for ImplementedBy to be an explicit nil
-func (o *SObjectDescribe) SetImplementedByNil() {
+func (o *SobjectDescribe) SetImplementedByNil() {
 	o.ImplementedBy.Set(nil)
 }
 
 // UnsetImplementedBy ensures that no value is present for ImplementedBy, not even an explicit nil
-func (o *SObjectDescribe) UnsetImplementedBy() {
+func (o *SobjectDescribe) UnsetImplementedBy() {
 	o.ImplementedBy.Unset()
 }
 
 // GetImplementsInterfaces returns the ImplementsInterfaces field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetImplementsInterfaces() string {
+func (o *SobjectDescribe) GetImplementsInterfaces() string {
 	if o == nil || isNil(o.ImplementsInterfaces.Get()) {
 		var ret string
 		return ret
@@ -675,7 +675,7 @@ func (o *SObjectDescribe) GetImplementsInterfaces() string {
 // GetImplementsInterfacesOk returns a tuple with the ImplementsInterfaces field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetImplementsInterfacesOk() (*string, bool) {
+func (o *SobjectDescribe) GetImplementsInterfacesOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -683,7 +683,7 @@ func (o *SObjectDescribe) GetImplementsInterfacesOk() (*string, bool) {
 }
 
 // HasImplementsInterfaces returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasImplementsInterfaces() bool {
+func (o *SobjectDescribe) HasImplementsInterfaces() bool {
 	if o != nil && o.ImplementsInterfaces.IsSet() {
 		return true
 	}
@@ -692,22 +692,22 @@ func (o *SObjectDescribe) HasImplementsInterfaces() bool {
 }
 
 // SetImplementsInterfaces gets a reference to the given NullableString and assigns it to the ImplementsInterfaces field.
-func (o *SObjectDescribe) SetImplementsInterfaces(v string) {
+func (o *SobjectDescribe) SetImplementsInterfaces(v string) {
 	o.ImplementsInterfaces.Set(&v)
 }
 
 // SetImplementsInterfacesNil sets the value for ImplementsInterfaces to be an explicit nil
-func (o *SObjectDescribe) SetImplementsInterfacesNil() {
+func (o *SobjectDescribe) SetImplementsInterfacesNil() {
 	o.ImplementsInterfaces.Set(nil)
 }
 
 // UnsetImplementsInterfaces ensures that no value is present for ImplementsInterfaces, not even an explicit nil
-func (o *SObjectDescribe) UnsetImplementsInterfaces() {
+func (o *SobjectDescribe) UnsetImplementsInterfaces() {
 	o.ImplementsInterfaces.Unset()
 }
 
 // GetIsInterface returns the IsInterface field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetIsInterface() bool {
+func (o *SobjectDescribe) GetIsInterface() bool {
 	if o == nil || isNil(o.IsInterface) {
 		var ret bool
 		return ret
@@ -717,7 +717,7 @@ func (o *SObjectDescribe) GetIsInterface() bool {
 
 // GetIsInterfaceOk returns a tuple with the IsInterface field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetIsInterfaceOk() (*bool, bool) {
+func (o *SobjectDescribe) GetIsInterfaceOk() (*bool, bool) {
 	if o == nil || isNil(o.IsInterface) {
 		return nil, false
 	}
@@ -725,7 +725,7 @@ func (o *SObjectDescribe) GetIsInterfaceOk() (*bool, bool) {
 }
 
 // HasIsInterface returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasIsInterface() bool {
+func (o *SobjectDescribe) HasIsInterface() bool {
 	if o != nil && !isNil(o.IsInterface) {
 		return true
 	}
@@ -734,12 +734,12 @@ func (o *SObjectDescribe) HasIsInterface() bool {
 }
 
 // SetIsInterface gets a reference to the given bool and assigns it to the IsInterface field.
-func (o *SObjectDescribe) SetIsInterface(v bool) {
+func (o *SobjectDescribe) SetIsInterface(v bool) {
 	o.IsInterface = &v
 }
 
 // GetIsSubtype returns the IsSubtype field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetIsSubtype() bool {
+func (o *SobjectDescribe) GetIsSubtype() bool {
 	if o == nil || isNil(o.IsSubtype) {
 		var ret bool
 		return ret
@@ -749,7 +749,7 @@ func (o *SObjectDescribe) GetIsSubtype() bool {
 
 // GetIsSubtypeOk returns a tuple with the IsSubtype field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetIsSubtypeOk() (*bool, bool) {
+func (o *SobjectDescribe) GetIsSubtypeOk() (*bool, bool) {
 	if o == nil || isNil(o.IsSubtype) {
 		return nil, false
 	}
@@ -757,7 +757,7 @@ func (o *SObjectDescribe) GetIsSubtypeOk() (*bool, bool) {
 }
 
 // HasIsSubtype returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasIsSubtype() bool {
+func (o *SobjectDescribe) HasIsSubtype() bool {
 	if o != nil && !isNil(o.IsSubtype) {
 		return true
 	}
@@ -766,12 +766,12 @@ func (o *SObjectDescribe) HasIsSubtype() bool {
 }
 
 // SetIsSubtype gets a reference to the given bool and assigns it to the IsSubtype field.
-func (o *SObjectDescribe) SetIsSubtype(v bool) {
+func (o *SobjectDescribe) SetIsSubtype(v bool) {
 	o.IsSubtype = &v
 }
 
 // GetKeyPrefix returns the KeyPrefix field value
-func (o *SObjectDescribe) GetKeyPrefix() string {
+func (o *SobjectDescribe) GetKeyPrefix() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -782,7 +782,7 @@ func (o *SObjectDescribe) GetKeyPrefix() string {
 
 // GetKeyPrefixOk returns a tuple with the KeyPrefix field value
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetKeyPrefixOk() (*string, bool) {
+func (o *SobjectDescribe) GetKeyPrefixOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -790,12 +790,12 @@ func (o *SObjectDescribe) GetKeyPrefixOk() (*string, bool) {
 }
 
 // SetKeyPrefix sets field value
-func (o *SObjectDescribe) SetKeyPrefix(v string) {
+func (o *SobjectDescribe) SetKeyPrefix(v string) {
 	o.KeyPrefix = v
 }
 
 // GetLabel returns the Label field value
-func (o *SObjectDescribe) GetLabel() string {
+func (o *SobjectDescribe) GetLabel() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -806,7 +806,7 @@ func (o *SObjectDescribe) GetLabel() string {
 
 // GetLabelOk returns a tuple with the Label field value
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetLabelOk() (*string, bool) {
+func (o *SobjectDescribe) GetLabelOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -814,12 +814,12 @@ func (o *SObjectDescribe) GetLabelOk() (*string, bool) {
 }
 
 // SetLabel sets field value
-func (o *SObjectDescribe) SetLabel(v string) {
+func (o *SobjectDescribe) SetLabel(v string) {
 	o.Label = v
 }
 
 // GetLabelPlural returns the LabelPlural field value
-func (o *SObjectDescribe) GetLabelPlural() string {
+func (o *SobjectDescribe) GetLabelPlural() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -830,7 +830,7 @@ func (o *SObjectDescribe) GetLabelPlural() string {
 
 // GetLabelPluralOk returns a tuple with the LabelPlural field value
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetLabelPluralOk() (*string, bool) {
+func (o *SobjectDescribe) GetLabelPluralOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -838,12 +838,12 @@ func (o *SObjectDescribe) GetLabelPluralOk() (*string, bool) {
 }
 
 // SetLabelPlural sets field value
-func (o *SObjectDescribe) SetLabelPlural(v string) {
+func (o *SobjectDescribe) SetLabelPlural(v string) {
 	o.LabelPlural = v
 }
 
 // GetLayoutable returns the Layoutable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetLayoutable() bool {
+func (o *SobjectDescribe) GetLayoutable() bool {
 	if o == nil || isNil(o.Layoutable) {
 		var ret bool
 		return ret
@@ -853,7 +853,7 @@ func (o *SObjectDescribe) GetLayoutable() bool {
 
 // GetLayoutableOk returns a tuple with the Layoutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetLayoutableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetLayoutableOk() (*bool, bool) {
 	if o == nil || isNil(o.Layoutable) {
 		return nil, false
 	}
@@ -861,7 +861,7 @@ func (o *SObjectDescribe) GetLayoutableOk() (*bool, bool) {
 }
 
 // HasLayoutable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasLayoutable() bool {
+func (o *SobjectDescribe) HasLayoutable() bool {
 	if o != nil && !isNil(o.Layoutable) {
 		return true
 	}
@@ -870,12 +870,12 @@ func (o *SObjectDescribe) HasLayoutable() bool {
 }
 
 // SetLayoutable gets a reference to the given bool and assigns it to the Layoutable field.
-func (o *SObjectDescribe) SetLayoutable(v bool) {
+func (o *SobjectDescribe) SetLayoutable(v bool) {
 	o.Layoutable = &v
 }
 
 // GetListviewable returns the Listviewable field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetListviewable() string {
+func (o *SobjectDescribe) GetListviewable() string {
 	if o == nil || isNil(o.Listviewable.Get()) {
 		var ret string
 		return ret
@@ -886,7 +886,7 @@ func (o *SObjectDescribe) GetListviewable() string {
 // GetListviewableOk returns a tuple with the Listviewable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetListviewableOk() (*string, bool) {
+func (o *SobjectDescribe) GetListviewableOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -894,7 +894,7 @@ func (o *SObjectDescribe) GetListviewableOk() (*string, bool) {
 }
 
 // HasListviewable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasListviewable() bool {
+func (o *SobjectDescribe) HasListviewable() bool {
 	if o != nil && o.Listviewable.IsSet() {
 		return true
 	}
@@ -903,22 +903,22 @@ func (o *SObjectDescribe) HasListviewable() bool {
 }
 
 // SetListviewable gets a reference to the given NullableString and assigns it to the Listviewable field.
-func (o *SObjectDescribe) SetListviewable(v string) {
+func (o *SobjectDescribe) SetListviewable(v string) {
 	o.Listviewable.Set(&v)
 }
 
 // SetListviewableNil sets the value for Listviewable to be an explicit nil
-func (o *SObjectDescribe) SetListviewableNil() {
+func (o *SobjectDescribe) SetListviewableNil() {
 	o.Listviewable.Set(nil)
 }
 
 // UnsetListviewable ensures that no value is present for Listviewable, not even an explicit nil
-func (o *SObjectDescribe) UnsetListviewable() {
+func (o *SobjectDescribe) UnsetListviewable() {
 	o.Listviewable.Unset()
 }
 
 // GetLookupLayoutable returns the LookupLayoutable field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetLookupLayoutable() string {
+func (o *SobjectDescribe) GetLookupLayoutable() string {
 	if o == nil || isNil(o.LookupLayoutable.Get()) {
 		var ret string
 		return ret
@@ -929,7 +929,7 @@ func (o *SObjectDescribe) GetLookupLayoutable() string {
 // GetLookupLayoutableOk returns a tuple with the LookupLayoutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetLookupLayoutableOk() (*string, bool) {
+func (o *SobjectDescribe) GetLookupLayoutableOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -937,7 +937,7 @@ func (o *SObjectDescribe) GetLookupLayoutableOk() (*string, bool) {
 }
 
 // HasLookupLayoutable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasLookupLayoutable() bool {
+func (o *SobjectDescribe) HasLookupLayoutable() bool {
 	if o != nil && o.LookupLayoutable.IsSet() {
 		return true
 	}
@@ -946,22 +946,22 @@ func (o *SObjectDescribe) HasLookupLayoutable() bool {
 }
 
 // SetLookupLayoutable gets a reference to the given NullableString and assigns it to the LookupLayoutable field.
-func (o *SObjectDescribe) SetLookupLayoutable(v string) {
+func (o *SobjectDescribe) SetLookupLayoutable(v string) {
 	o.LookupLayoutable.Set(&v)
 }
 
 // SetLookupLayoutableNil sets the value for LookupLayoutable to be an explicit nil
-func (o *SObjectDescribe) SetLookupLayoutableNil() {
+func (o *SobjectDescribe) SetLookupLayoutableNil() {
 	o.LookupLayoutable.Set(nil)
 }
 
 // UnsetLookupLayoutable ensures that no value is present for LookupLayoutable, not even an explicit nil
-func (o *SObjectDescribe) UnsetLookupLayoutable() {
+func (o *SobjectDescribe) UnsetLookupLayoutable() {
 	o.LookupLayoutable.Unset()
 }
 
 // GetMergeable returns the Mergeable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetMergeable() bool {
+func (o *SobjectDescribe) GetMergeable() bool {
 	if o == nil || isNil(o.Mergeable) {
 		var ret bool
 		return ret
@@ -971,7 +971,7 @@ func (o *SObjectDescribe) GetMergeable() bool {
 
 // GetMergeableOk returns a tuple with the Mergeable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetMergeableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetMergeableOk() (*bool, bool) {
 	if o == nil || isNil(o.Mergeable) {
 		return nil, false
 	}
@@ -979,7 +979,7 @@ func (o *SObjectDescribe) GetMergeableOk() (*bool, bool) {
 }
 
 // HasMergeable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasMergeable() bool {
+func (o *SobjectDescribe) HasMergeable() bool {
 	if o != nil && !isNil(o.Mergeable) {
 		return true
 	}
@@ -988,12 +988,12 @@ func (o *SObjectDescribe) HasMergeable() bool {
 }
 
 // SetMergeable gets a reference to the given bool and assigns it to the Mergeable field.
-func (o *SObjectDescribe) SetMergeable(v bool) {
+func (o *SobjectDescribe) SetMergeable(v bool) {
 	o.Mergeable = &v
 }
 
 // GetMruEnabled returns the MruEnabled field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetMruEnabled() bool {
+func (o *SobjectDescribe) GetMruEnabled() bool {
 	if o == nil || isNil(o.MruEnabled) {
 		var ret bool
 		return ret
@@ -1003,7 +1003,7 @@ func (o *SObjectDescribe) GetMruEnabled() bool {
 
 // GetMruEnabledOk returns a tuple with the MruEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetMruEnabledOk() (*bool, bool) {
+func (o *SobjectDescribe) GetMruEnabledOk() (*bool, bool) {
 	if o == nil || isNil(o.MruEnabled) {
 		return nil, false
 	}
@@ -1011,7 +1011,7 @@ func (o *SObjectDescribe) GetMruEnabledOk() (*bool, bool) {
 }
 
 // HasMruEnabled returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasMruEnabled() bool {
+func (o *SobjectDescribe) HasMruEnabled() bool {
 	if o != nil && !isNil(o.MruEnabled) {
 		return true
 	}
@@ -1020,12 +1020,12 @@ func (o *SObjectDescribe) HasMruEnabled() bool {
 }
 
 // SetMruEnabled gets a reference to the given bool and assigns it to the MruEnabled field.
-func (o *SObjectDescribe) SetMruEnabled(v bool) {
+func (o *SobjectDescribe) SetMruEnabled(v bool) {
 	o.MruEnabled = &v
 }
 
 // GetName returns the Name field value
-func (o *SObjectDescribe) GetName() string {
+func (o *SobjectDescribe) GetName() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -1036,7 +1036,7 @@ func (o *SObjectDescribe) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetNameOk() (*string, bool) {
+func (o *SobjectDescribe) GetNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1044,12 +1044,12 @@ func (o *SObjectDescribe) GetNameOk() (*string, bool) {
 }
 
 // SetName sets field value
-func (o *SObjectDescribe) SetName(v string) {
+func (o *SobjectDescribe) SetName(v string) {
 	o.Name = v
 }
 
 // GetNetworkScopeFieldName returns the NetworkScopeFieldName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectDescribe) GetNetworkScopeFieldName() string {
+func (o *SobjectDescribe) GetNetworkScopeFieldName() string {
 	if o == nil || isNil(o.NetworkScopeFieldName.Get()) {
 		var ret string
 		return ret
@@ -1060,7 +1060,7 @@ func (o *SObjectDescribe) GetNetworkScopeFieldName() string {
 // GetNetworkScopeFieldNameOk returns a tuple with the NetworkScopeFieldName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectDescribe) GetNetworkScopeFieldNameOk() (*string, bool) {
+func (o *SobjectDescribe) GetNetworkScopeFieldNameOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -1068,7 +1068,7 @@ func (o *SObjectDescribe) GetNetworkScopeFieldNameOk() (*string, bool) {
 }
 
 // HasNetworkScopeFieldName returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasNetworkScopeFieldName() bool {
+func (o *SobjectDescribe) HasNetworkScopeFieldName() bool {
 	if o != nil && o.NetworkScopeFieldName.IsSet() {
 		return true
 	}
@@ -1077,22 +1077,22 @@ func (o *SObjectDescribe) HasNetworkScopeFieldName() bool {
 }
 
 // SetNetworkScopeFieldName gets a reference to the given NullableString and assigns it to the NetworkScopeFieldName field.
-func (o *SObjectDescribe) SetNetworkScopeFieldName(v string) {
+func (o *SobjectDescribe) SetNetworkScopeFieldName(v string) {
 	o.NetworkScopeFieldName.Set(&v)
 }
 
 // SetNetworkScopeFieldNameNil sets the value for NetworkScopeFieldName to be an explicit nil
-func (o *SObjectDescribe) SetNetworkScopeFieldNameNil() {
+func (o *SobjectDescribe) SetNetworkScopeFieldNameNil() {
 	o.NetworkScopeFieldName.Set(nil)
 }
 
 // UnsetNetworkScopeFieldName ensures that no value is present for NetworkScopeFieldName, not even an explicit nil
-func (o *SObjectDescribe) UnsetNetworkScopeFieldName() {
+func (o *SobjectDescribe) UnsetNetworkScopeFieldName() {
 	o.NetworkScopeFieldName.Unset()
 }
 
 // GetQueryable returns the Queryable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetQueryable() bool {
+func (o *SobjectDescribe) GetQueryable() bool {
 	if o == nil || isNil(o.Queryable) {
 		var ret bool
 		return ret
@@ -1102,7 +1102,7 @@ func (o *SObjectDescribe) GetQueryable() bool {
 
 // GetQueryableOk returns a tuple with the Queryable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetQueryableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetQueryableOk() (*bool, bool) {
 	if o == nil || isNil(o.Queryable) {
 		return nil, false
 	}
@@ -1110,7 +1110,7 @@ func (o *SObjectDescribe) GetQueryableOk() (*bool, bool) {
 }
 
 // HasQueryable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasQueryable() bool {
+func (o *SobjectDescribe) HasQueryable() bool {
 	if o != nil && !isNil(o.Queryable) {
 		return true
 	}
@@ -1119,12 +1119,12 @@ func (o *SObjectDescribe) HasQueryable() bool {
 }
 
 // SetQueryable gets a reference to the given bool and assigns it to the Queryable field.
-func (o *SObjectDescribe) SetQueryable(v bool) {
+func (o *SobjectDescribe) SetQueryable(v bool) {
 	o.Queryable = &v
 }
 
 // GetReplicateable returns the Replicateable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetReplicateable() bool {
+func (o *SobjectDescribe) GetReplicateable() bool {
 	if o == nil || isNil(o.Replicateable) {
 		var ret bool
 		return ret
@@ -1134,7 +1134,7 @@ func (o *SObjectDescribe) GetReplicateable() bool {
 
 // GetReplicateableOk returns a tuple with the Replicateable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetReplicateableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetReplicateableOk() (*bool, bool) {
 	if o == nil || isNil(o.Replicateable) {
 		return nil, false
 	}
@@ -1142,7 +1142,7 @@ func (o *SObjectDescribe) GetReplicateableOk() (*bool, bool) {
 }
 
 // HasReplicateable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasReplicateable() bool {
+func (o *SobjectDescribe) HasReplicateable() bool {
 	if o != nil && !isNil(o.Replicateable) {
 		return true
 	}
@@ -1151,12 +1151,12 @@ func (o *SObjectDescribe) HasReplicateable() bool {
 }
 
 // SetReplicateable gets a reference to the given bool and assigns it to the Replicateable field.
-func (o *SObjectDescribe) SetReplicateable(v bool) {
+func (o *SobjectDescribe) SetReplicateable(v bool) {
 	o.Replicateable = &v
 }
 
 // GetRetrieveable returns the Retrieveable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetRetrieveable() bool {
+func (o *SobjectDescribe) GetRetrieveable() bool {
 	if o == nil || isNil(o.Retrieveable) {
 		var ret bool
 		return ret
@@ -1166,7 +1166,7 @@ func (o *SObjectDescribe) GetRetrieveable() bool {
 
 // GetRetrieveableOk returns a tuple with the Retrieveable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetRetrieveableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetRetrieveableOk() (*bool, bool) {
 	if o == nil || isNil(o.Retrieveable) {
 		return nil, false
 	}
@@ -1174,7 +1174,7 @@ func (o *SObjectDescribe) GetRetrieveableOk() (*bool, bool) {
 }
 
 // HasRetrieveable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasRetrieveable() bool {
+func (o *SobjectDescribe) HasRetrieveable() bool {
 	if o != nil && !isNil(o.Retrieveable) {
 		return true
 	}
@@ -1183,12 +1183,12 @@ func (o *SObjectDescribe) HasRetrieveable() bool {
 }
 
 // SetRetrieveable gets a reference to the given bool and assigns it to the Retrieveable field.
-func (o *SObjectDescribe) SetRetrieveable(v bool) {
+func (o *SobjectDescribe) SetRetrieveable(v bool) {
 	o.Retrieveable = &v
 }
 
 // GetSearchLayoutable returns the SearchLayoutable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetSearchLayoutable() bool {
+func (o *SobjectDescribe) GetSearchLayoutable() bool {
 	if o == nil || isNil(o.SearchLayoutable) {
 		var ret bool
 		return ret
@@ -1198,7 +1198,7 @@ func (o *SObjectDescribe) GetSearchLayoutable() bool {
 
 // GetSearchLayoutableOk returns a tuple with the SearchLayoutable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetSearchLayoutableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetSearchLayoutableOk() (*bool, bool) {
 	if o == nil || isNil(o.SearchLayoutable) {
 		return nil, false
 	}
@@ -1206,7 +1206,7 @@ func (o *SObjectDescribe) GetSearchLayoutableOk() (*bool, bool) {
 }
 
 // HasSearchLayoutable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasSearchLayoutable() bool {
+func (o *SobjectDescribe) HasSearchLayoutable() bool {
 	if o != nil && !isNil(o.SearchLayoutable) {
 		return true
 	}
@@ -1215,12 +1215,12 @@ func (o *SObjectDescribe) HasSearchLayoutable() bool {
 }
 
 // SetSearchLayoutable gets a reference to the given bool and assigns it to the SearchLayoutable field.
-func (o *SObjectDescribe) SetSearchLayoutable(v bool) {
+func (o *SobjectDescribe) SetSearchLayoutable(v bool) {
 	o.SearchLayoutable = &v
 }
 
 // GetSearchable returns the Searchable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetSearchable() bool {
+func (o *SobjectDescribe) GetSearchable() bool {
 	if o == nil || isNil(o.Searchable) {
 		var ret bool
 		return ret
@@ -1230,7 +1230,7 @@ func (o *SObjectDescribe) GetSearchable() bool {
 
 // GetSearchableOk returns a tuple with the Searchable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetSearchableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetSearchableOk() (*bool, bool) {
 	if o == nil || isNil(o.Searchable) {
 		return nil, false
 	}
@@ -1238,7 +1238,7 @@ func (o *SObjectDescribe) GetSearchableOk() (*bool, bool) {
 }
 
 // HasSearchable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasSearchable() bool {
+func (o *SobjectDescribe) HasSearchable() bool {
 	if o != nil && !isNil(o.Searchable) {
 		return true
 	}
@@ -1247,12 +1247,12 @@ func (o *SObjectDescribe) HasSearchable() bool {
 }
 
 // SetSearchable gets a reference to the given bool and assigns it to the Searchable field.
-func (o *SObjectDescribe) SetSearchable(v bool) {
+func (o *SobjectDescribe) SetSearchable(v bool) {
 	o.Searchable = &v
 }
 
 // GetSobjectDescribeOption returns the SobjectDescribeOption field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetSobjectDescribeOption() string {
+func (o *SobjectDescribe) GetSobjectDescribeOption() string {
 	if o == nil || isNil(o.SobjectDescribeOption) {
 		var ret string
 		return ret
@@ -1262,7 +1262,7 @@ func (o *SObjectDescribe) GetSobjectDescribeOption() string {
 
 // GetSobjectDescribeOptionOk returns a tuple with the SobjectDescribeOption field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetSobjectDescribeOptionOk() (*string, bool) {
+func (o *SobjectDescribe) GetSobjectDescribeOptionOk() (*string, bool) {
 	if o == nil || isNil(o.SobjectDescribeOption) {
 		return nil, false
 	}
@@ -1270,7 +1270,7 @@ func (o *SObjectDescribe) GetSobjectDescribeOptionOk() (*string, bool) {
 }
 
 // HasSobjectDescribeOption returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasSobjectDescribeOption() bool {
+func (o *SobjectDescribe) HasSobjectDescribeOption() bool {
 	if o != nil && !isNil(o.SobjectDescribeOption) {
 		return true
 	}
@@ -1279,12 +1279,12 @@ func (o *SObjectDescribe) HasSobjectDescribeOption() bool {
 }
 
 // SetSobjectDescribeOption gets a reference to the given string and assigns it to the SobjectDescribeOption field.
-func (o *SObjectDescribe) SetSobjectDescribeOption(v string) {
+func (o *SobjectDescribe) SetSobjectDescribeOption(v string) {
 	o.SobjectDescribeOption = &v
 }
 
 // GetTriggerable returns the Triggerable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetTriggerable() bool {
+func (o *SobjectDescribe) GetTriggerable() bool {
 	if o == nil || isNil(o.Triggerable) {
 		var ret bool
 		return ret
@@ -1294,7 +1294,7 @@ func (o *SObjectDescribe) GetTriggerable() bool {
 
 // GetTriggerableOk returns a tuple with the Triggerable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetTriggerableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetTriggerableOk() (*bool, bool) {
 	if o == nil || isNil(o.Triggerable) {
 		return nil, false
 	}
@@ -1302,7 +1302,7 @@ func (o *SObjectDescribe) GetTriggerableOk() (*bool, bool) {
 }
 
 // HasTriggerable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasTriggerable() bool {
+func (o *SobjectDescribe) HasTriggerable() bool {
 	if o != nil && !isNil(o.Triggerable) {
 		return true
 	}
@@ -1311,12 +1311,12 @@ func (o *SObjectDescribe) HasTriggerable() bool {
 }
 
 // SetTriggerable gets a reference to the given bool and assigns it to the Triggerable field.
-func (o *SObjectDescribe) SetTriggerable(v bool) {
+func (o *SobjectDescribe) SetTriggerable(v bool) {
 	o.Triggerable = &v
 }
 
 // GetUndeletable returns the Undeletable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetUndeletable() bool {
+func (o *SobjectDescribe) GetUndeletable() bool {
 	if o == nil || isNil(o.Undeletable) {
 		var ret bool
 		return ret
@@ -1326,7 +1326,7 @@ func (o *SObjectDescribe) GetUndeletable() bool {
 
 // GetUndeletableOk returns a tuple with the Undeletable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetUndeletableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetUndeletableOk() (*bool, bool) {
 	if o == nil || isNil(o.Undeletable) {
 		return nil, false
 	}
@@ -1334,7 +1334,7 @@ func (o *SObjectDescribe) GetUndeletableOk() (*bool, bool) {
 }
 
 // HasUndeletable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasUndeletable() bool {
+func (o *SobjectDescribe) HasUndeletable() bool {
 	if o != nil && !isNil(o.Undeletable) {
 		return true
 	}
@@ -1343,12 +1343,12 @@ func (o *SObjectDescribe) HasUndeletable() bool {
 }
 
 // SetUndeletable gets a reference to the given bool and assigns it to the Undeletable field.
-func (o *SObjectDescribe) SetUndeletable(v bool) {
+func (o *SobjectDescribe) SetUndeletable(v bool) {
 	o.Undeletable = &v
 }
 
 // GetUpdateable returns the Updateable field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetUpdateable() bool {
+func (o *SobjectDescribe) GetUpdateable() bool {
 	if o == nil || isNil(o.Updateable) {
 		var ret bool
 		return ret
@@ -1358,7 +1358,7 @@ func (o *SObjectDescribe) GetUpdateable() bool {
 
 // GetUpdateableOk returns a tuple with the Updateable field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetUpdateableOk() (*bool, bool) {
+func (o *SobjectDescribe) GetUpdateableOk() (*bool, bool) {
 	if o == nil || isNil(o.Updateable) {
 		return nil, false
 	}
@@ -1366,7 +1366,7 @@ func (o *SObjectDescribe) GetUpdateableOk() (*bool, bool) {
 }
 
 // HasUpdateable returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasUpdateable() bool {
+func (o *SobjectDescribe) HasUpdateable() bool {
 	if o != nil && !isNil(o.Updateable) {
 		return true
 	}
@@ -1375,12 +1375,12 @@ func (o *SObjectDescribe) HasUpdateable() bool {
 }
 
 // SetUpdateable gets a reference to the given bool and assigns it to the Updateable field.
-func (o *SObjectDescribe) SetUpdateable(v bool) {
+func (o *SobjectDescribe) SetUpdateable(v bool) {
 	o.Updateable = &v
 }
 
 // GetNamedLayoutInfos returns the NamedLayoutInfos field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetNamedLayoutInfos() []interface{} {
+func (o *SobjectDescribe) GetNamedLayoutInfos() []interface{} {
 	if o == nil || isNil(o.NamedLayoutInfos) {
 		var ret []interface{}
 		return ret
@@ -1390,7 +1390,7 @@ func (o *SObjectDescribe) GetNamedLayoutInfos() []interface{} {
 
 // GetNamedLayoutInfosOk returns a tuple with the NamedLayoutInfos field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetNamedLayoutInfosOk() ([]interface{}, bool) {
+func (o *SobjectDescribe) GetNamedLayoutInfosOk() ([]interface{}, bool) {
 	if o == nil || isNil(o.NamedLayoutInfos) {
 		return nil, false
 	}
@@ -1398,7 +1398,7 @@ func (o *SObjectDescribe) GetNamedLayoutInfosOk() ([]interface{}, bool) {
 }
 
 // HasNamedLayoutInfos returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasNamedLayoutInfos() bool {
+func (o *SobjectDescribe) HasNamedLayoutInfos() bool {
 	if o != nil && !isNil(o.NamedLayoutInfos) {
 		return true
 	}
@@ -1407,14 +1407,14 @@ func (o *SObjectDescribe) HasNamedLayoutInfos() bool {
 }
 
 // SetNamedLayoutInfos gets a reference to the given []interface{} and assigns it to the NamedLayoutInfos field.
-func (o *SObjectDescribe) SetNamedLayoutInfos(v []interface{}) {
+func (o *SobjectDescribe) SetNamedLayoutInfos(v []interface{}) {
 	o.NamedLayoutInfos = v
 }
 
 // GetActionOverrides returns the ActionOverrides field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetActionOverrides() []SObjectDescribeActionOverrides {
+func (o *SobjectDescribe) GetActionOverrides() []ActionOverrides {
 	if o == nil || isNil(o.ActionOverrides) {
-		var ret []SObjectDescribeActionOverrides
+		var ret []ActionOverrides
 		return ret
 	}
 	return o.ActionOverrides
@@ -1422,7 +1422,7 @@ func (o *SObjectDescribe) GetActionOverrides() []SObjectDescribeActionOverrides 
 
 // GetActionOverridesOk returns a tuple with the ActionOverrides field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetActionOverridesOk() ([]SObjectDescribeActionOverrides, bool) {
+func (o *SobjectDescribe) GetActionOverridesOk() ([]ActionOverrides, bool) {
 	if o == nil || isNil(o.ActionOverrides) {
 		return nil, false
 	}
@@ -1430,7 +1430,7 @@ func (o *SObjectDescribe) GetActionOverridesOk() ([]SObjectDescribeActionOverrid
 }
 
 // HasActionOverrides returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasActionOverrides() bool {
+func (o *SobjectDescribe) HasActionOverrides() bool {
 	if o != nil && !isNil(o.ActionOverrides) {
 		return true
 	}
@@ -1438,15 +1438,15 @@ func (o *SObjectDescribe) HasActionOverrides() bool {
 	return false
 }
 
-// SetActionOverrides gets a reference to the given []SObjectDescribeActionOverrides and assigns it to the ActionOverrides field.
-func (o *SObjectDescribe) SetActionOverrides(v []SObjectDescribeActionOverrides) {
+// SetActionOverrides gets a reference to the given []ActionOverrides and assigns it to the ActionOverrides field.
+func (o *SobjectDescribe) SetActionOverrides(v []ActionOverrides) {
 	o.ActionOverrides = v
 }
 
 // GetChildRelationships returns the ChildRelationships field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetChildRelationships() []SObjectDescribeChildRelationships {
+func (o *SobjectDescribe) GetChildRelationships() []ChildRelationships {
 	if o == nil || isNil(o.ChildRelationships) {
-		var ret []SObjectDescribeChildRelationships
+		var ret []ChildRelationships
 		return ret
 	}
 	return o.ChildRelationships
@@ -1454,7 +1454,7 @@ func (o *SObjectDescribe) GetChildRelationships() []SObjectDescribeChildRelation
 
 // GetChildRelationshipsOk returns a tuple with the ChildRelationships field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetChildRelationshipsOk() ([]SObjectDescribeChildRelationships, bool) {
+func (o *SobjectDescribe) GetChildRelationshipsOk() ([]ChildRelationships, bool) {
 	if o == nil || isNil(o.ChildRelationships) {
 		return nil, false
 	}
@@ -1462,7 +1462,7 @@ func (o *SObjectDescribe) GetChildRelationshipsOk() ([]SObjectDescribeChildRelat
 }
 
 // HasChildRelationships returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasChildRelationships() bool {
+func (o *SobjectDescribe) HasChildRelationships() bool {
 	if o != nil && !isNil(o.ChildRelationships) {
 		return true
 	}
@@ -1470,15 +1470,15 @@ func (o *SObjectDescribe) HasChildRelationships() bool {
 	return false
 }
 
-// SetChildRelationships gets a reference to the given []SObjectDescribeChildRelationships and assigns it to the ChildRelationships field.
-func (o *SObjectDescribe) SetChildRelationships(v []SObjectDescribeChildRelationships) {
+// SetChildRelationships gets a reference to the given []ChildRelationships and assigns it to the ChildRelationships field.
+func (o *SobjectDescribe) SetChildRelationships(v []ChildRelationships) {
 	o.ChildRelationships = v
 }
 
 // GetRecordTypeInfos returns the RecordTypeInfos field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetRecordTypeInfos() []SObjectRecordTypeInfo {
+func (o *SobjectDescribe) GetRecordTypeInfos() []RecordTypeInfo {
 	if o == nil || isNil(o.RecordTypeInfos) {
-		var ret []SObjectRecordTypeInfo
+		var ret []RecordTypeInfo
 		return ret
 	}
 	return o.RecordTypeInfos
@@ -1486,7 +1486,7 @@ func (o *SObjectDescribe) GetRecordTypeInfos() []SObjectRecordTypeInfo {
 
 // GetRecordTypeInfosOk returns a tuple with the RecordTypeInfos field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetRecordTypeInfosOk() ([]SObjectRecordTypeInfo, bool) {
+func (o *SobjectDescribe) GetRecordTypeInfosOk() ([]RecordTypeInfo, bool) {
 	if o == nil || isNil(o.RecordTypeInfos) {
 		return nil, false
 	}
@@ -1494,7 +1494,7 @@ func (o *SObjectDescribe) GetRecordTypeInfosOk() ([]SObjectRecordTypeInfo, bool)
 }
 
 // HasRecordTypeInfos returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasRecordTypeInfos() bool {
+func (o *SobjectDescribe) HasRecordTypeInfos() bool {
 	if o != nil && !isNil(o.RecordTypeInfos) {
 		return true
 	}
@@ -1502,15 +1502,15 @@ func (o *SObjectDescribe) HasRecordTypeInfos() bool {
 	return false
 }
 
-// SetRecordTypeInfos gets a reference to the given []SObjectRecordTypeInfo and assigns it to the RecordTypeInfos field.
-func (o *SObjectDescribe) SetRecordTypeInfos(v []SObjectRecordTypeInfo) {
+// SetRecordTypeInfos gets a reference to the given []RecordTypeInfo and assigns it to the RecordTypeInfos field.
+func (o *SobjectDescribe) SetRecordTypeInfos(v []RecordTypeInfo) {
 	o.RecordTypeInfos = v
 }
 
 // GetSupportedScopes returns the SupportedScopes field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetSupportedScopes() []SObjectDescribeSupportedScopes {
+func (o *SobjectDescribe) GetSupportedScopes() []SupportedScopes {
 	if o == nil || isNil(o.SupportedScopes) {
-		var ret []SObjectDescribeSupportedScopes
+		var ret []SupportedScopes
 		return ret
 	}
 	return o.SupportedScopes
@@ -1518,7 +1518,7 @@ func (o *SObjectDescribe) GetSupportedScopes() []SObjectDescribeSupportedScopes 
 
 // GetSupportedScopesOk returns a tuple with the SupportedScopes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetSupportedScopesOk() ([]SObjectDescribeSupportedScopes, bool) {
+func (o *SobjectDescribe) GetSupportedScopesOk() ([]SupportedScopes, bool) {
 	if o == nil || isNil(o.SupportedScopes) {
 		return nil, false
 	}
@@ -1526,7 +1526,7 @@ func (o *SObjectDescribe) GetSupportedScopesOk() ([]SObjectDescribeSupportedScop
 }
 
 // HasSupportedScopes returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasSupportedScopes() bool {
+func (o *SobjectDescribe) HasSupportedScopes() bool {
 	if o != nil && !isNil(o.SupportedScopes) {
 		return true
 	}
@@ -1534,13 +1534,13 @@ func (o *SObjectDescribe) HasSupportedScopes() bool {
 	return false
 }
 
-// SetSupportedScopes gets a reference to the given []SObjectDescribeSupportedScopes and assigns it to the SupportedScopes field.
-func (o *SObjectDescribe) SetSupportedScopes(v []SObjectDescribeSupportedScopes) {
+// SetSupportedScopes gets a reference to the given []SupportedScopes and assigns it to the SupportedScopes field.
+func (o *SobjectDescribe) SetSupportedScopes(v []SupportedScopes) {
 	o.SupportedScopes = v
 }
 
 // GetUrls returns the Urls field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetUrls() map[string]interface{} {
+func (o *SobjectDescribe) GetUrls() map[string]interface{} {
 	if o == nil || isNil(o.Urls) {
 		var ret map[string]interface{}
 		return ret
@@ -1550,7 +1550,7 @@ func (o *SObjectDescribe) GetUrls() map[string]interface{} {
 
 // GetUrlsOk returns a tuple with the Urls field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetUrlsOk() (map[string]interface{}, bool) {
+func (o *SobjectDescribe) GetUrlsOk() (map[string]interface{}, bool) {
 	if o == nil || isNil(o.Urls) {
 		return map[string]interface{}{}, false
 	}
@@ -1558,7 +1558,7 @@ func (o *SObjectDescribe) GetUrlsOk() (map[string]interface{}, bool) {
 }
 
 // HasUrls returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasUrls() bool {
+func (o *SobjectDescribe) HasUrls() bool {
 	if o != nil && !isNil(o.Urls) {
 		return true
 	}
@@ -1567,14 +1567,14 @@ func (o *SObjectDescribe) HasUrls() bool {
 }
 
 // SetUrls gets a reference to the given map[string]interface{} and assigns it to the Urls field.
-func (o *SObjectDescribe) SetUrls(v map[string]interface{}) {
+func (o *SobjectDescribe) SetUrls(v map[string]interface{}) {
 	o.Urls = v
 }
 
 // GetFields returns the Fields field value if set, zero value otherwise.
-func (o *SObjectDescribe) GetFields() []SObjectFieldDescribe {
+func (o *SobjectDescribe) GetFields() []FieldDescribe {
 	if o == nil || isNil(o.Fields) {
-		var ret []SObjectFieldDescribe
+		var ret []FieldDescribe
 		return ret
 	}
 	return o.Fields
@@ -1582,7 +1582,7 @@ func (o *SObjectDescribe) GetFields() []SObjectFieldDescribe {
 
 // GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectDescribe) GetFieldsOk() ([]SObjectFieldDescribe, bool) {
+func (o *SobjectDescribe) GetFieldsOk() ([]FieldDescribe, bool) {
 	if o == nil || isNil(o.Fields) {
 		return nil, false
 	}
@@ -1590,7 +1590,7 @@ func (o *SObjectDescribe) GetFieldsOk() ([]SObjectFieldDescribe, bool) {
 }
 
 // HasFields returns a boolean if a field has been set.
-func (o *SObjectDescribe) HasFields() bool {
+func (o *SobjectDescribe) HasFields() bool {
 	if o != nil && !isNil(o.Fields) {
 		return true
 	}
@@ -1598,12 +1598,12 @@ func (o *SObjectDescribe) HasFields() bool {
 	return false
 }
 
-// SetFields gets a reference to the given []SObjectFieldDescribe and assigns it to the Fields field.
-func (o *SObjectDescribe) SetFields(v []SObjectFieldDescribe) {
+// SetFields gets a reference to the given []FieldDescribe and assigns it to the Fields field.
+func (o *SobjectDescribe) SetFields(v []FieldDescribe) {
 	o.Fields = v
 }
 
-func (o SObjectDescribe) MarshalJSON() ([]byte, error) {
+func (o SobjectDescribe) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Activateable) {
 		toSerialize["activateable"] = o.Activateable
@@ -1743,38 +1743,38 @@ func (o SObjectDescribe) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableSObjectDescribe struct {
-	value *SObjectDescribe
+type NullableSobjectDescribe struct {
+	value *SobjectDescribe
 	isSet bool
 }
 
-func (v NullableSObjectDescribe) Get() *SObjectDescribe {
+func (v NullableSobjectDescribe) Get() *SobjectDescribe {
 	return v.value
 }
 
-func (v *NullableSObjectDescribe) Set(val *SObjectDescribe) {
+func (v *NullableSobjectDescribe) Set(val *SobjectDescribe) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSObjectDescribe) IsSet() bool {
+func (v NullableSobjectDescribe) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSObjectDescribe) Unset() {
+func (v *NullableSobjectDescribe) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSObjectDescribe(val *SObjectDescribe) *NullableSObjectDescribe {
-	return &NullableSObjectDescribe{value: val, isSet: true}
+func NewNullableSobjectDescribe(val *SobjectDescribe) *NullableSobjectDescribe {
+	return &NullableSobjectDescribe{value: val, isSet: true}
 }
 
-func (v NullableSObjectDescribe) MarshalJSON() ([]byte, error) {
+func (v NullableSobjectDescribe) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSObjectDescribe) UnmarshalJSON(src []byte) error {
+func (v *NullableSobjectDescribe) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

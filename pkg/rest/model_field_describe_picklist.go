@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// SObjectFieldDescribePicklist struct for SObjectFieldDescribePicklist
-type SObjectFieldDescribePicklist struct {
+// FieldDescribePicklist struct for FieldDescribePicklist
+type FieldDescribePicklist struct {
 	Active       *bool          `json:"active,omitempty"`
 	DefaultValue *bool          `json:"defaultValue,omitempty"`
 	Label        *string        `json:"label,omitempty"`
@@ -24,25 +24,25 @@ type SObjectFieldDescribePicklist struct {
 	Value        *string        `json:"value,omitempty"`
 }
 
-// NewSObjectFieldDescribePicklist instantiates a new SObjectFieldDescribePicklist object
+// NewFieldDescribePicklist instantiates a new FieldDescribePicklist object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSObjectFieldDescribePicklist() *SObjectFieldDescribePicklist {
-	this := SObjectFieldDescribePicklist{}
+func NewFieldDescribePicklist() *FieldDescribePicklist {
+	this := FieldDescribePicklist{}
 	return &this
 }
 
-// NewSObjectFieldDescribePicklistWithDefaults instantiates a new SObjectFieldDescribePicklist object
+// NewFieldDescribePicklistWithDefaults instantiates a new FieldDescribePicklist object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSObjectFieldDescribePicklistWithDefaults() *SObjectFieldDescribePicklist {
-	this := SObjectFieldDescribePicklist{}
+func NewFieldDescribePicklistWithDefaults() *FieldDescribePicklist {
+	this := FieldDescribePicklist{}
 	return &this
 }
 
 // GetActive returns the Active field value if set, zero value otherwise.
-func (o *SObjectFieldDescribePicklist) GetActive() bool {
+func (o *FieldDescribePicklist) GetActive() bool {
 	if o == nil || isNil(o.Active) {
 		var ret bool
 		return ret
@@ -52,7 +52,7 @@ func (o *SObjectFieldDescribePicklist) GetActive() bool {
 
 // GetActiveOk returns a tuple with the Active field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectFieldDescribePicklist) GetActiveOk() (*bool, bool) {
+func (o *FieldDescribePicklist) GetActiveOk() (*bool, bool) {
 	if o == nil || isNil(o.Active) {
 		return nil, false
 	}
@@ -60,7 +60,7 @@ func (o *SObjectFieldDescribePicklist) GetActiveOk() (*bool, bool) {
 }
 
 // HasActive returns a boolean if a field has been set.
-func (o *SObjectFieldDescribePicklist) HasActive() bool {
+func (o *FieldDescribePicklist) HasActive() bool {
 	if o != nil && !isNil(o.Active) {
 		return true
 	}
@@ -69,12 +69,12 @@ func (o *SObjectFieldDescribePicklist) HasActive() bool {
 }
 
 // SetActive gets a reference to the given bool and assigns it to the Active field.
-func (o *SObjectFieldDescribePicklist) SetActive(v bool) {
+func (o *FieldDescribePicklist) SetActive(v bool) {
 	o.Active = &v
 }
 
 // GetDefaultValue returns the DefaultValue field value if set, zero value otherwise.
-func (o *SObjectFieldDescribePicklist) GetDefaultValue() bool {
+func (o *FieldDescribePicklist) GetDefaultValue() bool {
 	if o == nil || isNil(o.DefaultValue) {
 		var ret bool
 		return ret
@@ -84,7 +84,7 @@ func (o *SObjectFieldDescribePicklist) GetDefaultValue() bool {
 
 // GetDefaultValueOk returns a tuple with the DefaultValue field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectFieldDescribePicklist) GetDefaultValueOk() (*bool, bool) {
+func (o *FieldDescribePicklist) GetDefaultValueOk() (*bool, bool) {
 	if o == nil || isNil(o.DefaultValue) {
 		return nil, false
 	}
@@ -92,7 +92,7 @@ func (o *SObjectFieldDescribePicklist) GetDefaultValueOk() (*bool, bool) {
 }
 
 // HasDefaultValue returns a boolean if a field has been set.
-func (o *SObjectFieldDescribePicklist) HasDefaultValue() bool {
+func (o *FieldDescribePicklist) HasDefaultValue() bool {
 	if o != nil && !isNil(o.DefaultValue) {
 		return true
 	}
@@ -101,12 +101,12 @@ func (o *SObjectFieldDescribePicklist) HasDefaultValue() bool {
 }
 
 // SetDefaultValue gets a reference to the given bool and assigns it to the DefaultValue field.
-func (o *SObjectFieldDescribePicklist) SetDefaultValue(v bool) {
+func (o *FieldDescribePicklist) SetDefaultValue(v bool) {
 	o.DefaultValue = &v
 }
 
 // GetLabel returns the Label field value if set, zero value otherwise.
-func (o *SObjectFieldDescribePicklist) GetLabel() string {
+func (o *FieldDescribePicklist) GetLabel() string {
 	if o == nil || isNil(o.Label) {
 		var ret string
 		return ret
@@ -116,7 +116,7 @@ func (o *SObjectFieldDescribePicklist) GetLabel() string {
 
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectFieldDescribePicklist) GetLabelOk() (*string, bool) {
+func (o *FieldDescribePicklist) GetLabelOk() (*string, bool) {
 	if o == nil || isNil(o.Label) {
 		return nil, false
 	}
@@ -124,7 +124,7 @@ func (o *SObjectFieldDescribePicklist) GetLabelOk() (*string, bool) {
 }
 
 // HasLabel returns a boolean if a field has been set.
-func (o *SObjectFieldDescribePicklist) HasLabel() bool {
+func (o *FieldDescribePicklist) HasLabel() bool {
 	if o != nil && !isNil(o.Label) {
 		return true
 	}
@@ -133,12 +133,12 @@ func (o *SObjectFieldDescribePicklist) HasLabel() bool {
 }
 
 // SetLabel gets a reference to the given string and assigns it to the Label field.
-func (o *SObjectFieldDescribePicklist) SetLabel(v string) {
+func (o *FieldDescribePicklist) SetLabel(v string) {
 	o.Label = &v
 }
 
 // GetValidFor returns the ValidFor field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *SObjectFieldDescribePicklist) GetValidFor() string {
+func (o *FieldDescribePicklist) GetValidFor() string {
 	if o == nil || isNil(o.ValidFor.Get()) {
 		var ret string
 		return ret
@@ -149,7 +149,7 @@ func (o *SObjectFieldDescribePicklist) GetValidFor() string {
 // GetValidForOk returns a tuple with the ValidFor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *SObjectFieldDescribePicklist) GetValidForOk() (*string, bool) {
+func (o *FieldDescribePicklist) GetValidForOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -157,7 +157,7 @@ func (o *SObjectFieldDescribePicklist) GetValidForOk() (*string, bool) {
 }
 
 // HasValidFor returns a boolean if a field has been set.
-func (o *SObjectFieldDescribePicklist) HasValidFor() bool {
+func (o *FieldDescribePicklist) HasValidFor() bool {
 	if o != nil && o.ValidFor.IsSet() {
 		return true
 	}
@@ -166,22 +166,22 @@ func (o *SObjectFieldDescribePicklist) HasValidFor() bool {
 }
 
 // SetValidFor gets a reference to the given NullableString and assigns it to the ValidFor field.
-func (o *SObjectFieldDescribePicklist) SetValidFor(v string) {
+func (o *FieldDescribePicklist) SetValidFor(v string) {
 	o.ValidFor.Set(&v)
 }
 
 // SetValidForNil sets the value for ValidFor to be an explicit nil
-func (o *SObjectFieldDescribePicklist) SetValidForNil() {
+func (o *FieldDescribePicklist) SetValidForNil() {
 	o.ValidFor.Set(nil)
 }
 
 // UnsetValidFor ensures that no value is present for ValidFor, not even an explicit nil
-func (o *SObjectFieldDescribePicklist) UnsetValidFor() {
+func (o *FieldDescribePicklist) UnsetValidFor() {
 	o.ValidFor.Unset()
 }
 
 // GetValue returns the Value field value if set, zero value otherwise.
-func (o *SObjectFieldDescribePicklist) GetValue() string {
+func (o *FieldDescribePicklist) GetValue() string {
 	if o == nil || isNil(o.Value) {
 		var ret string
 		return ret
@@ -191,7 +191,7 @@ func (o *SObjectFieldDescribePicklist) GetValue() string {
 
 // GetValueOk returns a tuple with the Value field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *SObjectFieldDescribePicklist) GetValueOk() (*string, bool) {
+func (o *FieldDescribePicklist) GetValueOk() (*string, bool) {
 	if o == nil || isNil(o.Value) {
 		return nil, false
 	}
@@ -199,7 +199,7 @@ func (o *SObjectFieldDescribePicklist) GetValueOk() (*string, bool) {
 }
 
 // HasValue returns a boolean if a field has been set.
-func (o *SObjectFieldDescribePicklist) HasValue() bool {
+func (o *FieldDescribePicklist) HasValue() bool {
 	if o != nil && !isNil(o.Value) {
 		return true
 	}
@@ -208,11 +208,11 @@ func (o *SObjectFieldDescribePicklist) HasValue() bool {
 }
 
 // SetValue gets a reference to the given string and assigns it to the Value field.
-func (o *SObjectFieldDescribePicklist) SetValue(v string) {
+func (o *FieldDescribePicklist) SetValue(v string) {
 	o.Value = &v
 }
 
-func (o SObjectFieldDescribePicklist) MarshalJSON() ([]byte, error) {
+func (o FieldDescribePicklist) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.Active) {
 		toSerialize["active"] = o.Active
@@ -232,38 +232,38 @@ func (o SObjectFieldDescribePicklist) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableSObjectFieldDescribePicklist struct {
-	value *SObjectFieldDescribePicklist
+type NullableFieldDescribePicklist struct {
+	value *FieldDescribePicklist
 	isSet bool
 }
 
-func (v NullableSObjectFieldDescribePicklist) Get() *SObjectFieldDescribePicklist {
+func (v NullableFieldDescribePicklist) Get() *FieldDescribePicklist {
 	return v.value
 }
 
-func (v *NullableSObjectFieldDescribePicklist) Set(val *SObjectFieldDescribePicklist) {
+func (v *NullableFieldDescribePicklist) Set(val *FieldDescribePicklist) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSObjectFieldDescribePicklist) IsSet() bool {
+func (v NullableFieldDescribePicklist) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSObjectFieldDescribePicklist) Unset() {
+func (v *NullableFieldDescribePicklist) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSObjectFieldDescribePicklist(val *SObjectFieldDescribePicklist) *NullableSObjectFieldDescribePicklist {
-	return &NullableSObjectFieldDescribePicklist{value: val, isSet: true}
+func NewNullableFieldDescribePicklist(val *FieldDescribePicklist) *NullableFieldDescribePicklist {
+	return &NullableFieldDescribePicklist{value: val, isSet: true}
 }
 
-func (v NullableSObjectFieldDescribePicklist) MarshalJSON() ([]byte, error) {
+func (v NullableFieldDescribePicklist) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSObjectFieldDescribePicklist) UnmarshalJSON(src []byte) error {
+func (v *NullableFieldDescribePicklist) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
