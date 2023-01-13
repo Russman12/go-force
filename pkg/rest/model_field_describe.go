@@ -70,7 +70,7 @@ type FieldDescribe struct {
 	SearchPrefilterable          *bool                   `json:"searchPrefilterable,omitempty"`
 	SoapType                     *string                 `json:"soapType,omitempty"`
 	Sortable                     *bool                   `json:"sortable,omitempty"`
-	Type                         *string                 `json:"type,omitempty"`
+	Type                         *FieldType              `json:"type,omitempty"`
 	Unique                       *bool                   `json:"unique,omitempty"`
 	Updateable                   *bool                   `json:"updateable,omitempty"`
 	WriteRequiresMasterRead      *bool                   `json:"writeRequiresMasterRead,omitempty"`
@@ -1913,9 +1913,9 @@ func (o *FieldDescribe) SetSortable(v bool) {
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *FieldDescribe) GetType() string {
+func (o *FieldDescribe) GetType() FieldType {
 	if o == nil || isNil(o.Type) {
-		var ret string
+		var ret FieldType
 		return ret
 	}
 	return *o.Type
@@ -1923,7 +1923,7 @@ func (o *FieldDescribe) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FieldDescribe) GetTypeOk() (*string, bool) {
+func (o *FieldDescribe) GetTypeOk() (*FieldType, bool) {
 	if o == nil || isNil(o.Type) {
 		return nil, false
 	}
@@ -1939,8 +1939,8 @@ func (o *FieldDescribe) HasType() bool {
 	return false
 }
 
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *FieldDescribe) SetType(v string) {
+// SetType gets a reference to the given FieldType and assigns it to the Type field.
+func (o *FieldDescribe) SetType(v FieldType) {
 	o.Type = &v
 }
 

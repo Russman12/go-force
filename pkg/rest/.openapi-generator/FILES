@@ -7,6 +7,7 @@ docs/ActionOverrides.md
 docs/ChildRelationships.md
 docs/FieldDescribe.md
 docs/FieldDescribePicklist.md
+docs/FieldType.md
 docs/RecordTypeInfo.md
 docs/RecordTypeInfoUrls.md
 docs/SObjectApi.md
@@ -17,6 +18,7 @@ model_action_overrides.go
 model_child_relationships.go
 model_field_describe.go
 model_field_describe_picklist.go
+model_field_type.go
 model_record_type_info.go
 model_record_type_info_urls.go
 model_s_object_describe.go

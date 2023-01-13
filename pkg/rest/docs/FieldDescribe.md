@@ -57,7 +57,7 @@ Name | Type | Description | Notes
 **SearchPrefilterable** | Pointer to **bool** |  | [optional] 
 **SoapType** | Pointer to **string** |  | [optional] 
 **Sortable** | Pointer to **bool** |  | [optional] 
-**Type** | Pointer to **string** |  | [optional] 
+**Type** | Pointer to [**FieldType**](FieldType.md) |  | [optional] 
 **Unique** | Pointer to **bool** |  | [optional] 
 **Updateable** | Pointer to **bool** |  | [optional] 
 **WriteRequiresMasterRead** | Pointer to **bool** |  | [optional] 
@@ -1538,20 +1538,20 @@ HasSortable returns a boolean if a field has been set.
 
 ### GetType
 
-`func (o *FieldDescribe) GetType() string`
+`func (o *FieldDescribe) GetType() FieldType`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *FieldDescribe) GetTypeOk() (*string, bool)`
+`func (o *FieldDescribe) GetTypeOk() (*FieldType, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *FieldDescribe) SetType(v string)`
+`func (o *FieldDescribe) SetType(v FieldType)`
 
 SetType sets Type field to given value.
 

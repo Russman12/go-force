@@ -775,34 +775,7 @@ components:
         sortable:
           type: boolean
         type:
-          enum:
-          - address
-          - anytype
-          - base64
-          - boolean
-          - combobox
-          - currency
-          - datacategorygroupreference
-          - date
-          - datetime
-          - double
-          - email
-          - encryptedstring
-          - id
-          - integer
-          - location
-          - long
-          - multipicklist
-          - percent
-          - phone
-          - picklist
-          - reference
-          - string
-          - textarea
-          - time
-          - url
-          example: id
-          type: string
+          $ref: '#/components/schemas/fieldType'
         unique:
           type: boolean
         updateable:
@@ -833,3 +806,32 @@ components:
       - encoding
       - maxBatchSize
       - sobjects
+    fieldType:
+      enum:
+      - address
+      - anytype
+      - base64
+      - boolean
+      - combobox
+      - currency
+      - datacategorygroupreference
+      - date
+      - datetime
+      - double
+      - email
+      - encryptedstring
+      - id
+      - integer
+      - location
+      - long
+      - multipicklist
+      - percent
+      - phone
+      - picklist
+      - reference
+      - string
+      - textarea
+      - time
+      - url
+      example: id
+      type: string

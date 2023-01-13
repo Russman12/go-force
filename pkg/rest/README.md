@@ -25,6 +25,7 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
  - [ChildRelationships](docs/ChildRelationships.md)
  - [FieldDescribe](docs/FieldDescribe.md)
  - [FieldDescribePicklist](docs/FieldDescribePicklist.md)
+ - [FieldType](docs/FieldType.md)
  - [RecordTypeInfo](docs/RecordTypeInfo.md)
  - [RecordTypeInfoUrls](docs/RecordTypeInfoUrls.md)
  - [SObjectDescribe](docs/SObjectDescribe.md)
