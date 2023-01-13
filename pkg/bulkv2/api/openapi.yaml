@@ -18,7 +18,7 @@ servers:
 paths:
   /jobs/query/{jobId}:
     delete:
-      operationId: QueryDeleteJob
+      operationId: DeleteJob
       parameters:
       - explode: false
         in: path
@@ -40,7 +40,7 @@ paths:
       tags:
       - Query
     get:
-      operationId: QueryJobInfo
+      operationId: JobInfo
       parameters:
       - explode: false
         in: path
@@ -66,7 +66,7 @@ paths:
       tags:
       - Query
     patch:
-      operationId: QueryAbortJob
+      operationId: AbortJob
       parameters:
       - explode: false
         in: path
@@ -95,7 +95,7 @@ paths:
       - Query
   /jobs/query/{jobId}/results:
     get:
-      operationId: QueryJobResults
+      operationId: GetJobResults
       parameters:
       - explode: false
         in: path
@@ -184,7 +184,7 @@ paths:
       - Query
   /jobs/query:
     get:
-      operationId: QueryJobs
+      operationId: GetJobs
       parameters:
       - description: "If set to true, the request only returns information about jobs\
           \ where PK Chunking is enabled."
@@ -245,7 +245,7 @@ paths:
       tags:
       - Query
     post:
-      operationId: QueryCreateJob
+      operationId: CreateJob
       parameters:
       - example: application/json
         explode: false
@@ -275,7 +275,7 @@ paths:
       - Query
   /jobs/ingest:
     get:
-      operationId: Jobs
+      operationId: getJobs
       parameters:
       - explode: true
         in: query
@@ -366,7 +366,7 @@ paths:
       - Job
   /jobs/ingest/{jobId}:
     delete:
-      operationId: DeleteJob
+      operationId: deleteJob
       parameters:
       - explode: false
         in: path
@@ -415,7 +415,7 @@ paths:
       tags:
       - Job
     patch:
-      operationId: CloseOrAbortJob
+      operationId: closeOrAbortJob
       parameters:
       - explode: false
         in: path
@@ -444,7 +444,7 @@ paths:
       - Job
   /jobs/ingest/{jobId}/successfulResults:
     get:
-      operationId: JobSuccessfulResults
+      operationId: getJobSuccessfulResults
       parameters:
       - explode: false
         in: path
@@ -472,7 +472,7 @@ paths:
       - Job
   /jobs/ingest/{jobId}/failedResults:
     get:
-      operationId: JobFailedResults
+      operationId: getJobFailedResults
       parameters:
       - explode: false
         in: path
@@ -500,7 +500,7 @@ paths:
       - Job
   /jobs/ingest/{jobId}/unprocessedrecords:
     get:
-      operationId: JobUnprocessedRecords
+      operationId: getJobUnprocessedRecords
       parameters:
       - explode: false
         in: path

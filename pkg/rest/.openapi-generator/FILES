@@ -23,5 +23,4 @@ model_s_object_field_describe_picklist.go
 model_s_object_record_type_info.go
 model_s_object_record_type_info_urls.go
 response.go
-test/api_s_object_test.go
 utils.go

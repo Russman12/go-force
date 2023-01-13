@@ -7,11 +7,11 @@ Method | HTTP request | Description
 [**CloseOrAbortJob**](JobApi.md#CloseOrAbortJob) | **Patch** /jobs/ingest/{jobId} | Close or Abort a Job
 [**CreateJob**](JobApi.md#CreateJob) | **Post** /jobs/ingest | Create job
 [**DeleteJob**](JobApi.md#DeleteJob) | **Delete** /jobs/ingest/{jobId} | Delete Job
+[**GetJobFailedResults**](JobApi.md#GetJobFailedResults) | **Get** /jobs/ingest/{jobId}/failedResults | Get Job Failed Record Results
 [**GetJobInfo**](JobApi.md#GetJobInfo) | **Get** /jobs/ingest/{jobId} | Get Job Info
-[**JobFailedResults**](JobApi.md#JobFailedResults) | **Get** /jobs/ingest/{jobId}/failedResults | Get Job Failed Record Results
-[**JobSuccessfulResults**](JobApi.md#JobSuccessfulResults) | **Get** /jobs/ingest/{jobId}/successfulResults | Get Job Successful Record Results
-[**JobUnprocessedRecords**](JobApi.md#JobUnprocessedRecords) | **Get** /jobs/ingest/{jobId}/unprocessedrecords | Get Job Unprocessed Record Results
-[**Jobs**](JobApi.md#Jobs) | **Get** /jobs/ingest | Get All Jobs
+[**GetJobSuccessfulResults**](JobApi.md#GetJobSuccessfulResults) | **Get** /jobs/ingest/{jobId}/successfulResults | Get Job Successful Record Results
+[**GetJobUnprocessedRecords**](JobApi.md#GetJobUnprocessedRecords) | **Get** /jobs/ingest/{jobId}/unprocessedrecords | Get Job Unprocessed Record Results
+[**GetJobs**](JobApi.md#GetJobs) | **Get** /jobs/ingest | Get All Jobs
 [**UploadJobData**](JobApi.md#UploadJobData) | **Put** /jobs/ingest/{jobId}/batches | Upload Job Data
 
 
@@ -216,6 +216,74 @@ No authorization required
 [[Back to README]](../README.md)
 
 
+## GetJobFailedResults
+
+> io.ReadCloser GetJobFailedResults(ctx, jobId).Execute()
+
+Get Job Failed Record Results
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    jobId := "jobId_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.JobApi.GetJobFailedResults(context.Background(), jobId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobFailedResults``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetJobFailedResults`: io.ReadCloser
+    fmt.Fprintf(os.Stdout, "Response from `JobApi.GetJobFailedResults`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**jobId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetJobFailedResultsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**io.ReadCloser**](io.ReadCloser.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: text/csv
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetJobInfo
 
 > JobInfo GetJobInfo(ctx, jobId).Execute()
@@ -284,77 +352,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## JobFailedResults
+## GetJobSuccessfulResults
 
-> io.ReadCloser JobFailedResults(ctx, jobId).Execute()
-
-Get Job Failed Record Results
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    jobId := "jobId_example" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.JobApi.JobFailedResults(context.Background(), jobId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `JobApi.JobFailedResults``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `JobFailedResults`: io.ReadCloser
-    fmt.Fprintf(os.Stdout, "Response from `JobApi.JobFailedResults`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiJobFailedResultsRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**io.ReadCloser**](io.ReadCloser.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: text/csv
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## JobSuccessfulResults
-
-> io.ReadCloser JobSuccessfulResults(ctx, jobId).Execute()
+> io.ReadCloser GetJobSuccessfulResults(ctx, jobId).Execute()
 
 Get Job Successful Record Results
 
@@ -375,13 +375,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.JobApi.JobSuccessfulResults(context.Background(), jobId).Execute()
+    resp, r, err := apiClient.JobApi.GetJobSuccessfulResults(context.Background(), jobId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `JobApi.JobSuccessfulResults``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobSuccessfulResults``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `JobSuccessfulResults`: io.ReadCloser
-    fmt.Fprintf(os.Stdout, "Response from `JobApi.JobSuccessfulResults`: %v\n", resp)
+    // response from `GetJobSuccessfulResults`: io.ReadCloser
+    fmt.Fprintf(os.Stdout, "Response from `JobApi.GetJobSuccessfulResults`: %v\n", resp)
 }
 ```
 
@@ -395,7 +395,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiJobSuccessfulResultsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetJobSuccessfulResultsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -420,9 +420,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## JobUnprocessedRecords
+## GetJobUnprocessedRecords
 
-> io.ReadCloser JobUnprocessedRecords(ctx, jobId).Execute()
+> io.ReadCloser GetJobUnprocessedRecords(ctx, jobId).Execute()
 
 Get Job Unprocessed Record Results
 
@@ -443,13 +443,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.JobApi.JobUnprocessedRecords(context.Background(), jobId).Execute()
+    resp, r, err := apiClient.JobApi.GetJobUnprocessedRecords(context.Background(), jobId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `JobApi.JobUnprocessedRecords``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobUnprocessedRecords``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `JobUnprocessedRecords`: io.ReadCloser
-    fmt.Fprintf(os.Stdout, "Response from `JobApi.JobUnprocessedRecords`: %v\n", resp)
+    // response from `GetJobUnprocessedRecords`: io.ReadCloser
+    fmt.Fprintf(os.Stdout, "Response from `JobApi.GetJobUnprocessedRecords`: %v\n", resp)
 }
 ```
 
@@ -463,7 +463,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiJobUnprocessedRecordsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetJobUnprocessedRecordsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -488,9 +488,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## Jobs
+## GetJobs
 
-> map[string]interface{} Jobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
+> map[string]interface{} GetJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
 
 Get All Jobs
 
@@ -513,13 +513,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.JobApi.Jobs(context.Background()).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
+    resp, r, err := apiClient.JobApi.GetJobs(context.Background()).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `JobApi.Jobs``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `Jobs`: map[string]interface{}
-    fmt.Fprintf(os.Stdout, "Response from `JobApi.Jobs`: %v\n", resp)
+    // response from `GetJobs`: map[string]interface{}
+    fmt.Fprintf(os.Stdout, "Response from `JobApi.GetJobs`: %v\n", resp)
 }
 ```
 
@@ -529,7 +529,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiJobsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetJobsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

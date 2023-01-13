@@ -339,6 +339,98 @@ func (a *JobApiService) DeleteJobExecute(r ApiDeleteJobRequest) (*http.Response,
 	return localVarHTTPResponse, nil
 }
 
+type ApiGetJobFailedResultsRequest struct {
+	ctx        context.Context
+	ApiService *JobApiService
+	jobId      string
+}
+
+func (r ApiGetJobFailedResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
+	return r.ApiService.GetJobFailedResultsExecute(r)
+}
+
+/*
+GetJobFailedResults Get Job Failed Record Results
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param jobId
+	@return ApiGetJobFailedResultsRequest
+*/
+func (a *JobApiService) GetJobFailedResults(ctx context.Context, jobId string) ApiGetJobFailedResultsRequest {
+	return ApiGetJobFailedResultsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		jobId:      jobId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return io.ReadCloser
+func (a *JobApiService) GetJobFailedResultsExecute(r ApiGetJobFailedResultsRequest) (*io.ReadCloser, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *io.ReadCloser
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.GetJobFailedResults")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/jobs/ingest/{jobId}/failedResults"
+	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterToString(r.jobId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"text/csv"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarHTTPResponse.Body.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
+}
+
 type ApiGetJobInfoRequest struct {
 	ctx        context.Context
 	ApiService *JobApiService
@@ -446,25 +538,25 @@ func (a *JobApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *ht
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiJobFailedResultsRequest struct {
+type ApiGetJobSuccessfulResultsRequest struct {
 	ctx        context.Context
 	ApiService *JobApiService
 	jobId      string
 }
 
-func (r ApiJobFailedResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
-	return r.ApiService.JobFailedResultsExecute(r)
+func (r ApiGetJobSuccessfulResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
+	return r.ApiService.GetJobSuccessfulResultsExecute(r)
 }
 
 /*
-JobFailedResults Get Job Failed Record Results
+GetJobSuccessfulResults Get Job Successful Record Results
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
-	@return ApiJobFailedResultsRequest
+	@return ApiGetJobSuccessfulResultsRequest
 */
-func (a *JobApiService) JobFailedResults(ctx context.Context, jobId string) ApiJobFailedResultsRequest {
-	return ApiJobFailedResultsRequest{
+func (a *JobApiService) GetJobSuccessfulResults(ctx context.Context, jobId string) ApiGetJobSuccessfulResultsRequest {
+	return ApiGetJobSuccessfulResultsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		jobId:      jobId,
@@ -474,7 +566,7 @@ func (a *JobApiService) JobFailedResults(ctx context.Context, jobId string) ApiJ
 // Execute executes the request
 //
 //	@return io.ReadCloser
-func (a *JobApiService) JobFailedResultsExecute(r ApiJobFailedResultsRequest) (*io.ReadCloser, *http.Response, error) {
+func (a *JobApiService) GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResultsRequest) (*io.ReadCloser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -482,99 +574,7 @@ func (a *JobApiService) JobFailedResultsExecute(r ApiJobFailedResultsRequest) (*
 		localVarReturnValue *io.ReadCloser
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.JobFailedResults")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/jobs/ingest/{jobId}/failedResults"
-	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterToString(r.jobId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/csv"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-		localVarHTTPResponse.Body.Close()
-		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-		if err != nil {
-			return localVarReturnValue, localVarHTTPResponse, err
-		}
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
-}
-
-type ApiJobSuccessfulResultsRequest struct {
-	ctx        context.Context
-	ApiService *JobApiService
-	jobId      string
-}
-
-func (r ApiJobSuccessfulResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
-	return r.ApiService.JobSuccessfulResultsExecute(r)
-}
-
-/*
-JobSuccessfulResults Get Job Successful Record Results
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param jobId
-	@return ApiJobSuccessfulResultsRequest
-*/
-func (a *JobApiService) JobSuccessfulResults(ctx context.Context, jobId string) ApiJobSuccessfulResultsRequest {
-	return ApiJobSuccessfulResultsRequest{
-		ApiService: a,
-		ctx:        ctx,
-		jobId:      jobId,
-	}
-}
-
-// Execute executes the request
-//
-//	@return io.ReadCloser
-func (a *JobApiService) JobSuccessfulResultsExecute(r ApiJobSuccessfulResultsRequest) (*io.ReadCloser, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *io.ReadCloser
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.JobSuccessfulResults")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.GetJobSuccessfulResults")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -630,25 +630,25 @@ func (a *JobApiService) JobSuccessfulResultsExecute(r ApiJobSuccessfulResultsReq
 	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
 }
 
-type ApiJobUnprocessedRecordsRequest struct {
+type ApiGetJobUnprocessedRecordsRequest struct {
 	ctx        context.Context
 	ApiService *JobApiService
 	jobId      string
 }
 
-func (r ApiJobUnprocessedRecordsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
-	return r.ApiService.JobUnprocessedRecordsExecute(r)
+func (r ApiGetJobUnprocessedRecordsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
+	return r.ApiService.GetJobUnprocessedRecordsExecute(r)
 }
 
 /*
-JobUnprocessedRecords Get Job Unprocessed Record Results
+GetJobUnprocessedRecords Get Job Unprocessed Record Results
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
-	@return ApiJobUnprocessedRecordsRequest
+	@return ApiGetJobUnprocessedRecordsRequest
 */
-func (a *JobApiService) JobUnprocessedRecords(ctx context.Context, jobId string) ApiJobUnprocessedRecordsRequest {
-	return ApiJobUnprocessedRecordsRequest{
+func (a *JobApiService) GetJobUnprocessedRecords(ctx context.Context, jobId string) ApiGetJobUnprocessedRecordsRequest {
+	return ApiGetJobUnprocessedRecordsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		jobId:      jobId,
@@ -658,7 +658,7 @@ func (a *JobApiService) JobUnprocessedRecords(ctx context.Context, jobId string)
 // Execute executes the request
 //
 //	@return io.ReadCloser
-func (a *JobApiService) JobUnprocessedRecordsExecute(r ApiJobUnprocessedRecordsRequest) (*io.ReadCloser, *http.Response, error) {
+func (a *JobApiService) GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRecordsRequest) (*io.ReadCloser, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -666,7 +666,7 @@ func (a *JobApiService) JobUnprocessedRecordsExecute(r ApiJobUnprocessedRecordsR
 		localVarReturnValue *io.ReadCloser
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.JobUnprocessedRecords")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.GetJobUnprocessedRecords")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -722,7 +722,7 @@ func (a *JobApiService) JobUnprocessedRecordsExecute(r ApiJobUnprocessedRecordsR
 	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
 }
 
-type ApiJobsRequest struct {
+type ApiGetJobsRequest struct {
 	ctx                 context.Context
 	ApiService          *JobApiService
 	isPkChunkingEnabled *bool
@@ -730,33 +730,33 @@ type ApiJobsRequest struct {
 	queryLocator        *string
 }
 
-func (r ApiJobsRequest) IsPkChunkingEnabled(isPkChunkingEnabled bool) ApiJobsRequest {
+func (r ApiGetJobsRequest) IsPkChunkingEnabled(isPkChunkingEnabled bool) ApiGetJobsRequest {
 	r.isPkChunkingEnabled = &isPkChunkingEnabled
 	return r
 }
 
-func (r ApiJobsRequest) JobType(jobType string) ApiJobsRequest {
+func (r ApiGetJobsRequest) JobType(jobType string) ApiGetJobsRequest {
 	r.jobType = &jobType
 	return r
 }
 
-func (r ApiJobsRequest) QueryLocator(queryLocator string) ApiJobsRequest {
+func (r ApiGetJobsRequest) QueryLocator(queryLocator string) ApiGetJobsRequest {
 	r.queryLocator = &queryLocator
 	return r
 }
 
-func (r ApiJobsRequest) Execute() (map[string]interface{}, *http.Response, error) {
-	return r.ApiService.JobsExecute(r)
+func (r ApiGetJobsRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.GetJobsExecute(r)
 }
 
 /*
-Jobs Get All Jobs
+GetJobs Get All Jobs
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiJobsRequest
+	@return ApiGetJobsRequest
 */
-func (a *JobApiService) Jobs(ctx context.Context) ApiJobsRequest {
-	return ApiJobsRequest{
+func (a *JobApiService) GetJobs(ctx context.Context) ApiGetJobsRequest {
+	return ApiGetJobsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -765,7 +765,7 @@ func (a *JobApiService) Jobs(ctx context.Context) ApiJobsRequest {
 // Execute executes the request
 //
 //	@return map[string]interface{}
-func (a *JobApiService) JobsExecute(r ApiJobsRequest) (map[string]interface{}, *http.Response, error) {
+func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (map[string]interface{}, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -773,7 +773,7 @@ func (a *JobApiService) JobsExecute(r ApiJobsRequest) (map[string]interface{}, *
 		localVarReturnValue map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.Jobs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.GetJobs")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

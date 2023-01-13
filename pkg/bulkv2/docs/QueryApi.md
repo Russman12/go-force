@@ -4,18 +4,18 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**QueryAbortJob**](QueryApi.md#QueryAbortJob) | **Patch** /jobs/query/{jobId} | Abort a Job Query
-[**QueryCreateJob**](QueryApi.md#QueryCreateJob) | **Post** /jobs/query | Create job Query
-[**QueryDeleteJob**](QueryApi.md#QueryDeleteJob) | **Delete** /jobs/query/{jobId} | Delete Job Query
-[**QueryJobInfo**](QueryApi.md#QueryJobInfo) | **Get** /jobs/query/{jobId} | Get Job Info Query
-[**QueryJobResults**](QueryApi.md#QueryJobResults) | **Get** /jobs/query/{jobId}/results | Get Job Query Result
-[**QueryJobs**](QueryApi.md#QueryJobs) | **Get** /jobs/query | Get All Query Jobs
+[**AbortJob**](QueryApi.md#AbortJob) | **Patch** /jobs/query/{jobId} | Abort a Job Query
+[**CreateJob**](QueryApi.md#CreateJob) | **Post** /jobs/query | Create job Query
+[**DeleteJob**](QueryApi.md#DeleteJob) | **Delete** /jobs/query/{jobId} | Delete Job Query
+[**GetJobResults**](QueryApi.md#GetJobResults) | **Get** /jobs/query/{jobId}/results | Get Job Query Result
+[**GetJobs**](QueryApi.md#GetJobs) | **Get** /jobs/query | Get All Query Jobs
+[**JobInfo**](QueryApi.md#JobInfo) | **Get** /jobs/query/{jobId} | Get Job Info Query
 
 
 
-## QueryAbortJob
+## AbortJob
 
-> QueryJobInfo QueryAbortJob(ctx, jobId).QueryJobInfo(queryJobInfo).Execute()
+> QueryJobInfo AbortJob(ctx, jobId).QueryJobInfo(queryJobInfo).Execute()
 
 Abort a Job Query
 
@@ -37,13 +37,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QueryApi.QueryAbortJob(context.Background(), jobId).QueryJobInfo(queryJobInfo).Execute()
+    resp, r, err := apiClient.QueryApi.AbortJob(context.Background(), jobId).QueryJobInfo(queryJobInfo).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.QueryAbortJob``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.AbortJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QueryAbortJob`: QueryJobInfo
-    fmt.Fprintf(os.Stdout, "Response from `QueryApi.QueryAbortJob`: %v\n", resp)
+    // response from `AbortJob`: QueryJobInfo
+    fmt.Fprintf(os.Stdout, "Response from `QueryApi.AbortJob`: %v\n", resp)
 }
 ```
 
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiQueryAbortJobRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiAbortJobRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -83,9 +83,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## QueryCreateJob
+## CreateJob
 
-> QueryJobInfo QueryCreateJob(ctx).ContentType(contentType).QueryJobCreateRequest(queryJobCreateRequest).Execute()
+> QueryJobInfo CreateJob(ctx).ContentType(contentType).QueryJobCreateRequest(queryJobCreateRequest).Execute()
 
 Create job Query
 
@@ -107,13 +107,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QueryApi.QueryCreateJob(context.Background()).ContentType(contentType).QueryJobCreateRequest(queryJobCreateRequest).Execute()
+    resp, r, err := apiClient.QueryApi.CreateJob(context.Background()).ContentType(contentType).QueryJobCreateRequest(queryJobCreateRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.QueryCreateJob``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.CreateJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QueryCreateJob`: QueryJobInfo
-    fmt.Fprintf(os.Stdout, "Response from `QueryApi.QueryCreateJob`: %v\n", resp)
+    // response from `CreateJob`: QueryJobInfo
+    fmt.Fprintf(os.Stdout, "Response from `QueryApi.CreateJob`: %v\n", resp)
 }
 ```
 
@@ -123,7 +123,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiQueryCreateJobRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiCreateJobRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -149,9 +149,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## QueryDeleteJob
+## DeleteJob
 
-> QueryDeleteJob(ctx, jobId).Execute()
+> DeleteJob(ctx, jobId).Execute()
 
 Delete Job Query
 
@@ -172,9 +172,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QueryApi.QueryDeleteJob(context.Background(), jobId).Execute()
+    resp, r, err := apiClient.QueryApi.DeleteJob(context.Background(), jobId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.QueryDeleteJob``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.DeleteJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiQueryDeleteJobRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteJobRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -215,77 +215,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## QueryJobInfo
+## GetJobResults
 
-> QueryJobInfo QueryJobInfo(ctx, jobId).Execute()
-
-Get Job Info Query
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    jobId := "jobId_example" // string | 
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QueryApi.QueryJobInfo(context.Background(), jobId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.QueryJobInfo``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `QueryJobInfo`: QueryJobInfo
-    fmt.Fprintf(os.Stdout, "Response from `QueryApi.QueryJobInfo`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiQueryJobInfoRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**QueryJobInfo**](QueryJobInfo.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## QueryJobResults
-
-> io.ReadCloser QueryJobResults(ctx, jobId).ContentType(contentType).Accept(accept).Locator(locator).MaxRecords(maxRecords).Execute()
+> io.ReadCloser GetJobResults(ctx, jobId).ContentType(contentType).Accept(accept).Locator(locator).MaxRecords(maxRecords).Execute()
 
 Get Job Query Result
 
@@ -310,13 +242,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QueryApi.QueryJobResults(context.Background(), jobId).ContentType(contentType).Accept(accept).Locator(locator).MaxRecords(maxRecords).Execute()
+    resp, r, err := apiClient.QueryApi.GetJobResults(context.Background(), jobId).ContentType(contentType).Accept(accept).Locator(locator).MaxRecords(maxRecords).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.QueryJobResults``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.GetJobResults``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QueryJobResults`: io.ReadCloser
-    fmt.Fprintf(os.Stdout, "Response from `QueryApi.QueryJobResults`: %v\n", resp)
+    // response from `GetJobResults`: io.ReadCloser
+    fmt.Fprintf(os.Stdout, "Response from `QueryApi.GetJobResults`: %v\n", resp)
 }
 ```
 
@@ -330,7 +262,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiQueryJobResultsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetJobResultsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -359,9 +291,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## QueryJobs
+## GetJobs
 
-> QueryJobsInfos QueryJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
+> QueryJobsInfos GetJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
 
 Get All Query Jobs
 
@@ -385,13 +317,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.QueryApi.QueryJobs(context.Background()).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
+    resp, r, err := apiClient.QueryApi.GetJobs(context.Background()).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.QueryJobs``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.GetJobs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `QueryJobs`: QueryJobsInfos
-    fmt.Fprintf(os.Stdout, "Response from `QueryApi.QueryJobs`: %v\n", resp)
+    // response from `GetJobs`: QueryJobsInfos
+    fmt.Fprintf(os.Stdout, "Response from `QueryApi.GetJobs`: %v\n", resp)
 }
 ```
 
@@ -401,7 +333,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiQueryJobsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetJobsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -414,6 +346,74 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**QueryJobsInfos**](QueryJobsInfos.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## JobInfo
+
+> QueryJobInfo JobInfo(ctx, jobId).Execute()
+
+Get Job Info Query
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    jobId := "jobId_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.QueryApi.JobInfo(context.Background(), jobId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.JobInfo``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `JobInfo`: QueryJobInfo
+    fmt.Fprintf(os.Stdout, "Response from `QueryApi.JobInfo`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**jobId** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiJobInfoRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**QueryJobInfo**](QueryJobInfo.md)
 
 ### Authorization
 
