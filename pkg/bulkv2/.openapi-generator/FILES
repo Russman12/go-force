@@ -29,4 +29,6 @@ model_query_job_info.go
 model_query_job_info_ext.go
 model_query_job_infos.go
 response.go
+test/api_job_test.go
+test/api_query_test.go
 utils.go

@@ -1,5 +1,5 @@
 /*
-Salesforce Platform Auth APIs
+Salesforce Platform Auth API
 
 Testing OAuthApiService
 

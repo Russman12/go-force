@@ -16,6 +16,7 @@ import (
 )
 
 // RecordTypeInfo struct for RecordTypeInfo
+
 type RecordTypeInfo struct {
 	Active                   *bool               `json:"active,omitempty"`
 	Available                *bool               `json:"available,omitempty"`

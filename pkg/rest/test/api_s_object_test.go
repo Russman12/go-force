@@ -1,5 +1,5 @@
 /*
-Salesforce Platform REST APIs
+Salesforce Platform REST API
 
 Testing SObjectApiService
 
@@ -22,13 +22,11 @@ func Test_rest_SObjectApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test SObjectApiService SObjectDescribe", func(t *testing.T) {
+	t.Run("Test SObjectApiService GetSObjects", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		var sObject string
-
-		resp, httpRes, err := apiClient.SObjectApi.SObjectDescribe(context.Background(), sObject).Execute()
+		resp, httpRes, err := apiClient.SObjectApi.GetSObjects(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,11 +34,13 @@ func Test_rest_SObjectApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test SObjectApiService SObjects", func(t *testing.T) {
+	t.Run("Test SObjectApiService SObjectDescribe", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.SObjectApi.SObjects(context.Background()).Execute()
+		var sObject string
+
+		resp, httpRes, err := apiClient.SObjectApi.SObjectDescribe(context.Background(), sObject).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

@@ -16,6 +16,7 @@ import (
 )
 
 // SObjectDescribes struct for SObjectDescribes
+
 type SObjectDescribes struct {
 	Encoding     string            `json:"encoding"`
 	MaxBatchSize int32             `json:"maxBatchSize"`

@@ -16,6 +16,7 @@ import (
 )
 
 // AuthResponse struct for AuthResponse
+
 type AuthResponse struct {
 	AccessToken string `json:"access_token"`
 	InstanceUrl string `json:"instance_url"`

@@ -16,6 +16,7 @@ import (
 )
 
 // ActionOverrides struct for ActionOverrides
+
 type ActionOverrides struct {
 	FormFactor         *string        `json:"formFactor,omitempty"`
 	IsAvailableInTouch *bool          `json:"isAvailableInTouch,omitempty"`

@@ -16,6 +16,7 @@ import (
 )
 
 // RecordTypeInfoUrls struct for RecordTypeInfoUrls
+
 type RecordTypeInfoUrls struct {
 	Layout *string `json:"layout,omitempty"`
 }

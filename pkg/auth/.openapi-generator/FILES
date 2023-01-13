@@ -7,4 +7,5 @@ docs/AuthResponse.md
 docs/OAuthApi.md
 model_auth_response.go
 response.go
+test/api_o_auth_test.go
 utils.go

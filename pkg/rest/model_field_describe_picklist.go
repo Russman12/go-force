@@ -16,6 +16,7 @@ import (
 )
 
 // FieldDescribePicklist struct for FieldDescribePicklist
+
 type FieldDescribePicklist struct {
 	Active       *bool          `json:"active,omitempty"`
 	DefaultValue *bool          `json:"defaultValue,omitempty"`

@@ -1,5 +1,5 @@
 /*
-Salesforce Platform Bulk V2 APIs
+Salesforce Platform Bulk V2 API
 
 Testing QueryApiService
 
@@ -22,13 +22,13 @@ func Test_bulkv2_QueryApiService(t *testing.T) {
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test QueryApiService QueryAbortJob", func(t *testing.T) {
+	t.Run("Test QueryApiService AbortQueryJob", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		var jobId string
 
-		resp, httpRes, err := apiClient.QueryApi.QueryAbortJob(context.Background(), jobId).Execute()
+		resp, httpRes, err := apiClient.QueryApi.AbortQueryJob(context.Background(), jobId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -36,11 +36,11 @@ func Test_bulkv2_QueryApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test QueryApiService QueryCreateJob", func(t *testing.T) {
+	t.Run("Test QueryApiService CreateQueryJob", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.QueryApi.QueryCreateJob(context.Background()).Execute()
+		resp, httpRes, err := apiClient.QueryApi.CreateQueryJob(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -48,13 +48,13 @@ func Test_bulkv2_QueryApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test QueryApiService QueryDeleteJob", func(t *testing.T) {
+	t.Run("Test QueryApiService DeleteQueryJob", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		var jobId string
 
-		httpRes, err := apiClient.QueryApi.QueryDeleteJob(context.Background(), jobId).Execute()
+		httpRes, err := apiClient.QueryApi.DeleteQueryJob(context.Background(), jobId).Execute()
 
 		require.Nil(t, err)
 
@@ -62,27 +62,13 @@ func Test_bulkv2_QueryApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test QueryApiService QueryJobInfo", func(t *testing.T) {
+	t.Run("Test QueryApiService GetJobResults", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
 		var jobId string
 
-		resp, httpRes, err := apiClient.QueryApi.QueryJobInfo(context.Background(), jobId).Execute()
-
-		require.Nil(t, err)
-		require.NotNil(t, resp)
-		assert.Equal(t, 200, httpRes.StatusCode)
-
-	})
-
-	t.Run("Test QueryApiService QueryJobResults", func(t *testing.T) {
-
-		t.Skip("skip test") // remove to run test
-
-		var jobId string
-
-		resp, httpRes, err := apiClient.QueryApi.QueryJobResults(context.Background(), jobId).Execute()
+		resp, httpRes, err := apiClient.QueryApi.GetJobResults(context.Background(), jobId).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
@@ -90,11 +76,25 @@ func Test_bulkv2_QueryApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test QueryApiService QueryJobs", func(t *testing.T) {
+	t.Run("Test QueryApiService GetQueryJobInfo", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.QueryApi.QueryJobs(context.Background()).Execute()
+		var jobId string
+
+		resp, httpRes, err := apiClient.QueryApi.GetQueryJobInfo(context.Background(), jobId).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
+	t.Run("Test QueryApiService GetQueryJobs", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		resp, httpRes, err := apiClient.QueryApi.GetQueryJobs(context.Background()).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)
