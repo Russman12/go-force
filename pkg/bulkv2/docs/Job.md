@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssignmentRuleId** | Pointer to **string** | The ID of the assignment rule. This property is only shown if an assignment rule is specified when the job is created. | [optional] 
-**ColumnDelimiter** | Pointer to **string** | The column delimiter used for CSV job data. | [optional] 
+**ColumnDelimiter** | Pointer to **NullableString** | The column delimiter used for CSV job data. | [optional] 
 **ContentType** | Pointer to **string** | The format of the data being processed. Only CSV is supported. | [optional] 
 **ExternalIdFieldName** | Pointer to **string** | The name of the external ID field for an upsert. | [optional] 
 **LineEnding** | Pointer to **string** | The line ending used for CSV job data. | [optional] 
@@ -81,6 +81,16 @@ SetColumnDelimiter sets ColumnDelimiter field to given value.
 
 HasColumnDelimiter returns a boolean if a field has been set.
 
+### SetColumnDelimiterNil
+
+`func (o *Job) SetColumnDelimiterNil(b bool)`
+
+ SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
+
+### UnsetColumnDelimiter
+`func (o *Job) UnsetColumnDelimiter()`
+
+UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
 ### GetContentType
 
 `func (o *Job) GetContentType() string`

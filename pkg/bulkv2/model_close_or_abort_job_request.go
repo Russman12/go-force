@@ -13,19 +13,55 @@ package bulkv2
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // CloseOrAbortJobRequest struct for CloseOrAbortJobRequest
+
+type CloseOrAbortJobRequestState int
+
+const (
+	CLOSE_OR_ABORT_JOB_REQUEST_STATE_UPLOAD_COMPLETE CloseOrAbortJobRequestState = iota
+	CLOSE_OR_ABORT_JOB_REQUEST_STATE_ABORTED
+)
+
+func (e *CloseOrAbortJobRequestState) String() string {
+	s := []string{"UploadComplete", "Aborted"}[*e]
+	return s
+}
+func (e CloseOrAbortJobRequestState) MarshalJSON() ([]byte, error) {
+	return json.Marshal(e.String())
+}
+
+func (e *CloseOrAbortJobRequestState) UnmarshalJSON(data []byte) error {
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return err
+	}
+	e, err := CloseOrAbortJobRequestStateParse(str)
+
+	return err
+}
+func CloseOrAbortJobRequestStateParse(s string) (*CloseOrAbortJobRequestState, error) {
+	for i, e := range []string{"UploadComplete", "Aborted"} {
+		if s == e {
+			enum := CloseOrAbortJobRequestState(i)
+			return &enum, nil
+		}
+	}
+	return nil, fmt.Errorf("%q is not a valid CloseOrAbortJobRequestState", s)
+}
+
 type CloseOrAbortJobRequest struct {
 	// The state to update the job to. Use UploadComplete to close a job, or Aborted to abort a job.
-	State string `json:"state"`
+	State CloseOrAbortJobRequestState `json:"state"`
 }
 
 // NewCloseOrAbortJobRequest instantiates a new CloseOrAbortJobRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCloseOrAbortJobRequest(state string) *CloseOrAbortJobRequest {
+func NewCloseOrAbortJobRequest(state CloseOrAbortJobRequestState) *CloseOrAbortJobRequest {
 	this := CloseOrAbortJobRequest{}
 	this.State = state
 	return &this
@@ -46,7 +82,7 @@ func (o *CloseOrAbortJobRequest) GetState() string {
 		return ret
 	}
 
-	return o.State
+	return o.State.String()
 }
 
 // GetStateOk returns a tuple with the State field value
@@ -55,11 +91,12 @@ func (o *CloseOrAbortJobRequest) GetStateOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.State, true
+	s := o.State.String()
+	return &s, true
 }
 
 // SetState sets field value
-func (o *CloseOrAbortJobRequest) SetState(v string) {
+func (o *CloseOrAbortJobRequest) SetState(v CloseOrAbortJobRequestState) {
 	o.State = v
 }
 

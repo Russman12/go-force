@@ -13,9 +13,232 @@ package bulkv2
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // QueryJobInfo struct for QueryJobInfo
+
+type QueryJobInfoState int
+
+const (
+	QUERY_JOB_INFO_STATE_UPLOAD_COMPLETE QueryJobInfoState = iota
+	QUERY_JOB_INFO_STATE_IN_PROGRESS
+	QUERY_JOB_INFO_STATE_ABORTED
+	QUERY_JOB_INFO_STATE_JOB_COMPLETE
+	QUERY_JOB_INFO_STATE_FAILED
+)
+
+func (e *QueryJobInfoState) String() string {
+	s := []string{"UploadComplete", "InProgress", "Aborted", "JobComplete", "Failed"}[*e]
+	return s
+}
+func (e QueryJobInfoState) MarshalJSON() ([]byte, error) {
+	return json.Marshal(e.String())
+}
+
+func (e *QueryJobInfoState) UnmarshalJSON(data []byte) error {
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return err
+	}
+	e, err := QueryJobInfoStateParse(str)
+
+	return err
+}
+func QueryJobInfoStateParse(s string) (*QueryJobInfoState, error) {
+	for i, e := range []string{"UploadComplete", "InProgress", "Aborted", "JobComplete", "Failed"} {
+		if s == e {
+			enum := QueryJobInfoState(i)
+			return &enum, nil
+		}
+	}
+	return nil, fmt.Errorf("%q is not a valid QueryJobInfoState", s)
+}
+
+type QueryJobInfoJobType int
+
+const (
+	QUERY_JOB_INFO_JOB_TYPE_V2_QUERY QueryJobInfoJobType = iota
+)
+
+func (e *QueryJobInfoJobType) String() string {
+	s := []string{"V2Query"}[*e]
+	return s
+}
+func (e QueryJobInfoJobType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(e.String())
+}
+
+func (e *QueryJobInfoJobType) UnmarshalJSON(data []byte) error {
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return err
+	}
+	e, err := QueryJobInfoJobTypeParse(str)
+
+	return err
+}
+func QueryJobInfoJobTypeParse(s string) (*QueryJobInfoJobType, error) {
+	for i, e := range []string{"V2Query"} {
+		if s == e {
+			enum := QueryJobInfoJobType(i)
+			return &enum, nil
+		}
+	}
+	return nil, fmt.Errorf("%q is not a valid QueryJobInfoJobType", s)
+}
+
+type QueryJobInfoOperation int
+
+const (
+	QUERY_JOB_INFO_OPERATION_QUERY QueryJobInfoOperation = iota
+	QUERY_JOB_INFO_OPERATION_QUERY_ALL
+)
+
+func (e *QueryJobInfoOperation) String() string {
+	s := []string{"query", "queryAll"}[*e]
+	return s
+}
+func (e QueryJobInfoOperation) MarshalJSON() ([]byte, error) {
+	return json.Marshal(e.String())
+}
+
+func (e *QueryJobInfoOperation) UnmarshalJSON(data []byte) error {
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return err
+	}
+	e, err := QueryJobInfoOperationParse(str)
+
+	return err
+}
+func QueryJobInfoOperationParse(s string) (*QueryJobInfoOperation, error) {
+	for i, e := range []string{"query", "queryAll"} {
+		if s == e {
+			enum := QueryJobInfoOperation(i)
+			return &enum, nil
+		}
+	}
+	return nil, fmt.Errorf("%q is not a valid QueryJobInfoOperation", s)
+}
+
+type QueryJobInfoContentType int
+
+const (
+	QUERY_JOB_INFO_CONTENT_TYPE_CSV QueryJobInfoContentType = iota
+)
+
+func (e *QueryJobInfoContentType) String() string {
+	s := []string{"CSV"}[*e]
+	return s
+}
+func (e QueryJobInfoContentType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(e.String())
+}
+
+func (e *QueryJobInfoContentType) UnmarshalJSON(data []byte) error {
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return err
+	}
+	e, err := QueryJobInfoContentTypeParse(str)
+
+	return err
+}
+func QueryJobInfoContentTypeParse(s string) (*QueryJobInfoContentType, error) {
+	for i, e := range []string{"CSV"} {
+		if s == e {
+			enum := QueryJobInfoContentType(i)
+			return &enum, nil
+		}
+	}
+	return nil, fmt.Errorf("%q is not a valid QueryJobInfoContentType", s)
+}
+
+type QueryJobInfoColumnDelimiter int
+
+const (
+	QUERY_JOB_INFO_COLUMN_DELIMITER_BACKQUOTE QueryJobInfoColumnDelimiter = iota
+	QUERY_JOB_INFO_COLUMN_DELIMITER_CARET
+	QUERY_JOB_INFO_COLUMN_DELIMITER_COMMA
+	QUERY_JOB_INFO_COLUMN_DELIMITER_PIPE
+	QUERY_JOB_INFO_COLUMN_DELIMITER_SEMICOLON
+	QUERY_JOB_INFO_COLUMN_DELIMITER_TAB
+)
+
+func (e *QueryJobInfoColumnDelimiter) String() *string {
+	s := []string{"BACKQUOTE", "CARET", "COMMA", "PIPE", "SEMICOLON", "TAB"}[*e]
+	return &s
+}
+func (e *QueryJobInfoColumnDelimiter) Get() *string {
+	return e.String()
+}
+func (e *QueryJobInfoColumnDelimiter) IsSet() bool {
+	return e != nil
+}
+func (e *QueryJobInfoColumnDelimiter) Set(val *QueryJobInfoColumnDelimiter) {
+	e = val
+}
+func (e *QueryJobInfoColumnDelimiter) Unset() {
+	e.Set(nil)
+}
+func (e QueryJobInfoColumnDelimiter) MarshalJSON() ([]byte, error) {
+	return json.Marshal(e.String())
+}
+
+func (e *QueryJobInfoColumnDelimiter) UnmarshalJSON(data []byte) error {
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return err
+	}
+	e, err := QueryJobInfoColumnDelimiterParse(str)
+
+	return err
+}
+func QueryJobInfoColumnDelimiterParse(s string) (*QueryJobInfoColumnDelimiter, error) {
+	for i, e := range []string{"BACKQUOTE", "CARET", "COMMA", "PIPE", "SEMICOLON", "TAB"} {
+		if s == e {
+			enum := QueryJobInfoColumnDelimiter(i)
+			return &enum, nil
+		}
+	}
+	return nil, fmt.Errorf("%q is not a valid QueryJobInfoColumnDelimiter", s)
+}
+
+type QueryJobInfoLineEnding int
+
+const (
+	QUERY_JOB_INFO_LINE_ENDING_LF QueryJobInfoLineEnding = iota
+	QUERY_JOB_INFO_LINE_ENDING_CRLF
+)
+
+func (e *QueryJobInfoLineEnding) String() string {
+	s := []string{"LF", "CRLF"}[*e]
+	return s
+}
+func (e QueryJobInfoLineEnding) MarshalJSON() ([]byte, error) {
+	return json.Marshal(e.String())
+}
+
+func (e *QueryJobInfoLineEnding) UnmarshalJSON(data []byte) error {
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return err
+	}
+	e, err := QueryJobInfoLineEndingParse(str)
+
+	return err
+}
+func QueryJobInfoLineEndingParse(s string) (*QueryJobInfoLineEnding, error) {
+	for i, e := range []string{"LF", "CRLF"} {
+		if s == e {
+			enum := QueryJobInfoLineEnding(i)
+			return &enum, nil
+		}
+	}
+	return nil, fmt.Errorf("%q is not a valid QueryJobInfoLineEnding", s)
+}
+
 type QueryJobInfo struct {
 	// The unique ID for this job.
 	Id string `json:"id"`
@@ -28,13 +251,13 @@ type QueryJobInfo struct {
 	// The UTC date and time when the API last updated the job information.
 	SystemModstamp string `json:"systemModstamp"`
 	// The current state of processing for the job.
-	State string `json:"state"`
+	State QueryJobInfoState `json:"state"`
 	// Reserved for future use. How the request is processed. Currently only parallel mode is supported. (When other modes are added, the API chooses the mode automatically. The mode isn’t user configurable.)
 	ConcurrencyMode string `json:"concurrencyMode"`
 	// The API version that the job was created in.
 	ApiVersion float32 `json:"apiVersion"`
 	// The job’s type. For a query job, the type is always V2Query.
-	JobType *string `json:"jobType,omitempty"`
+	JobType *QueryJobInfoJobType `json:"jobType,omitempty"`
 	// The number of records processed in this job.
 	NumberRecordsProcessed *int64 `json:"numberRecordsProcessed,omitempty"`
 	// The number of times that Salesforce attempted to save the results of an operation. Repeated attempts indicate a problem such as a lock contention.
@@ -42,20 +265,20 @@ type QueryJobInfo struct {
 	// The number of milliseconds taken to process the job.
 	TotalProcessingTime *int64 `json:"totalProcessingTime,omitempty"`
 	// The type of query.
-	Operation string `json:"operation"`
+	Operation QueryJobInfoOperation `json:"operation"`
 	// The format that is used for the results. Currently the only supported value is CSV.
-	ContentType string `json:"contentType"`
+	ContentType QueryJobInfoContentType `json:"contentType"`
 	// The column delimiter used for CSV job data. The default value is COMMA.
-	ColumnDelimiter *string `json:"columnDelimiter,omitempty"`
+	ColumnDelimiter QueryJobInfoColumnDelimiter `json:"columnDelimiter,omitempty"`
 	// The line ending used for CSV job data, marking the end of a data row. The default is LF.
-	LineEnding *string `json:"lineEnding,omitempty"`
+	LineEnding *QueryJobInfoLineEnding `json:"lineEnding,omitempty"`
 }
 
 // NewQueryJobInfo instantiates a new QueryJobInfo object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQueryJobInfo(id string, object string, createdById string, createdDate string, systemModstamp string, state string, concurrencyMode string, apiVersion float32, operation string, contentType string) *QueryJobInfo {
+func NewQueryJobInfo(id string, object string, createdById string, createdDate string, systemModstamp string, state QueryJobInfoState, concurrencyMode string, apiVersion float32, operation QueryJobInfoOperation, contentType QueryJobInfoContentType) *QueryJobInfo {
 	this := QueryJobInfo{}
 	this.Id = id
 	this.Object = object
@@ -205,7 +428,7 @@ func (o *QueryJobInfo) GetState() string {
 		return ret
 	}
 
-	return o.State
+	return o.State.String()
 }
 
 // GetStateOk returns a tuple with the State field value
@@ -214,11 +437,12 @@ func (o *QueryJobInfo) GetStateOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.State, true
+	s := o.State.String()
+	return &s, true
 }
 
 // SetState sets field value
-func (o *QueryJobInfo) SetState(v string) {
+func (o *QueryJobInfo) SetState(v QueryJobInfoState) {
 	o.State = v
 }
 
@@ -276,7 +500,7 @@ func (o *QueryJobInfo) GetJobType() string {
 		var ret string
 		return ret
 	}
-	return *o.JobType
+	return o.JobType.String()
 }
 
 // GetJobTypeOk returns a tuple with the JobType field value if set, nil otherwise
@@ -285,7 +509,8 @@ func (o *QueryJobInfo) GetJobTypeOk() (*string, bool) {
 	if o == nil || isNil(o.JobType) {
 		return nil, false
 	}
-	return o.JobType, true
+	s := o.JobType.String()
+	return &s, true
 }
 
 // HasJobType returns a boolean if a field has been set.
@@ -298,7 +523,7 @@ func (o *QueryJobInfo) HasJobType() bool {
 }
 
 // SetJobType gets a reference to the given string and assigns it to the JobType field.
-func (o *QueryJobInfo) SetJobType(v string) {
+func (o *QueryJobInfo) SetJobType(v QueryJobInfoJobType) {
 	o.JobType = &v
 }
 
@@ -405,7 +630,7 @@ func (o *QueryJobInfo) GetOperation() string {
 		return ret
 	}
 
-	return o.Operation
+	return o.Operation.String()
 }
 
 // GetOperationOk returns a tuple with the Operation field value
@@ -414,11 +639,12 @@ func (o *QueryJobInfo) GetOperationOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Operation, true
+	s := o.Operation.String()
+	return &s, true
 }
 
 // SetOperation sets field value
-func (o *QueryJobInfo) SetOperation(v string) {
+func (o *QueryJobInfo) SetOperation(v QueryJobInfoOperation) {
 	o.Operation = v
 }
 
@@ -429,7 +655,7 @@ func (o *QueryJobInfo) GetContentType() string {
 		return ret
 	}
 
-	return o.ContentType
+	return o.ContentType.String()
 }
 
 // GetContentTypeOk returns a tuple with the ContentType field value
@@ -438,44 +664,56 @@ func (o *QueryJobInfo) GetContentTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.ContentType, true
+	s := o.ContentType.String()
+	return &s, true
 }
 
 // SetContentType sets field value
-func (o *QueryJobInfo) SetContentType(v string) {
+func (o *QueryJobInfo) SetContentType(v QueryJobInfoContentType) {
 	o.ContentType = v
 }
 
-// GetColumnDelimiter returns the ColumnDelimiter field value if set, zero value otherwise.
+// GetColumnDelimiter returns the ColumnDelimiter field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *QueryJobInfo) GetColumnDelimiter() string {
-	if o == nil || isNil(o.ColumnDelimiter) {
+	if o == nil || isNil(o.ColumnDelimiter.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.ColumnDelimiter
+	return *o.ColumnDelimiter.Get()
 }
 
 // GetColumnDelimiterOk returns a tuple with the ColumnDelimiter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *QueryJobInfo) GetColumnDelimiterOk() (*string, bool) {
-	if o == nil || isNil(o.ColumnDelimiter) {
+	if o == nil {
 		return nil, false
 	}
-	return o.ColumnDelimiter, true
+	return o.ColumnDelimiter.Get(), o.ColumnDelimiter.IsSet()
 }
 
 // HasColumnDelimiter returns a boolean if a field has been set.
 func (o *QueryJobInfo) HasColumnDelimiter() bool {
-	if o != nil && !isNil(o.ColumnDelimiter) {
+	if o != nil && o.ColumnDelimiter.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetColumnDelimiter gets a reference to the given string and assigns it to the ColumnDelimiter field.
-func (o *QueryJobInfo) SetColumnDelimiter(v string) {
-	o.ColumnDelimiter = &v
+// SetColumnDelimiter gets a reference to the given NullableString and assigns it to the ColumnDelimiter field.
+func (o *QueryJobInfo) SetColumnDelimiter(v QueryJobInfoColumnDelimiter) {
+	o.ColumnDelimiter.Set(&v)
+}
+
+// SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
+func (o *QueryJobInfo) SetColumnDelimiterNil() {
+	o.ColumnDelimiter.Set(nil)
+}
+
+// UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
+func (o *QueryJobInfo) UnsetColumnDelimiter() {
+	o.ColumnDelimiter.Unset()
 }
 
 // GetLineEnding returns the LineEnding field value if set, zero value otherwise.
@@ -484,7 +722,7 @@ func (o *QueryJobInfo) GetLineEnding() string {
 		var ret string
 		return ret
 	}
-	return *o.LineEnding
+	return o.LineEnding.String()
 }
 
 // GetLineEndingOk returns a tuple with the LineEnding field value if set, nil otherwise
@@ -493,7 +731,8 @@ func (o *QueryJobInfo) GetLineEndingOk() (*string, bool) {
 	if o == nil || isNil(o.LineEnding) {
 		return nil, false
 	}
-	return o.LineEnding, true
+	s := o.LineEnding.String()
+	return &s, true
 }
 
 // HasLineEnding returns a boolean if a field has been set.
@@ -506,7 +745,7 @@ func (o *QueryJobInfo) HasLineEnding() bool {
 }
 
 // SetLineEnding gets a reference to the given string and assigns it to the LineEnding field.
-func (o *QueryJobInfo) SetLineEnding(v string) {
+func (o *QueryJobInfo) SetLineEnding(v QueryJobInfoLineEnding) {
 	o.LineEnding = &v
 }
 
@@ -554,8 +793,8 @@ func (o QueryJobInfo) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["contentType"] = o.ContentType
 	}
-	if !isNil(o.ColumnDelimiter) {
-		toSerialize["columnDelimiter"] = o.ColumnDelimiter
+	if o.ColumnDelimiter.IsSet() {
+		toSerialize["columnDelimiter"] = o.ColumnDelimiter.Get()
 	}
 	if !isNil(o.LineEnding) {
 		toSerialize["lineEnding"] = o.LineEnding

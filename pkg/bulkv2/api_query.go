@@ -24,31 +24,31 @@ import (
 // QueryApiService QueryApi service
 type QueryApiService service
 
-type ApiAbortJobRequest struct {
+type ApiAbortQueryJobRequest struct {
 	ctx          context.Context
 	ApiService   *QueryApiService
 	jobId        string
 	queryJobInfo *QueryJobInfo
 }
 
-func (r ApiAbortJobRequest) QueryJobInfo(queryJobInfo QueryJobInfo) ApiAbortJobRequest {
+func (r ApiAbortQueryJobRequest) QueryJobInfo(queryJobInfo QueryJobInfo) ApiAbortQueryJobRequest {
 	r.queryJobInfo = &queryJobInfo
 	return r
 }
 
-func (r ApiAbortJobRequest) Execute() (*QueryJobInfo, *http.Response, error) {
-	return r.ApiService.AbortJobExecute(r)
+func (r ApiAbortQueryJobRequest) Execute() (*QueryJobInfo, *http.Response, error) {
+	return r.ApiService.AbortQueryJobExecute(r)
 }
 
 /*
-AbortJob Abort a Job Query
+AbortQueryJob Abort a Job Query
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
-	@return ApiAbortJobRequest
+	@return ApiAbortQueryJobRequest
 */
-func (a *QueryApiService) AbortJob(ctx context.Context, jobId string) ApiAbortJobRequest {
-	return ApiAbortJobRequest{
+func (a *QueryApiService) AbortQueryJob(ctx context.Context, jobId string) ApiAbortQueryJobRequest {
+	return ApiAbortQueryJobRequest{
 		ApiService: a,
 		ctx:        ctx,
 		jobId:      jobId,
@@ -58,7 +58,7 @@ func (a *QueryApiService) AbortJob(ctx context.Context, jobId string) ApiAbortJo
 // Execute executes the request
 //
 //	@return QueryJobInfo
-func (a *QueryApiService) AbortJobExecute(r ApiAbortJobRequest) (*QueryJobInfo, *http.Response, error) {
+func (a *QueryApiService) AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*QueryJobInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPatch
 		localVarPostBody    interface{}
@@ -66,7 +66,7 @@ func (a *QueryApiService) AbortJobExecute(r ApiAbortJobRequest) (*QueryJobInfo, 
 		localVarReturnValue *QueryJobInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.AbortJob")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.AbortQueryJob")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -139,35 +139,35 @@ func (a *QueryApiService) AbortJobExecute(r ApiAbortJobRequest) (*QueryJobInfo, 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateJobRequest struct {
+type ApiCreateQueryJobRequest struct {
 	ctx                   context.Context
 	ApiService            *QueryApiService
 	contentType           *string
-	queryJobCreateRequest *QueryJobCreateRequest
+	createQueryJobRequest *CreateQueryJobRequest
 }
 
-func (r ApiCreateJobRequest) ContentType(contentType string) ApiCreateJobRequest {
+func (r ApiCreateQueryJobRequest) ContentType(contentType string) ApiCreateQueryJobRequest {
 	r.contentType = &contentType
 	return r
 }
 
-func (r ApiCreateJobRequest) QueryJobCreateRequest(queryJobCreateRequest QueryJobCreateRequest) ApiCreateJobRequest {
-	r.queryJobCreateRequest = &queryJobCreateRequest
+func (r ApiCreateQueryJobRequest) CreateQueryJobRequest(createQueryJobRequest CreateQueryJobRequest) ApiCreateQueryJobRequest {
+	r.createQueryJobRequest = &createQueryJobRequest
 	return r
 }
 
-func (r ApiCreateJobRequest) Execute() (*QueryJobInfo, *http.Response, error) {
-	return r.ApiService.CreateJobExecute(r)
+func (r ApiCreateQueryJobRequest) Execute() (*QueryJobInfo, *http.Response, error) {
+	return r.ApiService.CreateQueryJobExecute(r)
 }
 
 /*
-CreateJob Create job Query
+CreateQueryJob Create job Query
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCreateJobRequest
+	@return ApiCreateQueryJobRequest
 */
-func (a *QueryApiService) CreateJob(ctx context.Context) ApiCreateJobRequest {
-	return ApiCreateJobRequest{
+func (a *QueryApiService) CreateQueryJob(ctx context.Context) ApiCreateQueryJobRequest {
+	return ApiCreateQueryJobRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -176,7 +176,7 @@ func (a *QueryApiService) CreateJob(ctx context.Context) ApiCreateJobRequest {
 // Execute executes the request
 //
 //	@return QueryJobInfo
-func (a *QueryApiService) CreateJobExecute(r ApiCreateJobRequest) (*QueryJobInfo, *http.Response, error) {
+func (a *QueryApiService) CreateQueryJobExecute(r ApiCreateQueryJobRequest) (*QueryJobInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -184,7 +184,7 @@ func (a *QueryApiService) CreateJobExecute(r ApiCreateJobRequest) (*QueryJobInfo
 		localVarReturnValue *QueryJobInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.CreateJob")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.CreateQueryJob")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -216,7 +216,7 @@ func (a *QueryApiService) CreateJobExecute(r ApiCreateJobRequest) (*QueryJobInfo
 		localVarHeaderParams["Content-Type"] = parameterToString(*r.contentType, "")
 	}
 	// body params
-	localVarPostBody = r.queryJobCreateRequest
+	localVarPostBody = r.createQueryJobRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -259,25 +259,25 @@ func (a *QueryApiService) CreateJobExecute(r ApiCreateJobRequest) (*QueryJobInfo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteJobRequest struct {
+type ApiDeleteQueryJobRequest struct {
 	ctx        context.Context
 	ApiService *QueryApiService
 	jobId      string
 }
 
-func (r ApiDeleteJobRequest) Execute() (*http.Response, error) {
-	return r.ApiService.DeleteJobExecute(r)
+func (r ApiDeleteQueryJobRequest) Execute() (*http.Response, error) {
+	return r.ApiService.DeleteQueryJobExecute(r)
 }
 
 /*
-DeleteJob Delete Job Query
+DeleteQueryJob Delete Job Query
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
-	@return ApiDeleteJobRequest
+	@return ApiDeleteQueryJobRequest
 */
-func (a *QueryApiService) DeleteJob(ctx context.Context, jobId string) ApiDeleteJobRequest {
-	return ApiDeleteJobRequest{
+func (a *QueryApiService) DeleteQueryJob(ctx context.Context, jobId string) ApiDeleteQueryJobRequest {
+	return ApiDeleteQueryJobRequest{
 		ApiService: a,
 		ctx:        ctx,
 		jobId:      jobId,
@@ -285,14 +285,14 @@ func (a *QueryApiService) DeleteJob(ctx context.Context, jobId string) ApiDelete
 }
 
 // Execute executes the request
-func (a *QueryApiService) DeleteJobExecute(r ApiDeleteJobRequest) (*http.Response, error) {
+func (a *QueryApiService) DeleteQueryJobExecute(r ApiDeleteQueryJobRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodDelete
 		localVarPostBody   interface{}
 		formFiles          []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.DeleteJob")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.DeleteQueryJob")
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -478,90 +478,54 @@ func (a *QueryApiService) GetJobResultsExecute(r ApiGetJobResultsRequest) (*io.R
 	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
 }
 
-type ApiGetJobsRequest struct {
-	ctx                 context.Context
-	ApiService          *QueryApiService
-	isPkChunkingEnabled *bool
-	jobType             *string
-	concurrencyMode     *string
-	queryLocator        *string
+type ApiGetQueryJobInfoRequest struct {
+	ctx        context.Context
+	ApiService *QueryApiService
+	jobId      string
 }
 
-// If set to true, the request only returns information about jobs where PK Chunking is enabled.
-func (r ApiGetJobsRequest) IsPkChunkingEnabled(isPkChunkingEnabled bool) ApiGetJobsRequest {
-	r.isPkChunkingEnabled = &isPkChunkingEnabled
-	return r
-}
-
-// Gets information only about jobs matching the specified job type.
-func (r ApiGetJobsRequest) JobType(jobType string) ApiGetJobsRequest {
-	r.jobType = &jobType
-	return r
-}
-
-// For future use. Gets information only about jobs matching the specified concurrency mode. Possible values are serial and parallel.
-func (r ApiGetJobsRequest) ConcurrencyMode(concurrencyMode string) ApiGetJobsRequest {
-	r.concurrencyMode = &concurrencyMode
-	return r
-}
-
-// use the value from the nextRecordsUrl from the previous set
-func (r ApiGetJobsRequest) QueryLocator(queryLocator string) ApiGetJobsRequest {
-	r.queryLocator = &queryLocator
-	return r
-}
-
-func (r ApiGetJobsRequest) Execute() (*QueryJobsInfos, *http.Response, error) {
-	return r.ApiService.GetJobsExecute(r)
+func (r ApiGetQueryJobInfoRequest) Execute() (*QueryJobInfo, *http.Response, error) {
+	return r.ApiService.GetQueryJobInfoExecute(r)
 }
 
 /*
-GetJobs Get All Query Jobs
+GetQueryJobInfo Get Job Info Query
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetJobsRequest
+	@param jobId
+	@return ApiGetQueryJobInfoRequest
 */
-func (a *QueryApiService) GetJobs(ctx context.Context) ApiGetJobsRequest {
-	return ApiGetJobsRequest{
+func (a *QueryApiService) GetQueryJobInfo(ctx context.Context, jobId string) ApiGetQueryJobInfoRequest {
+	return ApiGetQueryJobInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
+		jobId:      jobId,
 	}
 }
 
 // Execute executes the request
 //
-//	@return QueryJobsInfos
-func (a *QueryApiService) GetJobsExecute(r ApiGetJobsRequest) (*QueryJobsInfos, *http.Response, error) {
+//	@return QueryJobInfo
+func (a *QueryApiService) GetQueryJobInfoExecute(r ApiGetQueryJobInfoRequest) (*QueryJobInfo, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *QueryJobsInfos
+		localVarReturnValue *QueryJobInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.GetJobs")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.GetQueryJobInfo")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/jobs/query"
+	localVarPath := localBasePath + "/jobs/query/{jobId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterToString(r.jobId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
-	if r.isPkChunkingEnabled != nil {
-		localVarQueryParams.Add("isPkChunkingEnabled", parameterToString(*r.isPkChunkingEnabled, ""))
-	}
-	if r.jobType != nil {
-		localVarQueryParams.Add("jobType", parameterToString(*r.jobType, ""))
-	}
-	if r.concurrencyMode != nil {
-		localVarQueryParams.Add("concurrencyMode", parameterToString(*r.concurrencyMode, ""))
-	}
-	if r.queryLocator != nil {
-		localVarQueryParams.Add("queryLocator", parameterToString(*r.queryLocator, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -621,54 +585,90 @@ func (a *QueryApiService) GetJobsExecute(r ApiGetJobsRequest) (*QueryJobsInfos, 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiJobInfoRequest struct {
-	ctx        context.Context
-	ApiService *QueryApiService
-	jobId      string
+type ApiGetQueryJobsRequest struct {
+	ctx                 context.Context
+	ApiService          *QueryApiService
+	isPkChunkingEnabled *bool
+	jobType             *string
+	concurrencyMode     *string
+	queryLocator        *string
 }
 
-func (r ApiJobInfoRequest) Execute() (*QueryJobInfo, *http.Response, error) {
-	return r.ApiService.JobInfoExecute(r)
+// If set to true, the request only returns information about jobs where PK Chunking is enabled.
+func (r ApiGetQueryJobsRequest) IsPkChunkingEnabled(isPkChunkingEnabled bool) ApiGetQueryJobsRequest {
+	r.isPkChunkingEnabled = &isPkChunkingEnabled
+	return r
+}
+
+// Gets information only about jobs matching the specified job type.
+func (r ApiGetQueryJobsRequest) JobType(jobType string) ApiGetQueryJobsRequest {
+	r.jobType = &jobType
+	return r
+}
+
+// For future use. Gets information only about jobs matching the specified concurrency mode. Possible values are serial and parallel.
+func (r ApiGetQueryJobsRequest) ConcurrencyMode(concurrencyMode string) ApiGetQueryJobsRequest {
+	r.concurrencyMode = &concurrencyMode
+	return r
+}
+
+// use the value from the nextRecordsUrl from the previous set
+func (r ApiGetQueryJobsRequest) QueryLocator(queryLocator string) ApiGetQueryJobsRequest {
+	r.queryLocator = &queryLocator
+	return r
+}
+
+func (r ApiGetQueryJobsRequest) Execute() (*QueryJobInfos, *http.Response, error) {
+	return r.ApiService.GetQueryJobsExecute(r)
 }
 
 /*
-JobInfo Get Job Info Query
+GetQueryJobs Get All Query Jobs
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param jobId
-	@return ApiJobInfoRequest
+	@return ApiGetQueryJobsRequest
 */
-func (a *QueryApiService) JobInfo(ctx context.Context, jobId string) ApiJobInfoRequest {
-	return ApiJobInfoRequest{
+func (a *QueryApiService) GetQueryJobs(ctx context.Context) ApiGetQueryJobsRequest {
+	return ApiGetQueryJobsRequest{
 		ApiService: a,
 		ctx:        ctx,
-		jobId:      jobId,
 	}
 }
 
 // Execute executes the request
 //
-//	@return QueryJobInfo
-func (a *QueryApiService) JobInfoExecute(r ApiJobInfoRequest) (*QueryJobInfo, *http.Response, error) {
+//	@return QueryJobInfos
+func (a *QueryApiService) GetQueryJobsExecute(r ApiGetQueryJobsRequest) (*QueryJobInfos, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *QueryJobInfo
+		localVarReturnValue *QueryJobInfos
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.JobInfo")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "QueryApiService.GetQueryJobs")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/jobs/query/{jobId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterToString(r.jobId, "")), -1)
+	localVarPath := localBasePath + "/jobs/query"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.isPkChunkingEnabled != nil {
+		localVarQueryParams.Add("isPkChunkingEnabled", parameterToString(*r.isPkChunkingEnabled, ""))
+	}
+	if r.jobType != nil {
+		localVarQueryParams.Add("jobType", parameterToString(*r.jobType, ""))
+	}
+	if r.concurrencyMode != nil {
+		localVarQueryParams.Add("concurrencyMode", parameterToString(*r.concurrencyMode, ""))
+	}
+	if r.queryLocator != nil {
+		localVarQueryParams.Add("queryLocator", parameterToString(*r.queryLocator, ""))
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

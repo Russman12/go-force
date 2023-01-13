@@ -1,0 +1,49 @@
+{{#vars}}{{#isEnum}}
+type {{classname}}{{name}} int
+const (
+{{#allowableValues.values}}
+    {{#lambda.uppercase}}{{#lambda.snakecase}}{{classname}} {{name}} {{.}}{{/lambda.snakecase}}{{/lambda.uppercase}} {{#-first}}{{classname}}{{name}} = iota{{/-first}}
+{{/allowableValues.values}}
+)
+func (e *{{classname}}{{name}}) String() {{#isNullable}}*{{/isNullable}}string {
+    s := []string{ {{#allowableValues.values}}"{{.}}"{{^-last}}, {{/-last}}{{/allowableValues.values}} }[*e]
+    return {{#isNullable}}&{{/isNullable}}s
+}
+{{#isNullable}}
+func (e *{{classname}}{{name}}) Get() *string {
+    return e.String()
+}
+func (e *{{classname}}{{name}}) IsSet() bool {
+    return e != nil
+}
+func (e *{{classname}}{{name}}) Set(val *{{classname}}{{name}}) {
+    e = val
+}
+func (e *{{classname}}{{name}}) Unset() {
+    e.Set(nil)
+}
+{{/isNullable}}
+func (e {{classname}}{{name}}) MarshalJSON() ([]byte, error) {
+    return json.Marshal(e.String())
+}
+
+func (e *{{classname}}{{name}}) UnmarshalJSON(data []byte) error {
+    var str string
+    if err := json.Unmarshal(data, &str); err != nil {
+        return err
+    }
+    e, err := {{classname}}{{name}}Parse(str)
+
+    return err
+}
+func {{classname}}{{name}}Parse(s string) (*{{classname}}{{name}}, error) {
+    for i, e := range []string{ {{#allowableValues.values}}"{{.}}"{{^-last}}, {{/-last}}{{/allowableValues.values}} } {
+        if s == e {
+            enum := {{classname}}{{name}}(i)
+            return &enum, nil
+        }
+    }
+    return nil, fmt.Errorf("%q is not a valid {{classname}}{{name}}", s)
+}
+
+{{/isEnum}}{{/vars}}

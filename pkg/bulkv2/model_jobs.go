@@ -16,6 +16,7 @@ import (
 )
 
 // Jobs struct for Jobs
+
 type Jobs struct {
 	// Indicates whether there are more jobs to get. If false, use the nextRecordsUrl value to retrieve the next group of jobs.
 	Done bool `json:"done"`

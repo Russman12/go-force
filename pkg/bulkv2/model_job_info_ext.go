@@ -13,9 +13,82 @@ package bulkv2
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // JobInfoExt struct for JobInfoExt
+
+type JobInfoExtJobType int
+
+const (
+	JOB_INFO_EXT_JOB_TYPE_BIG_OBJECT_INGEST JobInfoExtJobType = iota
+	JOB_INFO_EXT_JOB_TYPE_CLASSIC
+	JOB_INFO_EXT_JOB_TYPE_V2_INGEST
+)
+
+func (e *JobInfoExtJobType) String() string {
+	s := []string{"BigObjectIngest", "Classic", "V2Ingest"}[*e]
+	return s
+}
+func (e JobInfoExtJobType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(e.String())
+}
+
+func (e *JobInfoExtJobType) UnmarshalJSON(data []byte) error {
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return err
+	}
+	e, err := JobInfoExtJobTypeParse(str)
+
+	return err
+}
+func JobInfoExtJobTypeParse(s string) (*JobInfoExtJobType, error) {
+	for i, e := range []string{"BigObjectIngest", "Classic", "V2Ingest"} {
+		if s == e {
+			enum := JobInfoExtJobType(i)
+			return &enum, nil
+		}
+	}
+	return nil, fmt.Errorf("%q is not a valid JobInfoExtJobType", s)
+}
+
+type JobInfoExtState int
+
+const (
+	JOB_INFO_EXT_STATE_OPEN JobInfoExtState = iota
+	JOB_INFO_EXT_STATE_UPLOAD_COMPLETE
+	JOB_INFO_EXT_STATE_ABORTED
+	JOB_INFO_EXT_STATE_JOB_COMPLETE
+)
+
+func (e *JobInfoExtState) String() string {
+	s := []string{"open", "UploadComplete", "Aborted", "JobComplete"}[*e]
+	return s
+}
+func (e JobInfoExtState) MarshalJSON() ([]byte, error) {
+	return json.Marshal(e.String())
+}
+
+func (e *JobInfoExtState) UnmarshalJSON(data []byte) error {
+	var str string
+	if err := json.Unmarshal(data, &str); err != nil {
+		return err
+	}
+	e, err := JobInfoExtStateParse(str)
+
+	return err
+}
+func JobInfoExtStateParse(s string) (*JobInfoExtState, error) {
+	for i, e := range []string{"open", "UploadComplete", "Aborted", "JobComplete"} {
+		if s == e {
+			enum := JobInfoExtState(i)
+			return &enum, nil
+		}
+	}
+	return nil, fmt.Errorf("%q is not a valid JobInfoExtState", s)
+}
+
 type JobInfoExt struct {
 	// The API version that the job was created in.
 	ApiVersion *float32 `json:"apiVersion,omitempty"`
@@ -30,11 +103,11 @@ type JobInfoExt struct {
 	// Unique ID for this job.
 	Id *string `json:"id,omitempty"`
 	// The job’s type.
-	JobType *string `json:"jobType,omitempty"`
+	JobType *JobInfoExtJobType `json:"jobType,omitempty"`
 	// Date and time in the UTC time zone when the job finished.
 	SystemModstamp *string `json:"systemModstamp,omitempty"`
 	// The current state of processing for the job.
-	State *string `json:"state,omitempty"`
+	State *JobInfoExtState `json:"state,omitempty"`
 	// The number of milliseconds taken to process triggers and other processes related to the job data. This doesn't include the time used for processing asynchronous and batch Apex operations. If there are no triggers, the value is 0.
 	ApexProcessingTime *int64 `json:"apexProcessingTime,omitempty"`
 	// The number of milliseconds taken to actively process the job and includes apexProcessingTime, but doesn't include the time the job waited in the queue to be processed or the time required for serialization and deserialization.
@@ -266,7 +339,7 @@ func (o *JobInfoExt) GetJobType() string {
 		var ret string
 		return ret
 	}
-	return *o.JobType
+	return o.JobType.String()
 }
 
 // GetJobTypeOk returns a tuple with the JobType field value if set, nil otherwise
@@ -275,7 +348,8 @@ func (o *JobInfoExt) GetJobTypeOk() (*string, bool) {
 	if o == nil || isNil(o.JobType) {
 		return nil, false
 	}
-	return o.JobType, true
+	s := o.JobType.String()
+	return &s, true
 }
 
 // HasJobType returns a boolean if a field has been set.
@@ -288,7 +362,7 @@ func (o *JobInfoExt) HasJobType() bool {
 }
 
 // SetJobType gets a reference to the given string and assigns it to the JobType field.
-func (o *JobInfoExt) SetJobType(v string) {
+func (o *JobInfoExt) SetJobType(v JobInfoExtJobType) {
 	o.JobType = &v
 }
 
@@ -330,7 +404,7 @@ func (o *JobInfoExt) GetState() string {
 		var ret string
 		return ret
 	}
-	return *o.State
+	return o.State.String()
 }
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
@@ -339,7 +413,8 @@ func (o *JobInfoExt) GetStateOk() (*string, bool) {
 	if o == nil || isNil(o.State) {
 		return nil, false
 	}
-	return o.State, true
+	s := o.State.String()
+	return &s, true
 }
 
 // HasState returns a boolean if a field has been set.
@@ -352,7 +427,7 @@ func (o *JobInfoExt) HasState() bool {
 }
 
 // SetState gets a reference to the given string and assigns it to the State field.
-func (o *JobInfoExt) SetState(v string) {
+func (o *JobInfoExt) SetState(v JobInfoExtState) {
 	o.State = &v
 }
 

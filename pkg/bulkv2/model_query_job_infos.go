@@ -15,8 +15,9 @@ import (
 	"encoding/json"
 )
 
-// QueryJobsInfos struct for QueryJobsInfos
-type QueryJobsInfos struct {
+// QueryJobInfos struct for QueryJobInfos
+
+type QueryJobInfos struct {
 	// This is true if this is the last (or only) set of results. It is false if there are more records to fetch.
 	Done bool `json:"done"`
 	// An array of record objects.
@@ -25,27 +26,27 @@ type QueryJobsInfos struct {
 	NextRecordsUrl *string `json:"nextRecordsUrl,omitempty"`
 }
 
-// NewQueryJobsInfos instantiates a new QueryJobsInfos object
+// NewQueryJobInfos instantiates a new QueryJobInfos object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewQueryJobsInfos(done bool, records []QueryJobInfo) *QueryJobsInfos {
-	this := QueryJobsInfos{}
+func NewQueryJobInfos(done bool, records []QueryJobInfo) *QueryJobInfos {
+	this := QueryJobInfos{}
 	this.Done = done
 	this.Records = records
 	return &this
 }
 
-// NewQueryJobsInfosWithDefaults instantiates a new QueryJobsInfos object
+// NewQueryJobInfosWithDefaults instantiates a new QueryJobInfos object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewQueryJobsInfosWithDefaults() *QueryJobsInfos {
-	this := QueryJobsInfos{}
+func NewQueryJobInfosWithDefaults() *QueryJobInfos {
+	this := QueryJobInfos{}
 	return &this
 }
 
 // GetDone returns the Done field value
-func (o *QueryJobsInfos) GetDone() bool {
+func (o *QueryJobInfos) GetDone() bool {
 	if o == nil {
 		var ret bool
 		return ret
@@ -56,7 +57,7 @@ func (o *QueryJobsInfos) GetDone() bool {
 
 // GetDoneOk returns a tuple with the Done field value
 // and a boolean to check if the value has been set.
-func (o *QueryJobsInfos) GetDoneOk() (*bool, bool) {
+func (o *QueryJobInfos) GetDoneOk() (*bool, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -64,12 +65,12 @@ func (o *QueryJobsInfos) GetDoneOk() (*bool, bool) {
 }
 
 // SetDone sets field value
-func (o *QueryJobsInfos) SetDone(v bool) {
+func (o *QueryJobInfos) SetDone(v bool) {
 	o.Done = v
 }
 
 // GetRecords returns the Records field value
-func (o *QueryJobsInfos) GetRecords() []QueryJobInfo {
+func (o *QueryJobInfos) GetRecords() []QueryJobInfo {
 	if o == nil {
 		var ret []QueryJobInfo
 		return ret
@@ -80,7 +81,7 @@ func (o *QueryJobsInfos) GetRecords() []QueryJobInfo {
 
 // GetRecordsOk returns a tuple with the Records field value
 // and a boolean to check if the value has been set.
-func (o *QueryJobsInfos) GetRecordsOk() ([]QueryJobInfo, bool) {
+func (o *QueryJobInfos) GetRecordsOk() ([]QueryJobInfo, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -88,12 +89,12 @@ func (o *QueryJobsInfos) GetRecordsOk() ([]QueryJobInfo, bool) {
 }
 
 // SetRecords sets field value
-func (o *QueryJobsInfos) SetRecords(v []QueryJobInfo) {
+func (o *QueryJobInfos) SetRecords(v []QueryJobInfo) {
 	o.Records = v
 }
 
 // GetNextRecordsUrl returns the NextRecordsUrl field value if set, zero value otherwise.
-func (o *QueryJobsInfos) GetNextRecordsUrl() string {
+func (o *QueryJobInfos) GetNextRecordsUrl() string {
 	if o == nil || isNil(o.NextRecordsUrl) {
 		var ret string
 		return ret
@@ -103,7 +104,7 @@ func (o *QueryJobsInfos) GetNextRecordsUrl() string {
 
 // GetNextRecordsUrlOk returns a tuple with the NextRecordsUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryJobsInfos) GetNextRecordsUrlOk() (*string, bool) {
+func (o *QueryJobInfos) GetNextRecordsUrlOk() (*string, bool) {
 	if o == nil || isNil(o.NextRecordsUrl) {
 		return nil, false
 	}
@@ -111,7 +112,7 @@ func (o *QueryJobsInfos) GetNextRecordsUrlOk() (*string, bool) {
 }
 
 // HasNextRecordsUrl returns a boolean if a field has been set.
-func (o *QueryJobsInfos) HasNextRecordsUrl() bool {
+func (o *QueryJobInfos) HasNextRecordsUrl() bool {
 	if o != nil && !isNil(o.NextRecordsUrl) {
 		return true
 	}
@@ -120,11 +121,11 @@ func (o *QueryJobsInfos) HasNextRecordsUrl() bool {
 }
 
 // SetNextRecordsUrl gets a reference to the given string and assigns it to the NextRecordsUrl field.
-func (o *QueryJobsInfos) SetNextRecordsUrl(v string) {
+func (o *QueryJobInfos) SetNextRecordsUrl(v string) {
 	o.NextRecordsUrl = &v
 }
 
-func (o QueryJobsInfos) MarshalJSON() ([]byte, error) {
+func (o QueryJobInfos) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["done"] = o.Done
@@ -138,38 +139,38 @@ func (o QueryJobsInfos) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableQueryJobsInfos struct {
-	value *QueryJobsInfos
+type NullableQueryJobInfos struct {
+	value *QueryJobInfos
 	isSet bool
 }
 
-func (v NullableQueryJobsInfos) Get() *QueryJobsInfos {
+func (v NullableQueryJobInfos) Get() *QueryJobInfos {
 	return v.value
 }
 
-func (v *NullableQueryJobsInfos) Set(val *QueryJobsInfos) {
+func (v *NullableQueryJobInfos) Set(val *QueryJobInfos) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableQueryJobsInfos) IsSet() bool {
+func (v NullableQueryJobInfos) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableQueryJobsInfos) Unset() {
+func (v *NullableQueryJobInfos) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableQueryJobsInfos(val *QueryJobsInfos) *NullableQueryJobsInfos {
-	return &NullableQueryJobsInfos{value: val, isSet: true}
+func NewNullableQueryJobInfos(val *QueryJobInfos) *NullableQueryJobInfos {
+	return &NullableQueryJobInfos{value: val, isSet: true}
 }
 
-func (v NullableQueryJobsInfos) MarshalJSON() ([]byte, error) {
+func (v NullableQueryJobInfos) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableQueryJobsInfos) UnmarshalJSON(src []byte) error {
+func (v *NullableQueryJobInfos) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

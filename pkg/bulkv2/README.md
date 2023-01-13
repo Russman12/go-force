@@ -24,27 +24,27 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 | *JobApi* | [**GetJobUnprocessedRecords**](docs/JobApi.md#getjobunprocessedrecords) | **Get** /jobs/ingest/{jobId}/unprocessedrecords | Get Job Unprocessed Record Results |
 | *JobApi* | [**GetJobs**](docs/JobApi.md#getjobs) | **Get** /jobs/ingest | Get All Jobs |
 | *JobApi* | [**UploadJobData**](docs/JobApi.md#uploadjobdata) | **Put** /jobs/ingest/{jobId}/batches | Upload Job Data |
-| *QueryApi* | [**AbortJob**](docs/QueryApi.md#abortjob) | **Patch** /jobs/query/{jobId} | Abort a Job Query |
-| *QueryApi* | [**CreateJob**](docs/QueryApi.md#createjob) | **Post** /jobs/query | Create job Query |
-| *QueryApi* | [**DeleteJob**](docs/QueryApi.md#deletejob) | **Delete** /jobs/query/{jobId} | Delete Job Query |
+| *QueryApi* | [**AbortQueryJob**](docs/QueryApi.md#abortqueryjob) | **Patch** /jobs/query/{jobId} | Abort a Job Query |
+| *QueryApi* | [**CreateQueryJob**](docs/QueryApi.md#createqueryjob) | **Post** /jobs/query | Create job Query |
+| *QueryApi* | [**DeleteQueryJob**](docs/QueryApi.md#deletequeryjob) | **Delete** /jobs/query/{jobId} | Delete Job Query |
 | *QueryApi* | [**GetJobResults**](docs/QueryApi.md#getjobresults) | **Get** /jobs/query/{jobId}/results | Get Job Query Result |
-| *QueryApi* | [**GetJobs**](docs/QueryApi.md#getjobs) | **Get** /jobs/query | Get All Query Jobs |
-| *QueryApi* | [**JobInfo**](docs/QueryApi.md#jobinfo) | **Get** /jobs/query/{jobId} | Get Job Info Query |
+| *QueryApi* | [**GetQueryJobInfo**](docs/QueryApi.md#getqueryjobinfo) | **Get** /jobs/query/{jobId} | Get Job Info Query |
+| *QueryApi* | [**GetQueryJobs**](docs/QueryApi.md#getqueryjobs) | **Get** /jobs/query | Get All Query Jobs |
 
 
 ## Documentation For Models
 
  - [CloseOrAbortJobRequest](docs/CloseOrAbortJobRequest.md)
+ - [CreateQueryJobRequest](docs/CreateQueryJobRequest.md)
  - [Job](docs/Job.md)
  - [JobInfo](docs/JobInfo.md)
  - [JobInfoExt](docs/JobInfoExt.md)
  - [Jobs](docs/Jobs.md)
  - [QueryJob](docs/QueryJob.md)
- - [QueryJobCreateRequest](docs/QueryJobCreateRequest.md)
  - [QueryJobCreateRequestExt](docs/QueryJobCreateRequestExt.md)
  - [QueryJobInfo](docs/QueryJobInfo.md)
  - [QueryJobInfoExt](docs/QueryJobInfoExt.md)
- - [QueryJobsInfos](docs/QueryJobsInfos.md)
+ - [QueryJobInfos](docs/QueryJobInfos.md)
 
 
 ## Documentation For Authorization

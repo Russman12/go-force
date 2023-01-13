@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **TotalProcessingTime** | Pointer to **int64** | The number of milliseconds taken to process the job. | [optional] 
 **Operation** | **string** | The type of query. | 
 **ContentType** | **string** | The format that is used for the results. Currently the only supported value is CSV. | 
-**ColumnDelimiter** | Pointer to **string** | The column delimiter used for CSV job data. The default value is COMMA. | [optional] 
+**ColumnDelimiter** | Pointer to **NullableString** | The column delimiter used for CSV job data. The default value is COMMA. | [optional] 
 **LineEnding** | Pointer to **string** | The line ending used for CSV job data, marking the end of a data row. The default is LF. | [optional] 
 
 ## Methods
@@ -365,6 +365,16 @@ SetColumnDelimiter sets ColumnDelimiter field to given value.
 
 HasColumnDelimiter returns a boolean if a field has been set.
 
+### SetColumnDelimiterNil
+
+`func (o *QueryJobInfo) SetColumnDelimiterNil(b bool)`
+
+ SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
+
+### UnsetColumnDelimiter
+`func (o *QueryJobInfo) UnsetColumnDelimiter()`
+
+UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
 ### GetLineEnding
 
 `func (o *QueryJobInfo) GetLineEnding() string`

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AssignmentRuleId** | **string** | The ID of the assignment rule. This property is only shown if an assignment rule is specified when the job is created. | 
-**ColumnDelimiter** | **string** | The column delimiter used for CSV job data. | 
+**ColumnDelimiter** | **NullableString** | The column delimiter used for CSV job data. | 
 **ContentType** | **string** | The format of the data being processed. Only CSV is supported. | 
 **ExternalIdFieldName** | **string** | The name of the external ID field for an upsert. | 
 **LineEnding** | **string** | The line ending used for CSV job data. | 
@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 
 ### NewJobInfo
 
-`func NewJobInfo(assignmentRuleId string, columnDelimiter string, contentType string, externalIdFieldName string, lineEnding string, object string, operation string, apiVersion float32, concurrencyMode string, contentUrl string, createdById string, createdDate string, id string, jobType string, systemModstamp string, state string, ) *JobInfo`
+`func NewJobInfo(assignmentRuleId string, columnDelimiter NullableString, contentType string, externalIdFieldName string, lineEnding string, object string, operation string, apiVersion float32, concurrencyMode string, contentUrl string, createdById string, createdDate string, id string, jobType string, systemModstamp string, state string, ) *JobInfo`
 
 NewJobInfo instantiates a new JobInfo object
 This constructor will assign default values to properties that have it defined,
@@ -87,6 +87,16 @@ and a boolean to check if the value has been set.
 SetColumnDelimiter sets ColumnDelimiter field to given value.
 
 
+### SetColumnDelimiterNil
+
+`func (o *JobInfo) SetColumnDelimiterNil(b bool)`
+
+ SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
+
+### UnsetColumnDelimiter
+`func (o *JobInfo) UnsetColumnDelimiter()`
+
+UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
 ### GetContentType
 
 `func (o *JobInfo) GetContentType() string`

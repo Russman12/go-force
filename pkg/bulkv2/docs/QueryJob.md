@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Operation** | Pointer to **string** | The type of query. | [optional] 
 **ContentType** | Pointer to **string** | The format that is used for the results. Currently the only supported value is CSV. | [optional] 
-**ColumnDelimiter** | Pointer to **string** | The column delimiter used for CSV job data. The default value is COMMA. | [optional] 
+**ColumnDelimiter** | Pointer to **NullableString** | The column delimiter used for CSV job data. The default value is COMMA. | [optional] 
 **LineEnding** | Pointer to **string** | The line ending used for CSV job data, marking the end of a data row. The default is LF. | [optional] 
 
 ## Methods
@@ -103,6 +103,16 @@ SetColumnDelimiter sets ColumnDelimiter field to given value.
 
 HasColumnDelimiter returns a boolean if a field has been set.
 
+### SetColumnDelimiterNil
+
+`func (o *QueryJob) SetColumnDelimiterNil(b bool)`
+
+ SetColumnDelimiterNil sets the value for ColumnDelimiter to be an explicit nil
+
+### UnsetColumnDelimiter
+`func (o *QueryJob) UnsetColumnDelimiter()`
+
+UnsetColumnDelimiter ensures that no value is present for ColumnDelimiter, not even an explicit nil
 ### GetLineEnding
 
 `func (o *QueryJob) GetLineEnding() string`

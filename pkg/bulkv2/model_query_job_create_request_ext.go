@@ -16,6 +16,7 @@ import (
 )
 
 // QueryJobCreateRequestExt struct for QueryJobCreateRequestExt
+
 type QueryJobCreateRequestExt struct {
 	// The query to be performed.
 	Query *string `json:"query,omitempty"`
