@@ -1,17 +1,17 @@
-# \SobjectApi
+# \SObjectApi
 
 All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetSObjects**](SobjectApi.md#GetSObjects) | **Get** /sobjects | 
-[**SObjectDescribe**](SobjectApi.md#SObjectDescribe) | **Get** /sobjects/{sObject}/describe | 
+[**GetSObjects**](SObjectApi.md#GetSObjects) | **Get** /sobjects | 
+[**SObjectDescribe**](SObjectApi.md#SObjectDescribe) | **Get** /sobjects/{sObject}/describe | 
 
 
 
 ## GetSObjects
 
-> SobjectDescribes GetSObjects(ctx).Execute()
+> SObjectDescribes GetSObjects(ctx).Execute()
 
 
 
@@ -31,13 +31,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SobjectApi.GetSObjects(context.Background()).Execute()
+    resp, r, err := apiClient.SObjectApi.GetSObjects(context.Background()).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SobjectApi.GetSObjects``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.GetSObjects``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetSObjects`: SobjectDescribes
-    fmt.Fprintf(os.Stdout, "Response from `SobjectApi.GetSObjects`: %v\n", resp)
+    // response from `GetSObjects`: SObjectDescribes
+    fmt.Fprintf(os.Stdout, "Response from `SObjectApi.GetSObjects`: %v\n", resp)
 }
 ```
 
@@ -52,7 +52,7 @@ Other parameters are passed through a pointer to a apiGetSObjectsRequest struct 
 
 ### Return type
 
-[**SobjectDescribes**](SobjectDescribes.md)
+[**SObjectDescribes**](SObjectDescribes.md)
 
 ### Authorization
 
@@ -70,7 +70,7 @@ No authorization required
 
 ## SObjectDescribe
 
-> SobjectDescribe SObjectDescribe(ctx, sObject).Execute()
+> SObjectDescribe SObjectDescribe(ctx, sObject).Execute()
 
 
 
@@ -91,13 +91,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.SobjectApi.SObjectDescribe(context.Background(), sObject).Execute()
+    resp, r, err := apiClient.SObjectApi.SObjectDescribe(context.Background(), sObject).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `SobjectApi.SObjectDescribe``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.SObjectDescribe``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `SObjectDescribe`: SobjectDescribe
-    fmt.Fprintf(os.Stdout, "Response from `SobjectApi.SObjectDescribe`: %v\n", resp)
+    // response from `SObjectDescribe`: SObjectDescribe
+    fmt.Fprintf(os.Stdout, "Response from `SObjectApi.SObjectDescribe`: %v\n", resp)
 }
 ```
 
@@ -120,7 +120,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**SobjectDescribe**](SobjectDescribe.md)
+[**SObjectDescribe**](SObjectDescribe.md)
 
 ### Authorization
 

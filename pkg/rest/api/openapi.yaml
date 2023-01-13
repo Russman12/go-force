@@ -24,7 +24,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/sobjectDescribes'
+                $ref: '#/components/schemas/sObjectDescribes'
           description: Successful response
         "401":
           content: {}
@@ -33,7 +33,7 @@ paths:
           content: {}
           description: Bad Request
       tags:
-      - sobject
+      - SObject
   /sobjects/{sObject}/describe:
     get:
       operationId: sObjectDescribe
@@ -52,7 +52,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/sobjectDescribe'
+                $ref: '#/components/schemas/sObjectDescribe'
           description: Successful response
         "401":
           content: {}
@@ -61,10 +61,10 @@ paths:
           content: {}
           description: Bad Request
       tags:
-      - sobject
+      - SObject
 components:
   schemas:
-    sobjectDescribe:
+    sObjectDescribe:
       example:
         mruEnabled: true
         updateable: true
@@ -810,7 +810,7 @@ components:
         writeRequiresMasterRead:
           type: boolean
       type: object
-    sobjectDescribes:
+    sObjectDescribes:
       example:
         maxBatchSize: 200
         sobjects:
@@ -827,7 +827,7 @@ components:
           type: integer
         sobjects:
           items:
-            $ref: '#/components/schemas/sobjectDescribe'
+            $ref: '#/components/schemas/sObjectDescribe'
           type: array
       required:
       - encoding

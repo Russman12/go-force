@@ -1,6 +1,6 @@
 README.md
 api/openapi.yaml
-api_sobject.go
+api_s_object.go
 client.go
 configuration.go
 docs/ActionOverrides.md
@@ -9,9 +9,9 @@ docs/FieldDescribe.md
 docs/FieldDescribePicklist.md
 docs/RecordTypeInfo.md
 docs/RecordTypeInfoUrls.md
-docs/SobjectApi.md
-docs/SobjectDescribe.md
-docs/SobjectDescribes.md
+docs/SObjectApi.md
+docs/SObjectDescribe.md
+docs/SObjectDescribes.md
 docs/SupportedScopes.md
 model_action_overrides.go
 model_child_relationships.go
@@ -19,8 +19,8 @@ model_field_describe.go
 model_field_describe_picklist.go
 model_record_type_info.go
 model_record_type_info_urls.go
-model_sobject_describe.go
-model_sobject_describes.go
+model_s_object_describe.go
+model_s_object_describes.go
 model_supported_scopes.go
 response.go
 utils.go

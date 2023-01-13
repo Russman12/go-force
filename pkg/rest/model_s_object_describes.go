@@ -15,35 +15,35 @@ import (
 	"encoding/json"
 )
 
-// SobjectDescribes struct for SobjectDescribes
-type SobjectDescribes struct {
+// SObjectDescribes struct for SObjectDescribes
+type SObjectDescribes struct {
 	Encoding     string            `json:"encoding"`
 	MaxBatchSize int32             `json:"maxBatchSize"`
-	Sobjects     []SobjectDescribe `json:"sobjects"`
+	Sobjects     []SObjectDescribe `json:"sobjects"`
 }
 
-// NewSobjectDescribes instantiates a new SobjectDescribes object
+// NewSObjectDescribes instantiates a new SObjectDescribes object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewSobjectDescribes(encoding string, maxBatchSize int32, sobjects []SobjectDescribe) *SobjectDescribes {
-	this := SobjectDescribes{}
+func NewSObjectDescribes(encoding string, maxBatchSize int32, sobjects []SObjectDescribe) *SObjectDescribes {
+	this := SObjectDescribes{}
 	this.Encoding = encoding
 	this.MaxBatchSize = maxBatchSize
 	this.Sobjects = sobjects
 	return &this
 }
 
-// NewSobjectDescribesWithDefaults instantiates a new SobjectDescribes object
+// NewSObjectDescribesWithDefaults instantiates a new SObjectDescribes object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewSobjectDescribesWithDefaults() *SobjectDescribes {
-	this := SobjectDescribes{}
+func NewSObjectDescribesWithDefaults() *SObjectDescribes {
+	this := SObjectDescribes{}
 	return &this
 }
 
 // GetEncoding returns the Encoding field value
-func (o *SobjectDescribes) GetEncoding() string {
+func (o *SObjectDescribes) GetEncoding() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -54,7 +54,7 @@ func (o *SobjectDescribes) GetEncoding() string {
 
 // GetEncodingOk returns a tuple with the Encoding field value
 // and a boolean to check if the value has been set.
-func (o *SobjectDescribes) GetEncodingOk() (*string, bool) {
+func (o *SObjectDescribes) GetEncodingOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -62,12 +62,12 @@ func (o *SobjectDescribes) GetEncodingOk() (*string, bool) {
 }
 
 // SetEncoding sets field value
-func (o *SobjectDescribes) SetEncoding(v string) {
+func (o *SObjectDescribes) SetEncoding(v string) {
 	o.Encoding = v
 }
 
 // GetMaxBatchSize returns the MaxBatchSize field value
-func (o *SobjectDescribes) GetMaxBatchSize() int32 {
+func (o *SObjectDescribes) GetMaxBatchSize() int32 {
 	if o == nil {
 		var ret int32
 		return ret
@@ -78,7 +78,7 @@ func (o *SobjectDescribes) GetMaxBatchSize() int32 {
 
 // GetMaxBatchSizeOk returns a tuple with the MaxBatchSize field value
 // and a boolean to check if the value has been set.
-func (o *SobjectDescribes) GetMaxBatchSizeOk() (*int32, bool) {
+func (o *SObjectDescribes) GetMaxBatchSizeOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -86,14 +86,14 @@ func (o *SobjectDescribes) GetMaxBatchSizeOk() (*int32, bool) {
 }
 
 // SetMaxBatchSize sets field value
-func (o *SobjectDescribes) SetMaxBatchSize(v int32) {
+func (o *SObjectDescribes) SetMaxBatchSize(v int32) {
 	o.MaxBatchSize = v
 }
 
 // GetSobjects returns the Sobjects field value
-func (o *SobjectDescribes) GetSobjects() []SobjectDescribe {
+func (o *SObjectDescribes) GetSobjects() []SObjectDescribe {
 	if o == nil {
-		var ret []SobjectDescribe
+		var ret []SObjectDescribe
 		return ret
 	}
 
@@ -102,7 +102,7 @@ func (o *SobjectDescribes) GetSobjects() []SobjectDescribe {
 
 // GetSobjectsOk returns a tuple with the Sobjects field value
 // and a boolean to check if the value has been set.
-func (o *SobjectDescribes) GetSobjectsOk() ([]SobjectDescribe, bool) {
+func (o *SObjectDescribes) GetSobjectsOk() ([]SObjectDescribe, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -110,11 +110,11 @@ func (o *SobjectDescribes) GetSobjectsOk() ([]SobjectDescribe, bool) {
 }
 
 // SetSobjects sets field value
-func (o *SobjectDescribes) SetSobjects(v []SobjectDescribe) {
+func (o *SObjectDescribes) SetSobjects(v []SObjectDescribe) {
 	o.Sobjects = v
 }
 
-func (o SobjectDescribes) MarshalJSON() ([]byte, error) {
+func (o SObjectDescribes) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["encoding"] = o.Encoding
@@ -128,38 +128,38 @@ func (o SobjectDescribes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableSobjectDescribes struct {
-	value *SobjectDescribes
+type NullableSObjectDescribes struct {
+	value *SObjectDescribes
 	isSet bool
 }
 
-func (v NullableSobjectDescribes) Get() *SobjectDescribes {
+func (v NullableSObjectDescribes) Get() *SObjectDescribes {
 	return v.value
 }
 
-func (v *NullableSobjectDescribes) Set(val *SobjectDescribes) {
+func (v *NullableSObjectDescribes) Set(val *SObjectDescribes) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableSobjectDescribes) IsSet() bool {
+func (v NullableSObjectDescribes) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableSobjectDescribes) Unset() {
+func (v *NullableSObjectDescribes) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableSobjectDescribes(val *SobjectDescribes) *NullableSobjectDescribes {
-	return &NullableSobjectDescribes{value: val, isSet: true}
+func NewNullableSObjectDescribes(val *SObjectDescribes) *NullableSObjectDescribes {
+	return &NullableSObjectDescribes{value: val, isSet: true}
 }
 
-func (v NullableSobjectDescribes) MarshalJSON() ([]byte, error) {
+func (v NullableSObjectDescribes) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableSobjectDescribes) UnmarshalJSON(src []byte) error {
+func (v *NullableSObjectDescribes) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

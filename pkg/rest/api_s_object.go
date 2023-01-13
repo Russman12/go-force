@@ -20,15 +20,15 @@ import (
 	"strings"
 )
 
-// SobjectApiService SobjectApi service
-type SobjectApiService service
+// SObjectApiService SObjectApi service
+type SObjectApiService service
 
 type ApiGetSObjectsRequest struct {
 	ctx        context.Context
-	ApiService *SobjectApiService
+	ApiService *SObjectApiService
 }
 
-func (r ApiGetSObjectsRequest) Execute() (*SobjectDescribes, *http.Response, error) {
+func (r ApiGetSObjectsRequest) Execute() (*SObjectDescribes, *http.Response, error) {
 	return r.ApiService.GetSObjectsExecute(r)
 }
 
@@ -38,7 +38,7 @@ GetSObjects Method for GetSObjects
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetSObjectsRequest
 */
-func (a *SobjectApiService) GetSObjects(ctx context.Context) ApiGetSObjectsRequest {
+func (a *SObjectApiService) GetSObjects(ctx context.Context) ApiGetSObjectsRequest {
 	return ApiGetSObjectsRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -47,16 +47,16 @@ func (a *SobjectApiService) GetSObjects(ctx context.Context) ApiGetSObjectsReque
 
 // Execute executes the request
 //
-//	@return SobjectDescribes
-func (a *SobjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SobjectDescribes, *http.Response, error) {
+//	@return SObjectDescribes
+func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjectDescribes, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *SobjectDescribes
+		localVarReturnValue *SObjectDescribes
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SobjectApiService.GetSObjects")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SObjectApiService.GetSObjects")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -128,11 +128,11 @@ func (a *SobjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*Sobjec
 
 type ApiSObjectDescribeRequest struct {
 	ctx        context.Context
-	ApiService *SobjectApiService
+	ApiService *SObjectApiService
 	sObject    string
 }
 
-func (r ApiSObjectDescribeRequest) Execute() (*SobjectDescribe, *http.Response, error) {
+func (r ApiSObjectDescribeRequest) Execute() (*SObjectDescribe, *http.Response, error) {
 	return r.ApiService.SObjectDescribeExecute(r)
 }
 
@@ -143,7 +143,7 @@ SObjectDescribe Method for SObjectDescribe
 	@param sObject SObject name
 	@return ApiSObjectDescribeRequest
 */
-func (a *SobjectApiService) SObjectDescribe(ctx context.Context, sObject string) ApiSObjectDescribeRequest {
+func (a *SObjectApiService) SObjectDescribe(ctx context.Context, sObject string) ApiSObjectDescribeRequest {
 	return ApiSObjectDescribeRequest{
 		ApiService: a,
 		ctx:        ctx,
@@ -153,16 +153,16 @@ func (a *SobjectApiService) SObjectDescribe(ctx context.Context, sObject string)
 
 // Execute executes the request
 //
-//	@return SobjectDescribe
-func (a *SobjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) (*SobjectDescribe, *http.Response, error) {
+//	@return SObjectDescribe
+func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) (*SObjectDescribe, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *SobjectDescribe
+		localVarReturnValue *SObjectDescribe
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SobjectApiService.SObjectDescribe")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SObjectApiService.SObjectDescribe")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
