@@ -117,6 +117,6 @@ restClient := rest.NewAPIClient(restCfg)
 See API documentation for implementation details
 
 ## Supported APIs
-* [Auth](pkg/auth/README.md)
+* [Auth](pkg/auth/README.md) (partial)
 * [Bulk v2](pkg/bulkv2/README.md)
-* [Rest](pkg/rest/README.md)
+* [Rest](pkg/rest/README.md) (partial)

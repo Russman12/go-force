@@ -1,10 +1,10 @@
 README.md
-api/openapi.yaml
 api_o_auth.go
 client.go
 configuration.go
 docs/AuthResponse.md
 docs/OAuthApi.md
+go.sum
 model_auth_response.go
 response.go
 test/api_o_auth_test.go

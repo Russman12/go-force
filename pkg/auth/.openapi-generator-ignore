@@ -27,4 +27,7 @@
 
 git_push.sh
 go.mod
-go.sum
+
+api/openapi.yaml
+
+api/openapi.yaml
