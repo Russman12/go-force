@@ -1,5 +1,4 @@
 README.md
-api/openapi.yaml
 api_job.go
 api_query.go
 client.go
@@ -55,6 +54,4 @@ model_query_job_state.go
 model_query_job_type.go
 model_query_operation.go
 response.go
-test/api_job_test.go
-test/api_query_test.go
 utils.go

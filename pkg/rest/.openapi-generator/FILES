@@ -25,5 +25,4 @@ model_s_object_describe.go
 model_s_object_describes.go
 model_supported_scopes.go
 response.go
-test/api_s_object_test.go
 utils.go

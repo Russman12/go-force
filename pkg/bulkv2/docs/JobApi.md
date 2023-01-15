@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 
@@ -340,7 +340,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 
@@ -408,7 +408,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 
@@ -476,7 +476,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 
@@ -544,7 +544,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 
@@ -612,7 +612,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-No authorization required
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 

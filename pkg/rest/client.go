@@ -45,11 +45,11 @@ var (
 // APIClient manages communication with the Salesforce Platform REST API API v56.0
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
-	cfg    *Configuration
-	common service // Reuse a single struct instead of allocating one for each service on the heap.
+	cfg      *Configuration
+	common   service // Reuse a single struct instead of allocating one for each service on the heap.
+	TokenSrc oauth2.TokenSource
 
 	// API Services
-
 	SObjectApi *SObjectApiService
 }
 
@@ -59,7 +59,7 @@ type service struct {
 
 // NewAPIClient creates a new API client. Requires a userAgent string describing your application.
 // optionally a custom http.Client to allow for advanced features such as caching.
-func NewAPIClient(cfg *Configuration) *APIClient {
+func NewAPIClient(cfg *Configuration, tokenSource oauth2.TokenSource) *APIClient {
 	if cfg.HTTPClient == nil {
 		cfg.HTTPClient = http.DefaultClient
 	}
@@ -67,6 +67,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c := &APIClient{}
 	c.cfg = cfg
 	c.common.client = c
+	c.TokenSrc = tokenSource
 
 	// API Services
 	c.SObjectApi = (*SObjectApiService)(&c.common)

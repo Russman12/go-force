@@ -102,6 +102,13 @@ func (a *QueryApiService) AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*Quer
 		return localVarReturnValue, nil, err
 	}
 
+	//set oauth details
+	token, err := a.client.TokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+	token.SetAuthHeader(req)
+
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -222,6 +229,13 @@ func (a *QueryApiService) CreateQueryJobExecute(r ApiCreateQueryJobRequest) (*Qu
 		return localVarReturnValue, nil, err
 	}
 
+	//set oauth details
+	token, err := a.client.TokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+	token.SetAuthHeader(req)
+
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -325,6 +339,13 @@ func (a *QueryApiService) DeleteQueryJobExecute(r ApiDeleteQueryJobRequest) (*ht
 	if err != nil {
 		return nil, err
 	}
+
+	//set oauth details
+	token, err := a.client.TokenSrc.Token()
+	if err != nil {
+		return nil, err
+	}
+	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
@@ -456,6 +477,13 @@ func (a *QueryApiService) GetJobResultsExecute(r ApiGetJobResultsRequest) (*io.R
 		return localVarReturnValue, nil, err
 	}
 
+	//set oauth details
+	token, err := a.client.TokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+	token.SetAuthHeader(req)
+
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -547,6 +575,13 @@ func (a *QueryApiService) GetQueryJobInfoExecute(r ApiGetQueryJobInfoRequest) (*
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
+
+	//set oauth details
+	token, err := a.client.TokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
@@ -690,6 +725,13 @@ func (a *QueryApiService) GetQueryJobsExecute(r ApiGetQueryJobsRequest) (*QueryJ
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
+
+	//set oauth details
+	token, err := a.client.TokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {

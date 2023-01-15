@@ -89,6 +89,13 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 		return localVarReturnValue, nil, err
 	}
 
+	//set oauth details
+	token, err := a.client.TokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+	token.SetAuthHeader(req)
+
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -195,6 +202,13 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 	if err != nil {
 		return localVarReturnValue, nil, err
 	}
+
+	//set oauth details
+	token, err := a.client.TokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {

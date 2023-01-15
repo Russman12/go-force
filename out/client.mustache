@@ -41,12 +41,14 @@ var (
 type APIClient struct {
 	cfg    *Configuration
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
+{{#hasOAuthMethods}}
+    TokenSrc oauth2.TokenSource
+{{/hasOAuthMethods}}
 
 	// API Services
 {{#apiInfo}}
 {{#apis}}
 {{#operations}}
-
 	{{classname}} {{#generateInterfaces}}{{classname}}{{/generateInterfaces}}{{^generateInterfaces}}*{{classname}}Service{{/generateInterfaces}}
 {{/operations}}
 {{/apis}}
@@ -59,7 +61,7 @@ type service struct {
 
 // NewAPIClient creates a new API client. Requires a userAgent string describing your application.
 // optionally a custom http.Client to allow for advanced features such as caching.
-func NewAPIClient(cfg *Configuration) *APIClient {
+func NewAPIClient(cfg *Configuration{{#hasOAuthMethods}}, tokenSource oauth2.TokenSource{{/hasOAuthMethods}}) *APIClient {
 	if cfg.HTTPClient == nil {
 		cfg.HTTPClient = http.DefaultClient
 	}
@@ -67,6 +69,9 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c := &APIClient{}
 	c.cfg = cfg
 	c.common.client = c
+{{#hasOAuthMethods}}
+    c.TokenSrc = tokenSource
+{{/hasOAuthMethods}}
 
 {{#apiInfo}}
 	// API Services

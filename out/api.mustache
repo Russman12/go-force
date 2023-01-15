@@ -343,6 +343,15 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
 		return {{#returnType}}localVarReturnValue, {{/returnType}}nil, err
 	}
 
+{{#hasAuthMethods}}
+    //set oauth details
+    token, err := a.client.TokenSrc.Token()
+    if err != nil {
+        return {{#returnType}}localVarReturnValue, {{/returnType}}nil, err
+    }
+    token.SetAuthHeader(req)
+
+{{/hasAuthMethods}}
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
 		return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, err
