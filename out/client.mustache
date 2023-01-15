@@ -42,7 +42,7 @@ type APIClient struct {
 	cfg    *Configuration
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
 {{#hasOAuthMethods}}
-    TokenSrc oauth2.TokenSource
+    tokenSrc oauth2.TokenSource
 {{/hasOAuthMethods}}
 
 	// API Services
@@ -70,7 +70,7 @@ func NewAPIClient(cfg *Configuration{{#hasOAuthMethods}}, tokenSource oauth2.Tok
 	c.cfg = cfg
 	c.common.client = c
 {{#hasOAuthMethods}}
-    c.TokenSrc = tokenSource
+    c.tokenSrc = tokenSource
 {{/hasOAuthMethods}}
 
 {{#apiInfo}}

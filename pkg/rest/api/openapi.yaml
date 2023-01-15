@@ -6,7 +6,7 @@ info:
   title: Salesforce Platform REST API
   version: "56.0"
 servers:
-- description: Salesforce domain
+- description: API Base URL
   url: "{instanceUrl}/services/data/v{apiVersion}"
   variables:
     instanceUrl:
@@ -834,8 +834,11 @@ components:
       flows:
         clientCredentials:
           scopes: {}
-          tokenUrl: "https://{myDomainURL}/services/oauth2/token"
+          tokenUrl: /services/oauth2/token
+        implicit:
+          authorizationUrl: https://api.getbase.com/oauth2/authorize
+          scopes: {}
         password:
           scopes: {}
-          tokenUrl: https://login.salesforce.com/services/oauth2/token
+          tokenUrl: /services/oauth2/token
       type: oauth2

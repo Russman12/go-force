@@ -56,7 +56,17 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 		localVarReturnValue *SObjectDescribes
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SObjectApiService.GetSObjects")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -89,11 +99,6 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 		return localVarReturnValue, nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
@@ -169,7 +174,17 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 		localVarReturnValue *SObjectDescribe
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SObjectApiService.SObjectDescribe")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -203,11 +218,6 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 		return localVarReturnValue, nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)

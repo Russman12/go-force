@@ -107,7 +107,7 @@ func NewConfiguration() *Configuration {
 		Servers: ServerConfigurations{
 			{
 				URL:         "{instanceUrl}/services/data/v{apiVersion}",
-				Description: "Salesforce domain",
+				Description: "API Base URL",
 				Variables: map[string]ServerVariable{
 					"instanceUrl": ServerVariable{
 						Description:  "Salesforce server domain",

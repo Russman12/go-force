@@ -119,7 +119,22 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
 		{{/returnType}}
 	)
 
+{{#hasAuthMethods}}
+    token, err := a.client.tokenSrc.Token()
+    if err != nil {
+        return {{#returnType}}localVarReturnValue, {{/returnType}}nil, &GenericOpenAPIError{error: err.Error()}
+    }
+
+    serverIdx, err := getServerIndex(r.ctx)
+    if err != nil {
+        return {{#returnType}}localVarReturnValue, {{/returnType}}nil, &GenericOpenAPIError{error: err.Error()}
+    }
+
+    localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
+{{/hasAuthMethods}}
+{{^hasAuthMethods}}
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "{{{classname}}}Service.{{{nickname}}}")
+{{/hasAuthMethods}}
 	if err != nil {
 		return {{#returnType}}localVarReturnValue, {{/returnType}}nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -344,11 +359,6 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
 	}
 
 {{#hasAuthMethods}}
-    //set oauth details
-    token, err := a.client.TokenSrc.Token()
-    if err != nil {
-        return {{#returnType}}localVarReturnValue, {{/returnType}}nil, err
-    }
     token.SetAuthHeader(req)
 
 {{/hasAuthMethods}}

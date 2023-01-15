@@ -66,7 +66,17 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 		localVarReturnValue *JobInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.CloseOrAbortJob")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -102,11 +112,6 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 		return localVarReturnValue, nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
@@ -185,7 +190,17 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 		localVarReturnValue *JobInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.CreateJob")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -220,11 +235,6 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 		return localVarReturnValue, nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
@@ -297,7 +307,17 @@ func (a *JobApiService) DeleteJobExecute(r ApiDeleteJobRequest) (*http.Response,
 		formFiles          []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.DeleteJob")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -331,11 +351,6 @@ func (a *JobApiService) DeleteJobExecute(r ApiDeleteJobRequest) (*http.Response,
 		return nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
@@ -396,7 +411,17 @@ func (a *JobApiService) GetJobFailedResultsExecute(r ApiGetJobFailedResultsReque
 		localVarReturnValue *io.ReadCloser
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.GetJobFailedResults")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -430,11 +455,6 @@ func (a *JobApiService) GetJobFailedResultsExecute(r ApiGetJobFailedResultsReque
 		return localVarReturnValue, nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
@@ -495,7 +515,17 @@ func (a *JobApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *ht
 		localVarReturnValue *JobInfo
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.GetJobInfo")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -529,11 +559,6 @@ func (a *JobApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *ht
 		return localVarReturnValue, nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
@@ -609,7 +634,17 @@ func (a *JobApiService) GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResu
 		localVarReturnValue *io.ReadCloser
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.GetJobSuccessfulResults")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -643,11 +678,6 @@ func (a *JobApiService) GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResu
 		return localVarReturnValue, nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
@@ -708,7 +738,17 @@ func (a *JobApiService) GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRe
 		localVarReturnValue *io.ReadCloser
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.GetJobUnprocessedRecords")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -742,11 +782,6 @@ func (a *JobApiService) GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRe
 		return localVarReturnValue, nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
@@ -822,7 +857,17 @@ func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (map[string]interfac
 		localVarReturnValue map[string]interface{}
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.GetJobs")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -864,11 +909,6 @@ func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (map[string]interfac
 		return localVarReturnValue, nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
@@ -947,7 +987,17 @@ func (a *JobApiService) UploadJobDataExecute(r ApiUploadJobDataRequest) (*http.R
 		formFiles          []formFile
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "JobApiService.UploadJobData")
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	serverIdx, err := getServerIndex(r.ctx)
+	if err != nil {
+		return nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -983,11 +1033,6 @@ func (a *JobApiService) UploadJobDataExecute(r ApiUploadJobDataRequest) (*http.R
 		return nil, err
 	}
 
-	//set oauth details
-	token, err := a.client.TokenSrc.Token()
-	if err != nil {
-		return nil, err
-	}
 	token.SetAuthHeader(req)
 
 	localVarHTTPResponse, err := a.client.callAPI(req)

@@ -56,7 +56,7 @@ Other parameters are passed through a pointer to a apiGetSObjectsRequest struct 
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 
@@ -124,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
 
 ### HTTP request headers
 

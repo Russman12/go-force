@@ -47,7 +47,7 @@ var (
 type APIClient struct {
 	cfg      *Configuration
 	common   service // Reuse a single struct instead of allocating one for each service on the heap.
-	TokenSrc oauth2.TokenSource
+	tokenSrc oauth2.TokenSource
 
 	// API Services
 	SObjectApi *SObjectApiService
@@ -67,7 +67,7 @@ func NewAPIClient(cfg *Configuration, tokenSource oauth2.TokenSource) *APIClient
 	c := &APIClient{}
 	c.cfg = cfg
 	c.common.client = c
-	c.TokenSrc = tokenSource
+	c.tokenSrc = tokenSource
 
 	// API Services
 	c.SObjectApi = (*SObjectApiService)(&c.common)
