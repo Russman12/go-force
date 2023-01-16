@@ -1,15 +1,15 @@
-# \QueryApi
+# QueryApi
 
 All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**AbortQueryJob**](QueryApi.md#AbortQueryJob) | **Patch** /jobs/query/{jobId} | Abort a Job Query
-[**CreateQueryJob**](QueryApi.md#CreateQueryJob) | **Post** /jobs/query | Create job Query
-[**DeleteQueryJob**](QueryApi.md#DeleteQueryJob) | **Delete** /jobs/query/{jobId} | Delete Job Query
-[**GetJobResults**](QueryApi.md#GetJobResults) | **Get** /jobs/query/{jobId}/results | Get Job Query Result
-[**GetQueryJobInfo**](QueryApi.md#GetQueryJobInfo) | **Get** /jobs/query/{jobId} | Get Job Info Query
-[**GetQueryJobs**](QueryApi.md#GetQueryJobs) | **Get** /jobs/query | Get All Query Jobs
+| Method        | HTTP request  | Summary       |
+| ------------- | ------------- | ------------- |
+| [**AbortQueryJob**](#abortqueryjob) | **Patch** /jobs/query/{jobId} | Abort a Job Query |
+| [**CreateQueryJob**](#createqueryjob) | **Post** /jobs/query | Create job Query |
+| [**DeleteQueryJob**](#deletequeryjob) | **Delete** /jobs/query/{jobId} | Delete Job Query |
+| [**GetJobResults**](#getjobresults) | **Get** /jobs/query/{jobId}/results | Get Job Query Result |
+| [**GetQueryJobInfo**](#getqueryjobinfo) | **Get** /jobs/query/{jobId} | Get Job Info Query |
+| [**GetQueryJobs**](#getqueryjobs) | **Get** /jobs/query | Get All Query Jobs |
 
 
 
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 > QueryJobInfo AbortQueryJob(ctx, jobId).AbortQueryJobRequest(abortQueryJobRequest).Execute()
 
-Abort a Job Query
+
 
 ### Example
 
@@ -50,20 +50,20 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAbortQueryJobRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **abortQueryJobRequest** | [**AbortQueryJobRequest**](AbortQueryJobRequest.md) |  | 
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+| 
+|  **abortQueryJobRequest** | [**AbortQueryJobRequest**](AbortQueryJobRequest.md) |  |  |
 
 ### Return type
 
@@ -71,7 +71,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > QueryJobInfo CreateQueryJob(ctx).ContentType(contentType).CreateQueryJobRequest(createQueryJobRequest).Execute()
 
-Create job Query
+
 
 ### Example
 
@@ -119,17 +119,17 @@ func main() {
 
 ### Path Parameters
 
-
+ |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateQueryJobRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **contentType** | **string** |  | 
- **createQueryJobRequest** | [**CreateQueryJobRequest**](CreateQueryJobRequest.md) |  | 
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  **contentType** | **string** |  | 
+|  **createQueryJobRequest** | [**CreateQueryJobRequest**](CreateQueryJobRequest.md) |  |  |
 
 ### Return type
 
@@ -137,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -153,7 +153,7 @@ Name | Type | Description  | Notes
 
 > DeleteQueryJob(ctx, jobId).Execute()
 
-Delete Job Query
+
 
 ### Example
 
@@ -183,19 +183,19 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteQueryJobRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  |
 
 ### Return type
 
@@ -203,7 +203,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 
 > io.ReadCloser GetJobResults(ctx, jobId).ContentType(contentType).Accept(accept).Locator(locator).MaxRecords(maxRecords).Execute()
 
-Get Job Query Result
+
 
 ### Example
 
@@ -255,23 +255,23 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetJobResultsRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **contentType** | **string** |  | 
- **accept** | **string** |  | 
- **locator** | **string** | A string that identifies a specific set of query results. Providing a value for this parameter returns only that set of results. Omitting this parameter returns the first set of results.  You can find the locator string for the next set of results in the response of each request. See Example and Rules and Guidelines.  As long as the associated job exists, the locator string for a set of results does not change. You can use the locator to retrieve a set of results multiple times.  | 
- **maxRecords** | **int32** | The maximum number of records to retrieve per set of results for the query. The request is still subject to the size limits. If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size.  If you don’t provide a value for this parameter, the server uses a default value based on the service.  | 
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+| 
+|  **contentType** | **string** |  | 
+|  **accept** | **string** |  | 
+|  **locator** | **string** | A string that identifies a specific set of query results. Providing a value for this parameter returns only that set of results. Omitting this parameter returns the first set of results.  You can find the locator string for the next set of results in the response of each request. See Example and Rules and Guidelines.  As long as the associated job exists, the locator string for a set of results does not change. You can use the locator to retrieve a set of results multiple times.  | 
+|  **maxRecords** | **int32** | The maximum number of records to retrieve per set of results for the query. The request is still subject to the size limits. If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size.  If you don’t provide a value for this parameter, the server uses a default value based on the service.  |  |
 
 ### Return type
 
@@ -279,7 +279,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -295,7 +295,7 @@ Name | Type | Description  | Notes
 
 > QueryJobInfo GetQueryJobInfo(ctx, jobId).Execute()
 
-Get Job Info Query
+
 
 ### Example
 
@@ -327,19 +327,19 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetQueryJobInfoRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  |
 
 ### Return type
 
@@ -347,7 +347,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -363,7 +363,7 @@ Name | Type | Description  | Notes
 
 > QueryJobInfos GetQueryJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
 
-Get All Query Jobs
+
 
 ### Example
 
@@ -397,19 +397,19 @@ func main() {
 
 ### Path Parameters
 
-
+ |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetQueryJobsRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **isPkChunkingEnabled** | **bool** | If set to true, the request only returns information about jobs where PK Chunking is enabled. | 
- **jobType** | **string** | Gets information only about jobs matching the specified job type. | 
- **concurrencyMode** | **string** | For future use. Gets information only about jobs matching the specified concurrency mode. Possible values are serial and parallel. | 
- **queryLocator** | **string** | use the value from the nextRecordsUrl from the previous set | 
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  **isPkChunkingEnabled** | **bool** | If set to true, the request only returns information about jobs where PK Chunking is enabled. | 
+|  **jobType** | **string** | Gets information only about jobs matching the specified job type. | 
+|  **concurrencyMode** | **string** | For future use. Gets information only about jobs matching the specified concurrency mode. Possible values are serial and parallel. | 
+|  **queryLocator** | **string** | use the value from the nextRecordsUrl from the previous set |  |
 
 ### Return type
 
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 

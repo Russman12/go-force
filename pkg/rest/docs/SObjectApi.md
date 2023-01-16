@@ -2,11 +2,11 @@
 
 All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
-Method | HTTP request | Summary
-------------- | ------------- | -------------
-[**CreateRecord**](SObjectApi.md#CreateRecord) | **Post** /sobjects/{sObject} | Create a Record
-[**GetSObjects**](SObjectApi.md#GetSObjects) | **Get** /sobjects | Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization).
-[**SObjectDescribe**](SObjectApi.md#SObjectDescribe) | **Get** /sobjects/{sObject}/describe | Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.
+| Method        | HTTP request  | Summary       |
+| ------------- | ------------- | ------------- |
+| [**CreateRecord**](#createrecord) | **Post** /sobjects/{sObject} | Create a Record |
+| [**GetSObjects**](#getsobjects) | **Get** /sobjects | Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization). |
+| [**SObjectDescribe**](#sobjectdescribe) | **Get** /sobjects/{sObject}/describe | Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object. |
 
 
 
@@ -14,9 +14,7 @@ Method | HTTP request | Summary
 
 > CreateRecordResult CreateRecord(ctx, sObject).Body(body).Execute()
 
-
-
-
+Use the [sObject Basic Information](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_basic_info.htm) resource to create new records. You supply the required field values in the request data, and send the request using the POST HTTP method. The response body contains the ID of the new record if the call is successful.
 
 ### Example
 
@@ -49,20 +47,20 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sObject** | **string** | SObject name | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **sObject** | **string** | SObject name |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateRecordRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **body** | **interface{}** | SObject record to insert | 
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+| 
+|  **body** | **interface{}** | SObject record to insert |  |
 
 ### Return type
 
@@ -70,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (implicit)](../README.md#oauth--implicit-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -116,12 +114,12 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+This endpoint does not need any parameter. |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetSObjectsRequest struct via the builder pattern
-
+ |
 
 ### Return type
 
@@ -129,7 +127,7 @@ Other parameters are passed through a pointer to a apiGetSObjectsRequest struct 
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (implicit)](../README.md#oauth--implicit-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -177,19 +175,19 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**sObject** | **string** | SObject name | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **sObject** | **string** | SObject name |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiSObjectDescribeRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  |
 
 ### Return type
 
@@ -197,7 +195,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (implicit)](../README.md#oauth--implicit-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 

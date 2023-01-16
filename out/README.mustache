@@ -21,7 +21,7 @@ For more information, please visit [{{{infoUrl}}}]({{{infoUrl}}})
 
 All URIs are relative to *{{basePath}}*
 
-| Class        | Method        | HTTP request  | Description   |
+| Class        | Method        | HTTP request  | Summary       |
 | ------------ | ------------- | ------------- | ------------- |
 {{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}| *{{classname}}* | [**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}} | {{summary}} |
 {{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
@@ -37,7 +37,7 @@ All URIs are relative to *{{basePath}}*
 {{/authMethods}}{{#authMethods}}{{#last}} Authentication schemes defined for the API:{{/last}}{{/authMethods}}
 {{#authMethods}}
 
-### {{{name}}}
+### {{{name}}}{{#flow}} ({{{flow}}}){{/flow}}
 
 {{#isApiKey}}
 - **Type**: API key

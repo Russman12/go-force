@@ -1,18 +1,18 @@
-# \JobApi
+# JobApi
 
 All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**CloseOrAbortJob**](JobApi.md#CloseOrAbortJob) | **Patch** /jobs/ingest/{jobId} | Close or Abort a Job
-[**CreateJob**](JobApi.md#CreateJob) | **Post** /jobs/ingest | Create job
-[**DeleteJob**](JobApi.md#DeleteJob) | **Delete** /jobs/ingest/{jobId} | Delete Job
-[**GetJobFailedResults**](JobApi.md#GetJobFailedResults) | **Get** /jobs/ingest/{jobId}/failedResults | Get Job Failed Record Results
-[**GetJobInfo**](JobApi.md#GetJobInfo) | **Get** /jobs/ingest/{jobId} | Get Job Info
-[**GetJobSuccessfulResults**](JobApi.md#GetJobSuccessfulResults) | **Get** /jobs/ingest/{jobId}/successfulResults | Get Job Successful Record Results
-[**GetJobUnprocessedRecords**](JobApi.md#GetJobUnprocessedRecords) | **Get** /jobs/ingest/{jobId}/unprocessedrecords | Get Job Unprocessed Record Results
-[**GetJobs**](JobApi.md#GetJobs) | **Get** /jobs/ingest | Get All Jobs
-[**UploadJobData**](JobApi.md#UploadJobData) | **Put** /jobs/ingest/{jobId}/batches | Upload Job Data
+| Method        | HTTP request  | Summary       |
+| ------------- | ------------- | ------------- |
+| [**CloseOrAbortJob**](#closeorabortjob) | **Patch** /jobs/ingest/{jobId} | Close or Abort a Job |
+| [**CreateJob**](#createjob) | **Post** /jobs/ingest | Create job |
+| [**DeleteJob**](#deletejob) | **Delete** /jobs/ingest/{jobId} | Delete Job |
+| [**GetJobFailedResults**](#getjobfailedresults) | **Get** /jobs/ingest/{jobId}/failedResults | Get Job Failed Record Results |
+| [**GetJobInfo**](#getjobinfo) | **Get** /jobs/ingest/{jobId} | Get Job Info |
+| [**GetJobSuccessfulResults**](#getjobsuccessfulresults) | **Get** /jobs/ingest/{jobId}/successfulResults | Get Job Successful Record Results |
+| [**GetJobUnprocessedRecords**](#getjobunprocessedrecords) | **Get** /jobs/ingest/{jobId}/unprocessedrecords | Get Job Unprocessed Record Results |
+| [**GetJobs**](#getjobs) | **Get** /jobs/ingest | Get All Jobs |
+| [**UploadJobData**](#uploadjobdata) | **Put** /jobs/ingest/{jobId}/batches | Upload Job Data |
 
 
 
@@ -20,7 +20,7 @@ Method | HTTP request | Description
 
 > JobInfo CloseOrAbortJob(ctx, jobId).CloseOrAbortJobRequest(closeOrAbortJobRequest).Execute()
 
-Close or Abort a Job
+
 
 ### Example
 
@@ -53,20 +53,20 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCloseOrAbortJobRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **closeOrAbortJobRequest** | [**CloseOrAbortJobRequest**](CloseOrAbortJobRequest.md) |  | 
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+| 
+|  **closeOrAbortJobRequest** | [**CloseOrAbortJobRequest**](CloseOrAbortJobRequest.md) |  |  |
 
 ### Return type
 
@@ -74,7 +74,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -90,7 +90,7 @@ Name | Type | Description  | Notes
 
 > JobInfo CreateJob(ctx).CreateJobRequest(createJobRequest).Execute()
 
-Create job
+
 
 ### Example
 
@@ -121,16 +121,16 @@ func main() {
 
 ### Path Parameters
 
-
+ |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiCreateJobRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **createJobRequest** | [**CreateJobRequest**](CreateJobRequest.md) |  | 
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  **createJobRequest** | [**CreateJobRequest**](CreateJobRequest.md) |  |  |
 
 ### Return type
 
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 > DeleteJob(ctx, jobId).Execute()
 
-Delete Job
+
 
 ### Example
 
@@ -184,19 +184,19 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiDeleteJobRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  |
 
 ### Return type
 
@@ -204,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -220,7 +220,7 @@ Name | Type | Description  | Notes
 
 > io.ReadCloser GetJobFailedResults(ctx, jobId).Execute()
 
-Get Job Failed Record Results
+
 
 ### Example
 
@@ -252,19 +252,19 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetJobFailedResultsRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  |
 
 ### Return type
 
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -288,7 +288,7 @@ Name | Type | Description  | Notes
 
 > JobInfo GetJobInfo(ctx, jobId).Execute()
 
-Get Job Info
+
 
 ### Example
 
@@ -320,19 +320,19 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetJobInfoRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  |
 
 ### Return type
 
@@ -340,7 +340,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -356,7 +356,7 @@ Name | Type | Description  | Notes
 
 > io.ReadCloser GetJobSuccessfulResults(ctx, jobId).Execute()
 
-Get Job Successful Record Results
+
 
 ### Example
 
@@ -388,19 +388,19 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetJobSuccessfulResultsRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  |
 
 ### Return type
 
@@ -408,7 +408,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -424,7 +424,7 @@ Name | Type | Description  | Notes
 
 > io.ReadCloser GetJobUnprocessedRecords(ctx, jobId).Execute()
 
-Get Job Unprocessed Record Results
+
 
 ### Example
 
@@ -456,19 +456,19 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetJobUnprocessedRecordsRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  |
 
 ### Return type
 
@@ -476,7 +476,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -492,7 +492,7 @@ Name | Type | Description  | Notes
 
 > map[string]interface{} GetJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
 
-Get All Jobs
+
 
 ### Example
 
@@ -525,18 +525,18 @@ func main() {
 
 ### Path Parameters
 
-
+ |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetJobsRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **isPkChunkingEnabled** | **bool** |  | 
- **jobType** | **string** |  | 
- **queryLocator** | **string** |  | 
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  **isPkChunkingEnabled** | **bool** |  | 
+|  **jobType** | **string** |  | 
+|  **queryLocator** | **string** |  |  |
 
 ### Return type
 
@@ -544,7 +544,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -560,7 +560,7 @@ Name | Type | Description  | Notes
 
 > UploadJobData(ctx, jobId).Body(body).Execute()
 
-Upload Job Data
+
 
 ### Example
 
@@ -591,20 +591,20 @@ func main() {
 ### Path Parameters
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**jobId** | **string** |  | 
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **jobId** | **string** |  |  |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiUploadJobDataRequest struct via the builder pattern
 
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **body** | **io.ReadCloser** |  | 
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+| 
+|  **body** | **io.ReadCloser** |  |  |
 
 ### Return type
 
@@ -612,7 +612,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
