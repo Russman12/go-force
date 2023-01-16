@@ -1,11 +1,11 @@
-# \OrgApi
+# OrgApi
 
-All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
+All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
-Method | HTTP request | Description
+Method | HTTP request | Summary
 ------------- | ------------- | -------------
-[**GetLimits**](OrgApi.md#GetLimits) | **Get** /limits | 
-[**GetResources**](OrgApi.md#GetResources) | **Get** / | 
+[**GetLimits**](OrgApi.md#GetLimits) | **Get** /limits | Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries.
+[**GetResources**](OrgApi.md#GetResources) | **Get** / | Lists available resources for the specified API version, including resource name and URI.
 
 
 

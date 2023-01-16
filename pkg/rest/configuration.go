@@ -111,7 +111,7 @@ func NewConfiguration() *Configuration {
 				Variables: map[string]ServerVariable{
 					"instanceUrl": ServerVariable{
 						Description:  "Salesforce server domain",
-						DefaultValue: "https://test.salesforce.com",
+						DefaultValue: "https://myorg.lightning.force.com",
 					},
 					"apiVersion": ServerVariable{
 						Description:  "Salesforce api version",

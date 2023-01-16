@@ -41,7 +41,9 @@ func (r ApiCreateRecordRequest) Execute() (*CreateRecordResult, *http.Response, 
 }
 
 /*
-CreateRecord Method for CreateRecord
+CreateRecord Create a Record
+
+Use the [sObject Basic Information](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_basic_info.htm) resource to create new records. You supply the required field values in the request data, and send the request using the POST HTTP method. The response body contains the ID of the new record if the call is successful.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sObject SObject name
@@ -184,7 +186,7 @@ func (r ApiGetSObjectsRequest) Execute() (*SObjectDescribes, *http.Response, err
 }
 
 /*
-GetSObjects Method for GetSObjects
+GetSObjects Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization).
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetSObjectsRequest
@@ -300,7 +302,7 @@ func (r ApiSObjectDescribeRequest) Execute() (*SObjectDescribe, *http.Response, 
 }
 
 /*
-SObjectDescribe Method for SObjectDescribe
+SObjectDescribe Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param sObject SObject name

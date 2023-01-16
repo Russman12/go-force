@@ -1,18 +1,20 @@
-# \SObjectApi
+# SObjectApi
 
-All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
+All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
-Method | HTTP request | Description
+Method | HTTP request | Summary
 ------------- | ------------- | -------------
-[**CreateRecord**](SObjectApi.md#CreateRecord) | **Post** /sobjects/{sObject} | 
-[**GetSObjects**](SObjectApi.md#GetSObjects) | **Get** /sobjects | 
-[**SObjectDescribe**](SObjectApi.md#SObjectDescribe) | **Get** /sobjects/{sObject}/describe | 
+[**CreateRecord**](SObjectApi.md#CreateRecord) | **Post** /sobjects/{sObject} | Create a Record
+[**GetSObjects**](SObjectApi.md#GetSObjects) | **Get** /sobjects | Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization).
+[**SObjectDescribe**](SObjectApi.md#SObjectDescribe) | **Get** /sobjects/{sObject}/describe | Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.
 
 
 
 ## CreateRecord
 
 > CreateRecordResult CreateRecord(ctx, sObject).Body(body).Execute()
+
+
 
 
 

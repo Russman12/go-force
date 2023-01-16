@@ -32,7 +32,7 @@ func (r ApiGetLimitsRequest) Execute() (interface{}, *http.Response, error) {
 }
 
 /*
-GetLimits Method for GetLimits
+GetLimits Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetLimitsRequest
@@ -147,7 +147,7 @@ func (r ApiGetResourcesRequest) Execute() (interface{}, *http.Response, error) {
 }
 
 /*
-GetResources Method for GetResources
+GetResources Lists available resources for the specified API version, including resource name and URI.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetResourcesRequest

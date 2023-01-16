@@ -1,10 +1,10 @@
-# {{invokerPackage}}\{{classname}}{{#description}}
+# {{invokerPackage}}{{classname}}{{#description}}
 
 {{.}}{{/description}}
 
 All URIs are relative to *{{basePath}}*
 
-Method | HTTP request | Description
+Method | HTTP request | Summary
 ------------- | ------------- | -------------
 {{#operations}}{{#operation}}[**{{operationId}}**]({{classname}}.md#{{operationId}}) | **{{httpMethod}}** {{path}} | {{summary}}
 {{/operation}}{{/operations}}
@@ -16,7 +16,7 @@ Method | HTTP request | Description
 
 > {{#returnType}}{{{.}}} {{/returnType}}{{{operationId}}}(ctx{{#pathParams}}, {{paramName}}{{/pathParams}}){{#allParams}}{{^isPathParam}}.{{vendorExtensions.x-export-param-name}}({{paramName}}){{/isPathParam}}{{/allParams}}.Execute()
 
-{{{summary}}}{{#notes}}
+{{{description}}}{{#notes}}
 
 {{{unespacedNotes}}}{{/notes}}
 

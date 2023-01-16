@@ -18,7 +18,7 @@ init:
 watcher:
 	./watcher.sh
 debug-ops:
-	openapi-generator-cli generate -c codegencfg.json -i pkg/rest/api/openapi.yaml --package-name rest -o pkg/rest >/dev/null --global-property debugOperations --dry-run  --skip-operation-example > debug/operations.json
+	openapi-generator-cli generate -c codegencfg.json -i pkg/rest/api/openapi.yaml --package-name rest -o pkg/rest >/dev/null --global-property debugOperations --dry-run --skip-operation-example > debug/operations.json
 debug-supfiles:
-	openapi-generator-cli generate -c codegencfg.json -i pkg/rest/api/openapi.yaml --package-name rest -o pkg/rest >/dev/null --global-property debugSupportingFiles --dry-run  --skip-operation-example > debug/supportingFiles.json
+	openapi-generator-cli generate -c codegencfg.json -i pkg/rest/api/openapi.yaml --package-name rest -o pkg/rest >/dev/null --global-property debugSupportingFiles --dry-run --skip-operation-example > debug/supportingFiles.json
 

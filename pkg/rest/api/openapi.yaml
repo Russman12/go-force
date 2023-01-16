@@ -10,7 +10,7 @@ servers:
   url: "{instanceUrl}/services/data/v{apiVersion}"
   variables:
     instanceUrl:
-      default: https://test.salesforce.com
+      default: https://myorg.lightning.force.com
       description: Salesforce server domain
     apiVersion:
       default: "56.0"
@@ -33,6 +33,8 @@ paths:
         "400":
           content: {}
           description: Bad Request
+      summary: "Lists available resources for the specified API version, including\
+        \ resource name and URI."
       tags:
       - Org
   /limits:
@@ -50,6 +52,9 @@ paths:
         "400":
           content: {}
           description: Bad Request
+      summary: "Lists the available objects and their metadata for your organization’\
+        s data. In addition, it provides the organization encoding, as well as the\
+        \ maximum batch size permitted in queries."
       tags:
       - Org
   /sobjects:
@@ -68,10 +73,18 @@ paths:
         "400":
           content: {}
           description: Bad Request
+      summary: "Lists the available objects and their metadata for your organization’\
+        s data. In addition, it provides the organization encoding, as well as the\
+        \ maximum batch size permitted in queries. For more information on encoding,\
+        \ see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization)."
       tags:
       - SObject
   /sobjects/{sObject}:
     post:
+      description: "Use the [sObject Basic Information](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_basic_info.htm)\
+        \ resource to create new records. You supply the required field values in\
+        \ the request data, and send the request using the POST HTTP method. The response\
+        \ body contains the ID of the new record if the call is successful."
       operationId: createRecord
       parameters:
       - description: SObject name
@@ -107,6 +120,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errors'
           description: Bad Request
+      summary: Create a Record
       tags:
       - SObject
   /sobjects/{sObject}/describe:
@@ -135,6 +149,9 @@ paths:
         "400":
           content: {}
           description: Bad Request
+      summary: "Completely describes the individual metadata at all levels for the\
+        \ specified object. For example, this can be used to retrieve the fields,\
+        \ URLs, and child relationships for the Account object."
       tags:
       - SObject
 components:
