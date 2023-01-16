@@ -24,13 +24,23 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/rest"
 )
 
 func main() {
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := rest.NewConfiguration()
+    apiClient := rest.NewAPIClient(configuration, tokenSrc)
+
+
     resp, r, err := apiClient.OrgApi.GetLimits(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgApi.GetLimits``: %v\n", err)
@@ -83,13 +93,23 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/rest"
 )
 
 func main() {
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := rest.NewConfiguration()
+    apiClient := rest.NewAPIClient(configuration, tokenSrc)
+
+
     resp, r, err := apiClient.OrgApi.GetResources(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgApi.GetResources``: %v\n", err)

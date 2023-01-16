@@ -31,15 +31,25 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func main() {
-    jobId := "jobId_example" // string | 
-    closeOrAbortJobRequest := *openapiclient.NewCloseOrAbortJobRequest(openapiclient.JobCloseAbortState("UploadComplete")) // CloseOrAbortJobRequest |  (optional)
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := bulkv2.NewConfiguration()
+    apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
+
+    jobId := bulkv2.Test // string | 
+    closeOrAbortJobRequest := bulkv2.Test // CloseOrAbortJobRequest |  (optional)
+
     resp, r, err := apiClient.JobApi.CloseOrAbortJob(context.Background(), jobId).CloseOrAbortJobRequest(closeOrAbortJobRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.CloseOrAbortJob``: %v\n", err)
@@ -101,14 +111,24 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func main() {
-    createJobRequest := *openapiclient.NewCreateJobRequest("Object_example", openapiclient.JobOperation("insert")) // CreateJobRequest |  (optional)
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := bulkv2.NewConfiguration()
+    apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
+
+    createJobRequest := bulkv2.Test // CreateJobRequest |  (optional)
+
     resp, r, err := apiClient.JobApi.CreateJob(context.Background()).CreateJobRequest(createJobRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.CreateJob``: %v\n", err)
@@ -165,14 +185,24 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func main() {
-    jobId := "jobId_example" // string | 
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := bulkv2.NewConfiguration()
+    apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
+
+    jobId := bulkv2.Test // string | 
+
     resp, r, err := apiClient.JobApi.DeleteJob(context.Background(), jobId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.DeleteJob``: %v\n", err)
@@ -231,14 +261,24 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func main() {
-    jobId := "jobId_example" // string | 
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := bulkv2.NewConfiguration()
+    apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
+
+    jobId := bulkv2.Test // string | 
+
     resp, r, err := apiClient.JobApi.GetJobFailedResults(context.Background(), jobId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobFailedResults``: %v\n", err)
@@ -299,14 +339,24 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func main() {
-    jobId := "jobId_example" // string | 
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := bulkv2.NewConfiguration()
+    apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
+
+    jobId := bulkv2.Test // string | 
+
     resp, r, err := apiClient.JobApi.GetJobInfo(context.Background(), jobId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobInfo``: %v\n", err)
@@ -367,14 +417,24 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func main() {
-    jobId := "jobId_example" // string | 
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := bulkv2.NewConfiguration()
+    apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
+
+    jobId := bulkv2.Test // string | 
+
     resp, r, err := apiClient.JobApi.GetJobSuccessfulResults(context.Background(), jobId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobSuccessfulResults``: %v\n", err)
@@ -435,14 +495,24 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func main() {
-    jobId := "jobId_example" // string | 
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := bulkv2.NewConfiguration()
+    apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
+
+    jobId := bulkv2.Test // string | 
+
     resp, r, err := apiClient.JobApi.GetJobUnprocessedRecords(context.Background(), jobId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobUnprocessedRecords``: %v\n", err)
@@ -503,16 +573,26 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func main() {
-    isPkChunkingEnabled := true // bool |  (optional)
-    jobType := "jobType_example" // string |  (optional)
-    queryLocator := "queryLocator_example" // string |  (optional)
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := bulkv2.NewConfiguration()
+    apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
+
+    isPkChunkingEnabled := bulkv2.Test // bool |  (optional)
+    jobType := bulkv2.Test // string |  (optional)
+    queryLocator := bulkv2.Test // string |  (optional)
+
     resp, r, err := apiClient.JobApi.GetJobs(context.Background()).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobs``: %v\n", err)
@@ -571,15 +651,25 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func main() {
-    jobId := "jobId_example" // string | 
-    body := os.NewFile(1234, "some_file") // io.ReadCloser |  (optional)
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := bulkv2.NewConfiguration()
+    apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
+
+    jobId := bulkv2.Test // string | 
+    body := bulkv2.Test // io.ReadCloser |  (optional)
+
     resp, r, err := apiClient.JobApi.UploadJobData(context.Background(), jobId).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.UploadJobData``: %v\n", err)

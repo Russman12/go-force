@@ -27,19 +27,29 @@ import (
     "context"
     "fmt"
     "os"
+    "golang.org/x/oauth2"
 {{#vendorExtensions.x-go-import}}
-{{{vendorExtensions.x-go-import}}}
+    "{{{vendorExtensions.x-go-import}}}"
 {{/vendorExtensions.x-go-import}}
-    {{goImportAlias}} "./openapi"
+    "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}/{{subDirName}}/{{apiPackage}}"
 )
 
 func main() {
-    {{#allParams}}
-    {{paramName}} := {{{vendorExtensions.x-go-example}}} // {{{dataType}}} | {{{description}}}{{^required}} (optional){{/required}}{{#defaultValue}} (default to {{{.}}}){{/defaultValue}}
-    {{/allParams}}
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := {{goImportAlias}}.NewConfiguration()
-    apiClient := {{goImportAlias}}.NewAPIClient(configuration)
+    configuration := {{apiPackage}}.NewConfiguration()
+    apiClient := {{apiPackage}}.NewAPIClient(configuration, tokenSrc)
+
+{{#allParams}}
+    {{paramName}} := {{apiPackage}}.Test // {{{dataType}}} | {{{description}}}{{^required}} (optional){{/required}}{{#defaultValue}} (default to {{{.}}}){{/defaultValue}}
+{{/allParams}}
+
     resp, r, err := apiClient.{{classname}}.{{operationId}}(context.Background(){{#pathParams}}, {{paramName}}{{/pathParams}}){{#allParams}}{{^isPathParam}}.{{vendorExtensions.x-export-param-name}}({{paramName}}){{/isPathParam}}{{/allParams}}.Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `{{classname}}.{{operationId}}``: %v\n", err)

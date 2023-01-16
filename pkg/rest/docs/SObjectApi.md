@@ -24,15 +24,25 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/rest"
 )
 
 func main() {
-    sObject := "Contact" // string | SObject name
-    body := map[string]interface{}{ ... } // map[string]interface{} | SObject record to insert (optional)
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := rest.NewConfiguration()
+    apiClient := rest.NewAPIClient(configuration, tokenSrc)
+
+    sObject := rest.Test // string | SObject name
+    body := rest.Test // map[string]interface{} | SObject record to insert (optional)
+
     resp, r, err := apiClient.SObjectApi.CreateRecord(context.Background(), sObject).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.CreateRecord``: %v\n", err)
@@ -95,13 +105,23 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "./openapi"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/rest"
 )
 
 func main() {
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
 
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    configuration := rest.NewConfiguration()
+    apiClient := rest.NewAPIClient(configuration, tokenSrc)
+
+
     resp, r, err := apiClient.SObjectApi.GetSObjects(context.Background()).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.GetSObjects``: %v\n", err)
