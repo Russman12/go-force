@@ -4,9 +4,80 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreateRecord**](SObjectApi.md#CreateRecord) | **Post** /sobjects/{sObject} | 
 [**GetSObjects**](SObjectApi.md#GetSObjects) | **Get** /sobjects | 
 [**SObjectDescribe**](SObjectApi.md#SObjectDescribe) | **Get** /sobjects/{sObject}/describe | 
 
+
+
+## CreateRecord
+
+> CreateRecordResult CreateRecord(ctx, sObject).Body(body).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    sObject := "Contact" // string | SObject name
+    body := interface{}(987) // interface{} | SObject record to insert (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.SObjectApi.CreateRecord(context.Background(), sObject).Body(body).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.CreateRecord``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateRecord`: CreateRecordResult
+    fmt.Fprintf(os.Stdout, "Response from `SObjectApi.CreateRecord`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**sObject** | **string** | SObject name | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateRecordRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **body** | **interface{}** | SObject record to insert | 
+
+### Return type
+
+[**CreateRecordResult**](CreateRecordResult.md)
+
+### Authorization
+
+[oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth), [oAuth](../README.md#oAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## GetSObjects

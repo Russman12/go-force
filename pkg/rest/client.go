@@ -50,6 +50,7 @@ type APIClient struct {
 	tokenSrc oauth2.TokenSource
 
 	// API Services
+	OrgApi     *OrgApiService
 	SObjectApi *SObjectApiService
 }
 
@@ -70,6 +71,7 @@ func NewAPIClient(cfg *Configuration, tokenSource oauth2.TokenSource) *APIClient
 	c.tokenSrc = tokenSource
 
 	// API Services
+	c.OrgApi = (*OrgApiService)(&c.common)
 	c.SObjectApi = (*SObjectApiService)(&c.common)
 
 	return c
@@ -567,21 +569,12 @@ func (e GenericOpenAPIError) Model() interface{} {
 }
 
 // format error message using title and detail when model implements rfc7807
-func formatErrorMessage(status string, v interface{}) string {
-
-	str := ""
-	metaValue := reflect.ValueOf(v).Elem()
-
-	field := metaValue.FieldByName("Title")
-	if field != (reflect.Value{}) {
-		str = fmt.Sprintf("%s", field.Interface())
-	}
-
-	field = metaValue.FieldByName("Detail")
-	if field != (reflect.Value{}) {
-		str = fmt.Sprintf("%s (%s)", str, field.Interface())
+func formatErrorMessage(status string, v interface{}) (string, error) {
+	str, err := json.Marshal(v)
+	if err != nil {
+		return "", err
 	}
 
 	// status title (detail)
-	return fmt.Sprintf("%s %s", status, str)
+	return fmt.Sprintf("%s %s", status, str), nil
 }

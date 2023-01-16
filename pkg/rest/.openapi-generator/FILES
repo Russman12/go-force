@@ -1,13 +1,17 @@
 README.md
 api/openapi.yaml
+api_org.go
 api_s_object.go
 client.go
 configuration.go
 docs/ActionOverrides.md
 docs/ChildRelationships.md
+docs/CreateRecordResult.md
 docs/FieldDescribe.md
 docs/FieldDescribePicklist.md
 docs/FieldType.md
+docs/ModelError.md
+docs/OrgApi.md
 docs/RecordTypeInfo.md
 docs/RecordTypeInfoUrls.md
 docs/SObjectApi.md
@@ -16,6 +20,8 @@ docs/SObjectDescribes.md
 docs/SupportedScopes.md
 model_action_overrides.go
 model_child_relationships.go
+model_create_record_result.go
+model_error.go
 model_field_describe.go
 model_field_describe_picklist.go
 model_field_type.go
@@ -25,5 +31,6 @@ model_s_object_describe.go
 model_s_object_describes.go
 model_supported_scopes.go
 response.go
+test/api_org_test.go
 test/api_s_object_test.go
 utils.go

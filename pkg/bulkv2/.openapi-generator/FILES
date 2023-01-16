@@ -1,4 +1,5 @@
 README.md
+api/openapi.yaml
 api_job.go
 api_query.go
 client.go

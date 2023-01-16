@@ -15,6 +15,9 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 | Class        | Method        | HTTP request  | Description   |
 | ------------ | ------------- | ------------- | ------------- |
+| *OrgApi* | [**GetLimits**](docs/OrgApi.md#getlimits) | **Get** /limits |  |
+| *OrgApi* | [**GetResources**](docs/OrgApi.md#getresources) | **Get** / |  |
+| *SObjectApi* | [**CreateRecord**](docs/SObjectApi.md#createrecord) | **Post** /sobjects/{sObject} |  |
 | *SObjectApi* | [**GetSObjects**](docs/SObjectApi.md#getsobjects) | **Get** /sobjects |  |
 | *SObjectApi* | [**SObjectDescribe**](docs/SObjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe |  |
 
@@ -23,9 +26,11 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
  - [ActionOverrides](docs/ActionOverrides.md)
  - [ChildRelationships](docs/ChildRelationships.md)
+ - [CreateRecordResult](docs/CreateRecordResult.md)
  - [FieldDescribe](docs/FieldDescribe.md)
  - [FieldDescribePicklist](docs/FieldDescribePicklist.md)
  - [FieldType](docs/FieldType.md)
+ - [ModelError](docs/ModelError.md)
  - [RecordTypeInfo](docs/RecordTypeInfo.md)
  - [RecordTypeInfoUrls](docs/RecordTypeInfoUrls.md)
  - [SObjectDescribe](docs/SObjectDescribe.md)

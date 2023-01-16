@@ -16,7 +16,7 @@ servers:
       default: "56.0"
       description: Salesforce api version
 security:
-  - oAuth: []
+- oAuth: []
 paths:
   /jobs/query/{jobId}:
     delete:

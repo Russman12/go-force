@@ -18,6 +18,40 @@ servers:
 security:
 - oAuth: []
 paths:
+  /:
+    get:
+      operationId: getResources
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: {}
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      tags:
+      - Org
+  /limits:
+    get:
+      operationId: getLimits
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: {}
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      tags:
+      - Org
   /sobjects:
     get:
       operationId: getSObjects
@@ -33,6 +67,45 @@ paths:
           description: Unauthorized
         "400":
           content: {}
+          description: Bad Request
+      tags:
+      - SObject
+  /sobjects/{sObject}:
+    post:
+      operationId: createRecord
+      parameters:
+      - description: SObject name
+        example: Contact
+        explode: false
+        in: path
+        name: sObject
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema: {}
+        description: SObject record to insert
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createRecordResult'
+          description: Successful response
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+          description: Unauthorized
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
           description: Bad Request
       tags:
       - SObject
@@ -828,6 +901,41 @@ components:
       - url
       example: id
       type: string
+    createRecordResult:
+      example:
+        success: true
+        id: 001D000000IqhSLIAZ
+        errors:
+        - ""
+        - ""
+      properties:
+        id:
+          example: 001D000000IqhSLIAZ
+          nullable: true
+          type: string
+        errors:
+          items: {}
+          nullable: false
+          type: array
+        success:
+          example: true
+          nullable: false
+          type: boolean
+    errors:
+      items:
+        $ref: '#/components/schemas/error'
+      type: array
+    error:
+      properties:
+        message:
+          type: string
+        errorCode:
+          type: string
+        fields:
+          items:
+            type: string
+          type: array
+      type: object
   securitySchemes:
     oAuth:
       description: This API uses OAuth 2 with various flows
