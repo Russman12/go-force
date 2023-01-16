@@ -20,6 +20,8 @@ security:
 paths:
   /:
     get:
+      description: "Lists available resources for the specified API version, including\
+        \ resource name and URI."
       operationId: getResources
       responses:
         "200":
@@ -33,12 +35,15 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: "Lists available resources for the specified API version, including\
-        \ resource name and URI."
+      summary: Resources by Version
       tags:
       - Org
   /limits:
     get:
+      description: "Lists information about limits in your org. For each limit, this\
+        \ resource returns the maximum allocation and the remaining allocation based\
+        \ on usage. This resource is available in REST API version 29.0 and later\
+        \ for API users with the View Setup and Configuration permission."
       operationId: getLimits
       responses:
         "200":
@@ -52,13 +57,14 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: "Lists the available objects and their metadata for your organization’\
-        s data. In addition, it provides the organization encoding, as well as the\
-        \ maximum batch size permitted in queries."
+      summary: Limits
       tags:
       - Org
   /sobjects:
     get:
+      description: |-
+        Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization).
+        You can use the If-Modified-Since or If-Unmodified-Since header with this resource. When using the If-Modified-Since header, if no available object’s metadata has changed since the provided date, a 304 Not Modified status code is returned with no response body.
       operationId: getSObjects
       responses:
         "200":
@@ -73,10 +79,7 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: "Lists the available objects and their metadata for your organization’\
-        s data. In addition, it provides the organization encoding, as well as the\
-        \ maximum batch size permitted in queries. For more information on encoding,\
-        \ see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization)."
+      summary: Describe Global
       tags:
       - SObject
   /sobjects/{sObject}:
@@ -99,7 +102,10 @@ paths:
       requestBody:
         content:
           application/json:
-            schema: {}
+            example:
+              name: Express Logistics and Transport
+            schema:
+              type: object
         description: SObject record to insert
       responses:
         "200":
@@ -125,6 +131,10 @@ paths:
       - SObject
   /sobjects/{sObject}/describe:
     get:
+      description: |-
+        Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.
+        For more information about the metadata that is retrieved, see [DescribesObjectResult](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/sforce_api_calls_describesobjects_describesobjectresult.htm) in the SOAP API Developers Guide.
+        You can use the If-Modified-Since or If-Unmodified-Since header with this resource. When using the If-Modified-Since header, if no available object’s metadata has changed since the provided date, a 304 Not Modified status code is returned with no response body.
       operationId: sObjectDescribe
       parameters:
       - description: SObject name
@@ -149,11 +159,7 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: "Completely describes the individual metadata at all levels for the\
-        \ specified object. For example, this can be used to retrieve the fields,\
-        \ URLs, and child relationships for the Account object."
-      tags:
-      - SObject
+      summary: sObject Describe
 components:
   schemas:
     sObjectDescribe:

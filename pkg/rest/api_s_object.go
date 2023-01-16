@@ -27,11 +27,11 @@ type ApiCreateRecordRequest struct {
 	ctx        context.Context
 	ApiService *SObjectApiService
 	sObject    string
-	body       *interface{}
+	body       *map[string]interface{}
 }
 
 // SObject record to insert
-func (r ApiCreateRecordRequest) Body(body interface{}) ApiCreateRecordRequest {
+func (r ApiCreateRecordRequest) Body(body map[string]interface{}) ApiCreateRecordRequest {
 	r.body = &body
 	return r
 }
@@ -186,7 +186,10 @@ func (r ApiGetSObjectsRequest) Execute() (*SObjectDescribes, *http.Response, err
 }
 
 /*
-GetSObjects Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization).
+GetSObjects Describe Global
+
+Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization).
+You can use the If-Modified-Since or If-Unmodified-Since header with this resource. When using the If-Modified-Since header, if no available object’s metadata has changed since the provided date, a 304 Not Modified status code is returned with no response body.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetSObjectsRequest
@@ -225,125 +228,6 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 	}
 
 	localVarPath := localBasePath + "/sobjects"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	token.SetAuthHeader(req)
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-		localVarHTTPResponse.Body.Close()
-		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-		if err != nil {
-			return localVarReturnValue, localVarHTTPResponse, err
-		}
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiSObjectDescribeRequest struct {
-	ctx        context.Context
-	ApiService *SObjectApiService
-	sObject    string
-}
-
-func (r ApiSObjectDescribeRequest) Execute() (*SObjectDescribe, *http.Response, error) {
-	return r.ApiService.SObjectDescribeExecute(r)
-}
-
-/*
-SObjectDescribe Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param sObject SObject name
-	@return ApiSObjectDescribeRequest
-*/
-func (a *SObjectApiService) SObjectDescribe(ctx context.Context, sObject string) ApiSObjectDescribeRequest {
-	return ApiSObjectDescribeRequest{
-		ApiService: a,
-		ctx:        ctx,
-		sObject:    sObject,
-	}
-}
-
-// Execute executes the request
-//
-//	@return SObjectDescribe
-func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) (*SObjectDescribe, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *SObjectDescribe
-	)
-
-	token, err := a.client.tokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/sobjects/{sObject}/describe"
-	localVarPath = strings.Replace(localVarPath, "{"+"sObject"+"}", url.PathEscape(parameterToString(r.sObject, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

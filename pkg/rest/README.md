@@ -15,11 +15,11 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
 | Class        | Method        | HTTP request  | Summary       |
 | ------------ | ------------- | ------------- | ------------- |
-| *OrgApi* | [**GetLimits**](docs/OrgApi.md#getlimits) | **Get** /limits | Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. |
-| *OrgApi* | [**GetResources**](docs/OrgApi.md#getresources) | **Get** / | Lists available resources for the specified API version, including resource name and URI. |
+| *DefaultApi* | [**SObjectDescribe**](docs/DefaultApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe | sObject Describe |
+| *OrgApi* | [**GetLimits**](docs/OrgApi.md#getlimits) | **Get** /limits | Limits |
+| *OrgApi* | [**GetResources**](docs/OrgApi.md#getresources) | **Get** / | Resources by Version |
 | *SObjectApi* | [**CreateRecord**](docs/SObjectApi.md#createrecord) | **Post** /sobjects/{sObject} | Create a Record |
-| *SObjectApi* | [**GetSObjects**](docs/SObjectApi.md#getsobjects) | **Get** /sobjects | Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization). |
-| *SObjectApi* | [**SObjectDescribe**](docs/SObjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe | Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object. |
+| *SObjectApi* | [**GetSObjects**](docs/SObjectApi.md#getsobjects) | **Get** /sobjects | Describe Global |
 
 
 ## Documentation For Models

@@ -4,8 +4,8 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
 | Method        | HTTP request  | Summary       |
 | ------------- | ------------- | ------------- |
-| [**GetLimits**](#getlimits) | **Get** /limits | Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. |
-| [**GetResources**](#getresources) | **Get** / | Lists available resources for the specified API version, including resource name and URI. |
+| [**GetLimits**](#getlimits) | **Get** /limits | Limits |
+| [**GetResources**](#getresources) | **Get** / | Resources by Version |
 
 
 
@@ -13,7 +13,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
 > interface{} GetLimits(ctx).Execute()
 
-
+Lists information about limits in your org. For each limit, this resource returns the maximum allocation and the remaining allocation based on usage. This resource is available in REST API version 29.0 and later for API users with the View Setup and Configuration permission.
 
 ### Example
 
@@ -72,7 +72,7 @@ Other parameters are passed through a pointer to a apiGetLimitsRequest struct vi
 
 > interface{} GetResources(ctx).Execute()
 
-
+Lists available resources for the specified API version, including resource name and URI.
 
 ### Example
 
