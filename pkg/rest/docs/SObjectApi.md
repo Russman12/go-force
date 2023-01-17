@@ -247,7 +247,7 @@ Other parameters are passed through a pointer to a apiGetSObjectsRequest struct 
 
 ## SObjectDescribe
 
-> SObjectDescribe SObjectDescribe(ctx, sObject).Execute()
+> SObjectDescribe SObjectDescribe(ctx, sObject).IfModifiedSince(ifModifiedSince).IfUnmodifiedSince(ifUnmodifiedSince).Execute()
 
 Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.
 For more information about the metadata that is retrieved, see [DescribesObjectResult](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/sforce_api_calls_describesobjects_describesobjectresult.htm) in the SOAP API Developers Guide.
@@ -281,8 +281,10 @@ func main() {
     apiClient := rest.NewAPIClient(configuration, tokenSrc)
 
     sObject := "Contact" // string | SObject name
+    ifModifiedSince := "Mon, 30 Nov 2020 08:34:54 MST" // string | An optional header specifying a date and time. The request returns records that have been modified after that date and time. (optional)
+    ifUnmodifiedSince := "Mon, 30 Nov 2020 08:34:54 MST" // string | An optional header specifying a date and time. The request returns records that have not been modified after that date and time. (optional)
 
-    resp, r, err := apiClient.SObjectApi.SObjectDescribe(context.Background(), sObject).Execute()
+    resp, r, err := apiClient.SObjectApi.SObjectDescribe(context.Background(), sObject).IfModifiedSince(ifModifiedSince).IfUnmodifiedSince(ifUnmodifiedSince).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.SObjectDescribe``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -307,7 +309,9 @@ Other parameters are passed through a pointer to a apiSObjectDescribeRequest str
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  |
+| 
+|  **ifModifiedSince** | **string** | An optional header specifying a date and time. The request returns records that have been modified after that date and time. | 
+|  **ifUnmodifiedSince** | **string** | An optional header specifying a date and time. The request returns records that have not been modified after that date and time. |  |
 
 ### Return type
 

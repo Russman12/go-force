@@ -442,9 +442,23 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 }
 
 type ApiSObjectDescribeRequest struct {
-	ctx        context.Context
-	ApiService *SObjectApiService
-	sObject    string
+	ctx               context.Context
+	ApiService        *SObjectApiService
+	sObject           string
+	ifModifiedSince   *string
+	ifUnmodifiedSince *string
+}
+
+// An optional header specifying a date and time. The request returns records that have been modified after that date and time.
+func (r ApiSObjectDescribeRequest) IfModifiedSince(ifModifiedSince string) ApiSObjectDescribeRequest {
+	r.ifModifiedSince = &ifModifiedSince
+	return r
+}
+
+// An optional header specifying a date and time. The request returns records that have not been modified after that date and time.
+func (r ApiSObjectDescribeRequest) IfUnmodifiedSince(ifUnmodifiedSince string) ApiSObjectDescribeRequest {
+	r.ifUnmodifiedSince = &ifUnmodifiedSince
+	return r
 }
 
 func (r ApiSObjectDescribeRequest) Execute() (*SObjectDescribe, *http.Response, error) {
@@ -519,6 +533,12 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.ifModifiedSince != nil {
+		localVarHeaderParams["If-Modified-Since"] = parameterToString(*r.ifModifiedSince, "")
+	}
+	if r.ifUnmodifiedSince != nil {
+		localVarHeaderParams["If-Unmodified-Since"] = parameterToString(*r.ifUnmodifiedSince, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

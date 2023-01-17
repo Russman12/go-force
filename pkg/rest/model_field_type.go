@@ -34,7 +34,7 @@ const (
 	FIELDTYPE_EMAIL                      FieldType = "email"
 	FIELDTYPE_ENCRYPTEDSTRING            FieldType = "encryptedstring"
 	FIELDTYPE_ID                         FieldType = "id"
-	FIELDTYPE_INTEGER                    FieldType = "integer"
+	FIELDTYPE_INT                        FieldType = "int"
 	FIELDTYPE_LOCATION                   FieldType = "location"
 	FIELDTYPE_LONG                       FieldType = "long"
 	FIELDTYPE_MULTIPICKLIST              FieldType = "multipicklist"
@@ -63,7 +63,7 @@ var AllowedFieldTypeEnumValues = []FieldType{
 	"email",
 	"encryptedstring",
 	"id",
-	"integer",
+	"int",
 	"location",
 	"long",
 	"multipicklist",

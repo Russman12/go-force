@@ -203,6 +203,26 @@ paths:
         schema:
           type: string
         style: simple
+      - description: An optional header specifying a date and time. The request returns
+          records that have been modified after that date and time.
+        example: "Mon, 30 Nov 2020 08:34:54 MST"
+        explode: false
+        in: header
+        name: If-Modified-Since
+        required: false
+        schema:
+          type: string
+        style: simple
+      - description: An optional header specifying a date and time. The request returns
+          records that have not been modified after that date and time.
+        example: "Mon, 30 Nov 2020 08:34:54 MST"
+        explode: false
+        in: header
+        name: If-Unmodified-Since
+        required: false
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -969,7 +989,7 @@ components:
       - email
       - encryptedstring
       - id
-      - integer
+      - int
       - location
       - long
       - multipicklist

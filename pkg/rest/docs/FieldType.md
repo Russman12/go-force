@@ -29,7 +29,7 @@
 
 * `ID` (value: `"id"`)
 
-* `INTEGER` (value: `"integer"`)
+* `INT` (value: `"int"`)
 
 * `LOCATION` (value: `"location"`)
 
