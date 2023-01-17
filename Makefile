@@ -16,4 +16,4 @@ rest:
 init:
 	git config --local core.hooksPath .githooks/
 watcher:
-	./watcher.sh
+	scripts/watcher.sh
