@@ -50,7 +50,6 @@ type APIClient struct {
 	tokenSrc oauth2.TokenSource
 
 	// API Services
-	DefaultApi *DefaultApiService
 	OrgApi     *OrgApiService
 	SObjectApi *SObjectApiService
 }
@@ -72,7 +71,6 @@ func NewAPIClient(cfg *Configuration, tokenSource oauth2.TokenSource) *APIClient
 	c.tokenSrc = tokenSource
 
 	// API Services
-	c.DefaultApi = (*DefaultApiService)(&c.common)
 	c.OrgApi = (*OrgApiService)(&c.common)
 	c.SObjectApi = (*SObjectApiService)(&c.common)
 

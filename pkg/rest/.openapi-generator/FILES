@@ -1,6 +1,5 @@
 README.md
 api/openapi.yaml
-api_default.go
 api_org.go
 api_s_object.go
 client.go
@@ -8,7 +7,6 @@ configuration.go
 docs/ActionOverrides.md
 docs/ChildRelationships.md
 docs/CreateRecordResult.md
-docs/DefaultApi.md
 docs/FieldDescribe.md
 docs/FieldDescribePicklist.md
 docs/FieldType.md

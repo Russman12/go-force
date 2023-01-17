@@ -160,6 +160,8 @@ paths:
           content: {}
           description: Bad Request
       summary: sObject Describe
+      tags:
+      - SObject
 components:
   schemas:
     sObjectDescribe:

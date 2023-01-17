@@ -47,7 +47,7 @@ func main() {
     apiClient := {{apiPackage}}.NewAPIClient(configuration, tokenSrc)
 
 {{#allParams}}
-    {{paramName}} := {{apiPackage}}.Test // {{{dataType}}} | {{{description}}}{{^required}} (optional){{/required}}{{#defaultValue}} (default to {{{.}}}){{/defaultValue}}
+    {{paramName}} := {{#isString}}"{{{example}}}"{{/isString}}{{^isString}}{{#isNumeric}}{{{example}}}{{/isNumeric}}{{^isNumeric}}{{{dataType}}}{}{{/isNumeric}}{{/isString}} // {{{dataType}}} | {{{description}}}{{^required}} (optional){{/required}}{{#defaultValue}} (default to {{{.}}}){{/defaultValue}}
 {{/allParams}}
 
     resp, r, err := apiClient.{{classname}}.{{operationId}}(context.Background(){{#pathParams}}, {{paramName}}{{/pathParams}}){{#allParams}}{{^isPathParam}}.{{vendorExtensions.x-export-param-name}}({{paramName}}){{/isPathParam}}{{/allParams}}.Execute()
@@ -67,7 +67,7 @@ func main() {
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#pathParams}}{{#-last}}
 | Name         | Type          | Description   | Notes        |
 | ------------ | ------------- | ------------- | ------------ |
-| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.{{/-last}}{{/pathParams}}{{#pathParams}} | |
+| **ctx** | **context.Context** | context for logging, cancellation, deadlines, tracing, etc.{{/-last}}{{/pathParams}}{{#pathParams}} | |
 | **{{paramName}}** | {{^isPrimitiveType}}{{^isFile}}[{{/isFile}}{{/isPrimitiveType}}**{{dataType}}**{{^isPrimitiveType}}{{^isFile}}]({{baseType}}.md){{/isFile}}{{/isPrimitiveType}} | {{description}} | {{#defaultValue}}[default to {{.}}]{{/defaultValue}}{{/pathParams}} |
 
 ### Other Parameters

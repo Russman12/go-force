@@ -44,8 +44,8 @@ func main() {
     configuration := bulkv2.NewConfiguration()
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
-    jobId := bulkv2.Test // string | 
-    abortQueryJobRequest := bulkv2.Test // AbortQueryJobRequest |  (optional)
+    jobId := "jobId_example" // string | 
+    abortQueryJobRequest := AbortQueryJobRequest{} // AbortQueryJobRequest |  (optional)
 
     resp, r, err := apiClient.QueryApi.AbortQueryJob(context.Background(), jobId).AbortQueryJobRequest(abortQueryJobRequest).Execute()
     if err != nil {
@@ -62,7 +62,7 @@ func main() {
 
 | Name         | Type          | Description   | Notes        |
 | ------------ | ------------- | ------------- | ------------ |
-| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **ctx** | **context.Context** | context for logging, cancellation, deadlines, tracing, etc. | |
 | **jobId** | **string** |  |  |
 
 ### Other Parameters
@@ -124,8 +124,8 @@ func main() {
     configuration := bulkv2.NewConfiguration()
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
-    contentType := bulkv2.Test // string |  (optional)
-    createQueryJobRequest := bulkv2.Test // CreateQueryJobRequest |  (optional)
+    contentType := "application/json" // string |  (optional)
+    createQueryJobRequest := CreateQueryJobRequest{} // CreateQueryJobRequest |  (optional)
 
     resp, r, err := apiClient.QueryApi.CreateQueryJob(context.Background()).ContentType(contentType).CreateQueryJobRequest(createQueryJobRequest).Execute()
     if err != nil {
@@ -200,7 +200,7 @@ func main() {
     configuration := bulkv2.NewConfiguration()
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
-    jobId := bulkv2.Test // string | 
+    jobId := "jobId_example" // string | 
 
     resp, r, err := apiClient.QueryApi.DeleteQueryJob(context.Background(), jobId).Execute()
     if err != nil {
@@ -215,7 +215,7 @@ func main() {
 
 | Name         | Type          | Description   | Notes        |
 | ------------ | ------------- | ------------- | ------------ |
-| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **ctx** | **context.Context** | context for logging, cancellation, deadlines, tracing, etc. | |
 | **jobId** | **string** |  |  |
 
 ### Other Parameters
@@ -276,11 +276,11 @@ func main() {
     configuration := bulkv2.NewConfiguration()
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
-    jobId := bulkv2.Test // string | 
-    contentType := bulkv2.Test // string |  (optional)
-    accept := bulkv2.Test // string |  (optional)
-    locator := bulkv2.Test // string | A string that identifies a specific set of query results. Providing a value for this parameter returns only that set of results. Omitting this parameter returns the first set of results.  You can find the locator string for the next set of results in the response of each request. See Example and Rules and Guidelines.  As long as the associated job exists, the locator string for a set of results does not change. You can use the locator to retrieve a set of results multiple times.  (optional)
-    maxRecords := bulkv2.Test // int32 | The maximum number of records to retrieve per set of results for the query. The request is still subject to the size limits. If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size.  If you don’t provide a value for this parameter, the server uses a default value based on the service.  (optional)
+    jobId := "jobId_example" // string | 
+    contentType := "application/json" // string |  (optional)
+    accept := "text/csv" // string |  (optional)
+    locator := "locator_example" // string | A string that identifies a specific set of query results. Providing a value for this parameter returns only that set of results. Omitting this parameter returns the first set of results.  You can find the locator string for the next set of results in the response of each request. See Example and Rules and Guidelines.  As long as the associated job exists, the locator string for a set of results does not change. You can use the locator to retrieve a set of results multiple times.  (optional)
+    maxRecords := int32{} // int32 | The maximum number of records to retrieve per set of results for the query. The request is still subject to the size limits. If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size.  If you don’t provide a value for this parameter, the server uses a default value based on the service.  (optional)
 
     resp, r, err := apiClient.QueryApi.GetJobResults(context.Background(), jobId).ContentType(contentType).Accept(accept).Locator(locator).MaxRecords(maxRecords).Execute()
     if err != nil {
@@ -297,7 +297,7 @@ func main() {
 
 | Name         | Type          | Description   | Notes        |
 | ------------ | ------------- | ------------- | ------------ |
-| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **ctx** | **context.Context** | context for logging, cancellation, deadlines, tracing, etc. | |
 | **jobId** | **string** |  |  |
 
 ### Other Parameters
@@ -362,7 +362,7 @@ func main() {
     configuration := bulkv2.NewConfiguration()
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
-    jobId := bulkv2.Test // string | 
+    jobId := "jobId_example" // string | 
 
     resp, r, err := apiClient.QueryApi.GetQueryJobInfo(context.Background(), jobId).Execute()
     if err != nil {
@@ -379,7 +379,7 @@ func main() {
 
 | Name         | Type          | Description   | Notes        |
 | ------------ | ------------- | ------------- | ------------ |
-| **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc. | |
+| **ctx** | **context.Context** | context for logging, cancellation, deadlines, tracing, etc. | |
 | **jobId** | **string** |  |  |
 
 ### Other Parameters
@@ -440,10 +440,10 @@ func main() {
     configuration := bulkv2.NewConfiguration()
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
-    isPkChunkingEnabled := bulkv2.Test // bool | If set to true, the request only returns information about jobs where PK Chunking is enabled. (optional)
-    jobType := bulkv2.Test // string | Gets information only about jobs matching the specified job type. (optional)
-    concurrencyMode := bulkv2.Test // string | For future use. Gets information only about jobs matching the specified concurrency mode. Possible values are serial and parallel. (optional)
-    queryLocator := bulkv2.Test // string | use the value from the nextRecordsUrl from the previous set (optional)
+    isPkChunkingEnabled := bool{} // bool | If set to true, the request only returns information about jobs where PK Chunking is enabled. (optional)
+    jobType := "jobType_example" // string | Gets information only about jobs matching the specified job type. (optional)
+    concurrencyMode := "concurrencyMode_example" // string | For future use. Gets information only about jobs matching the specified concurrency mode. Possible values are serial and parallel. (optional)
+    queryLocator := "queryLocator_example" // string | use the value from the nextRecordsUrl from the previous set (optional)
 
     resp, r, err := apiClient.QueryApi.GetQueryJobs(context.Background()).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
     if err != nil {

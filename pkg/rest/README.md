@@ -15,11 +15,11 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
 | Class        | Method        | HTTP request  | Summary       |
 | ------------ | ------------- | ------------- | ------------- |
-| *DefaultApi* | [**SObjectDescribe**](docs/DefaultApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe | sObject Describe |
 | *OrgApi* | [**GetLimits**](docs/OrgApi.md#getlimits) | **Get** /limits | Limits |
 | *OrgApi* | [**GetResources**](docs/OrgApi.md#getresources) | **Get** / | Resources by Version |
 | *SObjectApi* | [**CreateRecord**](docs/SObjectApi.md#createrecord) | **Post** /sobjects/{sObject} | Create a Record |
 | *SObjectApi* | [**GetSObjects**](docs/SObjectApi.md#getsobjects) | **Get** /sobjects | Describe Global |
+| *SObjectApi* | [**SObjectDescribe**](docs/SObjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe | sObject Describe |
 
 
 ## Documentation For Models
