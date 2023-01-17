@@ -75,20 +75,22 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 Example
 
 ```golang
-auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
-r, err := client.Service.Operation(auth, args)
-```
+package main
 
-Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+import (
+    "golang.org/x/oauth2"
+    "context"
+)
 
-```golang
-import "golang.org/x/oauth2"
-
-/* Perform OAuth2 round trip request and obtain a token */
-
-tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
-auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
-r, err := client.Service.Operation(auth, args)
+func main() {
+    oAuth2Cfg := oauth2.Config{}
+    token, err := oAuth2Cfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuth2Cfg.TokenSource(context.Background(), token)
+    packageName.NewAPIClient(packageName.NewConfiguration(), tokenSrc)
+}
 ```
 
 
@@ -103,20 +105,18 @@ r, err := client.Service.Operation(auth, args)
 Example
 
 ```golang
-auth := context.WithValue(context.Background(), sw.ContextAccessToken, "ACCESSTOKENSTRING")
-r, err := client.Service.Operation(auth, args)
-```
+package main
 
-Or via OAuth2 module to automatically refresh tokens and perform user authentication.
+import (
+    "golang.org/x/oauth2"
+    "context"
+)
 
-```golang
-import "golang.org/x/oauth2"
-
-/* Perform OAuth2 round trip request and obtain a token */
-
-tokenSource := oauth2cfg.TokenSource(createContext(httpClient), &token)
-auth := context.WithValue(oauth2.NoContext, sw.ContextOAuth2, tokenSource)
-r, err := client.Service.Operation(auth, args)
+func main() {
+    oAuth2Cfg := clientcredentials.Config{}
+    tokenSrc := oAuth2Cfg.TokenSource(context.Background())
+    packageName.NewAPIClient(packageName.NewConfiguration(), tokenSrc)
+}
 ```
 
 

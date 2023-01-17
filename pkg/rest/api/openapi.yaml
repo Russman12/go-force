@@ -968,9 +968,6 @@ components:
         clientCredentials:
           scopes: {}
           tokenUrl: /services/oauth2/token
-        implicit:
-          authorizationUrl: https://api.getbase.com/oauth2/authorize
-          scopes: {}
         password:
           scopes: {}
           tokenUrl: /services/oauth2/token

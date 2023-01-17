@@ -66,7 +66,7 @@ Other parameters are passed through a pointer to a apiGetLimitsRequest struct vi
 
 ### Authorization
 
-[oAuth (password)](../README.md#oauth--password-), [oAuth (implicit)](../README.md#oauth--implicit-), [oAuth (application)](../README.md#oauth--application-)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
@@ -135,7 +135,7 @@ Other parameters are passed through a pointer to a apiGetResourcesRequest struct
 
 ### Authorization
 
-[oAuth (password)](../README.md#oauth--password-), [oAuth (implicit)](../README.md#oauth--implicit-), [oAuth (application)](../README.md#oauth--application-)
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
 
 ### HTTP request headers
 
