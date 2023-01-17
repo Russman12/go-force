@@ -10,6 +10,7 @@ docs/ColumnDelimiter.md
 docs/ContentType.md
 docs/CreateJobRequest.md
 docs/CreateQueryJobRequest.md
+docs/EncodingType.md
 docs/Job.md
 docs/JobApi.md
 docs/JobCloseAbortState.md
@@ -36,6 +37,7 @@ model_column_delimiter.go
 model_content_type.go
 model_create_job_request.go
 model_create_query_job_request.go
+model_encoding_type.go
 model_job.go
 model_job_close_abort_state.go
 model_job_info.go

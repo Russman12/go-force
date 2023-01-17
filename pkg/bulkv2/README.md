@@ -40,6 +40,7 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
  - [ContentType](docs/ContentType.md)
  - [CreateJobRequest](docs/CreateJobRequest.md)
  - [CreateQueryJobRequest](docs/CreateQueryJobRequest.md)
+ - [EncodingType](docs/EncodingType.md)
  - [Job](docs/Job.md)
  - [JobCloseAbortState](docs/JobCloseAbortState.md)
  - [JobInfo](docs/JobInfo.md)

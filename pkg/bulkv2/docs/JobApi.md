@@ -100,7 +100,7 @@ Other parameters are passed through a pointer to a apiCloseOrAbortJobRequest str
 
 ## CreateJob
 
-> JobInfo CreateJob(ctx).CreateJobRequest(createJobRequest).Execute()
+> JobInfo CreateJob(ctx).CreateJobRequest(createJobRequest).SforceCallOptions(sforceCallOptions).Execute()
 
 Creates a job representing a bulk operation and its associated data that is sent to Salesforce for asynchronous processing. Provide job data via an Upload Job Data request or as part of a multipart create job request.
 
@@ -132,8 +132,9 @@ func main() {
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
     createJobRequest := CreateJobRequest{} // CreateJobRequest | 
+    sforceCallOptions := "client=caseSensitiveToken; defaultNamespace=battle" // string |  (optional)
 
-    resp, r, err := apiClient.JobApi.CreateJob(context.Background()).CreateJobRequest(createJobRequest).Execute()
+    resp, r, err := apiClient.JobApi.CreateJob(context.Background()).CreateJobRequest(createJobRequest).SforceCallOptions(sforceCallOptions).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.CreateJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -154,7 +155,8 @@ Other parameters are passed through a pointer to a apiCreateJobRequest struct vi
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  **createJobRequest** | [**CreateJobRequest**](CreateJobRequest.md) |  |  |
+|  **createJobRequest** | [**CreateJobRequest**](CreateJobRequest.md) |  | 
+|  **sforceCallOptions** | **string** |  |  |
 
 ### Return type
 
@@ -254,7 +256,7 @@ Other parameters are passed through a pointer to a apiDeleteJobRequest struct vi
 
 ## GetJobFailedResults
 
-> io.ReadCloser GetJobFailedResults(ctx, jobId).Execute()
+> io.ReadCloser GetJobFailedResults(ctx, jobId).AcceptEncoding(acceptEncoding).Execute()
 
 Retrieves a list of failed records for a completed insert, delete, update, or upsert job.
 
@@ -286,8 +288,9 @@ func main() {
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
     jobId := "jobId_example" // string | 
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.JobApi.GetJobFailedResults(context.Background(), jobId).Execute()
+    resp, r, err := apiClient.JobApi.GetJobFailedResults(context.Background(), jobId).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobFailedResults``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -312,7 +315,8 @@ Other parameters are passed through a pointer to a apiGetJobFailedResultsRequest
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  |
+| 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -414,7 +418,7 @@ Other parameters are passed through a pointer to a apiGetJobInfoRequest struct v
 
 ## GetJobSuccessfulResults
 
-> io.ReadCloser GetJobSuccessfulResults(ctx, jobId).Execute()
+> io.ReadCloser GetJobSuccessfulResults(ctx, jobId).AcceptEncoding(acceptEncoding).Execute()
 
 Retrieves a list of successfully processed records for a completed job.
 
@@ -446,8 +450,9 @@ func main() {
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
     jobId := "jobId_example" // string | 
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.JobApi.GetJobSuccessfulResults(context.Background(), jobId).Execute()
+    resp, r, err := apiClient.JobApi.GetJobSuccessfulResults(context.Background(), jobId).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobSuccessfulResults``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -472,7 +477,8 @@ Other parameters are passed through a pointer to a apiGetJobSuccessfulResultsReq
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  |
+| 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -494,7 +500,7 @@ Other parameters are passed through a pointer to a apiGetJobSuccessfulResultsReq
 
 ## GetJobUnprocessedRecords
 
-> io.ReadCloser GetJobUnprocessedRecords(ctx, jobId).Execute()
+> io.ReadCloser GetJobUnprocessedRecords(ctx, jobId).AcceptEncoding(acceptEncoding).Execute()
 
 Retrieves a list of unprocessed records for failed or aborted jobs.
 
@@ -526,8 +532,9 @@ func main() {
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
     jobId := "jobId_example" // string | 
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.JobApi.GetJobUnprocessedRecords(context.Background(), jobId).Execute()
+    resp, r, err := apiClient.JobApi.GetJobUnprocessedRecords(context.Background(), jobId).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobUnprocessedRecords``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -552,7 +559,8 @@ Other parameters are passed through a pointer to a apiGetJobUnprocessedRecordsRe
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  |
+| 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -654,7 +662,7 @@ Other parameters are passed through a pointer to a apiGetJobsRequest struct via 
 
 ## UploadJobData
 
-> UploadJobData(ctx, jobId).Body(body).Execute()
+> UploadJobData(ctx, jobId).Body(body).ContentEncoding(contentEncoding).Execute()
 
 Uploads data for a job using CSV data you provide.
 
@@ -687,8 +695,9 @@ func main() {
 
     jobId := "jobId_example" // string | 
     body := io.ReadCloser{} // io.ReadCloser | 
+    contentEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.JobApi.UploadJobData(context.Background(), jobId).Body(body).Execute()
+    resp, r, err := apiClient.JobApi.UploadJobData(context.Background(), jobId).Body(body).ContentEncoding(contentEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.UploadJobData``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -712,7 +721,8 @@ Other parameters are passed through a pointer to a apiUploadJobDataRequest struc
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
 | 
-|  **body** | **io.ReadCloser** |  |  |
+|  **body** | **io.ReadCloser** |  | 
+|  **contentEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 

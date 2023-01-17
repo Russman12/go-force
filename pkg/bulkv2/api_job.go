@@ -157,13 +157,19 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 }
 
 type ApiCreateJobRequest struct {
-	ctx              context.Context
-	ApiService       *JobApiService
-	createJobRequest *CreateJobRequest
+	ctx               context.Context
+	ApiService        *JobApiService
+	createJobRequest  *CreateJobRequest
+	sforceCallOptions *string
 }
 
 func (r ApiCreateJobRequest) CreateJobRequest(createJobRequest CreateJobRequest) ApiCreateJobRequest {
 	r.createJobRequest = &createJobRequest
+	return r
+}
+
+func (r ApiCreateJobRequest) SforceCallOptions(sforceCallOptions string) ApiCreateJobRequest {
+	r.sforceCallOptions = &sforceCallOptions
 	return r
 }
 
@@ -237,6 +243,9 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.sforceCallOptions != nil {
+		localVarHeaderParams["Sforce-Call-Options"] = parameterToString(*r.sforceCallOptions, "")
 	}
 	// body params
 	localVarPostBody = r.createJobRequest
@@ -388,9 +397,15 @@ func (a *JobApiService) DeleteJobExecute(r ApiDeleteJobRequest) (*http.Response,
 }
 
 type ApiGetJobFailedResultsRequest struct {
-	ctx        context.Context
-	ApiService *JobApiService
-	jobId      string
+	ctx            context.Context
+	ApiService     *JobApiService
+	jobId          string
+	acceptEncoding *EncodingType
+}
+
+func (r ApiGetJobFailedResultsRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetJobFailedResultsRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetJobFailedResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
@@ -463,6 +478,9 @@ func (a *JobApiService) GetJobFailedResultsExecute(r ApiGetJobFailedResultsReque
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -615,9 +633,15 @@ func (a *JobApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *ht
 }
 
 type ApiGetJobSuccessfulResultsRequest struct {
-	ctx        context.Context
-	ApiService *JobApiService
-	jobId      string
+	ctx            context.Context
+	ApiService     *JobApiService
+	jobId          string
+	acceptEncoding *EncodingType
+}
+
+func (r ApiGetJobSuccessfulResultsRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetJobSuccessfulResultsRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetJobSuccessfulResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
@@ -691,6 +715,9 @@ func (a *JobApiService) GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResu
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -721,9 +748,15 @@ func (a *JobApiService) GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResu
 }
 
 type ApiGetJobUnprocessedRecordsRequest struct {
-	ctx        context.Context
-	ApiService *JobApiService
-	jobId      string
+	ctx            context.Context
+	ApiService     *JobApiService
+	jobId          string
+	acceptEncoding *EncodingType
+}
+
+func (r ApiGetJobUnprocessedRecordsRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetJobUnprocessedRecordsRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetJobUnprocessedRecordsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
@@ -796,6 +829,9 @@ func (a *JobApiService) GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRe
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -971,14 +1007,20 @@ func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (map[string]interfac
 }
 
 type ApiUploadJobDataRequest struct {
-	ctx        context.Context
-	ApiService *JobApiService
-	jobId      string
-	body       *io.ReadCloser
+	ctx             context.Context
+	ApiService      *JobApiService
+	jobId           string
+	body            *io.ReadCloser
+	contentEncoding *EncodingType
 }
 
 func (r ApiUploadJobDataRequest) Body(body io.ReadCloser) ApiUploadJobDataRequest {
 	r.body = &body
+	return r
+}
+
+func (r ApiUploadJobDataRequest) ContentEncoding(contentEncoding EncodingType) ApiUploadJobDataRequest {
+	r.contentEncoding = &contentEncoding
 	return r
 }
 
@@ -1052,6 +1094,9 @@ func (a *JobApiService) UploadJobDataExecute(r ApiUploadJobDataRequest) (*http.R
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.contentEncoding != nil {
+		localVarHeaderParams["Content-Encoding"] = parameterToString(*r.contentEncoding, "")
 	}
 	// body params
 	localVarPostBody = r.body

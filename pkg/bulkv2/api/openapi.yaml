@@ -18,6 +18,106 @@ servers:
 security:
 - oAuth: []
 paths:
+  /jobs/query:
+    get:
+      description: Gets information about all query jobs in the org. The information
+        includes Bulk API 2.0 query jobs and all Bulk API jobs.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_get_all_jobs.htm
+      operationId: GetQueryJobs
+      parameters:
+      - description: "If set to true, the request only returns information about jobs\
+          \ where PK Chunking is enabled."
+        example: "false"
+        explode: true
+        in: query
+        name: isPkChunkingEnabled
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - description: Gets information only about jobs matching the specified job type.
+        explode: true
+        in: query
+        name: jobType
+        required: false
+        schema:
+          enum:
+          - Classic
+          - V2Query
+          - V2Ingest
+          type: string
+        style: form
+      - description: For future use. Gets information only about jobs matching the
+          specified concurrency mode. Possible values are serial and parallel.
+        explode: true
+        in: query
+        name: concurrencyMode
+        required: false
+        schema:
+          enum:
+          - serial
+          - parallel
+          type: string
+        style: form
+      - description: use the value from the nextRecordsUrl from the previous set
+        explode: true
+        in: query
+        name: queryLocator
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryJobInfos'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Get Information About All Query Jobs
+      tags:
+      - Query
+    post:
+      description: Creates a query job.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_create_job.htm
+      operationId: CreateQueryJob
+      parameters:
+      - example: client=caseSensitiveToken; defaultNamespace=battle
+        explode: false
+        in: header
+        name: Sforce-Call-Options
+        required: false
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        $ref: '#/components/requestBodies/CreateQueryJobRequestBody'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryJobInfo'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Create a Query Job
+      tags:
+      - Query
   /jobs/query/{jobId}:
     delete:
       description: "Deletes a query job. When a job is deleted, job data stored by\
@@ -124,21 +224,12 @@ paths:
         schema:
           type: string
         style: simple
-      - example: application/json
-        explode: false
+      - explode: false
         in: header
-        name: Content-Type
+        name: Accept-Encoding
         required: false
         schema:
-          type: string
-        style: simple
-      - example: text/csv
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
+          $ref: '#/components/schemas/EncodingType'
         style: simple
       - description: |
           A string that identifies a specific set of query results. Providing a value for this parameter returns only that set of results.
@@ -202,106 +293,6 @@ paths:
       summary: Get Results for a Query Job
       tags:
       - Query
-  /jobs/query:
-    get:
-      description: Gets information about all query jobs in the org. The information
-        includes Bulk API 2.0 query jobs and all Bulk API jobs.
-      externalDocs:
-        description: Salesforce Documentation
-        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_get_all_jobs.htm
-      operationId: GetQueryJobs
-      parameters:
-      - description: "If set to true, the request only returns information about jobs\
-          \ where PK Chunking is enabled."
-        example: "false"
-        explode: true
-        in: query
-        name: isPkChunkingEnabled
-        required: false
-        schema:
-          type: boolean
-        style: form
-      - description: Gets information only about jobs matching the specified job type.
-        explode: true
-        in: query
-        name: jobType
-        required: false
-        schema:
-          enum:
-          - Classic
-          - V2Query
-          - V2Ingest
-          type: string
-        style: form
-      - description: For future use. Gets information only about jobs matching the
-          specified concurrency mode. Possible values are serial and parallel.
-        explode: true
-        in: query
-        name: concurrencyMode
-        required: false
-        schema:
-          enum:
-          - serial
-          - parallel
-          type: string
-        style: form
-      - description: use the value from the nextRecordsUrl from the previous set
-        explode: true
-        in: query
-        name: queryLocator
-        required: false
-        schema:
-          type: string
-        style: form
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/QueryJobInfos'
-          description: Successful response
-        "401":
-          content: {}
-          description: Unauthorized
-        "400":
-          content: {}
-          description: Bad Request
-      summary: Get Information About All Query Jobs
-      tags:
-      - Query
-    post:
-      description: Creates a query job.
-      externalDocs:
-        description: Salesforce Documentation
-        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_create_job.htm
-      operationId: CreateQueryJob
-      parameters:
-      - example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
-      requestBody:
-        $ref: '#/components/requestBodies/CreateQueryJobRequestBody'
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/QueryJobInfo'
-          description: Successful response
-        "401":
-          content: {}
-          description: Unauthorized
-        "400":
-          content: {}
-          description: Bad Request
-      summary: Create a Query Job
-      tags:
-      - Query
   /jobs/ingest:
     get:
       description: Retrieves all jobs in the org.
@@ -356,6 +347,15 @@ paths:
         description: Salesforce Documentation
         url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/create_job.htm
       operationId: createJob
+      parameters:
+      - example: client=caseSensitiveToken; defaultNamespace=battle
+        explode: false
+        in: header
+        name: Sforce-Call-Options
+        required: false
+        schema:
+          type: string
+        style: simple
       requestBody:
         $ref: '#/components/requestBodies/CreateJobRequestBody'
       responses:
@@ -388,6 +388,13 @@ paths:
         required: true
         schema:
           type: string
+        style: simple
+      - explode: false
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
         style: simple
       requestBody:
         content:
@@ -517,6 +524,13 @@ paths:
         schema:
           type: string
         style: simple
+      - explode: false
+        in: header
+        name: Accept-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
+        style: simple
       responses:
         "200":
           content:
@@ -550,6 +564,13 @@ paths:
         schema:
           type: string
         style: simple
+      - explode: false
+        in: header
+        name: Accept-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
+        style: simple
       responses:
         "200":
           content:
@@ -581,6 +602,13 @@ paths:
         required: true
         schema:
           type: string
+        style: simple
+      - explode: false
+        in: header
+        name: Accept-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
         style: simple
       responses:
         "200":
@@ -938,6 +966,18 @@ components:
       enum:
       - UploadComplete
       - Aborted
+      type: string
+    EncodingType:
+      description: "Use a compression header to compress a REST API request or response.\
+        \ Compression reduces the bandwidth required for a request, although it requires\
+        \ more processing power at your client. In most cases, this tradeoff benefits\
+        \ the overall performance of your application. REST API supports the gzip\
+        \ and deflate compression algorithms, as defined by the HTTP 1.1 specification.\
+        \ If you’re unsure about which one to use, gzip is more common than deflate."
+      enum:
+      - gzip
+      - deflate
+      title: Encoding Type
       type: string
   securitySchemes:
     oAuth:
