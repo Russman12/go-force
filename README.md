@@ -9,19 +9,8 @@ There are several openapi files which and are used to automatically generate the
 
 ## Installation
 
-Install the following dependencies:
-
-```shell
-go get github.com/stretchr/testify/assert
-go get golang.org/x/oauth2
-go get golang.org/x/net/context
-```
-
-Put the package under your project folder and add the following in import:
-
-```golang
-import rest "github.com/russman12/go-force/rest"
-```
+Add the following import:
+`import "github.com/russman12/go-force/pkg/rest"`
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
 
@@ -31,92 +20,36 @@ os.Setenv("HTTP_PROXY", "http://proxy_name:proxy_port")
 
 ## Configuration of Server URL
 
-Default configuration comes with `Servers` field that contains server objects as defined in the OpenAPI specification.
-
-### Select Server Configuration
-
-For using other server than the one defined on index 0 set context value `sw.ContextServerIndex` of type `int`.
-
-```golang
-ctx := context.WithValue(context.Background(), rest.ContextServerIndex, 1)
-```
-
-### Templated Server URL
-
-Templated server URL is formatted using default variables from configuration or from context value `sw.ContextServerVariables` of type `map[string]string`.
-
-```golang
-ctx := context.WithValue(context.Background(), rest.ContextServerVariables, map[string]string{
-	"basePath": "v2",
-})
-```
-
-Note, enum values are always validated and all unused variables are silently ignored.
-
-### URLs Configuration per Operation
-
-Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
-An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
-Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
-
-```golang
-ctx := context.WithValue(context.Background(), rest.ContextOperationServerIndices, map[string]int{
-	"{classname}Service.{nickname}": 2,
-})
-ctx = context.WithValue(context.Background(), rest.ContextOperationServerVariables, map[string]map[string]string{
-	"{classname}Service.{nickname}": {
-		"port": "8443",
-	},
-})
-```
+The server URL is automatically determined based on the oauth2 response from salesforce.
 
 ## Usage
-To start using this library, first download it via the following command:
-
-```bash
-go get github.com/russman12/go-force
-```
-
-Next, add the following lines of code to your project to log in to salesforce:
+The example below demonstrates how to send a request to the (REST Resources)[https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/dome_discoveryresource.htm].
 
 ```golang
-//create auth client with default config
-authClient := auth.NewAPIClient(auth.NewConfiguration())
+package main
 
-//use test.salesforce.com server
-authCtx := context.WithValue(context.Background(), auth.ContextServerIndex, 0)
-
-//log in to salesforce
-auth, _, _ := authClient.OAuthApi.
-	OAuthUserPass(authCtx).
-	ClientId("clientId").
-	ClientSecret("clientSecret").
-	Username("username").
-	Password("password").
-	GrantType("password").
-	Execute()
-```
-
-Now that you are logged into salesforce, you can use the auth data to set a default header on your desired API. You can also use the returned instance url to set the instance url in a new context for your desired API. For example:
-
-```golang
-//create config with default auth header set
-restCfg := rest.NewConfiguration()
-restCfg.AddDefaultHeader("Authorization", fmt.Sprintf("%s %s", auth.TokenType, auth.AccessToken))
-
-//create new context with instanceUrl injected into url
-restCtx := context.WithValue(
-	context.Background(),
-	rest.ContextServerVariables,
-	map[string]string{"instanceUrl": auth.InstanceUrl}
+import (
+	"fmt"
+	"golang.org/x/oauth2"
+	"context"
 )
 
-restClient := rest.NewAPIClient(restCfg)
+func main() {
+	oAuth2Cfg := clientcredentials.Config{}
+	tokenSrc := oAuth2Cfg.TokenSource(context.Background())
+	packageName.NewAPIClient(packageName.NewConfiguration(), tokenSrc)
+
+	restClient := rest.NewAPIClient(rest.NewConfiguration(), tokenSrc)
+	resources, _, err := restClient.OrgApi.GetResources(context.Background()).Execute()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("%+v\n", resources)
+}
 ```
 
 See API documentation for implementation details
 
 ## Supported APIs
-* [Auth](pkg/auth/README.md) (partial)
 * [Bulk v2](pkg/bulkv2/README.md)
-* [Rest](pkg/rest/README.md) (partial)
+* [Rest](pkg/rest/README.md) (partially implemented)
