@@ -32,7 +32,7 @@ func (r ApiGetLimitsRequest) Execute() (interface{}, *http.Response, error) {
 }
 
 /*
-GetLimits Limits
+GetLimits List Org Limits
 
 Lists information about limits in your org. For each limit, this resource returns the maximum allocation and the remaining allocation based on usage. This resource is available in REST API version 29.0 and later for API users with the View Setup and Configuration permission.
 
@@ -149,7 +149,7 @@ func (r ApiGetResourcesRequest) Execute() (interface{}, *http.Response, error) {
 }
 
 /*
-GetResources Resources by Version
+GetResources List Available REST Resources
 
 Lists available resources for the specified API version, including resource name and URI.
 

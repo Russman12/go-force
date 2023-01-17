@@ -36,6 +36,20 @@ func Test_rest_SObjectApiService(t *testing.T) {
 
 	})
 
+	t.Run("Test SObjectApiService GetBasicInfo", func(t *testing.T) {
+
+		t.Skip("skip test") // remove to run test
+
+		var sObject string
+
+		resp, httpRes, err := apiClient.SObjectApi.GetBasicInfo(context.Background(), sObject).Execute()
+
+		require.Nil(t, err)
+		require.NotNil(t, resp)
+		assert.Equal(t, 200, httpRes.StatusCode)
+
+	})
+
 	t.Run("Test SObjectApiService GetSObjects", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test

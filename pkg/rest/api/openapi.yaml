@@ -22,6 +22,9 @@ paths:
     get:
       description: "Lists available resources for the specified API version, including\
         \ resource name and URI."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_discoveryresource.htm
       operationId: getResources
       responses:
         "200":
@@ -35,7 +38,7 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Resources by Version
+      summary: List Available REST Resources
       tags:
       - Org
   /limits:
@@ -44,6 +47,9 @@ paths:
         \ resource returns the maximum allocation and the remaining allocation based\
         \ on usage. This resource is available in REST API version 29.0 and later\
         \ for API users with the View Setup and Configuration permission."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
       operationId: getLimits
       responses:
         "200":
@@ -57,7 +63,7 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Limits
+      summary: List Org Limits
       tags:
       - Org
   /sobjects:
@@ -65,6 +71,9 @@ paths:
       description: |-
         Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization).
         You can use the If-Modified-Since or If-Unmodified-Since header with this resource. When using the If-Modified-Since header, if no available object’s metadata has changed since the provided date, a 304 Not Modified status code is returned with no response body.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_describeGlobal.htm
       operationId: getSObjects
       responses:
         "200":
@@ -79,15 +88,59 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Describe Global
+      summary: Get a List of Objects
       tags:
       - SObject
   /sobjects/{sObject}:
+    get:
+      description: "Retrieves basic metadata for a specified object, including some\
+        \ object properties, recent items, and URIs for other resources related to\
+        \ the object. To retrieve the complete metadata for an object, use the (sObject\
+        \ Describe)[https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm]\
+        \ resource."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_basic_info_get.htm
+      operationId: GetBasicInfo
+      parameters:
+      - description: SObject name
+        example: Contact
+        explode: false
+        in: path
+        name: sObject
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+          description: Unauthorized
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+          description: Bad Request
+      summary: Retrieve Object Metadata Using sObject Basic Information
+      tags:
+      - SObject
     post:
-      description: "Use the [sObject Basic Information](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_basic_info.htm)\
-        \ resource to create new records. You supply the required field values in\
-        \ the request data, and send the request using the POST HTTP method. The response\
-        \ body contains the ID of the new record if the call is successful."
+      description: Creates a new record for a specified object based on field values
+        in the request body. You must specify values for required fields in the request
+        body. Specifying values for other fields is optional.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_basic_info_post.htm
       operationId: createRecord
       parameters:
       - description: SObject name
@@ -127,7 +180,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/errors'
           description: Bad Request
-      summary: Create a Record
+      summary: Create Records Using sObject Basic Information
       tags:
       - SObject
   /sobjects/{sObject}/describe:
@@ -136,6 +189,9 @@ paths:
         Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.
         For more information about the metadata that is retrieved, see [DescribesObjectResult](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/sforce_api_calls_describesobjects_describesobjectresult.htm) in the SOAP API Developers Guide.
         You can use the If-Modified-Since or If-Unmodified-Since header with this resource. When using the If-Modified-Since header, if no available object’s metadata has changed since the provided date, a 304 Not Modified status code is returned with no response body.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
       operationId: sObjectDescribe
       parameters:
       - description: SObject name
@@ -160,7 +216,7 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: sObject Describe
+      summary: Retrieve Metadata for an Object
       tags:
       - SObject
 components:

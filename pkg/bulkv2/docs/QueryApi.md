@@ -19,6 +19,7 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 
 
+
 ### Example
 
 ```go
@@ -99,6 +100,7 @@ Other parameters are passed through a pointer to a apiAbortQueryJobRequest struc
 
 
 
+
 ### Example
 
 ```go
@@ -175,6 +177,7 @@ Other parameters are passed through a pointer to a apiCreateQueryJobRequest stru
 
 
 
+
 ### Example
 
 ```go
@@ -248,6 +251,7 @@ Other parameters are passed through a pointer to a apiDeleteQueryJobRequest stru
 ## GetJobResults
 
 > io.ReadCloser GetJobResults(ctx, jobId).ContentType(contentType).Accept(accept).Locator(locator).MaxRecords(maxRecords).Execute()
+
 
 
 
@@ -337,6 +341,7 @@ Other parameters are passed through a pointer to a apiGetJobResultsRequest struc
 
 
 
+
 ### Example
 
 ```go
@@ -412,6 +417,7 @@ Other parameters are passed through a pointer to a apiGetQueryJobInfoRequest str
 ## GetQueryJobs
 
 > QueryJobInfos GetQueryJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
+
 
 
 

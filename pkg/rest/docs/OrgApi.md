@@ -4,8 +4,8 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
 | Method        | HTTP request  | Summary       |
 | ------------- | ------------- | ------------- |
-| [**GetLimits**](#getlimits) | **Get** /limits | Limits |
-| [**GetResources**](#getresources) | **Get** / | Resources by Version |
+| [**GetLimits**](#getlimits) | **Get** /limits | List Org Limits |
+| [**GetResources**](#getresources) | **Get** / | List Available REST Resources |
 
 
 
@@ -14,6 +14,8 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 > interface{} GetLimits(ctx).Execute()
 
 Lists information about limits in your org. For each limit, this resource returns the maximum allocation and the remaining allocation based on usage. This resource is available in REST API version 29.0 and later for API users with the View Setup and Configuration permission.
+
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm)
 
 ### Example
 
@@ -83,6 +85,8 @@ Other parameters are passed through a pointer to a apiGetLimitsRequest struct vi
 > interface{} GetResources(ctx).Execute()
 
 Lists available resources for the specified API version, including resource name and URI.
+
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_discoveryresource.htm)
 
 ### Example
 

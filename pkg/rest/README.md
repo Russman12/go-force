@@ -15,11 +15,12 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
 | Class        | Method        | HTTP request  | Summary       |
 | ------------ | ------------- | ------------- | ------------- |
-| *OrgApi* | [**GetLimits**](docs/OrgApi.md#getlimits) | **Get** /limits | Limits |
-| *OrgApi* | [**GetResources**](docs/OrgApi.md#getresources) | **Get** / | Resources by Version |
-| *SObjectApi* | [**CreateRecord**](docs/SObjectApi.md#createrecord) | **Post** /sobjects/{sObject} | Create a Record |
-| *SObjectApi* | [**GetSObjects**](docs/SObjectApi.md#getsobjects) | **Get** /sobjects | Describe Global |
-| *SObjectApi* | [**SObjectDescribe**](docs/SObjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe | sObject Describe |
+| *OrgApi* | [**GetLimits**](docs/OrgApi.md#getlimits) | **Get** /limits | List Org Limits |
+| *OrgApi* | [**GetResources**](docs/OrgApi.md#getresources) | **Get** / | List Available REST Resources |
+| *SObjectApi* | [**CreateRecord**](docs/SObjectApi.md#createrecord) | **Post** /sobjects/{sObject} | Create Records Using sObject Basic Information |
+| *SObjectApi* | [**GetBasicInfo**](docs/SObjectApi.md#getbasicinfo) | **Get** /sobjects/{sObject} | Retrieve Object Metadata Using sObject Basic Information |
+| *SObjectApi* | [**GetSObjects**](docs/SObjectApi.md#getsobjects) | **Get** /sobjects | Get a List of Objects |
+| *SObjectApi* | [**SObjectDescribe**](docs/SObjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe | Retrieve Metadata for an Object |
 
 
 ## Documentation For Models

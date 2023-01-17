@@ -27,3 +27,4 @@ _testmain.go
 
 debug/*
 .idea/*
+/scripts/debug-sup-files.sh

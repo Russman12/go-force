@@ -22,6 +22,7 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 
 
+
 ### Example
 
 ```go
@@ -102,6 +103,7 @@ Other parameters are passed through a pointer to a apiCloseOrAbortJobRequest str
 
 
 
+
 ### Example
 
 ```go
@@ -173,6 +175,7 @@ Other parameters are passed through a pointer to a apiCreateJobRequest struct vi
 ## DeleteJob
 
 > DeleteJob(ctx, jobId).Execute()
+
 
 
 
@@ -249,6 +252,7 @@ Other parameters are passed through a pointer to a apiDeleteJobRequest struct vi
 ## GetJobFailedResults
 
 > io.ReadCloser GetJobFailedResults(ctx, jobId).Execute()
+
 
 
 
@@ -330,6 +334,7 @@ Other parameters are passed through a pointer to a apiGetJobFailedResultsRequest
 
 
 
+
 ### Example
 
 ```go
@@ -405,6 +410,7 @@ Other parameters are passed through a pointer to a apiGetJobInfoRequest struct v
 ## GetJobSuccessfulResults
 
 > io.ReadCloser GetJobSuccessfulResults(ctx, jobId).Execute()
+
 
 
 
@@ -486,6 +492,7 @@ Other parameters are passed through a pointer to a apiGetJobSuccessfulResultsReq
 
 
 
+
 ### Example
 
 ```go
@@ -564,6 +571,7 @@ Other parameters are passed through a pointer to a apiGetJobUnprocessedRecordsRe
 
 
 
+
 ### Example
 
 ```go
@@ -639,6 +647,7 @@ Other parameters are passed through a pointer to a apiGetJobsRequest struct via 
 ## UploadJobData
 
 > UploadJobData(ctx, jobId).Body(body).Execute()
+
 
 
 
