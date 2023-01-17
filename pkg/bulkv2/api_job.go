@@ -43,6 +43,8 @@ func (r ApiCloseOrAbortJobRequest) Execute() (*JobInfo, *http.Response, error) {
 /*
 CloseOrAbortJob Close or Abort a Job
 
+Closes or aborts a job. If you close a job, Salesforce queues the job and uploaded data for processing, and you can’t add any more job data. If you abort a job, the job doesn’t get queued or processed.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
 	@return ApiCloseOrAbortJobRequest
@@ -170,7 +172,9 @@ func (r ApiCreateJobRequest) Execute() (*JobInfo, *http.Response, error) {
 }
 
 /*
-CreateJob Create job
+CreateJob Create a job
+
+Creates a job representing a bulk operation and its associated data that is sent to Salesforce for asynchronous processing. Provide job data via an Upload Job Data request or as part of a multipart create job request.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateJobRequest
@@ -291,7 +295,9 @@ func (r ApiDeleteJobRequest) Execute() (*http.Response, error) {
 }
 
 /*
-DeleteJob Delete Job
+DeleteJob Delete a Job
+
+Deletes a job. To be deleted, a job must have a state of `UploadComplete`, `JobComplete`, `Aborted`, or `Failed`.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
@@ -393,6 +399,8 @@ func (r ApiGetJobFailedResultsRequest) Execute() (*io.ReadCloser, *http.Response
 
 /*
 GetJobFailedResults Get Job Failed Record Results
+
+Retrieves a list of failed records for a completed insert, delete, update, or upsert job.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
@@ -497,6 +505,8 @@ func (r ApiGetJobInfoRequest) Execute() (*JobInfo, *http.Response, error) {
 
 /*
 GetJobInfo Get Job Info
+
+Retrieves detailed information about a job.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
@@ -617,6 +627,8 @@ func (r ApiGetJobSuccessfulResultsRequest) Execute() (*io.ReadCloser, *http.Resp
 /*
 GetJobSuccessfulResults Get Job Successful Record Results
 
+Retrieves a list of successfully processed records for a completed job.
+
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
 	@return ApiGetJobSuccessfulResultsRequest
@@ -720,6 +732,8 @@ func (r ApiGetJobUnprocessedRecordsRequest) Execute() (*io.ReadCloser, *http.Res
 
 /*
 GetJobUnprocessedRecords Get Job Unprocessed Record Results
+
+Retrieves a list of unprocessed records for failed or aborted jobs.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
@@ -841,6 +855,8 @@ func (r ApiGetJobsRequest) Execute() (map[string]interface{}, *http.Response, er
 
 /*
 GetJobs Get All Jobs
+
+Retrieves all jobs in the org.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetJobsRequest
@@ -972,6 +988,8 @@ func (r ApiUploadJobDataRequest) Execute() (*http.Response, error) {
 
 /*
 UploadJobData Upload Job Data
+
+Uploads data for a job using CSV data you provide.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId

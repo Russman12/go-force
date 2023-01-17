@@ -16,20 +16,20 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 | Class        | Method        | HTTP request  | Summary       |
 | ------------ | ------------- | ------------- | ------------- |
 | *JobApi* | [**CloseOrAbortJob**](docs/JobApi.md#closeorabortjob) | **Patch** /jobs/ingest/{jobId} | Close or Abort a Job |
-| *JobApi* | [**CreateJob**](docs/JobApi.md#createjob) | **Post** /jobs/ingest | Create job |
-| *JobApi* | [**DeleteJob**](docs/JobApi.md#deletejob) | **Delete** /jobs/ingest/{jobId} | Delete Job |
+| *JobApi* | [**CreateJob**](docs/JobApi.md#createjob) | **Post** /jobs/ingest | Create a job |
+| *JobApi* | [**DeleteJob**](docs/JobApi.md#deletejob) | **Delete** /jobs/ingest/{jobId} | Delete a Job |
 | *JobApi* | [**GetJobFailedResults**](docs/JobApi.md#getjobfailedresults) | **Get** /jobs/ingest/{jobId}/failedResults | Get Job Failed Record Results |
 | *JobApi* | [**GetJobInfo**](docs/JobApi.md#getjobinfo) | **Get** /jobs/ingest/{jobId} | Get Job Info |
 | *JobApi* | [**GetJobSuccessfulResults**](docs/JobApi.md#getjobsuccessfulresults) | **Get** /jobs/ingest/{jobId}/successfulResults | Get Job Successful Record Results |
 | *JobApi* | [**GetJobUnprocessedRecords**](docs/JobApi.md#getjobunprocessedrecords) | **Get** /jobs/ingest/{jobId}/unprocessedrecords | Get Job Unprocessed Record Results |
 | *JobApi* | [**GetJobs**](docs/JobApi.md#getjobs) | **Get** /jobs/ingest | Get All Jobs |
 | *JobApi* | [**UploadJobData**](docs/JobApi.md#uploadjobdata) | **Put** /jobs/ingest/{jobId}/batches | Upload Job Data |
-| *QueryApi* | [**AbortQueryJob**](docs/QueryApi.md#abortqueryjob) | **Patch** /jobs/query/{jobId} | Abort a Job Query |
-| *QueryApi* | [**CreateQueryJob**](docs/QueryApi.md#createqueryjob) | **Post** /jobs/query | Create job Query |
-| *QueryApi* | [**DeleteQueryJob**](docs/QueryApi.md#deletequeryjob) | **Delete** /jobs/query/{jobId} | Delete Job Query |
-| *QueryApi* | [**GetJobResults**](docs/QueryApi.md#getjobresults) | **Get** /jobs/query/{jobId}/results | Get Job Query Result |
-| *QueryApi* | [**GetQueryJobInfo**](docs/QueryApi.md#getqueryjobinfo) | **Get** /jobs/query/{jobId} | Get Job Info Query |
-| *QueryApi* | [**GetQueryJobs**](docs/QueryApi.md#getqueryjobs) | **Get** /jobs/query | Get All Query Jobs |
+| *QueryApi* | [**AbortQueryJob**](docs/QueryApi.md#abortqueryjob) | **Patch** /jobs/query/{jobId} | Abort a Query Job |
+| *QueryApi* | [**CreateQueryJob**](docs/QueryApi.md#createqueryjob) | **Post** /jobs/query | Create a Query Job |
+| *QueryApi* | [**DeleteQueryJob**](docs/QueryApi.md#deletequeryjob) | **Delete** /jobs/query/{jobId} | Delete a Query Job |
+| *QueryApi* | [**GetJobResults**](docs/QueryApi.md#getjobresults) | **Get** /jobs/query/{jobId}/results | Get Results for a Query Job |
+| *QueryApi* | [**GetQueryJobInfo**](docs/QueryApi.md#getqueryjobinfo) | **Get** /jobs/query/{jobId} | Get Information About a Query Job |
+| *QueryApi* | [**GetQueryJobs**](docs/QueryApi.md#getqueryjobs) | **Get** /jobs/query | Get Information About All Query Jobs |
 
 
 ## Documentation For Models

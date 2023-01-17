@@ -4,12 +4,12 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 | Method        | HTTP request  | Summary       |
 | ------------- | ------------- | ------------- |
-| [**AbortQueryJob**](#abortqueryjob) | **Patch** /jobs/query/{jobId} | Abort a Job Query |
-| [**CreateQueryJob**](#createqueryjob) | **Post** /jobs/query | Create job Query |
-| [**DeleteQueryJob**](#deletequeryjob) | **Delete** /jobs/query/{jobId} | Delete Job Query |
-| [**GetJobResults**](#getjobresults) | **Get** /jobs/query/{jobId}/results | Get Job Query Result |
-| [**GetQueryJobInfo**](#getqueryjobinfo) | **Get** /jobs/query/{jobId} | Get Job Info Query |
-| [**GetQueryJobs**](#getqueryjobs) | **Get** /jobs/query | Get All Query Jobs |
+| [**AbortQueryJob**](#abortqueryjob) | **Patch** /jobs/query/{jobId} | Abort a Query Job |
+| [**CreateQueryJob**](#createqueryjob) | **Post** /jobs/query | Create a Query Job |
+| [**DeleteQueryJob**](#deletequeryjob) | **Delete** /jobs/query/{jobId} | Delete a Query Job |
+| [**GetJobResults**](#getjobresults) | **Get** /jobs/query/{jobId}/results | Get Results for a Query Job |
+| [**GetQueryJobInfo**](#getqueryjobinfo) | **Get** /jobs/query/{jobId} | Get Information About a Query Job |
+| [**GetQueryJobs**](#getqueryjobs) | **Get** /jobs/query | Get Information About All Query Jobs |
 
 
 
@@ -17,8 +17,9 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 > QueryJobInfo AbortQueryJob(ctx, jobId).AbortQueryJobRequest(abortQueryJobRequest).Execute()
 
+Aborts a query job.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_abort_job.htm)
 
 ### Example
 
@@ -98,8 +99,9 @@ Other parameters are passed through a pointer to a apiAbortQueryJobRequest struc
 
 > QueryJobInfo CreateQueryJob(ctx).CreateQueryJobRequest(createQueryJobRequest).ContentType(contentType).Execute()
 
+Creates a query job.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_create_job.htm)
 
 ### Example
 
@@ -175,8 +177,9 @@ Other parameters are passed through a pointer to a apiCreateQueryJobRequest stru
 
 > DeleteQueryJob(ctx, jobId).Execute()
 
+Deletes a query job. When a job is deleted, job data stored by Salesforce is deleted and job metadata information is removed. The job no longer displays in the Bulk Data Load Jobs page in Salesforce.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_delete_job.htm)
 
 ### Example
 
@@ -252,8 +255,9 @@ Other parameters are passed through a pointer to a apiDeleteQueryJobRequest stru
 
 > io.ReadCloser GetJobResults(ctx, jobId).ContentType(contentType).Accept(accept).Locator(locator).MaxRecords(maxRecords).Execute()
 
+Gets the results for a query job. The job must have the state `JobComplete`.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_get_job_results.htm)
 
 ### Example
 
@@ -339,8 +343,9 @@ Other parameters are passed through a pointer to a apiGetJobResultsRequest struc
 
 > QueryJobInfo GetQueryJobInfo(ctx, jobId).Execute()
 
+Gets information about one query job.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_get_one_job.htm)
 
 ### Example
 
@@ -418,8 +423,9 @@ Other parameters are passed through a pointer to a apiGetQueryJobInfoRequest str
 
 > QueryJobInfos GetQueryJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
 
+Gets information about all query jobs in the org. The information includes Bulk API 2.0 query jobs and all Bulk API jobs.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_get_all_jobs.htm)
 
 ### Example
 

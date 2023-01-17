@@ -5,8 +5,8 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 | Method        | HTTP request  | Summary       |
 | ------------- | ------------- | ------------- |
 | [**CloseOrAbortJob**](#closeorabortjob) | **Patch** /jobs/ingest/{jobId} | Close or Abort a Job |
-| [**CreateJob**](#createjob) | **Post** /jobs/ingest | Create job |
-| [**DeleteJob**](#deletejob) | **Delete** /jobs/ingest/{jobId} | Delete Job |
+| [**CreateJob**](#createjob) | **Post** /jobs/ingest | Create a job |
+| [**DeleteJob**](#deletejob) | **Delete** /jobs/ingest/{jobId} | Delete a Job |
 | [**GetJobFailedResults**](#getjobfailedresults) | **Get** /jobs/ingest/{jobId}/failedResults | Get Job Failed Record Results |
 | [**GetJobInfo**](#getjobinfo) | **Get** /jobs/ingest/{jobId} | Get Job Info |
 | [**GetJobSuccessfulResults**](#getjobsuccessfulresults) | **Get** /jobs/ingest/{jobId}/successfulResults | Get Job Successful Record Results |
@@ -20,8 +20,9 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 > JobInfo CloseOrAbortJob(ctx, jobId).CloseOrAbortJobRequest(closeOrAbortJobRequest).Execute()
 
+Closes or aborts a job. If you close a job, Salesforce queues the job and uploaded data for processing, and you can’t add any more job data. If you abort a job, the job doesn’t get queued or processed.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/close_job.htm)
 
 ### Example
 
@@ -101,8 +102,9 @@ Other parameters are passed through a pointer to a apiCloseOrAbortJobRequest str
 
 > JobInfo CreateJob(ctx).CreateJobRequest(createJobRequest).Execute()
 
+Creates a job representing a bulk operation and its associated data that is sent to Salesforce for asynchronous processing. Provide job data via an Upload Job Data request or as part of a multipart create job request.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/create_job.htm)
 
 ### Example
 
@@ -176,8 +178,9 @@ Other parameters are passed through a pointer to a apiCreateJobRequest struct vi
 
 > DeleteJob(ctx, jobId).Execute()
 
+Deletes a job. To be deleted, a job must have a state of `UploadComplete`, `JobComplete`, `Aborted`, or `Failed`.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/delete_job.htm)
 
 ### Example
 
@@ -253,8 +256,9 @@ Other parameters are passed through a pointer to a apiDeleteJobRequest struct vi
 
 > io.ReadCloser GetJobFailedResults(ctx, jobId).Execute()
 
+Retrieves a list of failed records for a completed insert, delete, update, or upsert job.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_job_failed_results.htm)
 
 ### Example
 
@@ -332,8 +336,9 @@ Other parameters are passed through a pointer to a apiGetJobFailedResultsRequest
 
 > JobInfo GetJobInfo(ctx, jobId).Execute()
 
+Retrieves detailed information about a job.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_job_info.htm)
 
 ### Example
 
@@ -411,8 +416,9 @@ Other parameters are passed through a pointer to a apiGetJobInfoRequest struct v
 
 > io.ReadCloser GetJobSuccessfulResults(ctx, jobId).Execute()
 
+Retrieves a list of successfully processed records for a completed job.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_job_successful_results.htm)
 
 ### Example
 
@@ -490,8 +496,9 @@ Other parameters are passed through a pointer to a apiGetJobSuccessfulResultsReq
 
 > io.ReadCloser GetJobUnprocessedRecords(ctx, jobId).Execute()
 
+Retrieves a list of unprocessed records for failed or aborted jobs.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_job_unprocessed_results.htm)
 
 ### Example
 
@@ -569,8 +576,9 @@ Other parameters are passed through a pointer to a apiGetJobUnprocessedRecordsRe
 
 > map[string]interface{} GetJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
 
+Retrieves all jobs in the org.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_all_jobs.htm)
 
 ### Example
 
@@ -648,8 +656,9 @@ Other parameters are passed through a pointer to a apiGetJobsRequest struct via 
 
 > UploadJobData(ctx, jobId).Body(body).Execute()
 
+Uploads data for a job using CSV data you provide.
 
-
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/upload_job_data.htm)
 
 ### Example
 

@@ -41,7 +41,9 @@ func (r ApiAbortQueryJobRequest) Execute() (*QueryJobInfo, *http.Response, error
 }
 
 /*
-AbortQueryJob Abort a Job Query
+AbortQueryJob Abort a Query Job
+
+Aborts a query job.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
@@ -176,7 +178,9 @@ func (r ApiCreateQueryJobRequest) Execute() (*QueryJobInfo, *http.Response, erro
 }
 
 /*
-CreateQueryJob Create job Query
+CreateQueryJob Create a Query Job
+
+Creates a query job.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiCreateQueryJobRequest
@@ -300,7 +304,9 @@ func (r ApiDeleteQueryJobRequest) Execute() (*http.Response, error) {
 }
 
 /*
-DeleteQueryJob Delete Job Query
+DeleteQueryJob Delete a Query Job
+
+Deletes a query job. When a job is deleted, job data stored by Salesforce is deleted and job metadata information is removed. The job no longer displays in the Bulk Data Load Jobs page in Salesforce.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
@@ -427,7 +433,9 @@ func (r ApiGetJobResultsRequest) Execute() (*io.ReadCloser, *http.Response, erro
 }
 
 /*
-GetJobResults Get Job Query Result
+GetJobResults Get Results for a Query Job
+
+Gets the results for a query job. The job must have the state `JobComplete`.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
@@ -543,7 +551,9 @@ func (r ApiGetQueryJobInfoRequest) Execute() (*QueryJobInfo, *http.Response, err
 }
 
 /*
-GetQueryJobInfo Get Job Info Query
+GetQueryJobInfo Get Information About a Query Job
+
+Gets information about one query job.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param jobId
@@ -689,7 +699,9 @@ func (r ApiGetQueryJobsRequest) Execute() (*QueryJobInfos, *http.Response, error
 }
 
 /*
-GetQueryJobs Get All Query Jobs
+GetQueryJobs Get Information About All Query Jobs
+
+Gets information about all query jobs in the org. The information includes Bulk API 2.0 query jobs and all Bulk API jobs.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@return ApiGetQueryJobsRequest

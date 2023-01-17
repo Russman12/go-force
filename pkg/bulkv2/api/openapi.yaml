@@ -20,6 +20,12 @@ security:
 paths:
   /jobs/query/{jobId}:
     delete:
+      description: "Deletes a query job. When a job is deleted, job data stored by\
+        \ Salesforce is deleted and job metadata information is removed. The job no\
+        \ longer displays in the Bulk Data Load Jobs page in Salesforce."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_delete_job.htm
       operationId: DeleteQueryJob
       parameters:
       - explode: false
@@ -38,10 +44,14 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Delete Job Query
+      summary: Delete a Query Job
       tags:
       - Query
     get:
+      description: Gets information about one query job.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_get_one_job.htm
       operationId: GetQueryJobInfo
       parameters:
       - explode: false
@@ -64,10 +74,14 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Get Job Info Query
+      summary: Get Information About a Query Job
       tags:
       - Query
     patch:
+      description: Aborts a query job.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_abort_job.htm
       operationId: AbortQueryJob
       parameters:
       - explode: false
@@ -92,11 +106,15 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Abort a Job Query
+      summary: Abort a Query Job
       tags:
       - Query
   /jobs/query/{jobId}/results:
     get:
+      description: Gets the results for a query job. The job must have the state `JobComplete`.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_get_job_results.htm
       operationId: GetJobResults
       parameters:
       - explode: false
@@ -181,11 +199,16 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Get Job Query Result
+      summary: Get Results for a Query Job
       tags:
       - Query
   /jobs/query:
     get:
+      description: Gets information about all query jobs in the org. The information
+        includes Bulk API 2.0 query jobs and all Bulk API jobs.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_get_all_jobs.htm
       operationId: GetQueryJobs
       parameters:
       - description: "If set to true, the request only returns information about jobs\
@@ -243,10 +266,14 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Get All Query Jobs
+      summary: Get Information About All Query Jobs
       tags:
       - Query
     post:
+      description: Creates a query job.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_create_job.htm
       operationId: CreateQueryJob
       parameters:
       - example: application/json
@@ -272,11 +299,15 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Create job Query
+      summary: Create a Query Job
       tags:
       - Query
   /jobs/ingest:
     get:
+      description: Retrieves all jobs in the org.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_all_jobs.htm
       operationId: getJobs
       parameters:
       - explode: true
@@ -318,6 +349,12 @@ paths:
       tags:
       - Job
     post:
+      description: Creates a job representing a bulk operation and its associated
+        data that is sent to Salesforce for asynchronous processing. Provide job data
+        via an Upload Job Data request or as part of a multipart create job request.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/create_job.htm
       operationId: createJob
       requestBody:
         $ref: '#/components/requestBodies/CreateJobRequestBody'
@@ -334,11 +371,15 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Create job
+      summary: Create a job
       tags:
       - Job
   /jobs/ingest/{jobId}/batches:
     put:
+      description: Uploads data for a job using CSV data you provide.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/upload_job_data.htm
       operationId: uploadJobData
       parameters:
       - explode: false
@@ -369,6 +410,11 @@ paths:
       - Job
   /jobs/ingest/{jobId}:
     delete:
+      description: "Deletes a job. To be deleted, a job must have a state of `UploadComplete`,\
+        \ `JobComplete`, `Aborted`, or `Failed`."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/delete_job.htm
       operationId: deleteJob
       parameters:
       - explode: false
@@ -388,10 +434,14 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Delete Job
+      summary: Delete a Job
       tags:
       - Job
     get:
+      description: Retrieves detailed information about a job.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_job_info.htm
       operationId: getJobInfo
       parameters:
       - explode: false
@@ -418,6 +468,12 @@ paths:
       tags:
       - Job
     patch:
+      description: "Closes or aborts a job. If you close a job, Salesforce queues\
+        \ the job and uploaded data for processing, and you can’t add any more job\
+        \ data. If you abort a job, the job doesn’t get queued or processed."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/close_job.htm
       operationId: closeOrAbortJob
       parameters:
       - explode: false
@@ -447,6 +503,11 @@ paths:
       - Job
   /jobs/ingest/{jobId}/successfulResults:
     get:
+      description: Retrieves a list of successfully processed records for a completed
+        job.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_job_successful_results.htm
       operationId: getJobSuccessfulResults
       parameters:
       - explode: false
@@ -475,6 +536,11 @@ paths:
       - Job
   /jobs/ingest/{jobId}/failedResults:
     get:
+      description: "Retrieves a list of failed records for a completed insert, delete,\
+        \ update, or upsert job."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_job_failed_results.htm
       operationId: getJobFailedResults
       parameters:
       - explode: false
@@ -503,6 +569,10 @@ paths:
       - Job
   /jobs/ingest/{jobId}/unprocessedrecords:
     get:
+      description: Retrieves a list of unprocessed records for failed or aborted jobs.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/get_job_unprocessed_results.htm
       operationId: getJobUnprocessedRecords
       parameters:
       - explode: false
