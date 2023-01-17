@@ -87,6 +87,9 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.closeOrAbortJobRequest == nil {
+		return localVarReturnValue, nil, reportError("closeOrAbortJobRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -210,6 +213,9 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createJobRequest == nil {
+		return localVarReturnValue, nil, reportError("createJobRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1008,6 +1014,9 @@ func (a *JobApiService) UploadJobDataExecute(r ApiUploadJobDataRequest) (*http.R
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.body == nil {
+		return nil, reportError("body is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"text/csv"}

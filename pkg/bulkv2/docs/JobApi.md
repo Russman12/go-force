@@ -48,7 +48,7 @@ func main() {
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
     jobId := "jobId_example" // string | 
-    closeOrAbortJobRequest := CloseOrAbortJobRequest{} // CloseOrAbortJobRequest |  (optional)
+    closeOrAbortJobRequest := CloseOrAbortJobRequest{} // CloseOrAbortJobRequest | 
 
     resp, r, err := apiClient.JobApi.CloseOrAbortJob(context.Background(), jobId).CloseOrAbortJobRequest(closeOrAbortJobRequest).Execute()
     if err != nil {
@@ -127,7 +127,7 @@ func main() {
     configuration := bulkv2.NewConfiguration()
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
-    createJobRequest := CreateJobRequest{} // CreateJobRequest |  (optional)
+    createJobRequest := CreateJobRequest{} // CreateJobRequest | 
 
     resp, r, err := apiClient.JobApi.CreateJob(context.Background()).CreateJobRequest(createJobRequest).Execute()
     if err != nil {
@@ -668,7 +668,7 @@ func main() {
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
     jobId := "jobId_example" // string | 
-    body := io.ReadCloser{} // io.ReadCloser |  (optional)
+    body := io.ReadCloser{} // io.ReadCloser | 
 
     resp, r, err := apiClient.JobApi.UploadJobData(context.Background(), jobId).Body(body).Execute()
     if err != nil {

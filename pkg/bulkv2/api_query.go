@@ -87,6 +87,9 @@ func (a *QueryApiService) AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*Quer
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.abortQueryJobRequest == nil {
+		return localVarReturnValue, nil, reportError("abortQueryJobRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -154,17 +157,17 @@ func (a *QueryApiService) AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*Quer
 type ApiCreateQueryJobRequest struct {
 	ctx                   context.Context
 	ApiService            *QueryApiService
-	contentType           *string
 	createQueryJobRequest *CreateQueryJobRequest
-}
-
-func (r ApiCreateQueryJobRequest) ContentType(contentType string) ApiCreateQueryJobRequest {
-	r.contentType = &contentType
-	return r
+	contentType           *string
 }
 
 func (r ApiCreateQueryJobRequest) CreateQueryJobRequest(createQueryJobRequest CreateQueryJobRequest) ApiCreateQueryJobRequest {
 	r.createQueryJobRequest = &createQueryJobRequest
+	return r
+}
+
+func (r ApiCreateQueryJobRequest) ContentType(contentType string) ApiCreateQueryJobRequest {
+	r.contentType = &contentType
 	return r
 }
 
@@ -216,6 +219,9 @@ func (a *QueryApiService) CreateQueryJobExecute(r ApiCreateQueryJobRequest) (*Qu
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.createQueryJobRequest == nil {
+		return localVarReturnValue, nil, reportError("createQueryJobRequest is required and must be specified")
+	}
 
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

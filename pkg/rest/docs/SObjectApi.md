@@ -42,7 +42,7 @@ func main() {
     apiClient := rest.NewAPIClient(configuration, tokenSrc)
 
     sObject := "Contact" // string | SObject name
-    body := map[string]interface{}{} // map[string]interface{} | SObject record to insert (optional)
+    body := map[string]interface{}{} // map[string]interface{} | SObject record to insert
 
     resp, r, err := apiClient.SObjectApi.CreateRecord(context.Background(), sObject).Body(body).Execute()
     if err != nil {

@@ -354,6 +354,7 @@ paths:
             schema:
               format: binary
               type: string
+        required: true
       responses:
         "201":
           description: Successful response
@@ -552,21 +553,25 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AbortQueryJobRequest'
+      required: true
     CloseOrAbortJobRequest:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/CloseOrAbortJobRequest'
+      required: true
     CreateJobRequestBody:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/CreateJobRequest'
+      required: true
     CreateQueryJobRequestBody:
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/CreateQueryJobRequest'
+      required: true
   schemas:
     QueryJob:
       properties:

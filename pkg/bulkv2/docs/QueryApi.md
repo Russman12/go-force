@@ -45,7 +45,7 @@ func main() {
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
     jobId := "jobId_example" // string | 
-    abortQueryJobRequest := AbortQueryJobRequest{} // AbortQueryJobRequest |  (optional)
+    abortQueryJobRequest := AbortQueryJobRequest{} // AbortQueryJobRequest | 
 
     resp, r, err := apiClient.QueryApi.AbortQueryJob(context.Background(), jobId).AbortQueryJobRequest(abortQueryJobRequest).Execute()
     if err != nil {
@@ -95,7 +95,7 @@ Other parameters are passed through a pointer to a apiAbortQueryJobRequest struc
 
 ## CreateQueryJob
 
-> QueryJobInfo CreateQueryJob(ctx).ContentType(contentType).CreateQueryJobRequest(createQueryJobRequest).Execute()
+> QueryJobInfo CreateQueryJob(ctx).CreateQueryJobRequest(createQueryJobRequest).ContentType(contentType).Execute()
 
 
 
@@ -124,10 +124,10 @@ func main() {
     configuration := bulkv2.NewConfiguration()
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
+    createQueryJobRequest := CreateQueryJobRequest{} // CreateQueryJobRequest | 
     contentType := "application/json" // string |  (optional)
-    createQueryJobRequest := CreateQueryJobRequest{} // CreateQueryJobRequest |  (optional)
 
-    resp, r, err := apiClient.QueryApi.CreateQueryJob(context.Background()).ContentType(contentType).CreateQueryJobRequest(createQueryJobRequest).Execute()
+    resp, r, err := apiClient.QueryApi.CreateQueryJob(context.Background()).CreateQueryJobRequest(createQueryJobRequest).ContentType(contentType).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.CreateQueryJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -148,8 +148,8 @@ Other parameters are passed through a pointer to a apiCreateQueryJobRequest stru
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  **contentType** | **string** |  | 
-|  **createQueryJobRequest** | [**CreateQueryJobRequest**](CreateQueryJobRequest.md) |  |  |
+|  **createQueryJobRequest** | [**CreateQueryJobRequest**](CreateQueryJobRequest.md) |  | 
+|  **contentType** | **string** |  |  |
 
 ### Return type
 

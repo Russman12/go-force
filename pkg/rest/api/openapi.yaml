@@ -107,6 +107,7 @@ paths:
             schema:
               type: object
         description: SObject record to insert
+        required: true
       responses:
         "200":
           content:
