@@ -5,6 +5,7 @@ package {{packageName}}
 import (
 	"bytes"
 	"context"
+    "compress/gzip"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -367,9 +368,16 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
 		return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, err
 	}
 
+
+    respBodyReadCloser := localVarHTTPResponse.Body
+    if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+        respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+    }
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-        localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+        localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
         localVarHTTPResponse.Body.Close()
+        respBodyReadCloser.Close()
         localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
         if err != nil {
             return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, err
@@ -422,8 +430,9 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
 
     {{^returnProperty.isBinary}}
 	{{#returnType}}
-    localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+    localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
     localVarHTTPResponse.Body.Close()
+    respBodyReadCloser.Close()
     localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
     if err != nil {
         return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, err
@@ -441,7 +450,7 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
     return {{#returnType}}localVarReturnValue, {{/returnType}}localVarHTTPResponse, nil
     {{/returnProperty.isBinary}}
     {{#returnProperty.isBinary}}
-    return {{#returnType}}&localVarHTTPResponse.Body, {{/returnType}}localVarHTTPResponse, nil
+    return {{#returnType}}&respBodyReadCloser, {{/returnType}}localVarHTTPResponse, nil
     {{/returnProperty.isBinary}}
 }
 {{/operation}}

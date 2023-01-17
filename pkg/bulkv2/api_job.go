@@ -13,6 +13,7 @@ package bulkv2
 
 import (
 	"bytes"
+	"compress/gzip"
 	"context"
 	"io"
 	"io/ioutil"
@@ -124,9 +125,15 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -138,8 +145,9 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -261,9 +269,15 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -275,8 +289,9 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -379,9 +394,15 @@ func (a *JobApiService) DeleteJobExecute(r ApiDeleteJobRequest) (*http.Response,
 		return localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarHTTPResponse, err
@@ -494,9 +515,15 @@ func (a *JobApiService) GetJobFailedResultsExecute(r ApiGetJobFailedResultsReque
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -508,7 +535,7 @@ func (a *JobApiService) GetJobFailedResultsExecute(r ApiGetJobFailedResultsReque
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
+	return &respBodyReadCloser, localVarHTTPResponse, nil
 }
 
 type ApiGetJobInfoRequest struct {
@@ -600,9 +627,15 @@ func (a *JobApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *ht
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -614,8 +647,9 @@ func (a *JobApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *ht
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -730,9 +764,15 @@ func (a *JobApiService) GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResu
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -744,7 +784,7 @@ func (a *JobApiService) GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResu
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
+	return &respBodyReadCloser, localVarHTTPResponse, nil
 }
 
 type ApiGetJobUnprocessedRecordsRequest struct {
@@ -845,9 +885,15 @@ func (a *JobApiService) GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRe
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -859,7 +905,7 @@ func (a *JobApiService) GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRe
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return &localVarHTTPResponse.Body, localVarHTTPResponse, nil
+	return &respBodyReadCloser, localVarHTTPResponse, nil
 }
 
 type ApiGetJobsRequest struct {
@@ -974,9 +1020,15 @@ func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (map[string]interfac
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -988,8 +1040,9 @@ func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (map[string]interfac
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -1112,9 +1165,15 @@ func (a *JobApiService) UploadJobDataExecute(r ApiUploadJobDataRequest) (*http.R
 		return localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarHTTPResponse, err

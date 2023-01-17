@@ -13,6 +13,7 @@ package rest
 
 import (
 	"bytes"
+	"compress/gzip"
 	"context"
 	"io/ioutil"
 	"net/http"
@@ -124,9 +125,15 @@ func (a *SObjectApiService) CreateRecordExecute(r ApiCreateRecordRequest) (*Crea
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -161,8 +168,9 @@ func (a *SObjectApiService) CreateRecordExecute(r ApiCreateRecordRequest) (*Crea
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -268,9 +276,15 @@ func (a *SObjectApiService) GetBasicInfoExecute(r ApiGetBasicInfoRequest) (map[s
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -305,8 +319,9 @@ func (a *SObjectApiService) GetBasicInfoExecute(r ApiGetBasicInfoRequest) (map[s
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -409,9 +424,15 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -423,8 +444,9 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -552,9 +574,15 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -566,8 +594,9 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err

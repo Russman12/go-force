@@ -13,6 +13,7 @@ package rest
 
 import (
 	"bytes"
+	"compress/gzip"
 	"context"
 	"io/ioutil"
 	"net/http"
@@ -107,9 +108,15 @@ func (a *OrgApiService) GetLimitsExecute(r ApiGetLimitsRequest) (interface{}, *h
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -121,8 +128,9 @@ func (a *OrgApiService) GetLimitsExecute(r ApiGetLimitsRequest) (interface{}, *h
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
@@ -224,9 +232,15 @@ func (a *OrgApiService) GetResourcesExecute(r ApiGetResourcesRequest) (interface
 		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
 	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
 		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 		if err != nil {
 			return localVarReturnValue, localVarHTTPResponse, err
@@ -238,8 +252,9 @@ func (a *OrgApiService) GetResourcesExecute(r ApiGetResourcesRequest) (interface
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	localVarBody, err := ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
 	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
 	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
 		return localVarReturnValue, localVarHTTPResponse, err
