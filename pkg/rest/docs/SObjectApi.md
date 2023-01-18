@@ -13,7 +13,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
 ## CreateRecord
 
-> CreateRecordResult CreateRecord(ctx, sObject).Body(body).Execute()
+> CreateRecordResult CreateRecord(ctx, sObject).Body(body).ContentEncoding(contentEncoding).Execute()
 
 Creates a new record for a specified object based on field values in the request body. You must specify values for required fields in the request body. Specifying values for other fields is optional.
 
@@ -46,8 +46,9 @@ func main() {
 
     sObject := "Contact" // string | SObject name
     body := map[string]interface{}{} // map[string]interface{} | SObject record to insert
+    contentEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.SObjectApi.CreateRecord(context.Background(), sObject).Body(body).Execute()
+    resp, r, err := apiClient.SObjectApi.CreateRecord(context.Background(), sObject).Body(body).ContentEncoding(contentEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.CreateRecord``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -73,7 +74,8 @@ Other parameters are passed through a pointer to a apiCreateRecordRequest struct
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
 | 
-|  **body** | **map[string]interface{}** | SObject record to insert |  |
+|  **body** | **map[string]interface{}** | SObject record to insert | 
+|  **contentEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 

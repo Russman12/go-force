@@ -25,15 +25,21 @@ import (
 type SObjectApiService service
 
 type ApiCreateRecordRequest struct {
-	ctx        context.Context
-	ApiService *SObjectApiService
-	sObject    string
-	body       *map[string]interface{}
+	ctx             context.Context
+	ApiService      *SObjectApiService
+	sObject         string
+	body            *map[string]interface{}
+	contentEncoding *EncodingType
 }
 
 // SObject record to insert
 func (r ApiCreateRecordRequest) Body(body map[string]interface{}) ApiCreateRecordRequest {
 	r.body = &body
+	return r
+}
+
+func (r ApiCreateRecordRequest) ContentEncoding(contentEncoding EncodingType) ApiCreateRecordRequest {
+	r.contentEncoding = &contentEncoding
 	return r
 }
 
@@ -110,6 +116,9 @@ func (a *SObjectApiService) CreateRecordExecute(r ApiCreateRecordRequest) (*Crea
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.contentEncoding != nil {
+		localVarHeaderParams["Content-Encoding"] = parameterToString(*r.contentEncoding, "")
 	}
 	// body params
 	localVarPostBody = r.body

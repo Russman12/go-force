@@ -28,6 +28,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
  - [ActionOverrides](docs/ActionOverrides.md)
  - [ChildRelationships](docs/ChildRelationships.md)
  - [CreateRecordResult](docs/CreateRecordResult.md)
+ - [EncodingType](docs/EncodingType.md)
  - [FieldDescribe](docs/FieldDescribe.md)
  - [FieldDescribePicklist](docs/FieldDescribePicklist.md)
  - [FieldType](docs/FieldType.md)

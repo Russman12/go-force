@@ -152,6 +152,13 @@ paths:
         schema:
           type: string
         style: simple
+      - explode: false
+        in: header
+        name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1038,6 +1045,18 @@ components:
             type: string
           type: array
       type: object
+    EncodingType:
+      description: "Use a compression header to compress a REST API request or response.\
+        \ Compression reduces the bandwidth required for a request, although it requires\
+        \ more processing power at your client. In most cases, this tradeoff benefits\
+        \ the overall performance of your application. REST API supports the gzip\
+        \ and deflate compression algorithms, as defined by the HTTP 1.1 specification.\
+        \ If you’re unsure about which one to use, gzip is more common than deflate."
+      enum:
+      - gzip
+      - deflate
+      title: Encoding Type
+      type: string
   securitySchemes:
     oAuth:
       description: This API uses OAuth 2 with various flows

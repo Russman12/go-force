@@ -7,6 +7,7 @@ configuration.go
 docs/ActionOverrides.md
 docs/ChildRelationships.md
 docs/CreateRecordResult.md
+docs/EncodingType.md
 docs/FieldDescribe.md
 docs/FieldDescribePicklist.md
 docs/FieldType.md
@@ -21,6 +22,7 @@ docs/SupportedScopes.md
 model_action_overrides.go
 model_child_relationships.go
 model_create_record_result.go
+model_encoding_type.go
 model_error.go
 model_field_describe.go
 model_field_describe_picklist.go

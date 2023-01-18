@@ -13,6 +13,7 @@ package rest
 
 import (
 	"bytes"
+	"compress/gzip"
 	"context"
 	"encoding/json"
 	"encoding/xml"
@@ -306,7 +307,25 @@ func (c *APIClient) prepareRequest(
 
 	// Generate a new request
 	if body != nil {
-		localVarRequest, err = http.NewRequest(method, url.String(), body)
+
+		var reqBody io.Reader
+		reqBody = body
+
+		// id needs to be zipped
+		if headerParams["Content-Encoding"] == "gzip" {
+			pipeReader, pipeWriter := io.Pipe()
+
+			go func(reader io.Reader, pipeWriter *io.PipeWriter) {
+				defer pipeWriter.Close()
+				w := gzip.NewWriter(pipeWriter)
+				defer w.Close()
+				io.Copy(w, reader)
+			}(reqBody, pipeWriter)
+
+			reqBody = pipeReader
+		}
+
+		localVarRequest, err = http.NewRequest(method, url.String(), reqBody)
 	} else {
 		localVarRequest, err = http.NewRequest(method, url.String(), nil)
 	}
