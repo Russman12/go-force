@@ -15,7 +15,7 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 ## AbortQueryJob
 
-> QueryJobInfo AbortQueryJob(ctx, jobId).AbortQueryJobRequest(abortQueryJobRequest).Execute()
+> QueryJobInfo AbortQueryJob(ctx, jobId).AbortQueryJobRequest(abortQueryJobRequest).ContentEncoding(contentEncoding).Execute()
 
 Aborts a query job.
 
@@ -48,8 +48,9 @@ func main() {
 
     jobId := "jobId_example" // string | 
     abortQueryJobRequest := AbortQueryJobRequest{} // AbortQueryJobRequest | 
+    contentEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.QueryApi.AbortQueryJob(context.Background(), jobId).AbortQueryJobRequest(abortQueryJobRequest).Execute()
+    resp, r, err := apiClient.QueryApi.AbortQueryJob(context.Background(), jobId).AbortQueryJobRequest(abortQueryJobRequest).ContentEncoding(contentEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.AbortQueryJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -75,7 +76,8 @@ Other parameters are passed through a pointer to a apiAbortQueryJobRequest struc
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
 | 
-|  **abortQueryJobRequest** | [**AbortQueryJobRequest**](AbortQueryJobRequest.md) |  |  |
+|  **abortQueryJobRequest** | [**AbortQueryJobRequest**](AbortQueryJobRequest.md) |  | 
+|  **contentEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -97,7 +99,7 @@ Other parameters are passed through a pointer to a apiAbortQueryJobRequest struc
 
 ## CreateQueryJob
 
-> QueryJobInfo CreateQueryJob(ctx).CreateQueryJobRequest(createQueryJobRequest).SforceCallOptions(sforceCallOptions).Execute()
+> QueryJobInfo CreateQueryJob(ctx).CreateQueryJobRequest(createQueryJobRequest).SforceCallOptions(sforceCallOptions).ContentEncoding(contentEncoding).AcceptEncoding(acceptEncoding).Execute()
 
 Creates a query job.
 
@@ -130,8 +132,10 @@ func main() {
 
     createQueryJobRequest := CreateQueryJobRequest{} // CreateQueryJobRequest | 
     sforceCallOptions := "client=caseSensitiveToken; defaultNamespace=battle" // string |  (optional)
+    contentEncoding := EncodingType{} // EncodingType |  (optional)
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.QueryApi.CreateQueryJob(context.Background()).CreateQueryJobRequest(createQueryJobRequest).SforceCallOptions(sforceCallOptions).Execute()
+    resp, r, err := apiClient.QueryApi.CreateQueryJob(context.Background()).CreateQueryJobRequest(createQueryJobRequest).SforceCallOptions(sforceCallOptions).ContentEncoding(contentEncoding).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.CreateQueryJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -153,7 +157,9 @@ Other parameters are passed through a pointer to a apiCreateQueryJobRequest stru
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
 |  **createQueryJobRequest** | [**CreateQueryJobRequest**](CreateQueryJobRequest.md) |  | 
-|  **sforceCallOptions** | **string** |  |  |
+|  **sforceCallOptions** | **string** |  | 
+|  **contentEncoding** | [**EncodingType**](EncodingType.md) |  | 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -339,7 +345,7 @@ Other parameters are passed through a pointer to a apiGetJobResultsRequest struc
 
 ## GetQueryJobInfo
 
-> QueryJobInfo GetQueryJobInfo(ctx, jobId).Execute()
+> QueryJobInfo GetQueryJobInfo(ctx, jobId).AcceptEncoding(acceptEncoding).Execute()
 
 Gets information about one query job.
 
@@ -371,8 +377,9 @@ func main() {
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
     jobId := "jobId_example" // string | 
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.QueryApi.GetQueryJobInfo(context.Background(), jobId).Execute()
+    resp, r, err := apiClient.QueryApi.GetQueryJobInfo(context.Background(), jobId).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.GetQueryJobInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -397,7 +404,8 @@ Other parameters are passed through a pointer to a apiGetQueryJobInfoRequest str
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  |
+| 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -419,7 +427,7 @@ Other parameters are passed through a pointer to a apiGetQueryJobInfoRequest str
 
 ## GetQueryJobs
 
-> QueryJobInfos GetQueryJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
+> QueryJobInfos GetQueryJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).AcceptEncoding(acceptEncoding).Execute()
 
 Gets information about all query jobs in the org. The information includes Bulk API 2.0 query jobs and all Bulk API jobs.
 
@@ -454,8 +462,9 @@ func main() {
     jobType := "jobType_example" // string | Gets information only about jobs matching the specified job type. (optional)
     concurrencyMode := "concurrencyMode_example" // string | For future use. Gets information only about jobs matching the specified concurrency mode. Possible values are serial and parallel. (optional)
     queryLocator := "queryLocator_example" // string | use the value from the nextRecordsUrl from the previous set (optional)
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.QueryApi.GetQueryJobs(context.Background()).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).Execute()
+    resp, r, err := apiClient.QueryApi.GetQueryJobs(context.Background()).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).ConcurrencyMode(concurrencyMode).QueryLocator(queryLocator).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `QueryApi.GetQueryJobs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -479,7 +488,8 @@ Other parameters are passed through a pointer to a apiGetQueryJobsRequest struct
 |  **isPkChunkingEnabled** | **bool** | If set to true, the request only returns information about jobs where PK Chunking is enabled. | 
 |  **jobType** | **string** | Gets information only about jobs matching the specified job type. | 
 |  **concurrencyMode** | **string** | For future use. Gets information only about jobs matching the specified concurrency mode. Possible values are serial and parallel. | 
-|  **queryLocator** | **string** | use the value from the nextRecordsUrl from the previous set |  |
+|  **queryLocator** | **string** | use the value from the nextRecordsUrl from the previous set | 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 

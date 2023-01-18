@@ -30,6 +30,7 @@ type ApiCreateRecordRequest struct {
 	sObject         string
 	body            *map[string]interface{}
 	contentEncoding *EncodingType
+	acceptEncoding  *EncodingType
 }
 
 // SObject record to insert
@@ -40,6 +41,11 @@ func (r ApiCreateRecordRequest) Body(body map[string]interface{}) ApiCreateRecor
 
 func (r ApiCreateRecordRequest) ContentEncoding(contentEncoding EncodingType) ApiCreateRecordRequest {
 	r.contentEncoding = &contentEncoding
+	return r
+}
+
+func (r ApiCreateRecordRequest) AcceptEncoding(acceptEncoding EncodingType) ApiCreateRecordRequest {
+	r.acceptEncoding = &acceptEncoding
 	return r
 }
 
@@ -120,6 +126,9 @@ func (a *SObjectApiService) CreateRecordExecute(r ApiCreateRecordRequest) (*Crea
 	if r.contentEncoding != nil {
 		localVarHeaderParams["Content-Encoding"] = parameterToString(*r.contentEncoding, "")
 	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
+	}
 	// body params
 	localVarPostBody = r.body
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -197,9 +206,15 @@ func (a *SObjectApiService) CreateRecordExecute(r ApiCreateRecordRequest) (*Crea
 }
 
 type ApiGetBasicInfoRequest struct {
-	ctx        context.Context
-	ApiService *SObjectApiService
-	sObject    string
+	ctx            context.Context
+	ApiService     *SObjectApiService
+	sObject        string
+	acceptEncoding *EncodingType
+}
+
+func (r ApiGetBasicInfoRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetBasicInfoRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetBasicInfoRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -272,6 +287,9 @@ func (a *SObjectApiService) GetBasicInfoExecute(r ApiGetBasicInfoRequest) (map[s
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -348,8 +366,14 @@ func (a *SObjectApiService) GetBasicInfoExecute(r ApiGetBasicInfoRequest) (map[s
 }
 
 type ApiGetSObjectsRequest struct {
-	ctx        context.Context
-	ApiService *SObjectApiService
+	ctx            context.Context
+	ApiService     *SObjectApiService
+	acceptEncoding *EncodingType
+}
+
+func (r ApiGetSObjectsRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetSObjectsRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetSObjectsRequest) Execute() (*SObjectDescribes, *http.Response, error) {
@@ -421,6 +445,9 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -478,6 +505,7 @@ type ApiSObjectDescribeRequest struct {
 	sObject           string
 	ifModifiedSince   *string
 	ifUnmodifiedSince *string
+	acceptEncoding    *EncodingType
 }
 
 // An optional header specifying a date and time. The request returns records that have been modified after that date and time.
@@ -489,6 +517,11 @@ func (r ApiSObjectDescribeRequest) IfModifiedSince(ifModifiedSince string) ApiSO
 // An optional header specifying a date and time. The request returns records that have not been modified after that date and time.
 func (r ApiSObjectDescribeRequest) IfUnmodifiedSince(ifUnmodifiedSince string) ApiSObjectDescribeRequest {
 	r.ifUnmodifiedSince = &ifUnmodifiedSince
+	return r
+}
+
+func (r ApiSObjectDescribeRequest) AcceptEncoding(acceptEncoding EncodingType) ApiSObjectDescribeRequest {
+	r.acceptEncoding = &acceptEncoding
 	return r
 }
 
@@ -570,6 +603,9 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 	}
 	if r.ifUnmodifiedSince != nil {
 		localVarHeaderParams["If-Unmodified-Since"] = parameterToString(*r.ifUnmodifiedSince, "")
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

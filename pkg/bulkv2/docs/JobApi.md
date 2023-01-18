@@ -18,7 +18,7 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 
 ## CloseOrAbortJob
 
-> JobInfo CloseOrAbortJob(ctx, jobId).CloseOrAbortJobRequest(closeOrAbortJobRequest).Execute()
+> JobInfo CloseOrAbortJob(ctx, jobId).CloseOrAbortJobRequest(closeOrAbortJobRequest).ContentEncoding(contentEncoding).Execute()
 
 Closes or aborts a job. If you close a job, Salesforce queues the job and uploaded data for processing, and you can’t add any more job data. If you abort a job, the job doesn’t get queued or processed.
 
@@ -51,8 +51,9 @@ func main() {
 
     jobId := "jobId_example" // string | 
     closeOrAbortJobRequest := CloseOrAbortJobRequest{} // CloseOrAbortJobRequest | 
+    contentEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.JobApi.CloseOrAbortJob(context.Background(), jobId).CloseOrAbortJobRequest(closeOrAbortJobRequest).Execute()
+    resp, r, err := apiClient.JobApi.CloseOrAbortJob(context.Background(), jobId).CloseOrAbortJobRequest(closeOrAbortJobRequest).ContentEncoding(contentEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.CloseOrAbortJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -78,7 +79,8 @@ Other parameters are passed through a pointer to a apiCloseOrAbortJobRequest str
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
 | 
-|  **closeOrAbortJobRequest** | [**CloseOrAbortJobRequest**](CloseOrAbortJobRequest.md) |  |  |
+|  **closeOrAbortJobRequest** | [**CloseOrAbortJobRequest**](CloseOrAbortJobRequest.md) |  | 
+|  **contentEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -100,7 +102,7 @@ Other parameters are passed through a pointer to a apiCloseOrAbortJobRequest str
 
 ## CreateJob
 
-> JobInfo CreateJob(ctx).CreateJobRequest(createJobRequest).SforceCallOptions(sforceCallOptions).Execute()
+> JobInfo CreateJob(ctx).CreateJobRequest(createJobRequest).SforceCallOptions(sforceCallOptions).ContentEncoding(contentEncoding).AcceptEncoding(acceptEncoding).Execute()
 
 Creates a job representing a bulk operation and its associated data that is sent to Salesforce for asynchronous processing. Provide job data via an Upload Job Data request or as part of a multipart create job request.
 
@@ -133,8 +135,10 @@ func main() {
 
     createJobRequest := CreateJobRequest{} // CreateJobRequest | 
     sforceCallOptions := "client=caseSensitiveToken; defaultNamespace=battle" // string |  (optional)
+    contentEncoding := EncodingType{} // EncodingType |  (optional)
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.JobApi.CreateJob(context.Background()).CreateJobRequest(createJobRequest).SforceCallOptions(sforceCallOptions).Execute()
+    resp, r, err := apiClient.JobApi.CreateJob(context.Background()).CreateJobRequest(createJobRequest).SforceCallOptions(sforceCallOptions).ContentEncoding(contentEncoding).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.CreateJob``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -156,7 +160,9 @@ Other parameters are passed through a pointer to a apiCreateJobRequest struct vi
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
 |  **createJobRequest** | [**CreateJobRequest**](CreateJobRequest.md) |  | 
-|  **sforceCallOptions** | **string** |  |  |
+|  **sforceCallOptions** | **string** |  | 
+|  **contentEncoding** | [**EncodingType**](EncodingType.md) |  | 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -338,7 +344,7 @@ Other parameters are passed through a pointer to a apiGetJobFailedResultsRequest
 
 ## GetJobInfo
 
-> JobInfo GetJobInfo(ctx, jobId).Execute()
+> JobInfo GetJobInfo(ctx, jobId).AcceptEncoding(acceptEncoding).Execute()
 
 Retrieves detailed information about a job.
 
@@ -370,8 +376,9 @@ func main() {
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
     jobId := "jobId_example" // string | 
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.JobApi.GetJobInfo(context.Background(), jobId).Execute()
+    resp, r, err := apiClient.JobApi.GetJobInfo(context.Background(), jobId).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -396,7 +403,8 @@ Other parameters are passed through a pointer to a apiGetJobInfoRequest struct v
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  |
+| 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -582,7 +590,7 @@ Other parameters are passed through a pointer to a apiGetJobUnprocessedRecordsRe
 
 ## GetJobs
 
-> map[string]interface{} GetJobs(ctx).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
+> map[string]interface{} GetJobs(ctx).AcceptEncoding(acceptEncoding).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
 
 Retrieves all jobs in the org.
 
@@ -613,11 +621,12 @@ func main() {
     configuration := bulkv2.NewConfiguration()
     apiClient := bulkv2.NewAPIClient(configuration, tokenSrc)
 
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
     isPkChunkingEnabled := bool{} // bool |  (optional)
     jobType := "jobType_example" // string |  (optional)
     queryLocator := "queryLocator_example" // string |  (optional)
 
-    resp, r, err := apiClient.JobApi.GetJobs(context.Background()).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
+    resp, r, err := apiClient.JobApi.GetJobs(context.Background()).AcceptEncoding(acceptEncoding).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -638,6 +647,7 @@ Other parameters are passed through a pointer to a apiGetJobsRequest struct via 
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  | 
 |  **isPkChunkingEnabled** | **bool** |  | 
 |  **jobType** | **string** |  | 
 |  **queryLocator** | **string** |  |  |

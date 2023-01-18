@@ -13,7 +13,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
 ## CreateRecord
 
-> CreateRecordResult CreateRecord(ctx, sObject).Body(body).ContentEncoding(contentEncoding).Execute()
+> CreateRecordResult CreateRecord(ctx, sObject).Body(body).ContentEncoding(contentEncoding).AcceptEncoding(acceptEncoding).Execute()
 
 Creates a new record for a specified object based on field values in the request body. You must specify values for required fields in the request body. Specifying values for other fields is optional.
 
@@ -47,8 +47,9 @@ func main() {
     sObject := "Contact" // string | SObject name
     body := map[string]interface{}{} // map[string]interface{} | SObject record to insert
     contentEncoding := EncodingType{} // EncodingType |  (optional)
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.SObjectApi.CreateRecord(context.Background(), sObject).Body(body).ContentEncoding(contentEncoding).Execute()
+    resp, r, err := apiClient.SObjectApi.CreateRecord(context.Background(), sObject).Body(body).ContentEncoding(contentEncoding).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.CreateRecord``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -75,7 +76,8 @@ Other parameters are passed through a pointer to a apiCreateRecordRequest struct
 | ------------- | ------------- | ------------- | ------------- |
 | 
 |  **body** | **map[string]interface{}** | SObject record to insert | 
-|  **contentEncoding** | [**EncodingType**](EncodingType.md) |  |  |
+|  **contentEncoding** | [**EncodingType**](EncodingType.md) |  | 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -97,7 +99,7 @@ Other parameters are passed through a pointer to a apiCreateRecordRequest struct
 
 ## GetBasicInfo
 
-> map[string]interface{} GetBasicInfo(ctx, sObject).Execute()
+> map[string]interface{} GetBasicInfo(ctx, sObject).AcceptEncoding(acceptEncoding).Execute()
 
 Retrieves basic metadata for a specified object, including some object properties, recent items, and URIs for other resources related to the object. To retrieve the complete metadata for an object, use the (sObject Describe)[https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm] resource.
 
@@ -129,8 +131,9 @@ func main() {
     apiClient := rest.NewAPIClient(configuration, tokenSrc)
 
     sObject := "Contact" // string | SObject name
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.SObjectApi.GetBasicInfo(context.Background(), sObject).Execute()
+    resp, r, err := apiClient.SObjectApi.GetBasicInfo(context.Background(), sObject).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.GetBasicInfo``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -155,7 +158,8 @@ Other parameters are passed through a pointer to a apiGetBasicInfoRequest struct
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  |
+| 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -177,7 +181,7 @@ Other parameters are passed through a pointer to a apiGetBasicInfoRequest struct
 
 ## GetSObjects
 
-> SObjectDescribes GetSObjects(ctx).Execute()
+> SObjectDescribes GetSObjects(ctx).AcceptEncoding(acceptEncoding).Execute()
 
 Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization).
 You can use the If-Modified-Since or If-Unmodified-Since header with this resource. When using the If-Modified-Since header, if no available object’s metadata has changed since the provided date, a 304 Not Modified status code is returned with no response body.
@@ -209,8 +213,9 @@ func main() {
     configuration := rest.NewConfiguration()
     apiClient := rest.NewAPIClient(configuration, tokenSrc)
 
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.SObjectApi.GetSObjects(context.Background()).Execute()
+    resp, r, err := apiClient.SObjectApi.GetSObjects(context.Background()).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.GetSObjects``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -222,12 +227,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter. |
+ |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetSObjectsRequest struct via the builder pattern
- |
+
+
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -249,7 +258,7 @@ Other parameters are passed through a pointer to a apiGetSObjectsRequest struct 
 
 ## SObjectDescribe
 
-> SObjectDescribe SObjectDescribe(ctx, sObject).IfModifiedSince(ifModifiedSince).IfUnmodifiedSince(ifUnmodifiedSince).Execute()
+> SObjectDescribe SObjectDescribe(ctx, sObject).IfModifiedSince(ifModifiedSince).IfUnmodifiedSince(ifUnmodifiedSince).AcceptEncoding(acceptEncoding).Execute()
 
 Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.
 For more information about the metadata that is retrieved, see [DescribesObjectResult](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/sforce_api_calls_describesobjects_describesobjectresult.htm) in the SOAP API Developers Guide.
@@ -285,8 +294,9 @@ func main() {
     sObject := "Contact" // string | SObject name
     ifModifiedSince := "Mon, 30 Nov 2020 08:34:54 MST" // string | An optional header specifying a date and time. The request returns records that have been modified after that date and time. (optional)
     ifUnmodifiedSince := "Mon, 30 Nov 2020 08:34:54 MST" // string | An optional header specifying a date and time. The request returns records that have not been modified after that date and time. (optional)
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.SObjectApi.SObjectDescribe(context.Background(), sObject).IfModifiedSince(ifModifiedSince).IfUnmodifiedSince(ifUnmodifiedSince).Execute()
+    resp, r, err := apiClient.SObjectApi.SObjectDescribe(context.Background(), sObject).IfModifiedSince(ifModifiedSince).IfUnmodifiedSince(ifUnmodifiedSince).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `SObjectApi.SObjectDescribe``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -313,7 +323,8 @@ Other parameters are passed through a pointer to a apiSObjectDescribeRequest str
 | ------------- | ------------- | ------------- | ------------- |
 | 
 |  **ifModifiedSince** | **string** | An optional header specifying a date and time. The request returns records that have been modified after that date and time. | 
-|  **ifUnmodifiedSince** | **string** | An optional header specifying a date and time. The request returns records that have not been modified after that date and time. |  |
+|  **ifUnmodifiedSince** | **string** | An optional header specifying a date and time. The request returns records that have not been modified after that date and time. | 
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 

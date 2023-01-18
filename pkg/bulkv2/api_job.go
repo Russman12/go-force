@@ -30,10 +30,16 @@ type ApiCloseOrAbortJobRequest struct {
 	ApiService             *JobApiService
 	jobId                  string
 	closeOrAbortJobRequest *CloseOrAbortJobRequest
+	contentEncoding        *EncodingType
 }
 
 func (r ApiCloseOrAbortJobRequest) CloseOrAbortJobRequest(closeOrAbortJobRequest CloseOrAbortJobRequest) ApiCloseOrAbortJobRequest {
 	r.closeOrAbortJobRequest = &closeOrAbortJobRequest
+	return r
+}
+
+func (r ApiCloseOrAbortJobRequest) ContentEncoding(contentEncoding EncodingType) ApiCloseOrAbortJobRequest {
+	r.contentEncoding = &contentEncoding
 	return r
 }
 
@@ -111,6 +117,9 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.contentEncoding != nil {
+		localVarHeaderParams["Content-Encoding"] = parameterToString(*r.contentEncoding, "")
+	}
 	// body params
 	localVarPostBody = r.closeOrAbortJobRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -169,6 +178,8 @@ type ApiCreateJobRequest struct {
 	ApiService        *JobApiService
 	createJobRequest  *CreateJobRequest
 	sforceCallOptions *string
+	contentEncoding   *EncodingType
+	acceptEncoding    *EncodingType
 }
 
 func (r ApiCreateJobRequest) CreateJobRequest(createJobRequest CreateJobRequest) ApiCreateJobRequest {
@@ -178,6 +189,16 @@ func (r ApiCreateJobRequest) CreateJobRequest(createJobRequest CreateJobRequest)
 
 func (r ApiCreateJobRequest) SforceCallOptions(sforceCallOptions string) ApiCreateJobRequest {
 	r.sforceCallOptions = &sforceCallOptions
+	return r
+}
+
+func (r ApiCreateJobRequest) ContentEncoding(contentEncoding EncodingType) ApiCreateJobRequest {
+	r.contentEncoding = &contentEncoding
+	return r
+}
+
+func (r ApiCreateJobRequest) AcceptEncoding(acceptEncoding EncodingType) ApiCreateJobRequest {
+	r.acceptEncoding = &acceptEncoding
 	return r
 }
 
@@ -254,6 +275,12 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 	}
 	if r.sforceCallOptions != nil {
 		localVarHeaderParams["Sforce-Call-Options"] = parameterToString(*r.sforceCallOptions, "")
+	}
+	if r.contentEncoding != nil {
+		localVarHeaderParams["Content-Encoding"] = parameterToString(*r.contentEncoding, "")
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	// body params
 	localVarPostBody = r.createJobRequest
@@ -539,9 +566,15 @@ func (a *JobApiService) GetJobFailedResultsExecute(r ApiGetJobFailedResultsReque
 }
 
 type ApiGetJobInfoRequest struct {
-	ctx        context.Context
-	ApiService *JobApiService
-	jobId      string
+	ctx            context.Context
+	ApiService     *JobApiService
+	jobId          string
+	acceptEncoding *EncodingType
+}
+
+func (r ApiGetJobInfoRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetJobInfoRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetJobInfoRequest) Execute() (*JobInfo, *http.Response, error) {
@@ -614,6 +647,9 @@ func (a *JobApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *ht
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
@@ -911,9 +947,15 @@ func (a *JobApiService) GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRe
 type ApiGetJobsRequest struct {
 	ctx                 context.Context
 	ApiService          *JobApiService
+	acceptEncoding      *EncodingType
 	isPkChunkingEnabled *bool
 	jobType             *string
 	queryLocator        *string
+}
+
+func (r ApiGetJobsRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetJobsRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetJobsRequest) IsPkChunkingEnabled(isPkChunkingEnabled bool) ApiGetJobsRequest {
@@ -1007,6 +1049,9 @@ func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (map[string]interfac
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

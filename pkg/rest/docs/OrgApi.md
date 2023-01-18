@@ -11,7 +11,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 
 ## GetLimits
 
-> interface{} GetLimits(ctx).Execute()
+> interface{} GetLimits(ctx).AcceptEncoding(acceptEncoding).Execute()
 
 Lists information about limits in your org. For each limit, this resource returns the maximum allocation and the remaining allocation based on usage. This resource is available in REST API version 29.0 and later for API users with the View Setup and Configuration permission.
 
@@ -42,8 +42,9 @@ func main() {
     configuration := rest.NewConfiguration()
     apiClient := rest.NewAPIClient(configuration, tokenSrc)
 
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.OrgApi.GetLimits(context.Background()).Execute()
+    resp, r, err := apiClient.OrgApi.GetLimits(context.Background()).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgApi.GetLimits``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -55,12 +56,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter. |
+ |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetLimitsRequest struct via the builder pattern
- |
+
+
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 
@@ -82,7 +87,7 @@ Other parameters are passed through a pointer to a apiGetLimitsRequest struct vi
 
 ## GetResources
 
-> interface{} GetResources(ctx).Execute()
+> interface{} GetResources(ctx).AcceptEncoding(acceptEncoding).Execute()
 
 Lists available resources for the specified API version, including resource name and URI.
 
@@ -113,8 +118,9 @@ func main() {
     configuration := rest.NewConfiguration()
     apiClient := rest.NewAPIClient(configuration, tokenSrc)
 
+    acceptEncoding := EncodingType{} // EncodingType |  (optional)
 
-    resp, r, err := apiClient.OrgApi.GetResources(context.Background()).Execute()
+    resp, r, err := apiClient.OrgApi.GetResources(context.Background()).AcceptEncoding(acceptEncoding).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `OrgApi.GetResources``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -126,12 +132,16 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter. |
+ |
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiGetResourcesRequest struct via the builder pattern
- |
+
+
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  **acceptEncoding** | [**EncodingType**](EncodingType.md) |  |  |
 
 ### Return type
 

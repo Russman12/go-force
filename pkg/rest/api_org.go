@@ -24,8 +24,14 @@ import (
 type OrgApiService service
 
 type ApiGetLimitsRequest struct {
-	ctx        context.Context
-	ApiService *OrgApiService
+	ctx            context.Context
+	ApiService     *OrgApiService
+	acceptEncoding *EncodingType
+}
+
+func (r ApiGetLimitsRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetLimitsRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetLimitsRequest) Execute() (interface{}, *http.Response, error) {
@@ -96,6 +102,9 @@ func (a *OrgApiService) GetLimitsExecute(r ApiGetLimitsRequest) (interface{}, *h
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -148,8 +157,14 @@ func (a *OrgApiService) GetLimitsExecute(r ApiGetLimitsRequest) (interface{}, *h
 }
 
 type ApiGetResourcesRequest struct {
-	ctx        context.Context
-	ApiService *OrgApiService
+	ctx            context.Context
+	ApiService     *OrgApiService
+	acceptEncoding *EncodingType
+}
+
+func (r ApiGetResourcesRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetResourcesRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetResourcesRequest) Execute() (interface{}, *http.Response, error) {
@@ -219,6 +234,9 @@ func (a *OrgApiService) GetResourcesExecute(r ApiGetResourcesRequest) (interface
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {

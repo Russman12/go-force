@@ -26,6 +26,14 @@ paths:
         description: Salesforce Documentation
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_discoveryresource.htm
       operationId: getResources
+      parameters:
+      - explode: false
+        in: header
+        name: Accept-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
+        style: simple
       responses:
         "200":
           content:
@@ -51,6 +59,14 @@ paths:
         description: Salesforce Documentation
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_limits.htm
       operationId: getLimits
+      parameters:
+      - explode: false
+        in: header
+        name: Accept-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
+        style: simple
       responses:
         "200":
           content:
@@ -75,6 +91,14 @@ paths:
         description: Salesforce Documentation
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_describeGlobal.htm
       operationId: getSObjects
+      parameters:
+      - explode: false
+        in: header
+        name: Accept-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
+        style: simple
       responses:
         "200":
           content:
@@ -111,6 +135,13 @@ paths:
         required: true
         schema:
           type: string
+        style: simple
+      - explode: false
+        in: header
+        name: Accept-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
         style: simple
       responses:
         "200":
@@ -155,6 +186,13 @@ paths:
       - explode: false
         in: header
         name: Content-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
+        style: simple
+      - explode: false
+        in: header
+        name: Accept-Encoding
         required: false
         schema:
           $ref: '#/components/schemas/EncodingType'
@@ -229,6 +267,13 @@ paths:
         required: false
         schema:
           type: string
+        style: simple
+      - explode: false
+        in: header
+        name: Accept-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
         style: simple
       responses:
         "200":

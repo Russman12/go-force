@@ -30,10 +30,16 @@ type ApiAbortQueryJobRequest struct {
 	ApiService           *QueryApiService
 	jobId                string
 	abortQueryJobRequest *AbortQueryJobRequest
+	contentEncoding      *EncodingType
 }
 
 func (r ApiAbortQueryJobRequest) AbortQueryJobRequest(abortQueryJobRequest AbortQueryJobRequest) ApiAbortQueryJobRequest {
 	r.abortQueryJobRequest = &abortQueryJobRequest
+	return r
+}
+
+func (r ApiAbortQueryJobRequest) ContentEncoding(contentEncoding EncodingType) ApiAbortQueryJobRequest {
+	r.contentEncoding = &contentEncoding
 	return r
 }
 
@@ -111,6 +117,9 @@ func (a *QueryApiService) AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*Quer
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.contentEncoding != nil {
+		localVarHeaderParams["Content-Encoding"] = parameterToString(*r.contentEncoding, "")
+	}
 	// body params
 	localVarPostBody = r.abortQueryJobRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
@@ -169,6 +178,8 @@ type ApiCreateQueryJobRequest struct {
 	ApiService            *QueryApiService
 	createQueryJobRequest *CreateQueryJobRequest
 	sforceCallOptions     *string
+	contentEncoding       *EncodingType
+	acceptEncoding        *EncodingType
 }
 
 func (r ApiCreateQueryJobRequest) CreateQueryJobRequest(createQueryJobRequest CreateQueryJobRequest) ApiCreateQueryJobRequest {
@@ -178,6 +189,16 @@ func (r ApiCreateQueryJobRequest) CreateQueryJobRequest(createQueryJobRequest Cr
 
 func (r ApiCreateQueryJobRequest) SforceCallOptions(sforceCallOptions string) ApiCreateQueryJobRequest {
 	r.sforceCallOptions = &sforceCallOptions
+	return r
+}
+
+func (r ApiCreateQueryJobRequest) ContentEncoding(contentEncoding EncodingType) ApiCreateQueryJobRequest {
+	r.contentEncoding = &contentEncoding
+	return r
+}
+
+func (r ApiCreateQueryJobRequest) AcceptEncoding(acceptEncoding EncodingType) ApiCreateQueryJobRequest {
+	r.acceptEncoding = &acceptEncoding
 	return r
 }
 
@@ -254,6 +275,12 @@ func (a *QueryApiService) CreateQueryJobExecute(r ApiCreateQueryJobRequest) (*Qu
 	}
 	if r.sforceCallOptions != nil {
 		localVarHeaderParams["Sforce-Call-Options"] = parameterToString(*r.sforceCallOptions, "")
+	}
+	if r.contentEncoding != nil {
+		localVarHeaderParams["Content-Encoding"] = parameterToString(*r.contentEncoding, "")
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	// body params
 	localVarPostBody = r.createQueryJobRequest
@@ -559,9 +586,15 @@ func (a *QueryApiService) GetJobResultsExecute(r ApiGetJobResultsRequest) (*io.R
 }
 
 type ApiGetQueryJobInfoRequest struct {
-	ctx        context.Context
-	ApiService *QueryApiService
-	jobId      string
+	ctx            context.Context
+	ApiService     *QueryApiService
+	jobId          string
+	acceptEncoding *EncodingType
+}
+
+func (r ApiGetQueryJobInfoRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetQueryJobInfoRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
 }
 
 func (r ApiGetQueryJobInfoRequest) Execute() (*QueryJobInfo, *http.Response, error) {
@@ -635,6 +668,9 @@ func (a *QueryApiService) GetQueryJobInfoExecute(r ApiGetQueryJobInfoRequest) (*
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -693,6 +729,7 @@ type ApiGetQueryJobsRequest struct {
 	jobType             *string
 	concurrencyMode     *string
 	queryLocator        *string
+	acceptEncoding      *EncodingType
 }
 
 // If set to true, the request only returns information about jobs where PK Chunking is enabled.
@@ -716,6 +753,11 @@ func (r ApiGetQueryJobsRequest) ConcurrencyMode(concurrencyMode string) ApiGetQu
 // use the value from the nextRecordsUrl from the previous set
 func (r ApiGetQueryJobsRequest) QueryLocator(queryLocator string) ApiGetQueryJobsRequest {
 	r.queryLocator = &queryLocator
+	return r
+}
+
+func (r ApiGetQueryJobsRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetQueryJobsRequest {
+	r.acceptEncoding = &acceptEncoding
 	return r
 }
 
@@ -798,6 +840,9 @@ func (a *QueryApiService) GetQueryJobsExecute(r ApiGetQueryJobsRequest) (*QueryJ
 	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
