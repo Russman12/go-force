@@ -12,7 +12,6 @@ Contact: russell-laboe@outlook.com
 package bulkv2
 
 import (
-	"context"
 	"net/http"
 	"strings"
 )
@@ -28,9 +27,6 @@ func (c contextKey) String() string {
 }
 
 var (
-	// ContextOAuth2 takes an oauth2.TokenSource as authentication for the request.
-	ContextOAuth2 = contextKey("token")
-
 	// ContextBasicAuth takes BasicAuth as authentication for the request.
 	ContextBasicAuth = contextKey("basic")
 
@@ -43,14 +39,8 @@ var (
 	// ContextHttpSignatureAuth takes HttpSignatureAuth as authentication for the request.
 	ContextHttpSignatureAuth = contextKey("httpsignature")
 
-	// ContextServerIndex uses a server configuration from the index.
-	ContextServerIndex = contextKey("serverIndex")
-
 	// ContextOperationServerIndices uses a server configuration from the index mapping.
 	ContextOperationServerIndices = contextKey("serverOperationIndices")
-
-	// ContextServerVariables overrides a server configuration variables.
-	ContextServerVariables = contextKey("serverVariables")
 
 	// ContextOperationServerVariables overrides a server configuration variables using operation specific values.
 	ContextOperationServerVariables = contextKey("serverOperationVariables")
@@ -138,6 +128,7 @@ func NewConfigurationWithActiveServerVars(index int, variables map[string]string
 }
 
 // SetActiveServer sets the current active server configuration
+// TODO: add error return
 func (c *Configuration) SetActiveServer(index int) {
 	c.activeServerIndex = index
 }
@@ -147,6 +138,8 @@ func (c *Configuration) GetActiveServer() *ServerConfiguration {
 	return c.servers[c.activeServerIndex]
 }
 
+// GetServer returns server configuration at given index
+// TODO: add error return
 func (c *Configuration) GetServer(index int) *ServerConfiguration {
 	return c.servers[index]
 }
@@ -179,56 +172,4 @@ func injectUrlVars(url string, variables map[string]string) string {
 		url = strings.Replace(url, "{"+name+"}", value, -1)
 	}
 	return url
-}
-
-func getServerIndex(ctx context.Context) (int, error) {
-	si := ctx.Value(ContextServerIndex)
-	if si != nil {
-		if index, ok := si.(int); ok {
-			return index, nil
-		}
-		return 0, reportError("Invalid type %T should be int", si)
-	}
-	return 0, nil
-}
-
-func getServerOperationIndex(ctx context.Context, endpoint string) (int, error) {
-	osi := ctx.Value(ContextOperationServerIndices)
-	if osi != nil {
-		if operationIndices, ok := osi.(map[string]int); !ok {
-			return 0, reportError("Invalid type %T should be map[string]int", osi)
-		} else {
-			index, ok := operationIndices[endpoint]
-			if ok {
-				return index, nil
-			}
-		}
-	}
-	return getServerIndex(ctx)
-}
-
-func getServerVariables(ctx context.Context) (map[string]string, error) {
-	sv := ctx.Value(ContextServerVariables)
-	if sv != nil {
-		if variables, ok := sv.(map[string]string); ok {
-			return variables, nil
-		}
-		return nil, reportError("ctx value of ContextServerVariables has invalid type %T should be map[string]string", sv)
-	}
-	return nil, nil
-}
-
-func getServerOperationVariables(ctx context.Context, endpoint string) (map[string]string, error) {
-	osv := ctx.Value(ContextOperationServerVariables)
-	if osv != nil {
-		if operationVariables, ok := osv.(map[string]map[string]string); !ok {
-			return nil, reportError("ctx value of ContextOperationServerVariables has invalid type %T should be map[string]map[string]string", osv)
-		} else {
-			variables, ok := operationVariables[endpoint]
-			if ok {
-				return variables, nil
-			}
-		}
-	}
-	return getServerVariables(ctx)
 }
