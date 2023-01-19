@@ -12,6 +12,7 @@ Contact: russell-laboe@outlook.com
 package bulkv2
 
 import (
+	"fmt"
 	"net/http"
 	"strings"
 )
@@ -103,10 +104,12 @@ func NewConfiguration() *Configuration {
 					"instanceUrl": &ServerVariable{
 						description:  "Salesforce server domain",
 						defaultValue: "https://test.salesforce.com",
+						currentValue: "https://test.salesforce.com",
 					},
 					"apiVersion": &ServerVariable{
 						description:  "Salesforce api version",
 						defaultValue: "56.0",
+						currentValue: "56.0",
 					},
 				},
 			},
@@ -118,19 +121,25 @@ func NewConfiguration() *Configuration {
 }
 
 // NewConfigurationWithActiveServerVars returns a new Configuration object with the default server and variable replacements set
-func NewConfigurationWithActiveServerVars(index int, variables map[string]string) *Configuration {
+func NewConfigurationWithActiveServerVars(index int, variables map[string]string) (*Configuration, error) {
 	cfg := NewConfiguration()
+	if index < 0 || index >= len(cfg.servers) {
+		return nil, fmt.Errorf("Server index out of range")
+	}
 	cfg.activeServerIndex = index
 	for name, val := range variables {
 		cfg.servers[cfg.activeServerIndex].SetServerVariable(name, val)
 	}
-	return cfg
+	return cfg, nil
 }
 
 // SetActiveServer sets the current active server configuration
-// TODO: add error return
-func (c *Configuration) SetActiveServer(index int) {
+func (c *Configuration) SetActiveServer(index int) error {
+	if index >= len(c.servers) || index < 0 {
+		return fmt.Errorf("Server index out of range")
+	}
 	c.activeServerIndex = index
+	return nil
 }
 
 // GetActiveServer returns the current active server configuration
@@ -139,9 +148,12 @@ func (c *Configuration) GetActiveServer() *ServerConfiguration {
 }
 
 // GetServer returns server configuration at given index
-// TODO: add error return
-func (c *Configuration) GetServer(index int) *ServerConfiguration {
-	return c.servers[index]
+func (c *Configuration) GetServer(index int) (*ServerConfiguration, error) {
+	if index >= len(c.servers) || index < 0 {
+		return nil, fmt.Errorf("Server index out of range")
+	}
+
+	return c.servers[index], nil
 }
 
 func (sc *ServerConfiguration) SetServerVariable(name string, value string) {
