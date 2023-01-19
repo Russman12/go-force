@@ -80,18 +80,14 @@ func (a *QueryApiService) AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*Quer
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	localVarPath := activeServer.GetURL() + "/jobs/query/{jobId}"
+	pathParams := map[string]string{
+		"jobId": url.PathEscape(parameterToString(strings.Trim(r.jobId, " "), "")),
 	}
-
-	localVarPath := localBasePath + "/jobs/query/{jobId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterToString(r.jobId, "")), -1)
+	localVarPath = injectUrlVars(localVarPath, pathParams)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -237,17 +233,10 @@ func (a *QueryApiService) CreateQueryJobExecute(r ApiCreateQueryJobRequest) (*Qu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/jobs/query"
+	localVarPath := activeServer.GetURL() + "/jobs/query"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -375,18 +364,14 @@ func (a *QueryApiService) DeleteQueryJobExecute(r ApiDeleteQueryJobRequest) (*ht
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return nil, &GenericOpenAPIError{error: err.Error()}
+	localVarPath := activeServer.GetURL() + "/jobs/query/{jobId}"
+	pathParams := map[string]string{
+		"jobId": url.PathEscape(parameterToString(strings.Trim(r.jobId, " "), "")),
 	}
-
-	localVarPath := localBasePath + "/jobs/query/{jobId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterToString(r.jobId, "")), -1)
+	localVarPath = injectUrlVars(localVarPath, pathParams)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -507,18 +492,14 @@ func (a *QueryApiService) GetJobResultsExecute(r ApiGetJobResultsRequest) (*io.R
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	localVarPath := activeServer.GetURL() + "/jobs/query/{jobId}/results"
+	pathParams := map[string]string{
+		"jobId": url.PathEscape(parameterToString(strings.Trim(r.jobId, " "), "")),
 	}
-
-	localVarPath := localBasePath + "/jobs/query/{jobId}/results"
-	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterToString(r.jobId, "")), -1)
+	localVarPath = injectUrlVars(localVarPath, pathParams)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -634,18 +615,14 @@ func (a *QueryApiService) GetQueryJobInfoExecute(r ApiGetQueryJobInfoRequest) (*
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	localVarPath := activeServer.GetURL() + "/jobs/query/{jobId}"
+	pathParams := map[string]string{
+		"jobId": url.PathEscape(parameterToString(strings.Trim(r.jobId, " "), "")),
 	}
-
-	localVarPath := localBasePath + "/jobs/query/{jobId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"jobId"+"}", url.PathEscape(parameterToString(r.jobId, "")), -1)
+	localVarPath = injectUrlVars(localVarPath, pathParams)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -796,17 +773,10 @@ func (a *QueryApiService) GetQueryJobsExecute(r ApiGetQueryJobsRequest) (*QueryJ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/jobs/query"
+	localVarPath := activeServer.GetURL() + "/jobs/query"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

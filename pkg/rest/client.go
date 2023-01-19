@@ -62,8 +62,8 @@ type service struct {
 // NewAPIClient creates a new API client. Requires a userAgent string describing your application.
 // optionally a custom http.Client to allow for advanced features such as caching.
 func NewAPIClient(cfg *Configuration, tokenSource oauth2.TokenSource) *APIClient {
-	if cfg.HTTPClient == nil {
-		cfg.HTTPClient = http.DefaultClient
+	if cfg.httpClient == nil {
+		cfg.httpClient = http.DefaultClient
 	}
 
 	c := &APIClient{}
@@ -173,7 +173,7 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 		log.Printf("\n%s\n", string(dump))
 	}
 
-	resp, err := c.cfg.HTTPClient.Do(request)
+	resp, err := c.cfg.httpClient.Do(request)
 	if err != nil {
 		return resp, err
 	}

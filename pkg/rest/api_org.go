@@ -69,17 +69,10 @@ func (a *OrgApiService) GetLimitsExecute(r ApiGetLimitsRequest) (interface{}, *h
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/limits"
+	localVarPath := activeServer.GetURL() + "/limits"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -202,17 +195,10 @@ func (a *OrgApiService) GetResourcesExecute(r ApiGetResourcesRequest) (interface
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/"
+	localVarPath := activeServer.GetURL() + "/"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

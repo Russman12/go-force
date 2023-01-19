@@ -86,18 +86,14 @@ func (a *SObjectApiService) CreateRecordExecute(r ApiCreateRecordRequest) (*Crea
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	localVarPath := activeServer.GetURL() + "/sobjects/{sObject}"
+	pathParams := map[string]string{
+		"sObject": url.PathEscape(parameterToString(strings.Trim(r.sObject, " "), "")),
 	}
-
-	localVarPath := localBasePath + "/sobjects/{sObject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sObject"+"}", url.PathEscape(parameterToString(r.sObject, "")), -1)
+	localVarPath = injectUrlVars(localVarPath, pathParams)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -254,18 +250,14 @@ func (a *SObjectApiService) GetBasicInfoExecute(r ApiGetBasicInfoRequest) (map[s
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	localVarPath := activeServer.GetURL() + "/sobjects/{sObject}"
+	pathParams := map[string]string{
+		"sObject": url.PathEscape(parameterToString(strings.Trim(r.sObject, " "), "")),
 	}
-
-	localVarPath := localBasePath + "/sobjects/{sObject}"
-	localVarPath = strings.Replace(localVarPath, "{"+"sObject"+"}", url.PathEscape(parameterToString(r.sObject, "")), -1)
+	localVarPath = injectUrlVars(localVarPath, pathParams)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -412,17 +404,10 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/sobjects"
+	localVarPath := activeServer.GetURL() + "/sobjects"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -564,18 +549,14 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	serverIdx, err := getServerIndex(r.ctx)
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
 
-	localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	localVarPath := activeServer.GetURL() + "/sobjects/{sObject}/describe"
+	pathParams := map[string]string{
+		"sObject": url.PathEscape(parameterToString(strings.Trim(r.sObject, " "), "")),
 	}
-
-	localVarPath := localBasePath + "/sobjects/{sObject}/describe"
-	localVarPath = strings.Replace(localVarPath, "{"+"sObject"+"}", url.PathEscape(parameterToString(r.sObject, "")), -1)
+	localVarPath = injectUrlVars(localVarPath, pathParams)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

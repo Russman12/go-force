@@ -13,7 +13,6 @@ package rest
 
 import (
 	"context"
-	"fmt"
 	"net/http"
 	"strings"
 )
@@ -71,31 +70,33 @@ type APIKey struct {
 
 // ServerVariable stores the information about a server variable
 type ServerVariable struct {
-	Description  string
-	DefaultValue string
-	EnumValues   []string
+	description  string
+	defaultValue string
+	currentValue string
+	enumValues   []string
 }
 
 // ServerConfiguration stores the information about a server
 type ServerConfiguration struct {
-	URL         string
-	Description string
-	Variables   map[string]ServerVariable
+	url         string
+	description string
+	variables   map[string]*ServerVariable
 }
 
 // ServerConfigurations stores multiple ServerConfiguration items
-type ServerConfigurations []ServerConfiguration
+type ServerConfigurations []*ServerConfiguration
 
 // Configuration stores the configuration of the API client
 type Configuration struct {
-	Host             string            `json:"host,omitempty"`
-	Scheme           string            `json:"scheme,omitempty"`
-	DefaultHeader    map[string]string `json:"defaultHeader,omitempty"`
-	UserAgent        string            `json:"userAgent,omitempty"`
-	Debug            bool              `json:"debug,omitempty"`
-	Servers          ServerConfigurations
-	OperationServers map[string]ServerConfigurations
-	HTTPClient       *http.Client
+	Host              string            `json:"host,omitempty"`
+	Scheme            string            `json:"scheme,omitempty"`
+	DefaultHeader     map[string]string `json:"defaultHeader,omitempty"`
+	UserAgent         string            `json:"userAgent,omitempty"`
+	Debug             bool              `json:"debug,omitempty"`
+	servers           ServerConfigurations
+	activeServerIndex int
+	operationServers  map[string]ServerConfigurations
+	httpClient        *http.Client
 }
 
 // NewConfiguration returns a new Configuration object
@@ -104,25 +105,57 @@ func NewConfiguration() *Configuration {
 		DefaultHeader: make(map[string]string),
 		UserAgent:     "OpenAPI-Generator/1.0.0/go",
 		Debug:         false,
-		Servers: ServerConfigurations{
+		servers: ServerConfigurations{
 			{
-				URL:         "{instanceUrl}/services/data/v{apiVersion}",
-				Description: "API Base URL",
-				Variables: map[string]ServerVariable{
-					"instanceUrl": ServerVariable{
-						Description:  "Salesforce server domain",
-						DefaultValue: "https://myorg.lightning.force.com",
+				url:         "{instanceUrl}/services/data/v{apiVersion}",
+				description: "API Base URL",
+				variables: map[string]*ServerVariable{
+					"instanceUrl": &ServerVariable{
+						description:  "Salesforce server domain",
+						defaultValue: "https://myorg.lightning.force.com",
 					},
-					"apiVersion": ServerVariable{
-						Description:  "Salesforce api version",
-						DefaultValue: "56.0",
+					"apiVersion": &ServerVariable{
+						description:  "Salesforce api version",
+						defaultValue: "56.0",
 					},
 				},
 			},
 		},
-		OperationServers: map[string]ServerConfigurations{},
+		activeServerIndex: 0,
+		operationServers:  map[string]ServerConfigurations{},
 	}
 	return cfg
+}
+
+// NewConfigurationWithActiveServerVars returns a new Configuration object with the default server and variable replacements set
+func NewConfigurationWithActiveServerVars(index int, variables map[string]string) *Configuration {
+	cfg := NewConfiguration()
+	cfg.activeServerIndex = index
+	for name, val := range variables {
+		cfg.servers[cfg.activeServerIndex].SetServerVariable(name, val)
+	}
+	return cfg
+}
+
+// SetActiveServer sets the current active server configuration
+func (c *Configuration) SetActiveServer(index int) {
+	c.activeServerIndex = index
+}
+
+// GetActiveServer returns the current active server configuration
+func (c *Configuration) GetActiveServer() *ServerConfiguration {
+	return c.servers[c.activeServerIndex]
+}
+
+func (c *Configuration) GetServer(index int) *ServerConfiguration {
+	return c.servers[index]
+}
+
+func (sc *ServerConfiguration) SetServerVariable(name string, value string) {
+	if _, ok := sc.variables[name]; !ok {
+		sc.variables[name] = &ServerVariable{currentValue: value}
+	}
+	sc.variables[name].currentValue = value
 }
 
 // AddDefaultHeader adds a new HTTP header to the default header in the request
@@ -130,37 +163,22 @@ func (c *Configuration) AddDefaultHeader(key string, value string) {
 	c.DefaultHeader[key] = value
 }
 
-// URL formats template on a index using given variables
-func (sc ServerConfigurations) URL(index int, variables map[string]string) (string, error) {
-	if index < 0 || len(sc) <= index {
-		return "", fmt.Errorf("index %v out of range %v", index, len(sc)-1)
+// GetURL gets the url for a server config with variables injected
+func (sc ServerConfiguration) GetURL() string {
+	urlVars := map[string]string{}
+	for varName, serverVar := range sc.variables {
+		urlVars[varName] = serverVar.currentValue
 	}
-	server := sc[index]
-	url := server.URL
-
-	// go through variables and replace placeholders
-	for name, variable := range server.Variables {
-		if value, ok := variables[name]; ok {
-			found := bool(len(variable.EnumValues) == 0)
-			for _, enumValue := range variable.EnumValues {
-				if value == enumValue {
-					found = true
-				}
-			}
-			if !found {
-				return "", fmt.Errorf("the variable %s in the server URL has invalid value %v. Must be %v", name, value, variable.EnumValues)
-			}
-			url = strings.Replace(url, "{"+name+"}", value, -1)
-		} else {
-			url = strings.Replace(url, "{"+name+"}", variable.DefaultValue, -1)
-		}
-	}
-	return url, nil
+	return injectUrlVars(sc.url, urlVars)
 }
 
-// ServerURL returns URL based on server settings
-func (c *Configuration) ServerURL(index int, variables map[string]string) (string, error) {
-	return c.Servers.URL(index, variables)
+// injectUrlVars formats the given string with injected variables
+func injectUrlVars(url string, variables map[string]string) string {
+	// go through variables and replace placeholders
+	for name, value := range variables {
+		url = strings.Replace(url, "{"+name+"}", value, -1)
+	}
+	return url
 }
 
 func getServerIndex(ctx context.Context) (int, error) {
@@ -213,28 +231,4 @@ func getServerOperationVariables(ctx context.Context, endpoint string) (map[stri
 		}
 	}
 	return getServerVariables(ctx)
-}
-
-// ServerURLWithContext returns a new server URL given an endpoint
-func (c *Configuration) ServerURLWithContext(ctx context.Context, endpoint string) (string, error) {
-	sc, ok := c.OperationServers[endpoint]
-	if !ok {
-		sc = c.Servers
-	}
-
-	if ctx == nil {
-		return sc.URL(0, nil)
-	}
-
-	index, err := getServerOperationIndex(ctx, endpoint)
-	if err != nil {
-		return "", err
-	}
-
-	variables, err := getServerOperationVariables(ctx, endpoint)
-	if err != nil {
-		return "", err
-	}
-
-	return sc.URL(index, variables)
 }

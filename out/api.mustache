@@ -126,22 +126,21 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
         return {{#returnType}}localVarReturnValue, {{/returnType}}nil, &GenericOpenAPIError{error: err.Error()}
     }
 
-    serverIdx, err := getServerIndex(r.ctx)
-    if err != nil {
-        return {{#returnType}}localVarReturnValue, {{/returnType}}nil, &GenericOpenAPIError{error: err.Error()}
+    activeServer := a.client.cfg.GetActiveServer()
+    activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
+
+{{/hasAuthMethods}}
+	localVarPath := activeServer.GetURL() + "{{{path}}}"
+    {{#pathParams}}
+    {{#-first}}
+    pathParams := map[string]string {
+    {{/-first}}
+        "{{baseName}}": url.PathEscape(parameterToString(strings.Trim(r.{{paramName}}, " "), "{{collectionFormat}}")),
+    {{#-last}}
     }
-
-    localBasePath, err := a.client.cfg.ServerURL(serverIdx, map[string]string{"instanceUrl": token.Extra("instance_url").(string)})
-{{/hasAuthMethods}}
-{{^hasAuthMethods}}
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "{{{classname}}}Service.{{{nickname}}}")
-{{/hasAuthMethods}}
-	if err != nil {
-		return {{#returnType}}localVarReturnValue, {{/returnType}}nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "{{{path}}}"{{#pathParams}}
-	localVarPath = strings.Replace(localVarPath, "{"+"{{baseName}}"+"}", url.PathEscape(parameterToString(r.{{paramName}}, "{{collectionFormat}}")), -1){{/pathParams}}
+    localVarPath = injectUrlVars(localVarPath, pathParams)
+    {{/-last}}
+    {{/pathParams}}
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
