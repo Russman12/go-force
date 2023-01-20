@@ -127,7 +127,7 @@ paths:
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_basic_info_get.htm
       operationId: GetBasicInfo
       parameters:
-      - description: SObject name
+      - description: The name of the object.
         example: Contact
         explode: false
         in: path
@@ -174,7 +174,7 @@ paths:
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_basic_info_post.htm
       operationId: createRecord
       parameters:
-      - description: SObject name
+      - description: The name of the object.
         example: Contact
         explode: false
         in: path
@@ -239,7 +239,7 @@ paths:
         url: https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm
       operationId: sObjectDescribe
       parameters:
-      - description: SObject name
+      - description: The name of the object.
         example: Contact
         explode: false
         in: path
@@ -289,6 +289,71 @@ paths:
           content: {}
           description: Bad Request
       summary: Retrieve Metadata for an Object
+      tags:
+      - SObject
+  /sobjects/{sObject}/{recordId}:
+    get:
+      description: Retrieves a record based on the specified object and record ID.
+        The fields and field values of the record are returned in the response body.
+      operationId: retrieveRecord
+      parameters:
+      - description: The name of the object.
+        example: Contact
+        explode: false
+        in: path
+        name: sObject
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: The identifier of the object.
+        example: 001R0000005hDFYIA2
+        explode: false
+        in: path
+        name: recordId
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: header
+        name: Accept-Encoding
+        required: false
+        schema:
+          $ref: '#/components/schemas/EncodingType'
+        style: simple
+      - description: A comma-delimited list of fields specifying the fields and values
+          returned in the response body.
+        example: "name,description,numberofemployees,industry"
+        explode: false
+        in: query
+        name: fields
+        required: false
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+          description: Unauthorized
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+          description: Bad Request
+      summary: Retrieve Records Using sObject Rows
       tags:
       - SObject
 components:

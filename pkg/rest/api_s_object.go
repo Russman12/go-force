@@ -59,7 +59,7 @@ CreateRecord Create Records Using sObject Basic Information
 Creates a new record for a specified object based on field values in the request body. You must specify values for required fields in the request body. Specifying values for other fields is optional.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param sObject SObject name
+	@param sObject The name of the object.
 	@return ApiCreateRecordRequest
 */
 func (a *SObjectApiService) CreateRecord(ctx context.Context, sObject string) ApiCreateRecordRequest {
@@ -223,7 +223,7 @@ GetBasicInfo Retrieve Object Metadata Using sObject Basic Information
 Retrieves basic metadata for a specified object, including some object properties, recent items, and URIs for other resources related to the object. To retrieve the complete metadata for an object, use the (sObject Describe)[https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm] resource.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param sObject SObject name
+	@param sObject The name of the object.
 	@return ApiGetBasicInfoRequest
 */
 func (a *SObjectApiService) GetBasicInfo(ctx context.Context, sObject string) ApiGetBasicInfoRequest {
@@ -484,6 +484,176 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiRetrieveRecordRequest struct {
+	ctx            context.Context
+	ApiService     *SObjectApiService
+	sObject        string
+	recordId       string
+	acceptEncoding *EncodingType
+	fields         *[]string
+}
+
+func (r ApiRetrieveRecordRequest) AcceptEncoding(acceptEncoding EncodingType) ApiRetrieveRecordRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
+}
+
+// A comma-delimited list of fields specifying the fields and values returned in the response body.
+func (r ApiRetrieveRecordRequest) Fields(fields []string) ApiRetrieveRecordRequest {
+	r.fields = &fields
+	return r
+}
+
+func (r ApiRetrieveRecordRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.RetrieveRecordExecute(r)
+}
+
+/*
+RetrieveRecord Retrieve Records Using sObject Rows
+
+Retrieves a record based on the specified object and record ID. The fields and field values of the record are returned in the response body.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sObject The name of the object.
+	@param recordId The identifier of the object.
+	@return ApiRetrieveRecordRequest
+*/
+func (a *SObjectApiService) RetrieveRecord(ctx context.Context, sObject string, recordId string) ApiRetrieveRecordRequest {
+	return ApiRetrieveRecordRequest{
+		ApiService: a,
+		ctx:        ctx,
+		sObject:    sObject,
+		recordId:   recordId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return map[string]interface{}
+func (a *SObjectApiService) RetrieveRecordExecute(r ApiRetrieveRecordRequest) (map[string]interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue map[string]interface{}
+	)
+
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
+
+	localVarPath := activeServer.GetURL() + "/sobjects/{sObject}/{recordId}"
+	pathParams := map[string]string{
+		"sObject":  url.PathEscape(parameterToString(strings.Trim(r.sObject, " "), "")),
+		"recordId": url.PathEscape(parameterToString(strings.Trim(r.recordId, " "), "")),
+	}
+	localVarPath = injectUrlVars(localVarPath, pathParams)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.fields != nil {
+		localVarQueryParams.Add("fields", parameterToString(*r.fields, "csv"))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	token.SetAuthHeader(req)
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v []ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			// marshaling never returns err since v can only contain openapi valid types
+			newErr.error, _ = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v []ModelError
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			// marshaling never returns err since v can only contain openapi valid types
+			newErr.error, _ = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+	localVarHTTPResponse.Body.Close()
+	respBodyReadCloser.Close()
+	localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiSObjectDescribeRequest struct {
 	ctx               context.Context
 	ApiService        *SObjectApiService
@@ -522,7 +692,7 @@ For more information about the metadata that is retrieved, see [DescribesObjectR
 You can use the If-Modified-Since or If-Unmodified-Since header with this resource. When using the If-Modified-Since header, if no available object’s metadata has changed since the provided date, a 304 Not Modified status code is returned with no response body.
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param sObject SObject name
+	@param sObject The name of the object.
 	@return ApiSObjectDescribeRequest
 */
 func (a *SObjectApiService) SObjectDescribe(ctx context.Context, sObject string) ApiSObjectDescribeRequest {

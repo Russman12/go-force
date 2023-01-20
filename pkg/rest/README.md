@@ -20,6 +20,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0*
 | *SObjectApi* | [**CreateRecord**](docs/SObjectApi.md#createrecord) | **Post** /sobjects/{sObject} | Create Records Using sObject Basic Information |
 | *SObjectApi* | [**GetBasicInfo**](docs/SObjectApi.md#getbasicinfo) | **Get** /sobjects/{sObject} | Retrieve Object Metadata Using sObject Basic Information |
 | *SObjectApi* | [**GetSObjects**](docs/SObjectApi.md#getsobjects) | **Get** /sobjects | Get a List of Objects |
+| *SObjectApi* | [**RetrieveRecord**](docs/SObjectApi.md#retrieverecord) | **Get** /sobjects/{sObject}/{recordId} | Retrieve Records Using sObject Rows |
 | *SObjectApi* | [**SObjectDescribe**](docs/SObjectApi.md#sobjectdescribe) | **Get** /sobjects/{sObject}/describe | Retrieve Metadata for an Object |
 
 
