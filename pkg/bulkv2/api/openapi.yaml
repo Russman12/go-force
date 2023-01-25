@@ -250,7 +250,7 @@ paths:
       externalDocs:
         description: Salesforce Documentation
         url: https://developer.salesforce.com/docs/atlas.en-us.api_asynch.meta/api_asynch/query_get_job_results.htm
-      operationId: GetJobResults
+      operationId: GetQueryJobResults
       parameters:
       - explode: false
         in: path

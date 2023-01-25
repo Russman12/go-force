@@ -27,8 +27,8 @@ All URIs are relative to *https://test.salesforce.com/services/data/v56.0*
 | *QueryApi* | [**AbortQueryJob**](docs/QueryApi.md#abortqueryjob) | **Patch** /jobs/query/{jobId} | Abort a Query Job |
 | *QueryApi* | [**CreateQueryJob**](docs/QueryApi.md#createqueryjob) | **Post** /jobs/query | Create a Query Job |
 | *QueryApi* | [**DeleteQueryJob**](docs/QueryApi.md#deletequeryjob) | **Delete** /jobs/query/{jobId} | Delete a Query Job |
-| *QueryApi* | [**GetJobResults**](docs/QueryApi.md#getjobresults) | **Get** /jobs/query/{jobId}/results | Get Results for a Query Job |
 | *QueryApi* | [**GetQueryJobInfo**](docs/QueryApi.md#getqueryjobinfo) | **Get** /jobs/query/{jobId} | Get Information About a Query Job |
+| *QueryApi* | [**GetQueryJobResults**](docs/QueryApi.md#getqueryjobresults) | **Get** /jobs/query/{jobId}/results | Get Results for a Query Job |
 | *QueryApi* | [**GetQueryJobs**](docs/QueryApi.md#getqueryjobs) | **Get** /jobs/query | Get Information About All Query Jobs |
 
 

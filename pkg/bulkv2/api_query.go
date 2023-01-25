@@ -429,143 +429,6 @@ func (a *QueryApiService) DeleteQueryJobExecute(r ApiDeleteQueryJobRequest) (*ht
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetJobResultsRequest struct {
-	ctx            context.Context
-	ApiService     *QueryApiService
-	jobId          string
-	acceptEncoding *EncodingType
-	locator        *string
-	maxRecords     *int32
-}
-
-func (r ApiGetJobResultsRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetJobResultsRequest {
-	r.acceptEncoding = &acceptEncoding
-	return r
-}
-
-// A string that identifies a specific set of query results. Providing a value for this parameter returns only that set of results. Omitting this parameter returns the first set of results.  You can find the locator string for the next set of results in the response of each request. See Example and Rules and Guidelines.  As long as the associated job exists, the locator string for a set of results does not change. You can use the locator to retrieve a set of results multiple times.
-func (r ApiGetJobResultsRequest) Locator(locator string) ApiGetJobResultsRequest {
-	r.locator = &locator
-	return r
-}
-
-// The maximum number of records to retrieve per set of results for the query. The request is still subject to the size limits. If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size.  If you don’t provide a value for this parameter, the server uses a default value based on the service.
-func (r ApiGetJobResultsRequest) MaxRecords(maxRecords int32) ApiGetJobResultsRequest {
-	r.maxRecords = &maxRecords
-	return r
-}
-
-func (r ApiGetJobResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
-	return r.ApiService.GetJobResultsExecute(r)
-}
-
-/*
-GetJobResults Get Results for a Query Job
-
-Gets the results for a query job. The job must have the state `JobComplete`.
-
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param jobId
-	@return ApiGetJobResultsRequest
-*/
-func (a *QueryApiService) GetJobResults(ctx context.Context, jobId string) ApiGetJobResultsRequest {
-	return ApiGetJobResultsRequest{
-		ApiService: a,
-		ctx:        ctx,
-		jobId:      jobId,
-	}
-}
-
-// Execute executes the request
-//
-//	@return io.ReadCloser
-func (a *QueryApiService) GetJobResultsExecute(r ApiGetJobResultsRequest) (*io.ReadCloser, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *io.ReadCloser
-	)
-
-	token, err := a.client.tokenSrc.Token()
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	activeServer := a.client.cfg.GetActiveServer()
-	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
-
-	localVarPath := activeServer.GetURL() + "/jobs/query/{jobId}/results"
-	pathParams := map[string]string{
-		"jobId": url.PathEscape(parameterToString(strings.Trim(r.jobId, " "), "")),
-	}
-	localVarPath = injectUrlVars(localVarPath, pathParams)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	if r.locator != nil {
-		localVarQueryParams.Add("locator", parameterToString(*r.locator, ""))
-	}
-	if r.maxRecords != nil {
-		localVarQueryParams.Add("maxRecords", parameterToString(*r.maxRecords, ""))
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"text/csv"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.acceptEncoding != nil {
-		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	token.SetAuthHeader(req)
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	respBodyReadCloser := localVarHTTPResponse.Body
-	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
-		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
-		localVarHTTPResponse.Body.Close()
-		respBodyReadCloser.Close()
-		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-		if err != nil {
-			return localVarReturnValue, localVarHTTPResponse, err
-		}
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return &respBodyReadCloser, localVarHTTPResponse, nil
-}
-
 type ApiGetQueryJobInfoRequest struct {
 	ctx            context.Context
 	ApiService     *QueryApiService
@@ -697,6 +560,143 @@ func (a *QueryApiService) GetQueryJobInfoExecute(r ApiGetQueryJobInfoRequest) (*
 	}
 
 	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetQueryJobResultsRequest struct {
+	ctx            context.Context
+	ApiService     *QueryApiService
+	jobId          string
+	acceptEncoding *EncodingType
+	locator        *string
+	maxRecords     *int32
+}
+
+func (r ApiGetQueryJobResultsRequest) AcceptEncoding(acceptEncoding EncodingType) ApiGetQueryJobResultsRequest {
+	r.acceptEncoding = &acceptEncoding
+	return r
+}
+
+// A string that identifies a specific set of query results. Providing a value for this parameter returns only that set of results. Omitting this parameter returns the first set of results.  You can find the locator string for the next set of results in the response of each request. See Example and Rules and Guidelines.  As long as the associated job exists, the locator string for a set of results does not change. You can use the locator to retrieve a set of results multiple times.
+func (r ApiGetQueryJobResultsRequest) Locator(locator string) ApiGetQueryJobResultsRequest {
+	r.locator = &locator
+	return r
+}
+
+// The maximum number of records to retrieve per set of results for the query. The request is still subject to the size limits. If you are working with a very large number of query results, you may experience a timeout before receiving all the data from Salesforce. To prevent a timeout, specify the maximum number of records your client is expecting to receive in the maxRecords parameter. This splits the results into smaller sets with this value as the maximum size.  If you don’t provide a value for this parameter, the server uses a default value based on the service.
+func (r ApiGetQueryJobResultsRequest) MaxRecords(maxRecords int32) ApiGetQueryJobResultsRequest {
+	r.maxRecords = &maxRecords
+	return r
+}
+
+func (r ApiGetQueryJobResultsRequest) Execute() (*io.ReadCloser, *http.Response, error) {
+	return r.ApiService.GetQueryJobResultsExecute(r)
+}
+
+/*
+GetQueryJobResults Get Results for a Query Job
+
+Gets the results for a query job. The job must have the state `JobComplete`.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param jobId
+	@return ApiGetQueryJobResultsRequest
+*/
+func (a *QueryApiService) GetQueryJobResults(ctx context.Context, jobId string) ApiGetQueryJobResultsRequest {
+	return ApiGetQueryJobResultsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		jobId:      jobId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return io.ReadCloser
+func (a *QueryApiService) GetQueryJobResultsExecute(r ApiGetQueryJobResultsRequest) (*io.ReadCloser, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *io.ReadCloser
+	)
+
+	token, err := a.client.tokenSrc.Token()
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	activeServer := a.client.cfg.GetActiveServer()
+	activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
+
+	localVarPath := activeServer.GetURL() + "/jobs/query/{jobId}/results"
+	pathParams := map[string]string{
+		"jobId": url.PathEscape(parameterToString(strings.Trim(r.jobId, " "), "")),
+	}
+	localVarPath = injectUrlVars(localVarPath, pathParams)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	if r.locator != nil {
+		localVarQueryParams.Add("locator", parameterToString(*r.locator, ""))
+	}
+	if r.maxRecords != nil {
+		localVarQueryParams.Add("maxRecords", parameterToString(*r.maxRecords, ""))
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"text/csv"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.acceptEncoding != nil {
+		localVarHeaderParams["Accept-Encoding"] = parameterToString(*r.acceptEncoding, "")
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	token.SetAuthHeader(req)
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	respBodyReadCloser := localVarHTTPResponse.Body
+	if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+		respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+		localVarHTTPResponse.Body.Close()
+		respBodyReadCloser.Close()
+		localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+		if err != nil {
+			return localVarReturnValue, localVarHTTPResponse, err
+		}
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return &respBodyReadCloser, localVarHTTPResponse, nil
 }
 
 type ApiGetQueryJobsRequest struct {
