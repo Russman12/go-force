@@ -376,7 +376,7 @@ paths:
           content:
             application/json:
               schema:
-                type: object
+                $ref: '#/components/schemas/Jobs'
           description: Successful response
       summary: Get All Jobs
       tags:
@@ -933,6 +933,12 @@ components:
       - $ref: '#/components/schemas/Job'
       - $ref: '#/components/schemas/JobInfoExt'
     Jobs:
+      example:
+        nextRecordsUrl: https://openapi-generator.tech
+        records:
+        - null
+        - null
+        done: true
       properties:
         done:
           description: "Indicates whether there are more jobs to get. If false, use\

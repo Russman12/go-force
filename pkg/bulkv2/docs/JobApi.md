@@ -590,7 +590,7 @@ Other parameters are passed through a pointer to a apiGetJobUnprocessedRecordsRe
 
 ## GetJobs
 
-> map[string]interface{} GetJobs(ctx).AcceptEncoding(acceptEncoding).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
+> Jobs GetJobs(ctx).AcceptEncoding(acceptEncoding).IsPkChunkingEnabled(isPkChunkingEnabled).JobType(jobType).QueryLocator(queryLocator).Execute()
 
 Retrieves all jobs in the org.
 
@@ -631,7 +631,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `JobApi.GetJobs``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetJobs`: map[string]interface{}
+    // response from `GetJobs`: Jobs
     fmt.Fprintf(os.Stdout, "Response from `JobApi.GetJobs`: %v\n", resp)
 }
 ```
@@ -654,7 +654,7 @@ Other parameters are passed through a pointer to a apiGetJobsRequest struct via 
 
 ### Return type
 
-**map[string]interface{}**
+[**Jobs**](Jobs.md)
 
 ### Authorization
 

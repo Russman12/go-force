@@ -942,7 +942,7 @@ func (r ApiGetJobsRequest) QueryLocator(queryLocator string) ApiGetJobsRequest {
 	return r
 }
 
-func (r ApiGetJobsRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiGetJobsRequest) Execute() (*Jobs, *http.Response, error) {
 	return r.ApiService.GetJobsExecute(r)
 }
 
@@ -963,13 +963,13 @@ func (a *JobApiService) GetJobs(ctx context.Context) ApiGetJobsRequest {
 
 // Execute executes the request
 //
-//	@return map[string]interface{}
-func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (map[string]interface{}, *http.Response, error) {
+//	@return Jobs
+func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (*Jobs, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue map[string]interface{}
+		localVarReturnValue *Jobs
 	)
 
 	token, err := a.client.tokenSrc.Token()
