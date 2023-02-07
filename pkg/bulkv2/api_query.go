@@ -22,12 +22,102 @@ import (
 	"strings"
 )
 
+type QueryApi interface {
+
+	/*
+		AbortQueryJob Abort a Query Job
+
+		Aborts a query job.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiAbortQueryJobRequest
+	*/
+	AbortQueryJob(ctx context.Context, jobId string) ApiAbortQueryJobRequest
+
+	// AbortQueryJobExecute executes the request
+	//  @return QueryJobInfo
+	AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*QueryJobInfo, *http.Response, error)
+
+	/*
+		CreateQueryJob Create a Query Job
+
+		Creates a query job.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiCreateQueryJobRequest
+	*/
+	CreateQueryJob(ctx context.Context) ApiCreateQueryJobRequest
+
+	// CreateQueryJobExecute executes the request
+	//  @return QueryJobInfo
+	CreateQueryJobExecute(r ApiCreateQueryJobRequest) (*QueryJobInfo, *http.Response, error)
+
+	/*
+		DeleteQueryJob Delete a Query Job
+
+		Deletes a query job. When a job is deleted, job data stored by Salesforce is deleted and job metadata information is removed. The job no longer displays in the Bulk Data Load Jobs page in Salesforce.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiDeleteQueryJobRequest
+	*/
+	DeleteQueryJob(ctx context.Context, jobId string) ApiDeleteQueryJobRequest
+
+	// DeleteQueryJobExecute executes the request
+	DeleteQueryJobExecute(r ApiDeleteQueryJobRequest) (*http.Response, error)
+
+	/*
+		GetQueryJobInfo Get Information About a Query Job
+
+		Gets information about one query job.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiGetQueryJobInfoRequest
+	*/
+	GetQueryJobInfo(ctx context.Context, jobId string) ApiGetQueryJobInfoRequest
+
+	// GetQueryJobInfoExecute executes the request
+	//  @return QueryJobInfo
+	GetQueryJobInfoExecute(r ApiGetQueryJobInfoRequest) (*QueryJobInfo, *http.Response, error)
+
+	/*
+		GetQueryJobResults Get Results for a Query Job
+
+		Gets the results for a query job. The job must have the state `JobComplete`.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiGetQueryJobResultsRequest
+	*/
+	GetQueryJobResults(ctx context.Context, jobId string) ApiGetQueryJobResultsRequest
+
+	// GetQueryJobResultsExecute executes the request
+	//  @return io.ReadCloser
+	GetQueryJobResultsExecute(r ApiGetQueryJobResultsRequest) (*io.ReadCloser, *http.Response, error)
+
+	/*
+		GetQueryJobs Get Information About All Query Jobs
+
+		Gets information about all query jobs in the org. The information includes Bulk API 2.0 query jobs and all Bulk API jobs.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiGetQueryJobsRequest
+	*/
+	GetQueryJobs(ctx context.Context) ApiGetQueryJobsRequest
+
+	// GetQueryJobsExecute executes the request
+	//  @return QueryJobInfos
+	GetQueryJobsExecute(r ApiGetQueryJobsRequest) (*QueryJobInfos, *http.Response, error)
+}
+
 // QueryApiService QueryApi service
 type QueryApiService service
 
 type ApiAbortQueryJobRequest struct {
 	ctx                  context.Context
-	ApiService           *QueryApiService
+	ApiService           QueryApi
 	jobId                string
 	abortQueryJobRequest *AbortQueryJobRequest
 	contentEncoding      *EncodingType
@@ -171,7 +261,7 @@ func (a *QueryApiService) AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*Quer
 
 type ApiCreateQueryJobRequest struct {
 	ctx                   context.Context
-	ApiService            *QueryApiService
+	ApiService            QueryApi
 	createQueryJobRequest *CreateQueryJobRequest
 	sforceCallOptions     *string
 	contentEncoding       *EncodingType
@@ -326,7 +416,7 @@ func (a *QueryApiService) CreateQueryJobExecute(r ApiCreateQueryJobRequest) (*Qu
 
 type ApiDeleteQueryJobRequest struct {
 	ctx        context.Context
-	ApiService *QueryApiService
+	ApiService QueryApi
 	jobId      string
 }
 
@@ -431,7 +521,7 @@ func (a *QueryApiService) DeleteQueryJobExecute(r ApiDeleteQueryJobRequest) (*ht
 
 type ApiGetQueryJobInfoRequest struct {
 	ctx            context.Context
-	ApiService     *QueryApiService
+	ApiService     QueryApi
 	jobId          string
 	acceptEncoding *EncodingType
 }
@@ -564,7 +654,7 @@ func (a *QueryApiService) GetQueryJobInfoExecute(r ApiGetQueryJobInfoRequest) (*
 
 type ApiGetQueryJobResultsRequest struct {
 	ctx            context.Context
-	ApiService     *QueryApiService
+	ApiService     QueryApi
 	jobId          string
 	acceptEncoding *EncodingType
 	locator        *string
@@ -701,7 +791,7 @@ func (a *QueryApiService) GetQueryJobResultsExecute(r ApiGetQueryJobResultsReque
 
 type ApiGetQueryJobsRequest struct {
 	ctx                 context.Context
-	ApiService          *QueryApiService
+	ApiService          QueryApi
 	isPkChunkingEnabled *bool
 	jobType             *string
 	concurrencyMode     *string

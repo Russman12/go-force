@@ -22,12 +22,146 @@ import (
 	"strings"
 )
 
+type JobApi interface {
+
+	/*
+		CloseOrAbortJob Close or Abort a Job
+
+		Closes or aborts a job. If you close a job, Salesforce queues the job and uploaded data for processing, and you can’t add any more job data. If you abort a job, the job doesn’t get queued or processed.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiCloseOrAbortJobRequest
+	*/
+	CloseOrAbortJob(ctx context.Context, jobId string) ApiCloseOrAbortJobRequest
+
+	// CloseOrAbortJobExecute executes the request
+	//  @return JobInfo
+	CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*JobInfo, *http.Response, error)
+
+	/*
+		CreateJob Create a job
+
+		Creates a job representing a bulk operation and its associated data that is sent to Salesforce for asynchronous processing. Provide job data via an Upload Job Data request or as part of a multipart create job request.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiCreateJobRequest
+	*/
+	CreateJob(ctx context.Context) ApiCreateJobRequest
+
+	// CreateJobExecute executes the request
+	//  @return JobInfo
+	CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http.Response, error)
+
+	/*
+		DeleteJob Delete a Job
+
+		Deletes a job. To be deleted, a job must have a state of `UploadComplete`, `JobComplete`, `Aborted`, or `Failed`.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiDeleteJobRequest
+	*/
+	DeleteJob(ctx context.Context, jobId string) ApiDeleteJobRequest
+
+	// DeleteJobExecute executes the request
+	DeleteJobExecute(r ApiDeleteJobRequest) (*http.Response, error)
+
+	/*
+		GetJobFailedResults Get Job Failed Record Results
+
+		Retrieves a list of failed records for a completed insert, delete, update, or upsert job.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiGetJobFailedResultsRequest
+	*/
+	GetJobFailedResults(ctx context.Context, jobId string) ApiGetJobFailedResultsRequest
+
+	// GetJobFailedResultsExecute executes the request
+	//  @return io.ReadCloser
+	GetJobFailedResultsExecute(r ApiGetJobFailedResultsRequest) (*io.ReadCloser, *http.Response, error)
+
+	/*
+		GetJobInfo Get Job Info
+
+		Retrieves detailed information about a job.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiGetJobInfoRequest
+	*/
+	GetJobInfo(ctx context.Context, jobId string) ApiGetJobInfoRequest
+
+	// GetJobInfoExecute executes the request
+	//  @return JobInfo
+	GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *http.Response, error)
+
+	/*
+		GetJobSuccessfulResults Get Job Successful Record Results
+
+		Retrieves a list of successfully processed records for a completed job.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiGetJobSuccessfulResultsRequest
+	*/
+	GetJobSuccessfulResults(ctx context.Context, jobId string) ApiGetJobSuccessfulResultsRequest
+
+	// GetJobSuccessfulResultsExecute executes the request
+	//  @return io.ReadCloser
+	GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResultsRequest) (*io.ReadCloser, *http.Response, error)
+
+	/*
+		GetJobUnprocessedRecords Get Job Unprocessed Record Results
+
+		Retrieves a list of unprocessed records for failed or aborted jobs.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiGetJobUnprocessedRecordsRequest
+	*/
+	GetJobUnprocessedRecords(ctx context.Context, jobId string) ApiGetJobUnprocessedRecordsRequest
+
+	// GetJobUnprocessedRecordsExecute executes the request
+	//  @return io.ReadCloser
+	GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRecordsRequest) (*io.ReadCloser, *http.Response, error)
+
+	/*
+		GetJobs Get All Jobs
+
+		Retrieves all jobs in the org.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiGetJobsRequest
+	*/
+	GetJobs(ctx context.Context) ApiGetJobsRequest
+
+	// GetJobsExecute executes the request
+	//  @return Jobs
+	GetJobsExecute(r ApiGetJobsRequest) (*Jobs, *http.Response, error)
+
+	/*
+		UploadJobData Upload Job Data
+
+		Uploads data for a job using CSV data you provide.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param jobId
+		@return ApiUploadJobDataRequest
+	*/
+	UploadJobData(ctx context.Context, jobId string) ApiUploadJobDataRequest
+
+	// UploadJobDataExecute executes the request
+	UploadJobDataExecute(r ApiUploadJobDataRequest) (*http.Response, error)
+}
+
 // JobApiService JobApi service
 type JobApiService service
 
 type ApiCloseOrAbortJobRequest struct {
 	ctx                    context.Context
-	ApiService             *JobApiService
+	ApiService             JobApi
 	jobId                  string
 	closeOrAbortJobRequest *CloseOrAbortJobRequest
 	contentEncoding        *EncodingType
@@ -171,7 +305,7 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 
 type ApiCreateJobRequest struct {
 	ctx               context.Context
-	ApiService        *JobApiService
+	ApiService        JobApi
 	createJobRequest  *CreateJobRequest
 	sforceCallOptions *string
 	contentEncoding   *EncodingType
@@ -326,7 +460,7 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 
 type ApiDeleteJobRequest struct {
 	ctx        context.Context
-	ApiService *JobApiService
+	ApiService JobApi
 	jobId      string
 }
 
@@ -431,7 +565,7 @@ func (a *JobApiService) DeleteJobExecute(r ApiDeleteJobRequest) (*http.Response,
 
 type ApiGetJobFailedResultsRequest struct {
 	ctx            context.Context
-	ApiService     *JobApiService
+	ApiService     JobApi
 	jobId          string
 	acceptEncoding *EncodingType
 }
@@ -548,7 +682,7 @@ func (a *JobApiService) GetJobFailedResultsExecute(r ApiGetJobFailedResultsReque
 
 type ApiGetJobInfoRequest struct {
 	ctx            context.Context
-	ApiService     *JobApiService
+	ApiService     JobApi
 	jobId          string
 	acceptEncoding *EncodingType
 }
@@ -681,7 +815,7 @@ func (a *JobApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *ht
 
 type ApiGetJobSuccessfulResultsRequest struct {
 	ctx            context.Context
-	ApiService     *JobApiService
+	ApiService     JobApi
 	jobId          string
 	acceptEncoding *EncodingType
 }
@@ -798,7 +932,7 @@ func (a *JobApiService) GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResu
 
 type ApiGetJobUnprocessedRecordsRequest struct {
 	ctx            context.Context
-	ApiService     *JobApiService
+	ApiService     JobApi
 	jobId          string
 	acceptEncoding *EncodingType
 }
@@ -915,7 +1049,7 @@ func (a *JobApiService) GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRe
 
 type ApiGetJobsRequest struct {
 	ctx                 context.Context
-	ApiService          *JobApiService
+	ApiService          JobApi
 	acceptEncoding      *EncodingType
 	isPkChunkingEnabled *bool
 	jobType             *string
@@ -1068,7 +1202,7 @@ func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (*Jobs, *http.Respon
 
 type ApiUploadJobDataRequest struct {
 	ctx             context.Context
-	ApiService      *JobApiService
+	ApiService      JobApi
 	jobId           string
 	body            *io.ReadCloser
 	contentEncoding *EncodingType

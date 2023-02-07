@@ -51,8 +51,8 @@ type APIClient struct {
 	tokenSrc oauth2.TokenSource
 
 	// API Services
-	JobApi   *JobApiService
-	QueryApi *QueryApiService
+	JobApi   JobApi
+	QueryApi QueryApi
 }
 
 type service struct {

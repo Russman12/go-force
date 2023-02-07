@@ -51,8 +51,8 @@ type APIClient struct {
 	tokenSrc oauth2.TokenSource
 
 	// API Services
-	OrgApi     *OrgApiService
-	SObjectApi *SObjectApiService
+	OrgApi     OrgApi
+	SObjectApi SObjectApi
 }
 
 type service struct {

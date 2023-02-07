@@ -21,12 +21,93 @@ import (
 	"strings"
 )
 
+type SObjectApi interface {
+
+	/*
+		CreateRecord Create Records Using sObject Basic Information
+
+		Creates a new record for a specified object based on field values in the request body. You must specify values for required fields in the request body. Specifying values for other fields is optional.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param sObject The name of the object.
+		@return ApiCreateRecordRequest
+	*/
+	CreateRecord(ctx context.Context, sObject string) ApiCreateRecordRequest
+
+	// CreateRecordExecute executes the request
+	//  @return CreateRecordResult
+	CreateRecordExecute(r ApiCreateRecordRequest) (*CreateRecordResult, *http.Response, error)
+
+	/*
+		GetBasicInfo Retrieve Object Metadata Using sObject Basic Information
+
+		Retrieves basic metadata for a specified object, including some object properties, recent items, and URIs for other resources related to the object. To retrieve the complete metadata for an object, use the (sObject Describe)[https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/resources_sobject_describe.htm] resource.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param sObject The name of the object.
+		@return ApiGetBasicInfoRequest
+	*/
+	GetBasicInfo(ctx context.Context, sObject string) ApiGetBasicInfoRequest
+
+	// GetBasicInfoExecute executes the request
+	//  @return map[string]interface{}
+	GetBasicInfoExecute(r ApiGetBasicInfoRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+			GetSObjects Get a List of Objects
+
+			Lists the available objects and their metadata for your organization’s data. In addition, it provides the organization encoding, as well as the maximum batch size permitted in queries. For more information on encoding, see [Internationalization and Character Sets](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/implementation_considerations.htm#sforce_api_other_internationalization).
+		You can use the If-Modified-Since or If-Unmodified-Since header with this resource. When using the If-Modified-Since header, if no available object’s metadata has changed since the provided date, a 304 Not Modified status code is returned with no response body.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@return ApiGetSObjectsRequest
+	*/
+	GetSObjects(ctx context.Context) ApiGetSObjectsRequest
+
+	// GetSObjectsExecute executes the request
+	//  @return SObjectDescribes
+	GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjectDescribes, *http.Response, error)
+
+	/*
+		RetrieveRecord Retrieve Records Using sObject Rows
+
+		Retrieves a record based on the specified object and record ID. The fields and field values of the record are returned in the response body.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param sObject The name of the object.
+		@param recordId The identifier of the object.
+		@return ApiRetrieveRecordRequest
+	*/
+	RetrieveRecord(ctx context.Context, sObject string, recordId string) ApiRetrieveRecordRequest
+
+	// RetrieveRecordExecute executes the request
+	//  @return map[string]interface{}
+	RetrieveRecordExecute(r ApiRetrieveRecordRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
+			SObjectDescribe Retrieve Metadata for an Object
+
+			Completely describes the individual metadata at all levels for the specified object. For example, this can be used to retrieve the fields, URLs, and child relationships for the Account object.
+		For more information about the metadata that is retrieved, see [DescribesObjectResult](https://developer.salesforce.com/docs/atlas.en-us.242.0.api.meta/api/sforce_api_calls_describesobjects_describesobjectresult.htm) in the SOAP API Developers Guide.
+		You can use the If-Modified-Since or If-Unmodified-Since header with this resource. When using the If-Modified-Since header, if no available object’s metadata has changed since the provided date, a 304 Not Modified status code is returned with no response body.
+
+			@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+			@param sObject The name of the object.
+			@return ApiSObjectDescribeRequest
+	*/
+	SObjectDescribe(ctx context.Context, sObject string) ApiSObjectDescribeRequest
+
+	// SObjectDescribeExecute executes the request
+	//  @return SObjectDescribe
+	SObjectDescribeExecute(r ApiSObjectDescribeRequest) (*SObjectDescribe, *http.Response, error)
+}
+
 // SObjectApiService SObjectApi service
 type SObjectApiService service
 
 type ApiCreateRecordRequest struct {
 	ctx             context.Context
-	ApiService      *SObjectApiService
+	ApiService      SObjectApi
 	sObject         string
 	body            *map[string]interface{}
 	contentEncoding *EncodingType
@@ -203,7 +284,7 @@ func (a *SObjectApiService) CreateRecordExecute(r ApiCreateRecordRequest) (*Crea
 
 type ApiGetBasicInfoRequest struct {
 	ctx            context.Context
-	ApiService     *SObjectApiService
+	ApiService     SObjectApi
 	sObject        string
 	acceptEncoding *EncodingType
 }
@@ -359,7 +440,7 @@ func (a *SObjectApiService) GetBasicInfoExecute(r ApiGetBasicInfoRequest) (map[s
 
 type ApiGetSObjectsRequest struct {
 	ctx            context.Context
-	ApiService     *SObjectApiService
+	ApiService     SObjectApi
 	acceptEncoding *EncodingType
 }
 
@@ -486,7 +567,7 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 
 type ApiRetrieveRecordRequest struct {
 	ctx            context.Context
-	ApiService     *SObjectApiService
+	ApiService     SObjectApi
 	sObject        string
 	recordId       string
 	acceptEncoding *EncodingType
@@ -656,7 +737,7 @@ func (a *SObjectApiService) RetrieveRecordExecute(r ApiRetrieveRecordRequest) (m
 
 type ApiSObjectDescribeRequest struct {
 	ctx               context.Context
-	ApiService        *SObjectApiService
+	ApiService        SObjectApi
 	sObject           string
 	ifModifiedSince   *string
 	ifUnmodifiedSince *string

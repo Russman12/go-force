@@ -20,12 +20,43 @@ import (
 	"net/url"
 )
 
+type OrgApi interface {
+
+	/*
+		GetLimits List Org Limits
+
+		Lists information about limits in your org. For each limit, this resource returns the maximum allocation and the remaining allocation based on usage. This resource is available in REST API version 29.0 and later for API users with the View Setup and Configuration permission.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiGetLimitsRequest
+	*/
+	GetLimits(ctx context.Context) ApiGetLimitsRequest
+
+	// GetLimitsExecute executes the request
+	//  @return interface{}
+	GetLimitsExecute(r ApiGetLimitsRequest) (interface{}, *http.Response, error)
+
+	/*
+		GetResources List Available REST Resources
+
+		Lists available resources for the specified API version, including resource name and URI.
+
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@return ApiGetResourcesRequest
+	*/
+	GetResources(ctx context.Context) ApiGetResourcesRequest
+
+	// GetResourcesExecute executes the request
+	//  @return interface{}
+	GetResourcesExecute(r ApiGetResourcesRequest) (interface{}, *http.Response, error)
+}
+
 // OrgApiService OrgApi service
 type OrgApiService service
 
 type ApiGetLimitsRequest struct {
 	ctx            context.Context
-	ApiService     *OrgApiService
+	ApiService     OrgApi
 	acceptEncoding *EncodingType
 }
 
@@ -151,7 +182,7 @@ func (a *OrgApiService) GetLimitsExecute(r ApiGetLimitsRequest) (interface{}, *h
 
 type ApiGetResourcesRequest struct {
 	ctx            context.Context
-	ApiService     *OrgApiService
+	ApiService     OrgApi
 	acceptEncoding *EncodingType
 }
 

@@ -9,6 +9,7 @@
   },
   "templateDir": "out",
   "generatorName": "go",
+  "generateInterfaces": true,
   "isGoSubmodule": true,
   "additionalProperties": {
     "subDirName": "pkg"
