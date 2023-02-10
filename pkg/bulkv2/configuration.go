@@ -163,6 +163,21 @@ func (sc *ServerConfiguration) SetServerVariable(name string, value string) {
 	sc.variables[name].currentValue = value
 }
 
+func (sc *ServerConfiguration) GetServerVariable(name string) string {
+	if srvVar, ok := sc.variables[name]; ok {
+		return srvVar.currentValue
+	}
+	return ""
+}
+
+func (sc *ServerConfiguration) ResetServerVariable(name string) error {
+	if _, ok := sc.variables[name]; !ok {
+		return fmt.Errorf("unable to locate server variable")
+	}
+	sc.variables[name].currentValue = sc.variables[name].defaultValue
+	return nil
+}
+
 // AddDefaultHeader adds a new HTTP header to the default header in the request
 func (c *Configuration) AddDefaultHeader(key string, value string) {
 	c.DefaultHeader[key] = value
