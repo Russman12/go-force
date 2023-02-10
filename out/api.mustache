@@ -121,7 +121,7 @@ func (a *{{{classname}}}Service) {{nickname}}Execute(r {{#structPrefix}}{{&class
 	)
 
 {{#hasAuthMethods}}
-    token, err := a.client.tokenSrc.Token()
+    token, err := a.client.TokenSrc.Token()
     if err != nil {
         return {{#returnType}}localVarReturnValue, {{/returnType}}nil, &GenericOpenAPIError{error: err.Error()}
     }

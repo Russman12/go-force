@@ -165,7 +165,7 @@ func (a *QueryApiService) AbortQueryJobExecute(r ApiAbortQueryJobRequest) (*Quer
 		localVarReturnValue *QueryJobInfo
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -318,7 +318,7 @@ func (a *QueryApiService) CreateQueryJobExecute(r ApiCreateQueryJobRequest) (*Qu
 		localVarReturnValue *QueryJobInfo
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -449,7 +449,7 @@ func (a *QueryApiService) DeleteQueryJobExecute(r ApiDeleteQueryJobRequest) (*ht
 		formFiles          []formFile
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -563,7 +563,7 @@ func (a *QueryApiService) GetQueryJobInfoExecute(r ApiGetQueryJobInfoRequest) (*
 		localVarReturnValue *QueryJobInfo
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -710,7 +710,7 @@ func (a *QueryApiService) GetQueryJobResultsExecute(r ApiGetQueryJobResultsReque
 		localVarReturnValue *io.ReadCloser
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -858,7 +858,7 @@ func (a *QueryApiService) GetQueryJobsExecute(r ApiGetQueryJobsRequest) (*QueryJ
 		localVarReturnValue *QueryJobInfos
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}

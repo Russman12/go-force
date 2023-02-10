@@ -209,7 +209,7 @@ func (a *JobApiService) CloseOrAbortJobExecute(r ApiCloseOrAbortJobRequest) (*Jo
 		localVarReturnValue *JobInfo
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -362,7 +362,7 @@ func (a *JobApiService) CreateJobExecute(r ApiCreateJobRequest) (*JobInfo, *http
 		localVarReturnValue *JobInfo
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -493,7 +493,7 @@ func (a *JobApiService) DeleteJobExecute(r ApiDeleteJobRequest) (*http.Response,
 		formFiles          []formFile
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -607,7 +607,7 @@ func (a *JobApiService) GetJobFailedResultsExecute(r ApiGetJobFailedResultsReque
 		localVarReturnValue *io.ReadCloser
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -724,7 +724,7 @@ func (a *JobApiService) GetJobInfoExecute(r ApiGetJobInfoRequest) (*JobInfo, *ht
 		localVarReturnValue *JobInfo
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -857,7 +857,7 @@ func (a *JobApiService) GetJobSuccessfulResultsExecute(r ApiGetJobSuccessfulResu
 		localVarReturnValue *io.ReadCloser
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -974,7 +974,7 @@ func (a *JobApiService) GetJobUnprocessedRecordsExecute(r ApiGetJobUnprocessedRe
 		localVarReturnValue *io.ReadCloser
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1106,7 +1106,7 @@ func (a *JobApiService) GetJobsExecute(r ApiGetJobsRequest) (*Jobs, *http.Respon
 		localVarReturnValue *Jobs
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -1247,7 +1247,7 @@ func (a *JobApiService) UploadJobDataExecute(r ApiUploadJobDataRequest) (*http.R
 		formFiles          []formFile
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return nil, &GenericOpenAPIError{error: err.Error()}
 	}
