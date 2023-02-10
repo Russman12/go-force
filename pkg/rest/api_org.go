@@ -95,7 +95,7 @@ func (a *OrgApiService) GetLimitsExecute(r ApiGetLimitsRequest) (interface{}, *h
 		localVarReturnValue interface{}
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -221,7 +221,7 @@ func (a *OrgApiService) GetResourcesExecute(r ApiGetResourcesRequest) (interface
 		localVarReturnValue interface{}
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
