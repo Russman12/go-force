@@ -162,7 +162,7 @@ func (a *SObjectApiService) CreateRecordExecute(r ApiCreateRecordRequest) (*Crea
 		localVarReturnValue *CreateRecordResult
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -326,7 +326,7 @@ func (a *SObjectApiService) GetBasicInfoExecute(r ApiGetBasicInfoRequest) (map[s
 		localVarReturnValue map[string]interface{}
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -480,7 +480,7 @@ func (a *SObjectApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*SObjec
 		localVarReturnValue *SObjectDescribes
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -619,7 +619,7 @@ func (a *SObjectApiService) RetrieveRecordExecute(r ApiRetrieveRecordRequest) (m
 		localVarReturnValue map[string]interface{}
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -795,7 +795,7 @@ func (a *SObjectApiService) SObjectDescribeExecute(r ApiSObjectDescribeRequest) 
 		localVarReturnValue *SObjectDescribe
 	)
 
-	token, err := a.client.tokenSrc.Token()
+	token, err := a.client.TokenSrc.Token()
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
