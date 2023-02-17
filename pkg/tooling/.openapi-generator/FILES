@@ -77,4 +77,5 @@ model_tests_array_item.go
 model_tests_array_max_failed_tests_item.go
 model_tests_array_test_level_item.go
 response.go
+test/api_default_test.go
 utils.go

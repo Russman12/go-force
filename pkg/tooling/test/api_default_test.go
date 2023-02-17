@@ -22,6 +22,35 @@ func Test_tooling_DefaultApiService(t *testing.T) {
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
 
+    t.Run("Test DefaultApiService CreateRecord", func(t *testing.T) {
+
+        t.Skip("skip test")  // remove to run test
+
+        var sObjectName string
+
+        resp, httpRes, err := apiClient.DefaultApi.CreateRecord(context.Background(), sObjectName).Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+
+    })
+
+    t.Run("Test DefaultApiService DeleteRecord", func(t *testing.T) {
+
+        t.Skip("skip test")  // remove to run test
+
+        var sObjectName string
+        var id string
+
+        httpRes, err := apiClient.DefaultApi.DeleteRecord(context.Background(), sObjectName, id).Execute()
+
+        require.Nil(t, err)
+        
+        assert.Equal(t, 200, httpRes.StatusCode)
+
+    })
+
     t.Run("Test DefaultApiService DescribeSObject", func(t *testing.T) {
 
         t.Skip("skip test")  // remove to run test
