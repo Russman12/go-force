@@ -82,4 +82,16 @@ func Test_tooling_DefaultApiService(t *testing.T) {
 
     })
 
+    t.Run("Test DefaultApiService Search", func(t *testing.T) {
+
+        t.Skip("skip test")  // remove to run test
+
+        resp, httpRes, err := apiClient.DefaultApi.Search(context.Background()).Execute()
+
+        require.Nil(t, err)
+        require.NotNil(t, resp)
+        assert.Equal(t, 200, httpRes.StatusCode)
+
+    })
+
 }

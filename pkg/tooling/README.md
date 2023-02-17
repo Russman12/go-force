@@ -20,6 +20,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 | *DefaultApi* | [**Query**](docs/DefaultApi.md#query) | **Get** /query | Executes query |
 | *DefaultApi* | [**RunTestsAsync**](docs/DefaultApi.md#runtestsasync) | **Post** /runTestsAsynchronous | Run tests asynchronously |
 | *DefaultApi* | [**RunTestsSync**](docs/DefaultApi.md#runtestssync) | **Post** /runTestsSynchronous | Run tests synchronously |
+| *DefaultApi* | [**Search**](docs/DefaultApi.md#search) | **Get** /search | Executes SOSL |
 
 
 ## Documentation For Models
@@ -37,6 +38,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
  - [FlowProcessType](docs/FlowProcessType.md)
  - [QueryResult](docs/QueryResult.md)
  - [RunTestsResult](docs/RunTestsResult.md)
+ - [SOSLResult](docs/SOSLResult.md)
  - [TestLevel](docs/TestLevel.md)
  - [TestRequest](docs/TestRequest.md)
  - [TestResultsSuccess](docs/TestResultsSuccess.md)

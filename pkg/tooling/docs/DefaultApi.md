@@ -9,6 +9,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 | [**Query**](#query) | **Get** /query | Executes query |
 | [**RunTestsAsync**](#runtestsasync) | **Post** /runTestsAsynchronous | Run tests asynchronously |
 | [**RunTestsSync**](#runtestssync) | **Post** /runTestsSynchronous | Run tests synchronously |
+| [**Search**](#search) | **Get** /search | Executes SOSL |
 
 
 
@@ -197,7 +198,7 @@ func main() {
     configuration := tooling.NewConfiguration()
     apiClient := tooling.NewAPIClient(configuration, tokenSrc)
 
-    q := "q_example" // string | 
+    q := "q_example" // string | SOQL query statement
 
     resp, r, err := apiClient.DefaultApi.Query(context.Background()).Q(q).Execute()
     if err != nil {
@@ -220,7 +221,7 @@ Other parameters are passed through a pointer to a apiQueryRequest struct via th
 
 | Name          | Type          | Description   | Notes         |
 | ------------- | ------------- | ------------- | ------------- |
-|  **q** | **string** |  |  |
+|  **q** | **string** | SOQL query statement |  |
 
 ### Return type
 
@@ -385,6 +386,82 @@ Other parameters are passed through a pointer to a apiRunTestsSyncRequest struct
 ### HTTP request headers
 
 - **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## Search
+
+> SOSLResult Search(ctx).Q(q).Execute()
+
+Search for records containing specified values.
+
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm)
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/tooling"
+)
+
+func main() {
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
+
+    configuration := tooling.NewConfiguration()
+    apiClient := tooling.NewAPIClient(configuration, tokenSrc)
+
+    q := "q_example" // string | SOSL search statement
+
+    resp, r, err := apiClient.DefaultApi.Search(context.Background()).Q(q).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.Search``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `Search`: SOSLResult
+    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.Search`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+ |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSearchRequest struct via the builder pattern
+
+
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  **q** | **string** | SOSL search statement |  |
+
+### Return type
+
+[**SOSLResult**](SOSLResult.md)
+
+### Authorization
+
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

@@ -92,6 +92,20 @@ type DefaultApi interface {
 	// RunTestsSyncExecute executes the request
 	//  @return RunTestsResult
 	RunTestsSyncExecute(r ApiRunTestsSyncRequest) (*RunTestsResult, *http.Response, error)
+
+	/*
+	Search Executes SOSL
+
+	Search for records containing specified values.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSearchRequest
+	*/
+	Search(ctx context.Context) ApiSearchRequest
+
+	// SearchExecute executes the request
+	//  @return SOSLResult
+	SearchExecute(r ApiSearchRequest) (*SOSLResult, *http.Response, error)
 }
 
 // DefaultApiService DefaultApi service
@@ -357,6 +371,7 @@ type ApiQueryRequest struct {
 	q *string
 }
 
+// SOQL query statement
 func (r ApiQueryRequest) Q(q string) ApiQueryRequest {
 	r.q = &q
 	return r
@@ -676,6 +691,134 @@ func (a *DefaultApiService) RunTestsSyncExecute(r ApiRunTestsSyncRequest) (*RunT
 	}
 	// body params
 	localVarPostBody = r.testRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+    token.SetAuthHeader(req)
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+
+    respBodyReadCloser := localVarHTTPResponse.Body
+    if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+        respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+    }
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+        localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+        localVarHTTPResponse.Body.Close()
+        respBodyReadCloser.Close()
+        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+        if err != nil {
+            return localVarReturnValue, localVarHTTPResponse, err
+        }
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+    localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+    localVarHTTPResponse.Body.Close()
+    respBodyReadCloser.Close()
+    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+    if err != nil {
+        return localVarReturnValue, localVarHTTPResponse, err
+    }
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+    return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiSearchRequest struct {
+	ctx context.Context
+	ApiService DefaultApi
+	q *string
+}
+
+// SOSL search statement
+func (r ApiSearchRequest) Q(q string) ApiSearchRequest {
+	r.q = &q
+	return r
+}
+
+func (r ApiSearchRequest) Execute() (*SOSLResult, *http.Response, error) {
+	return r.ApiService.SearchExecute(r)
+}
+
+/*
+Search Executes SOSL
+
+Search for records containing specified values.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiSearchRequest
+*/
+func (a *DefaultApiService) Search(ctx context.Context) ApiSearchRequest {
+	return ApiSearchRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return SOSLResult
+func (a *DefaultApiService) SearchExecute(r ApiSearchRequest) (*SOSLResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SOSLResult
+	)
+
+    token, err := a.client.TokenSrc.Token()
+    if err != nil {
+        return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+    }
+
+    activeServer := a.client.cfg.GetActiveServer()
+    activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
+
+	localVarPath := activeServer.GetURL() + "/search"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.q == nil {
+		return localVarReturnValue, nil, reportError("q is required and must be specified")
+	}
+
+	localVarQueryParams.Add("q", parameterToString(*r.q, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

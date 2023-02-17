@@ -17,6 +17,7 @@ docs/FlowCoverageWarning.md
 docs/FlowProcessType.md
 docs/QueryResult.md
 docs/RunTestsResult.md
+docs/SOSLResult.md
 docs/TestLevel.md
 docs/TestRequest.md
 docs/TestResultsSuccess.md
@@ -38,6 +39,7 @@ model_flow_coverage_warning.go
 model_flow_process_type.go
 model_query_result.go
 model_run_tests_result.go
+model_sosl_result.go
 model_test_level.go
 model_test_request.go
 model_test_results_success.go
@@ -47,4 +49,5 @@ model_tests_array_item.go
 model_tests_array_max_failed_tests_item.go
 model_tests_array_test_level_item.go
 response.go
+test/api_default_test.go
 utils.go
