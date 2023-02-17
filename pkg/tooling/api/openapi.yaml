@@ -1,0 +1,1665 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: russell-laboe@outlook.com
+    name: Russell Laboe
+  title: Salesforce Platform REST API
+  version: "56.0"
+servers:
+- description: API Base URL
+  url: "{instanceUrl}/services/data/v{apiVersion}/tooling"
+  variables:
+    instanceUrl:
+      default: https://myorg.lightning.force.com
+      description: Salesforce server domain
+    apiVersion:
+      default: "56.0"
+      description: Salesforce api version
+security:
+- oAuth: []
+paths:
+  /completions:
+    get:
+      description: Retrieves available code completions of the referenced type for
+        Apex system method symbols (type=apex). Available from API version 28.0 or
+        later. Retrieves available code completions of the referenced type for Visualforce
+        markup (type=visualforce). Available from API version 38.0 or later.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: getCompletions
+      parameters:
+      - explode: true
+        in: query
+        name: type
+        required: true
+        schema:
+          $ref: '#/components/schemas/CompletionType'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: {}
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Retrieve available code completions
+  /executeAnonymous:
+    get:
+      description: Executes Apex code anonymously. Available from API version 29.0
+        or later.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: executeAnonymous
+      parameters:
+      - explode: true
+        in: query
+        name: anonymousBody
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteAnonymousResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Executes anonymous Apex
+  /query:
+    get:
+      description: "Executes a query against an object and returns data that matches\
+        \ the specified criteria. Tooling API exposes objects like EntityDefinition\
+        \ and FieldDefinition that use the external object framework. That is, they\
+        \ don’t exist in the database but are constructed dynamically. Special query\
+        \ rules apply to virtual entities. If the query result is too large, it’s\
+        \ broken up into batches. The response contains the first batch of results\
+        \ and a query identifier. The identifier can be used in a request to retrieve\
+        \ the next batch."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: query
+      parameters:
+      - description: SOQL query statement
+        explode: true
+        in: query
+        name: q
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Executes query
+  /runTestsAsynchronous:
+    post:
+      description: "Runs one or more methods within one or more Apex classes, using\
+        \ the asynchronous test execution mechanism. In the request body, you can\
+        \ specify test class names and IDs, suite names and IDs, the maximum number\
+        \ of failed tests to allow, and the test level, as comma-separated lists or\
+        \ as an array. You can also indicate whether to opt out of collecting code\
+        \ coverage information during the test run (available in API version 43.0\
+        \ and later)."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: runTestsAsync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AsyncTestRequest'
+      responses:
+        "200":
+          content:
+            text/plain; charset=utf-8:
+              schema:
+                type: string
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Run tests asynchronously
+  /runTestsSynchronous:
+    post:
+      description: "Runs one or more methods within an Apex class, using the synchronous\
+        \ test execution mechanism. All test methods in a synchronous test run must\
+        \ be in the same class."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: runTestsSync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunTestsResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Run tests synchronously
+  /search:
+    get:
+      description: Search for records containing specified values.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: search
+      parameters:
+      - description: SOSL search statement
+        explode: true
+        in: query
+        name: q
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SOSLResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Executes SOSL
+  /sobjects:
+    get:
+      description: Lists the available Tooling API objects and their metadata.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: getSObjects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeGlobalResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: List SObjects
+  /sobjects/{SObjectName}:
+    get:
+      description: Describes the individual metadata for the specified object.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: getSObject
+      parameters:
+      - explode: false
+        in: path
+        name: SObjectName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SObjectResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Describe SObject metadata
+    post:
+      description: Creates record for the specified object.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: createRecord
+      parameters:
+      - explode: false
+        in: path
+        name: SObjectName
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Create a new record
+  /sobjects/{SObjectName}/describe:
+    get:
+      description: "Completely describes the individual metadata at all levels for\
+        \ the specified object. For example, use this resource to retrieve the fields,\
+        \ URLs, and child relationships for a Tooling API object."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: describeSObject
+      parameters:
+      - explode: false
+        in: path
+        name: SObjectName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeSObjectResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Completely describe SObject metadata
+  /sobjects/{SObjectName}/{id}:
+    delete:
+      description: Delete records based on the specified object ID.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: deleteRecord
+      parameters:
+      - explode: false
+        in: path
+        name: SObjectName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record Id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Delete record
+    get:
+      description: Retrieve records or fields based on the specified object ID.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: retrieveRecord
+      parameters:
+      - explode: false
+        in: path
+        name: SObjectName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record Id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Retrieve records or fields
+    patch:
+      description: Update records based on the specified object ID.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: updateRecord
+      parameters:
+      - explode: false
+        in: path
+        name: SObjectName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record Id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "204":
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Update record
+components:
+  schemas:
+    CompletionType:
+      description: Type of completion
+      enum:
+      - apex
+      - visualforce
+      title: Completion Type
+      type: string
+    ExecuteAnonymousResult:
+      example:
+        compiled: true
+        line: 0
+        success: true
+        column: 6
+        exceptionStackTrace: exceptionStackTrace
+        compileProblem: compileProblem
+        exceptionMessage: exceptionMessage
+      properties:
+        line:
+          format: int32
+          type: integer
+        column:
+          format: int32
+          type: integer
+        compiled:
+          type: boolean
+        success:
+          type: boolean
+        compileProblem:
+          format: nullable
+          type: string
+        exceptionStackTrace:
+          format: nullable
+          type: string
+        exceptionMessage:
+          format: nullable
+          type: string
+      type: object
+    QueryResult:
+      example:
+        totalSize: 6
+        size: 0
+        records:
+        - "{}"
+        - "{}"
+        entityTypeName: entityTypeName
+        queryLocator: queryLocator
+        done: true
+      properties:
+        size:
+          format: int32
+          type: integer
+        totalSize:
+          format: int32
+          type: integer
+        done:
+          type: boolean
+        queryLocator:
+          nullable: true
+          type: string
+        entityTypeName:
+          type: string
+        records:
+          items:
+            type: object
+          type: array
+      required:
+      - done
+      - entityTypeName
+      - queryLocator
+      - records
+      - size
+      - totalSize
+    SOSLResult:
+      example:
+        records:
+        - "{}"
+        - "{}"
+      properties:
+        searchRecords:
+          items:
+            type: object
+          type: array
+      required:
+      - searchRecords
+    AsyncTestRequest:
+      oneOf:
+      - $ref: '#/components/schemas/AsyncTestSimpleRequest'
+      - $ref: '#/components/schemas/TestRequest'
+    AsyncTestSimpleRequest:
+      properties:
+        classNames:
+          type: string
+        classids:
+          type: string
+        suiteNames:
+          type: string
+        suiteids:
+          type: string
+        maxFailedTests:
+          type: string
+        testLevel:
+          type: string
+        skipCodeCoverage:
+          type: string
+    TestRequest:
+      example:
+        tests:
+        - null
+        - null
+      properties:
+        tests:
+          items:
+            $ref: '#/components/schemas/TestsArrayItem'
+          type: array
+    TestsArrayClassNameItem:
+      properties:
+        className:
+          type: string
+        testMethods:
+          items:
+            type: string
+          type: array
+      required:
+      - className
+      type: object
+    TestsArrayClassIdItem:
+      properties:
+        classId:
+          type: string
+        testMethods:
+          items:
+            type: string
+          type: array
+      type: object
+    TestsArrayMaxFailedTestsItem:
+      properties:
+        maxFailedTests:
+          type: integer
+      type: object
+    TestsArrayTestLevelItem:
+      properties:
+        testLevel:
+          $ref: '#/components/schemas/TestLevel'
+      type: object
+    TestLevel:
+      enum:
+      - RunSpecifiedTests
+      - RunLocalTests
+      - RunAllTestsInOrg
+      type: string
+    EncodingType:
+      description: "Use a compression header to compress a REST API request or response.\
+        \ Compression reduces the bandwidth required for a request, although it requires\
+        \ more processing power at your client. In most cases, this tradeoff benefits\
+        \ the overall performance of your application. REST API supports the gzip\
+        \ and deflate compression algorithms, as defined by the HTTP 1.1 specification.\
+        \ If you’re unsure about which one to use, gzip is more common than deflate."
+      enum:
+      - gzip
+      - deflate
+      title: Encoding Type
+      type: string
+    TestsArrayItem:
+      oneOf:
+      - $ref: '#/components/schemas/TestsArrayClassNameItem'
+      - $ref: '#/components/schemas/TestsArrayClassIdItem'
+      - $ref: '#/components/schemas/TestsArrayMaxFailedTestsItem'
+      - $ref: '#/components/schemas/TestsArrayTestLevelItem'
+      type: object
+    RunTestsResult:
+      example:
+        apexLogId: apexLogId
+        codeCoverageWarnings:
+        - name: name
+          namespace: namespace
+          id: id
+          message: message
+        - name: name
+          namespace: namespace
+          id: id
+          message: message
+        numFailures: 6
+        failures:
+        - "{}"
+        - "{}"
+        successes:
+        - name: name
+          namespace: namespace
+          methodName: methodName
+          id: id
+          time: 3
+          seeAllData: true
+        - name: name
+          namespace: namespace
+          methodName: methodName
+          id: id
+          time: 3
+          seeAllData: true
+        numTestsRun: 1
+        totalTime: 5.962133916683182
+        flowCoverageWarnings:
+        - flowNamespace: flowNamespace
+          message: message
+          flowId: flowId
+          flowName: flowName
+        - flowNamespace: flowNamespace
+          message: message
+          flowId: flowId
+          flowName: flowName
+        codeCoverage:
+        - dmlInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          soqlInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          name: name
+          namespace: namespace
+          id: id
+          methodInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          type: type
+          locationsNotCovered:
+          - line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          - line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          numLocations: 0
+          soslInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+        - dmlInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          soqlInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          name: name
+          namespace: namespace
+          id: id
+          methodInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          type: type
+          locationsNotCovered:
+          - line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          - line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          numLocations: 0
+          soslInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+        flowCoverage:
+        - elementsNotCovered:
+          - elementsNotCovered
+          - elementsNotCovered
+          flowNamespace: flowNamespace
+          numElementsNotCovered: 2
+          processType: null
+          flowId: flowId
+          flowName: flowName
+          numElements: 5
+        - elementsNotCovered:
+          - elementsNotCovered
+          - elementsNotCovered
+          flowNamespace: flowNamespace
+          numElementsNotCovered: 2
+          processType: null
+          flowId: flowId
+          flowName: flowName
+          numElements: 5
+      properties:
+        apexLogId:
+          type: string
+        codeCoverage:
+          items:
+            $ref: '#/components/schemas/CodeCoverageResult'
+          type: array
+        codeCoverageWarnings:
+          items:
+            $ref: '#/components/schemas/CodeCoverageWarning'
+          type: array
+        failures:
+          items:
+            type: object
+          type: array
+        flowCoverage:
+          items:
+            $ref: '#/components/schemas/FlowCoverageResult'
+          type: array
+        flowCoverageWarnings:
+          items:
+            $ref: '#/components/schemas/FlowCoverageWarning'
+          type: array
+        numFailures:
+          format: int32
+          type: integer
+        numTestsRun:
+          format: int32
+          type: integer
+        successes:
+          items:
+            $ref: '#/components/schemas/TestResultsSuccess'
+          type: array
+        totalTime:
+          format: double
+          type: number
+      required:
+      - apexLogId
+      - numFailures
+      - numTestsRun
+      - totalTime
+      type: object
+    CodeCoverageResult:
+      example:
+        dmlInfo:
+          line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        soqlInfo:
+          line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        name: name
+        namespace: namespace
+        id: id
+        methodInfo:
+          line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        type: type
+        locationsNotCovered:
+        - line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        - line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        numLocations: 0
+        soslInfo:
+          line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+      properties:
+        dmlInfo:
+          $ref: '#/components/schemas/CodeLocation'
+        id:
+          type: string
+        locationsNotCovered:
+          items:
+            $ref: '#/components/schemas/CodeLocation'
+          type: array
+        methodInfo:
+          $ref: '#/components/schemas/CodeLocation'
+        name:
+          type: string
+        namespace:
+          type: string
+        numLocations:
+          format: int32
+          type: integer
+        soqlInfo:
+          $ref: '#/components/schemas/CodeLocation'
+        soslInfo:
+          $ref: '#/components/schemas/CodeLocation'
+        type:
+          type: string
+      required:
+      - id
+      - name
+      - namespace
+      - numLocations
+      - type
+      type: object
+    CodeCoverageWarning:
+      example:
+        name: name
+        namespace: namespace
+        id: id
+        message: message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        namespace:
+          format: nullable
+          type: string
+      required:
+      - id
+      - message
+      - name
+      type: object
+    FlowCoverageResult:
+      example:
+        elementsNotCovered:
+        - elementsNotCovered
+        - elementsNotCovered
+        flowNamespace: flowNamespace
+        numElementsNotCovered: 2
+        processType: null
+        flowId: flowId
+        flowName: flowName
+        numElements: 5
+      properties:
+        elementsNotCovered:
+          items:
+            type: string
+          type: array
+        flowId:
+          type: string
+        flowName:
+          type: string
+        flowNamespace:
+          format: nullable
+          type: string
+        numElements:
+          format: int32
+          type: integer
+        numElementsNotCovered:
+          format: int32
+          type: integer
+        processType:
+          $ref: '#/components/schemas/FlowProcessType'
+      required:
+      - flowId
+      - flowName
+      - numElements
+      - numElementsNotCovered
+      type: object
+    CodeLocation:
+      example:
+        line: 6
+        numExecutions: 1
+        column: 0
+        time: 5.962133916683182
+      properties:
+        column:
+          format: int32
+          type: integer
+        line:
+          format: int32
+          type: integer
+        numExecutions:
+          format: int32
+          type: integer
+        time:
+          format: double
+          type: number
+      required:
+      - column
+      - line
+      - numExecutions
+      - time
+      type: object
+    TestResultsSuccess:
+      properties:
+        id:
+          type: string
+        methodName:
+          type: string
+        name:
+          type: string
+        namespace:
+          format: nullable
+          type: string
+        seeAllData:
+          type: boolean
+        time:
+          format: double
+          type: number
+      required:
+      - id
+      - methodName
+      - name
+      - seeAllData
+      - time
+      type: object
+    FlowProcessType:
+      enum:
+      - ActionCadenceAutolaunchedFlow
+      - ActionCadenceStepFlow
+      - Appointments
+      - AutoLaunchedFlow
+      - CheckoutFlow
+      - ContactRequestFlow
+      - CustomerLifecycle
+      - CustomEvent
+      - EvaluationFlow
+      - FieldServiceMobile
+      - FieldServiceWeb
+      - Flow
+      - FSCLending
+      - InvocableProcess
+      - LoginFlow
+      - LoyaltyManagementFlow
+      - Orchestrator
+      - RoutingFlow
+      - Survey
+      - SurveyEnrich
+      - Workflow
+      type: string
+    FlowCoverageWarning:
+      example:
+        flowNamespace: flowNamespace
+        message: message
+        flowId: flowId
+        flowName: flowName
+      properties:
+        flowId:
+          type: string
+        flowName:
+          type: string
+        flowNamespace:
+          nullable: true
+          type: string
+        message:
+          type: string
+      required:
+      - flowId
+      - flowName
+      - message
+    DescribeGlobalResult:
+      example:
+        maxBatchSize: 0
+        sobjects:
+        - mruEnabled: true
+          updateable: true
+          activateable: true
+          deprecatedAndHidden: true
+          deletable: true
+          replicateable: true
+          isSubtype: true
+          mergeable: true
+          urls:
+            rowTemplate: rowTemplate
+            describe: describe
+            sobject: sobject
+          feedEnabled: true
+          customSetting: true
+          isInterface: true
+          deepCloneable: true
+          layoutable: true
+          custom: true
+          associateParentEntity: associateParentEntity
+          undeletable: true
+          label: label
+          keyPrefix: keyPrefix
+          searchable: true
+          queryable: true
+          createable: true
+          retrieveable: true
+          associateEntityType: associateEntityType
+          hasSubtypes: true
+          name: name
+          labelPlural: labelPlural
+          triggerable: true
+        - mruEnabled: true
+          updateable: true
+          activateable: true
+          deprecatedAndHidden: true
+          deletable: true
+          replicateable: true
+          isSubtype: true
+          mergeable: true
+          urls:
+            rowTemplate: rowTemplate
+            describe: describe
+            sobject: sobject
+          feedEnabled: true
+          customSetting: true
+          isInterface: true
+          deepCloneable: true
+          layoutable: true
+          custom: true
+          associateParentEntity: associateParentEntity
+          undeletable: true
+          label: label
+          keyPrefix: keyPrefix
+          searchable: true
+          queryable: true
+          createable: true
+          retrieveable: true
+          associateEntityType: associateEntityType
+          hasSubtypes: true
+          name: name
+          labelPlural: labelPlural
+          triggerable: true
+        encoding: encoding
+      properties:
+        encoding:
+          type: string
+        maxBatchSize:
+          format: int32
+          type: integer
+        sobjects:
+          items:
+            $ref: '#/components/schemas/SObjectDescribe'
+          type: array
+    SObjectDescribeURL:
+      example:
+        rowTemplate: rowTemplate
+        describe: describe
+        sobject: sobject
+      properties:
+        rowTemplate:
+          type: string
+        describe:
+          type: string
+        sobject:
+          type: string
+      type: object
+    SObjectDescribe:
+      example:
+        mruEnabled: true
+        updateable: true
+        activateable: true
+        deprecatedAndHidden: true
+        deletable: true
+        replicateable: true
+        isSubtype: true
+        mergeable: true
+        urls:
+          rowTemplate: rowTemplate
+          describe: describe
+          sobject: sobject
+        feedEnabled: true
+        customSetting: true
+        isInterface: true
+        deepCloneable: true
+        layoutable: true
+        custom: true
+        associateParentEntity: associateParentEntity
+        undeletable: true
+        label: label
+        keyPrefix: keyPrefix
+        searchable: true
+        queryable: true
+        createable: true
+        retrieveable: true
+        associateEntityType: associateEntityType
+        hasSubtypes: true
+        name: name
+        labelPlural: labelPlural
+        triggerable: true
+      properties:
+        activateable:
+          type: boolean
+        associateEntityType:
+          format: nullable
+          type: string
+        associateParentEntity:
+          format: nullable
+          type: string
+        createable:
+          type: boolean
+        custom:
+          type: boolean
+        customSetting:
+          type: boolean
+        deepCloneable:
+          type: boolean
+        deletable:
+          type: boolean
+        deprecatedAndHidden:
+          type: boolean
+        feedEnabled:
+          type: boolean
+        hasSubtypes:
+          type: boolean
+        isInterface:
+          type: boolean
+        isSubtype:
+          type: boolean
+        keyPrefix:
+          type: string
+        label:
+          type: string
+        labelPlural:
+          type: string
+        layoutable:
+          type: boolean
+        mergeable:
+          type: boolean
+        mruEnabled:
+          type: boolean
+        name:
+          type: string
+        queryable:
+          type: boolean
+        replicateable:
+          type: boolean
+        retrieveable:
+          type: boolean
+        searchable:
+          type: boolean
+        triggerable:
+          type: boolean
+        undeletable:
+          type: boolean
+        updateable:
+          type: boolean
+        urls:
+          $ref: '#/components/schemas/SObjectDescribeURL'
+      type: object
+    SObjectResult:
+      example:
+        objectDescribe:
+          mruEnabled: true
+          updateable: true
+          activateable: true
+          deprecatedAndHidden: true
+          deletable: true
+          replicateable: true
+          isSubtype: true
+          mergeable: true
+          urls:
+            rowTemplate: rowTemplate
+            describe: describe
+            sobject: sobject
+          feedEnabled: true
+          customSetting: true
+          isInterface: true
+          deepCloneable: true
+          layoutable: true
+          custom: true
+          associateParentEntity: associateParentEntity
+          undeletable: true
+          label: label
+          keyPrefix: keyPrefix
+          searchable: true
+          queryable: true
+          createable: true
+          retrieveable: true
+          associateEntityType: associateEntityType
+          hasSubtypes: true
+          name: name
+          labelPlural: labelPlural
+          triggerable: true
+        recentItems:
+        - "{}"
+        - "{}"
+      properties:
+        objectDescribe:
+          $ref: '#/components/schemas/SObjectDescribe'
+        recentItems:
+          items:
+            type: object
+          type: array
+    DescribeSObjectResult:
+      allOf:
+      - $ref: '#/components/schemas/SObjectDescribe'
+      - $ref: '#/components/schemas/DescribeSObjectResultExt'
+    DescribeSObjectResultExt:
+      properties:
+        actionOverrides:
+          items:
+            $ref: '#/components/schemas/ActionOverride'
+          type: array
+        childRelationships:
+          items:
+            $ref: '#/components/schemas/ChildRelationship'
+          type: array
+        compactLayoutable:
+          type: boolean
+        defaultImplementation:
+          format: nullable
+          type: string
+        extendedBy:
+          format: nullable
+          type: string
+        extendsInterfaces:
+          format: nullable
+          type: string
+        fields:
+          items:
+            $ref: '#/components/schemas/Field'
+          type: array
+        implementedBy:
+          format: nullable
+          type: string
+        implementsInterfaces:
+          format: nullable
+          type: string
+        listviewable:
+          format: nullable
+          type: string
+        lookupLayoutable:
+          format: nullable
+          type: string
+        namedLayoutInfos:
+          items:
+            $ref: '#/components/schemas/NamedLayoutInfo'
+          type: array
+        networkScopeFieldName:
+          format: nullable
+          type: string
+        recordTypeInfos:
+          items:
+            $ref: '#/components/schemas/RecordTypeInfo'
+          type: array
+        searchLayoutable:
+          type: boolean
+        sobjectDescribeOption:
+          example: FULL
+          type: string
+        supportedScopes:
+          items:
+            $ref: '#/components/schemas/ScopeInfo'
+          type: array
+    ActionOverride:
+      properties:
+        formFactor:
+          type: string
+        isAvailableInTouch:
+          type: boolean
+        name:
+          type: string
+        pageId:
+          type: string
+        url:
+          type: string
+      type: object
+    ChildRelationship:
+      properties:
+        cascadeDelete:
+          type: boolean
+        childSObject:
+          type: string
+        deprecatedAndHidden:
+          type: boolean
+        field:
+          type: string
+        junctionIdListNames:
+          items:
+            type: string
+          type: array
+        junctionReferenceTo:
+          items:
+            type: string
+          type: array
+        relationshipName:
+          type: string
+        restrictedDelete:
+          type: boolean
+      type: object
+    Field:
+      properties:
+        autonumber:
+          description: "Indicates whether this field is an autonumber field (true)\
+            \ or not (false). Analogous to a SQL IDENTITY type, autonumber fields\
+            \ are read only, non-createable text fields with a maximum length of 30\
+            \ characters. Autonumber fields are read-only fields used to provide a\
+            \ unique ID that is independent of the internal object ID (such as a purchase\
+            \ order number or invoice number). Autonumber fields are configured entirely\
+            \ in the Salesforce user interface. The API provides access to this attribute\
+            \ so that client applications can determine whether a given field is an\
+            \ autonumber field."
+          type: boolean
+        byteLength:
+          description: "For variable-length fields (including binary fields), the\
+            \ maximum size of the field, in bytes."
+          type: integer
+        calculated:
+          description: Indicates whether the field is a custom formula field (true)
+            or not (false). Note that custom formula fields are always read-only.
+          type: boolean
+        caseSensitive:
+          description: Indicates whether the field is case sensitive (true) or not
+            (false).
+          type: boolean
+        controllerName:
+          description: The name of the field that controls the values of this picklist.
+            It only applies if type is picklist or multipicklist and dependentPicklist
+            is true. The mapping of controlling field to dependent field is stored
+            in the validFor attribute of each PicklistEntry for this picklist.
+          type: string
+        createable:
+          description: "Indicates whether the field can be created (true) or not (false).\
+            \ If true, then this field value can be set in a create() call."
+          type: boolean
+        custom:
+          description: Indicates whether the field is a custom field (true) or not
+            (false).
+          type: boolean
+        dataTranslationEnabled:
+          description: Indicates whether data translation is enabled for the field
+            (true) or not (false). Available in API version 49.0 and later.
+          type: boolean
+        defaultedOnCreate:
+          description: "Indicates whether this field is defaulted when created (true)\
+            \ or not (false). If true, then Salesforce implicitly assigns a value\
+            \ for this field when the object is created, even if a value for this\
+            \ field is not passed in on the create() call. For example, in the Opportunity\
+            \ object, the Probability field has this attribute because its value is\
+            \ derived from the Stage field. Similarly, the Owner has this attribute\
+            \ on most objects because its value is derived from the current user (if\
+            \ the Owner field is not specified)."
+          type: boolean
+        defaultValueFormula:
+          description: "The default value specified for this field if the formula\
+            \ is not used. If no value has been specified, this field is not returned."
+          type: string
+        dependentPicklist:
+          description: "Indicates whether a picklist is a dependent picklist (true)\
+            \ where available values depend on the chosen values from a controlling\
+            \ field, or not (false). See About Dependent Picklists."
+          type: boolean
+        deprecatedAndHidden:
+          description: Reserved for future use.
+          type: boolean
+        digits:
+          description: For fields of type integer. Maximum number of digits. The API
+            returns an error if an integer value exceeds the number of digits.
+          type: integer
+        displayLocationInDecimal:
+          description: "Indicates how the geolocation values of a Location custom\
+            \ field appears in the user interface. If true, the geolocation values\
+            \ appear in decimal notation. If false, the geolocation values appear\
+            \ as degrees, minutes, and seconds."
+          type: boolean
+        encrypted:
+          description: "Indicates whether this field is encrypted. This value only\
+            \ appears in the results of a describeSObjects() call when it is true;\
+            \ otherwise, it is omitted from the results. This field is available in\
+            \ API version 31.0 and later."
+          type: boolean
+        extraTypeInfo:
+          description: "If the field is a textarea field type, indicates if the text\
+            \ area is plain text (plaintextarea) or rich text (richtextarea).\nIf\
+            \ the field is a url field type, if this value is imageurl, the URL references\
+            \ an image file. Available on standard fields on standard objects only,\
+            \ for example, Account.photoUrl, Contact.photoUrl, and so on.\nIf the\
+            \ field is a reference field type, indicates the type of external object\
+            \ relationship. Available on external objects only. null—lookup relationship\
+            \ externallookup—external lookup relationship indirectlookup—indirect\
+            \ lookup relationship filterable\tboolean\tIndicates whether the field\
+            \ is filterable (true) or not (false). If true, then this field can be\
+            \ specified in the WHERE clause of a query string in a query() call. filteredLookupInfo\t\
+            FilteredLookupInfo\tIf the field is a reference field type with a lookup\
+            \ filter, filteredLookupInfo contains the lookup filter information for\
+            \ the field. If there is no lookup filter, or the filter is inactive,\
+            \ this field is null.\nThis field is available in API version 31.0 and\
+            \ later. formula\tstring\tThe formula specified for this field. If no\
+            \ formula is specified for this field, it is not returned."
+          type: string
+        groupable:
+          description: Indicates whether the field can be included in the GROUP BY
+            clause of a SOQL query (true) or not (false). See GROUP BY in the Salesforce
+            SOQL and SOSL Reference Guide. Available in API version 18.0 and later.
+          type: boolean
+        highScaleNumber:
+          description: "Indicates whether the field stores numbers to 8 decimal places\
+            \ regardless of what’s specified in the field details (true) or not (false).\
+            \ Used to handle currencies for products that cost fractions of a cent,\
+            \ in large quantities. If high-scale unit pricing isn’t enabled in your\
+            \ organization, this field isn’t returned. Available in API version 33.0\
+            \ and later."
+          type: boolean
+        htmlFormatted:
+          description: Indicates whether a field such as a hyperlink custom formula
+            field has been formatted for HTML and should be encoded for display in
+            HTML (true) or not (false). Also indicates whether a field is a custom
+            formula field that has an IMAGE text function.
+          type: boolean
+        idLookup:
+          description: Indicates whether the field can be used to specify a record
+            in an upsert() call (true) or not (false).
+          type: boolean
+        inlineHelpText:
+          description: The text that displays in the field-level help hover text for
+            this field.
+          type: string
+        label:
+          description: Text label that is displayed next to the field in the Salesforce
+            user interface. This label can be localized.
+          type: string
+        length:
+          description: "Returns the maximum size of the field in Unicode characters\
+            \ (not bytes) or 255, whichever is less. The maximum value returned by\
+            \ the getLength() property is 255. Available in API version 49.0 and later."
+          type: integer
+        mask:
+          description: Reserved for future use.
+          type: string
+        maskType:
+          description: Reserved for future use.
+          type: string
+        name:
+          description: "Field name used in API calls, such as create(), delete(),\
+            \ and query()."
+          type: string
+        nameField:
+          description: |-
+            Indicates whether this field is a name field (true) or not (false). Used to identify the name field for standard objects (such as AccountName for an Account object) and custom objects. Limited to one per object, except where FirstName and LastName fields are used (such as in the Contact object).
+            If a compound name is present, for example the Name field on a person account, nameField is set to true for that record. If no compound name is present, FirstName and LastName have this field set to true.
+          type: boolean
+        namePointing:
+          description: "Indicates whether the field's value is the Name of the parent\
+            \ of this object (true) or not (false). Used for objects whose parents\
+            \ may be more than one type of object, for example a task may have an\
+            \ account or a contact as a parent."
+          type: boolean
+        nillable:
+          description: Indicates whether the field is nillable (true) or not (false).
+            A nillable field can have empty content. A non-nillable field must have
+            a value in order for the object to be created or saved.
+          type: boolean
+        permissionable:
+          description: Indicates whether FieldPermissions can be specified for the
+            field (true) or not (false).
+          type: boolean
+        picklistValues:
+          description: Provides the list of valid values for the picklist. Specified
+            only if restrictedPicklist is true.
+          items:
+            $ref: '#/components/schemas/PicklistEntry'
+          type: array
+        polymorphicForeignKey:
+          description: Indicates whether the foreign key includes multiple entity
+            types (true) or not (false).
+          type: boolean
+        precision:
+          description: "For fields of type double. Maximum number of digits that can\
+            \ be stored, including all numbers to the left and to the right of the\
+            \ decimal point (but excluding the decimal point character)."
+          type: integer
+        relationshipName:
+          description: "The name of the relationship, if this is a master-detail relationship\
+            \ field."
+          type: string
+        relationshipOrder:
+          description: "The type of relationship for a master-detail relationship\
+            \ field. Valid values are: `0` if the field is the primary relationship\
+            \ `1` if the field is the secondary relationship"
+          enum:
+          - 0
+          - 1
+          type: integer
+        referenceTargetField:
+          description: Applies only to indirect lookup relationships on external objects.
+            Name of the custom field on the parent standard or custom object whose
+            values are matched against the values of the child external object's indirect
+            lookup relationship field. This matching is done to determine which records
+            are related to each other. This field is available in API version 32.0
+            and later.
+          type: string
+        referenceTo:
+          description: "For fields that refer to other objects, this array indicates\
+            \ the object types of the referenced objects."
+          items:
+            type: string
+          type: array
+        restrictedPicklist:
+          description: Indicates whether the field is a restricted picklist (true)
+            or not (false).
+          type: boolean
+        scale:
+          description: "For fields of type double. Number of digits to the right of\
+            \ the decimal point. The API silently truncates any extra digits to the\
+            \ right of the decimal point, but it returns a fault response if the number\
+            \ has too many digits to the left of the decimal point."
+          type: integer
+        searchPrefilterable:
+          description: Indicates whether a foreign key can be included in prefiltering
+            (true) or not (false) when used in a SOSL WHERE clause. Prefiltering means
+            to filter by a specific field value before executing the full search query.
+            Available in API version 40.0 and later.
+          type: boolean
+        soapType:
+          type: string
+        sortable:
+          description: Indicates whether a query can sort on this field (true) or
+            not (false).
+          type: boolean
+        type:
+          $ref: '#/components/schemas/FieldType'
+        unique:
+          description: Indicates whether the value must be unique true) or not false).
+          type: boolean
+        updateable:
+          description: |-
+            Indicates one of the following: Whether the field is updateable, (true) or not (false).
+            If true, then this field value can be set in an update() call.
+            If the field is in a master-detail relationship on a custom object, indicates whether the child records can be reparented to different parent records (true), false otherwise.
+          type: boolean
+        writeRequiresMasterRead:
+          description: "This field only applies to master-detail relationships. Indicates\
+            \ whether a user requires read sharing access (true) or write sharing\
+            \ access (false) to the parent record to insert, update, and delete a\
+            \ child record. In both cases, a user also needs Create, Edit, and Delete\
+            \ object permissions for the child object."
+          type: boolean
+      type: object
+    FieldType:
+      description: See FieldType for a list of allowable values.
+      enum:
+      - string
+      - boolean
+      - int
+      - double
+      - date
+      - datetime
+      - base64
+      - id
+      - reference
+      - currency
+      - textarea
+      - percent
+      - phone
+      - url
+      - email
+      - combobox
+      - picklist
+      - multipicklist
+      - anyType
+      - location
+      - complexvalue
+      type: string
+    PicklistEntry:
+      properties:
+        active:
+          description: Indicates whether this item must be displayed (true) or not
+            (false) in the drop-down list for the picklist field in the user interface.
+          type: boolean
+        validFor:
+          description: A set of bits where each bit indicates a controlling value
+            for which this `PicklistEntry` is valid. See About Dependent Picklists.
+          type: string
+        defaultValue:
+          description: Indicates whether this item is the default item (true) in the
+            picklist or not (false). Only one item in a picklist can be designated
+            as the default.
+          type: boolean
+        label:
+          description: Display name of this item in the picklist.
+          type: string
+        value:
+          description: Value of this item in the picklist.
+          type: string
+      type: object
+    NamedLayoutInfo:
+      properties:
+        name:
+          description: Name of this layout.
+          type: string
+      type: object
+    RecordTypeInfo:
+      description: The name of the named layout for the object. Standard objects can
+        have defined named layouts which are separate from the primary layout for
+        both the profile and the record type.
+      properties:
+        available:
+          description: Indicates whether this record type is available (true) or not
+            (false). Availability is used to display a list of available record types
+            to the user when they are creating a new record.
+          type: boolean
+        defaultRecordTypeMapping:
+          description: Indicates whether this is the default record type mapping (true)
+            or not (false).
+          type: boolean
+        developerName:
+          description: Developer name of this record type. Available in API versions
+            43.0 and later.
+          type: string
+        master:
+          description: Indicates whether this is the main record type (true) or not
+            (false). The main record type is the default record type that’s used when
+            a record has no custom record type associated with it.
+          type: boolean
+        name:
+          description: Name of this record type.
+          type: string
+        recordTypeId:
+          description: ID of this record type.
+          type: string
+      type: object
+    ScopeInfo:
+      description: "A scope for an object that can be used to filter object records.\
+        \ For example, Account may have a supported ScopeInfo of “mine” (with a UI\
+        \ label of “My accounts”) which filters only Account records for the current\
+        \ user."
+      properties:
+        label:
+          description: UI label for this scope.
+          type: string
+        name:
+          description: Name of this scope.
+          type: string
+      type: object
+  securitySchemes:
+    oAuth:
+      description: This API uses OAuth 2 with various flows
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: /services/oauth2/token
+        password:
+          scopes: {}
+          tokenUrl: /services/oauth2/token
+      type: oauth2
