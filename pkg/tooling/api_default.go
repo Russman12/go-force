@@ -52,6 +52,20 @@ type DefaultApi interface {
 	GetCompletionsExecute(r ApiGetCompletionsRequest) (interface{}, *http.Response, error)
 
 	/*
+	GetSObjects List SObjects
+
+	Lists the available Tooling API objects and their metadata.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetSObjectsRequest
+	*/
+	GetSObjects(ctx context.Context) ApiGetSObjectsRequest
+
+	// GetSObjectsExecute executes the request
+	//  @return DescribeGlobalResult
+	GetSObjectsExecute(r ApiGetSObjectsRequest) (*DescribeGlobalResult, *http.Response, error)
+
+	/*
 	Query Executes query
 
 	Executes a query against an object and returns data that matches the specified criteria. Tooling API exposes objects like EntityDefinition and FieldDefinition that use the external object framework. That is, they don’t exist in the database but are constructed dynamically. Special query rules apply to virtual entities. If the query result is too large, it’s broken up into batches. The response contains the first batch of results and a query identifier. The identifier can be used in a request to retrieve the next batch.
@@ -296,6 +310,123 @@ func (a *DefaultApiService) GetCompletionsExecute(r ApiGetCompletionsRequest) (i
 	}
 
 	localVarQueryParams.Add("type", parameterToString(*r.type_, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+    token.SetAuthHeader(req)
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+
+    respBodyReadCloser := localVarHTTPResponse.Body
+    if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+        respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+    }
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+        localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+        localVarHTTPResponse.Body.Close()
+        respBodyReadCloser.Close()
+        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+        if err != nil {
+            return localVarReturnValue, localVarHTTPResponse, err
+        }
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+    localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+    localVarHTTPResponse.Body.Close()
+    respBodyReadCloser.Close()
+    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+    if err != nil {
+        return localVarReturnValue, localVarHTTPResponse, err
+    }
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+    return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetSObjectsRequest struct {
+	ctx context.Context
+	ApiService DefaultApi
+}
+
+func (r ApiGetSObjectsRequest) Execute() (*DescribeGlobalResult, *http.Response, error) {
+	return r.ApiService.GetSObjectsExecute(r)
+}
+
+/*
+GetSObjects List SObjects
+
+Lists the available Tooling API objects and their metadata.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiGetSObjectsRequest
+*/
+func (a *DefaultApiService) GetSObjects(ctx context.Context) ApiGetSObjectsRequest {
+	return ApiGetSObjectsRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return DescribeGlobalResult
+func (a *DefaultApiService) GetSObjectsExecute(r ApiGetSObjectsRequest) (*DescribeGlobalResult, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *DescribeGlobalResult
+	)
+
+    token, err := a.client.TokenSrc.Token()
+    if err != nil {
+        return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+    }
+
+    activeServer := a.client.cfg.GetActiveServer()
+    activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
+
+	localVarPath := activeServer.GetURL() + "/sobjects"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

@@ -10,6 +10,9 @@ docs/CodeCoverageWarning.md
 docs/CodeLocation.md
 docs/CompletionType.md
 docs/DefaultApi.md
+docs/DescribeGlobalResult.md
+docs/DescribeSObject.md
+docs/DescribeSObjectURL.md
 docs/EncodingType.md
 docs/ExecuteAnonymousResult.md
 docs/FlowCoverageResult.md
@@ -32,6 +35,9 @@ model_code_coverage_result.go
 model_code_coverage_warning.go
 model_code_location.go
 model_completion_type.go
+model_describe_global_result.go
+model_describe_s_object.go
+model_describe_s_object_url.go
 model_encoding_type.go
 model_execute_anonymous_result.go
 model_flow_coverage_result.go

@@ -206,6 +206,27 @@ paths:
           content: {}
           description: Bad Request
       summary: Executes SOSL
+  /sobjects:
+    get:
+      description: Lists the available Tooling API objects and their metadata.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: getSObjects
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DescribeGlobalResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: List SObjects
 components:
   schemas:
     CompletionType:
@@ -764,6 +785,189 @@ components:
       - flowId
       - flowName
       - message
+    DescribeGlobalResult:
+      example:
+        maxBatchSize: 0
+        sobjects:
+        - mruEnabled: true
+          updateable: true
+          activateable: true
+          deprecatedAndHidden: true
+          deletable: true
+          replicateable: true
+          isSubtype: true
+          mergeable: true
+          urls:
+            rowTemplate: rowTemplate
+            describe: describe
+            sobject: sobject
+          feedEnabled: true
+          customSetting: true
+          isInterface: true
+          deepCloneable: true
+          layoutable: true
+          custom: true
+          associateParentEntity: associateParentEntity
+          undeletable: true
+          label: label
+          keyPrefix: keyPrefix
+          searchable: true
+          queryable: true
+          createable: true
+          retrieveable: true
+          associateEntityType: associateEntityType
+          hasSubtypes: true
+          name: name
+          labelPlural: labelPlural
+          triggerable: true
+        - mruEnabled: true
+          updateable: true
+          activateable: true
+          deprecatedAndHidden: true
+          deletable: true
+          replicateable: true
+          isSubtype: true
+          mergeable: true
+          urls:
+            rowTemplate: rowTemplate
+            describe: describe
+            sobject: sobject
+          feedEnabled: true
+          customSetting: true
+          isInterface: true
+          deepCloneable: true
+          layoutable: true
+          custom: true
+          associateParentEntity: associateParentEntity
+          undeletable: true
+          label: label
+          keyPrefix: keyPrefix
+          searchable: true
+          queryable: true
+          createable: true
+          retrieveable: true
+          associateEntityType: associateEntityType
+          hasSubtypes: true
+          name: name
+          labelPlural: labelPlural
+          triggerable: true
+        encoding: encoding
+      properties:
+        encoding:
+          type: string
+        maxBatchSize:
+          format: int32
+          type: integer
+        sobjects:
+          items:
+            $ref: '#/components/schemas/DescribeSObject'
+          type: array
+    DescribeSObjectURL:
+      example:
+        rowTemplate: rowTemplate
+        describe: describe
+        sobject: sobject
+      properties:
+        rowTemplate:
+          type: string
+        describe:
+          type: string
+        sobject:
+          type: string
+      type: object
+    DescribeSObject:
+      example:
+        mruEnabled: true
+        updateable: true
+        activateable: true
+        deprecatedAndHidden: true
+        deletable: true
+        replicateable: true
+        isSubtype: true
+        mergeable: true
+        urls:
+          rowTemplate: rowTemplate
+          describe: describe
+          sobject: sobject
+        feedEnabled: true
+        customSetting: true
+        isInterface: true
+        deepCloneable: true
+        layoutable: true
+        custom: true
+        associateParentEntity: associateParentEntity
+        undeletable: true
+        label: label
+        keyPrefix: keyPrefix
+        searchable: true
+        queryable: true
+        createable: true
+        retrieveable: true
+        associateEntityType: associateEntityType
+        hasSubtypes: true
+        name: name
+        labelPlural: labelPlural
+        triggerable: true
+      properties:
+        activateable:
+          type: boolean
+        associateEntityType:
+          format: nullable
+          type: string
+        associateParentEntity:
+          format: nullable
+          type: string
+        createable:
+          type: boolean
+        custom:
+          type: boolean
+        customSetting:
+          type: boolean
+        deepCloneable:
+          type: boolean
+        deletable:
+          type: boolean
+        deprecatedAndHidden:
+          type: boolean
+        feedEnabled:
+          type: boolean
+        hasSubtypes:
+          type: boolean
+        isInterface:
+          type: boolean
+        isSubtype:
+          type: boolean
+        keyPrefix:
+          type: string
+        label:
+          type: string
+        labelPlural:
+          type: string
+        layoutable:
+          type: boolean
+        mergeable:
+          type: boolean
+        mruEnabled:
+          type: boolean
+        name:
+          type: string
+        queryable:
+          type: boolean
+        replicateable:
+          type: boolean
+        retrieveable:
+          type: boolean
+        searchable:
+          type: boolean
+        triggerable:
+          type: boolean
+        undeletable:
+          type: boolean
+        updateable:
+          type: boolean
+        urls:
+          $ref: '#/components/schemas/DescribeSObjectURL'
+      type: object
   securitySchemes:
     oAuth:
       description: This API uses OAuth 2 with various flows

@@ -17,6 +17,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 | ------------ | ------------- | ------------- | ------------- |
 | *DefaultApi* | [**ExecuteAnonymous**](docs/DefaultApi.md#executeanonymous) | **Get** /executeAnonymous | Executes anonymous Apex |
 | *DefaultApi* | [**GetCompletions**](docs/DefaultApi.md#getcompletions) | **Get** /completions | Retrieve available code completions |
+| *DefaultApi* | [**GetSObjects**](docs/DefaultApi.md#getsobjects) | **Get** /sobjects | List SObjects |
 | *DefaultApi* | [**Query**](docs/DefaultApi.md#query) | **Get** /query | Executes query |
 | *DefaultApi* | [**RunTestsAsync**](docs/DefaultApi.md#runtestsasync) | **Post** /runTestsAsynchronous | Run tests asynchronously |
 | *DefaultApi* | [**RunTestsSync**](docs/DefaultApi.md#runtestssync) | **Post** /runTestsSynchronous | Run tests synchronously |
@@ -31,6 +32,9 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
  - [CodeCoverageWarning](docs/CodeCoverageWarning.md)
  - [CodeLocation](docs/CodeLocation.md)
  - [CompletionType](docs/CompletionType.md)
+ - [DescribeGlobalResult](docs/DescribeGlobalResult.md)
+ - [DescribeSObject](docs/DescribeSObject.md)
+ - [DescribeSObjectURL](docs/DescribeSObjectURL.md)
  - [EncodingType](docs/EncodingType.md)
  - [ExecuteAnonymousResult](docs/ExecuteAnonymousResult.md)
  - [FlowCoverageResult](docs/FlowCoverageResult.md)
