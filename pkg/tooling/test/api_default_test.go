@@ -149,4 +149,19 @@ func Test_tooling_DefaultApiService(t *testing.T) {
 
     })
 
+    t.Run("Test DefaultApiService UpdateRecord", func(t *testing.T) {
+
+        t.Skip("skip test")  // remove to run test
+
+        var sObjectName string
+        var id string
+
+        httpRes, err := apiClient.DefaultApi.UpdateRecord(context.Background(), sObjectName, id).Execute()
+
+        require.Nil(t, err)
+        
+        assert.Equal(t, 200, httpRes.StatusCode)
+
+    })
+
 }

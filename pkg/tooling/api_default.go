@@ -167,6 +167,21 @@ type DefaultApi interface {
 	// SearchExecute executes the request
 	//  @return SOSLResult
 	SearchExecute(r ApiSearchRequest) (*SOSLResult, *http.Response, error)
+
+	/*
+	UpdateRecord Update records
+
+	Update records based on the specified object ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sObjectName
+	@param id Record Id
+	@return ApiUpdateRecordRequest
+	*/
+	UpdateRecord(ctx context.Context, sObjectName string, id string) ApiUpdateRecordRequest
+
+	// UpdateRecordExecute executes the request
+	UpdateRecordExecute(r ApiUpdateRecordRequest) (*http.Response, error)
 }
 
 // DefaultApiService DefaultApi service
@@ -1423,4 +1438,123 @@ func (a *DefaultApiService) SearchExecute(r ApiSearchRequest) (*SOSLResult, *htt
 	}
 
     return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateRecordRequest struct {
+	ctx context.Context
+	ApiService DefaultApi
+	sObjectName string
+	id string
+	body *map[string]interface{}
+}
+
+func (r ApiUpdateRecordRequest) Body(body map[string]interface{}) ApiUpdateRecordRequest {
+	r.body = &body
+	return r
+}
+
+func (r ApiUpdateRecordRequest) Execute() (*http.Response, error) {
+	return r.ApiService.UpdateRecordExecute(r)
+}
+
+/*
+UpdateRecord Update records
+
+Update records based on the specified object ID.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sObjectName
+ @param id Record Id
+ @return ApiUpdateRecordRequest
+*/
+func (a *DefaultApiService) UpdateRecord(ctx context.Context, sObjectName string, id string) ApiUpdateRecordRequest {
+	return ApiUpdateRecordRequest{
+		ApiService: a,
+		ctx: ctx,
+		sObjectName: sObjectName,
+		id: id,
+	}
+}
+
+// Execute executes the request
+func (a *DefaultApiService) UpdateRecordExecute(r ApiUpdateRecordRequest) (*http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPatch
+		localVarPostBody     interface{}
+		formFiles            []formFile
+	)
+
+    token, err := a.client.TokenSrc.Token()
+    if err != nil {
+        return nil, &GenericOpenAPIError{error: err.Error()}
+    }
+
+    activeServer := a.client.cfg.GetActiveServer()
+    activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
+
+	localVarPath := activeServer.GetURL() + "/sobjects/{SObjectName}/{id}"
+    pathParams := map[string]string {
+        "SObjectName": url.PathEscape(parameterToString(strings.Trim(r.sObjectName, " "), "")),
+        "id": url.PathEscape(parameterToString(strings.Trim(r.id, " "), "")),
+    }
+    localVarPath = injectUrlVars(localVarPath, pathParams)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.body
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return nil, err
+	}
+
+    token.SetAuthHeader(req)
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarHTTPResponse, err
+	}
+
+
+    respBodyReadCloser := localVarHTTPResponse.Body
+    if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+        respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+    }
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+        localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+        localVarHTTPResponse.Body.Close()
+        respBodyReadCloser.Close()
+        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+        if err != nil {
+            return localVarHTTPResponse, err
+        }
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarHTTPResponse, newErr
+	}
+
+
+    return localVarHTTPResponse, nil
 }

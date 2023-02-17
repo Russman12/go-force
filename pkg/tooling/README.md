@@ -25,6 +25,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 | *DefaultApi* | [**RunTestsAsync**](docs/DefaultApi.md#runtestsasync) | **Post** /runTestsAsynchronous | Run tests asynchronously |
 | *DefaultApi* | [**RunTestsSync**](docs/DefaultApi.md#runtestssync) | **Post** /runTestsSynchronous | Run tests synchronously |
 | *DefaultApi* | [**Search**](docs/DefaultApi.md#search) | **Get** /search | Executes SOSL |
+| *DefaultApi* | [**UpdateRecord**](docs/DefaultApi.md#updaterecord) | **Patch** /sobjects/{SObjectName}/{id} | Update records |
 
 
 ## Documentation For Models
