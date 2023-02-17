@@ -1,4 +1,4 @@
-all: clean bulkv2 rest
+all: clean bulkv2 rest tooling
 
 fmt:
 	go fmt ./... >/dev/null
@@ -11,6 +11,10 @@ bulkv2:
 	go fmt ./pkg/bulkv2/... >/dev/null
 rest:
 	openapi-generator-cli generate -c codegencfg.json -i pkg/rest/api/openapi.yaml --package-name rest -o pkg/rest >/dev/null
+	go fmt ./pkg/rest/... >/dev/null
+	go fmt ./pkg/rest/... >/dev/null
+tooling:
+	openapi-generator-cli generate -c codegencfg.json -i pkg/tooling/api/openapi.yaml --package-name tooling -o pkg/tooling >/dev/null
 	go fmt ./pkg/rest/... >/dev/null
 	go fmt ./pkg/rest/... >/dev/null
 init:
