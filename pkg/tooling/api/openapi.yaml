@@ -256,6 +256,39 @@ paths:
           content: {}
           description: Bad Request
       summary: Describe SObject metadata
+    post:
+      description: Creates record for the specified object.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: createRecord
+      parameters:
+      - explode: false
+        in: path
+        name: SObjectName
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Create a new record
   /sobjects/{SObjectName}/describe:
     get:
       description: "Completely describes the individual metadata at all levels for\

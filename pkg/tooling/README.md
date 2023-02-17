@@ -15,6 +15,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 
 | Class        | Method        | HTTP request  | Summary       |
 | ------------ | ------------- | ------------- | ------------- |
+| *DefaultApi* | [**CreateRecord**](docs/DefaultApi.md#createrecord) | **Post** /sobjects/{SObjectName} | Create a new record |
 | *DefaultApi* | [**DescribeSObject**](docs/DefaultApi.md#describesobject) | **Get** /sobjects/{SObjectName}/describe | Completely describe SObject metadata |
 | *DefaultApi* | [**ExecuteAnonymous**](docs/DefaultApi.md#executeanonymous) | **Get** /executeAnonymous | Executes anonymous Apex |
 | *DefaultApi* | [**GetCompletions**](docs/DefaultApi.md#getcompletions) | **Get** /completions | Retrieve available code completions |

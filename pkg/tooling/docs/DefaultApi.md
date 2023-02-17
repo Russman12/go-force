@@ -4,6 +4,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 
 | Method        | HTTP request  | Summary       |
 | ------------- | ------------- | ------------- |
+| [**CreateRecord**](#createrecord) | **Post** /sobjects/{SObjectName} | Create a new record |
 | [**DescribeSObject**](#describesobject) | **Get** /sobjects/{SObjectName}/describe | Completely describe SObject metadata |
 | [**ExecuteAnonymous**](#executeanonymous) | **Get** /executeAnonymous | Executes anonymous Apex |
 | [**GetCompletions**](#getcompletions) | **Get** /completions | Retrieve available code completions |
@@ -16,6 +17,88 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 | [**Search**](#search) | **Get** /search | Executes SOSL |
 | [**UpdateRecord**](#updaterecord) | **Patch** /sobjects/{SObjectName}/{id} | Update records |
 
+
+
+## CreateRecord
+
+> map[string]interface{} CreateRecord(ctx, sObjectName).Body(body).Execute()
+
+Creates record for the specified object.
+
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm)
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/tooling"
+)
+
+func main() {
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
+
+    configuration := tooling.NewConfiguration()
+    apiClient := tooling.NewAPIClient(configuration, tokenSrc)
+
+    sObjectName := "sObjectName_example" // string | 
+    body := map[string]interface{}{} // map[string]interface{} |  (optional)
+
+    resp, r, err := apiClient.DefaultApi.CreateRecord(context.Background(), sObjectName).Body(body).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.CreateRecord``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateRecord`: map[string]interface{}
+    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.CreateRecord`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for logging, cancellation, deadlines, tracing, etc. | |
+| **sObjectName** | **string** |  |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateRecordRequest struct via the builder pattern
+
+
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+| 
+|  **body** | **map[string]interface{}** |  |  |
+
+### Return type
+
+**map[string]interface{}**
+
+### Authorization
+
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## DescribeSObject
