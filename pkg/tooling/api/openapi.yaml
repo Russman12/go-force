@@ -1,0 +1,734 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: russell-laboe@outlook.com
+    name: Russell Laboe
+  title: Salesforce Platform REST API
+  version: "56.0"
+servers:
+- description: API Base URL
+  url: "{instanceUrl}/services/data/v{apiVersion}/tooling"
+  variables:
+    instanceUrl:
+      default: https://myorg.lightning.force.com
+      description: Salesforce server domain
+    apiVersion:
+      default: "56.0"
+      description: Salesforce api version
+security:
+- oAuth: []
+paths:
+  /completions:
+    get:
+      description: Retrieves available code completions of the referenced type for
+        Apex system method symbols (type=apex). Available from API version 28.0 or
+        later. Retrieves available code completions of the referenced type for Visualforce
+        markup (type=visualforce). Available from API version 38.0 or later.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: getCompletions
+      parameters:
+      - explode: true
+        in: query
+        name: type
+        required: true
+        schema:
+          $ref: '#/components/schemas/CompletionType'
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema: {}
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Retrieve available code completions
+  /executeAnonymous:
+    get:
+      description: Executes Apex code anonymously. Available from API version 29.0
+        or later.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: executeAnonymous
+      parameters:
+      - explode: true
+        in: query
+        name: anonymousBody
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExecuteAnonymousResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Executes anonymous Apex
+  /query:
+    get:
+      description: "Executes a query against an object and returns data that matches\
+        \ the specified criteria. Tooling API exposes objects like EntityDefinition\
+        \ and FieldDefinition that use the external object framework. That is, they\
+        \ don’t exist in the database but are constructed dynamically. Special query\
+        \ rules apply to virtual entities. If the query result is too large, it’s\
+        \ broken up into batches. The response contains the first batch of results\
+        \ and a query identifier. The identifier can be used in a request to retrieve\
+        \ the next batch."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: query
+      parameters:
+      - explode: true
+        in: query
+        name: q
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Executes query
+  /runTestsAsynchronous:
+    post:
+      description: "Runs one or more methods within one or more Apex classes, using\
+        \ the asynchronous test execution mechanism. In the request body, you can\
+        \ specify test class names and IDs, suite names and IDs, the maximum number\
+        \ of failed tests to allow, and the test level, as comma-separated lists or\
+        \ as an array. You can also indicate whether to opt out of collecting code\
+        \ coverage information during the test run (available in API version 43.0\
+        \ and later)."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: runTestsAsync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AsyncTestRequest'
+      responses:
+        "200":
+          content:
+            text/plain; charset=utf-8:
+              schema:
+                type: string
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Run tests asynchronously
+  /runTestsSynchronous:
+    post:
+      description: "Runs one or more methods within an Apex class, using the synchronous\
+        \ test execution mechanism. All test methods in a synchronous test run must\
+        \ be in the same class."
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: runTestsSync
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunTestsResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Run tests synchronously
+components:
+  schemas:
+    CompletionType:
+      description: Type of completion
+      enum:
+      - apex
+      - visualforce
+      title: Completion Type
+      type: string
+    ExecuteAnonymousResult:
+      example:
+        compiled: true
+        line: 0
+        success: true
+        column: 6
+        exceptionStackTrace: exceptionStackTrace
+        compileProblem: compileProblem
+        exceptionMessage: exceptionMessage
+      properties:
+        line:
+          format: int32
+          type: integer
+        column:
+          format: int32
+          type: integer
+        compiled:
+          type: boolean
+        success:
+          type: boolean
+        compileProblem:
+          format: nullable
+          type: string
+        exceptionStackTrace:
+          format: nullable
+          type: string
+        exceptionMessage:
+          format: nullable
+          type: string
+      type: object
+    QueryResult:
+      example:
+        totalSize: 6
+        size: 0
+        records:
+        - "{}"
+        - "{}"
+        entityTypeName: entityTypeName
+        queryLocator: queryLocator
+        done: true
+      properties:
+        size:
+          format: int32
+          type: integer
+        totalSize:
+          format: int32
+          type: integer
+        done:
+          type: boolean
+        queryLocator:
+          nullable: true
+          type: string
+        entityTypeName:
+          type: string
+        records:
+          items:
+            type: object
+          type: array
+      required:
+      - done
+      - entityTypeName
+      - queryLocator
+      - records
+      - size
+      - totalSize
+    AsyncTestRequest:
+      oneOf:
+      - $ref: '#/components/schemas/AsyncTestSimpleRequest'
+      - $ref: '#/components/schemas/TestRequest'
+    AsyncTestSimpleRequest:
+      properties:
+        classNames:
+          type: string
+        classids:
+          type: string
+        suiteNames:
+          type: string
+        suiteids:
+          type: string
+        maxFailedTests:
+          type: string
+        testLevel:
+          type: string
+        skipCodeCoverage:
+          type: string
+    TestRequest:
+      example:
+        tests:
+        - null
+        - null
+      properties:
+        tests:
+          items:
+            $ref: '#/components/schemas/TestsArrayItem'
+          type: array
+    TestsArrayClassNameItem:
+      properties:
+        className:
+          type: string
+        testMethods:
+          items:
+            type: string
+          type: array
+      required:
+      - className
+      type: object
+    TestsArrayClassIdItem:
+      properties:
+        classId:
+          type: string
+        testMethods:
+          items:
+            type: string
+          type: array
+      type: object
+    TestsArrayMaxFailedTestsItem:
+      properties:
+        maxFailedTests:
+          type: integer
+      type: object
+    TestsArrayTestLevelItem:
+      properties:
+        testLevel:
+          $ref: '#/components/schemas/TestLevel'
+      type: object
+    TestLevel:
+      enum:
+      - RunSpecifiedTests
+      - RunLocalTests
+      - RunAllTestsInOrg
+      type: string
+    EncodingType:
+      description: "Use a compression header to compress a REST API request or response.\
+        \ Compression reduces the bandwidth required for a request, although it requires\
+        \ more processing power at your client. In most cases, this tradeoff benefits\
+        \ the overall performance of your application. REST API supports the gzip\
+        \ and deflate compression algorithms, as defined by the HTTP 1.1 specification.\
+        \ If you’re unsure about which one to use, gzip is more common than deflate."
+      enum:
+      - gzip
+      - deflate
+      title: Encoding Type
+      type: string
+    TestsArrayItem:
+      oneOf:
+      - $ref: '#/components/schemas/TestsArrayClassNameItem'
+      - $ref: '#/components/schemas/TestsArrayClassIdItem'
+      - $ref: '#/components/schemas/TestsArrayMaxFailedTestsItem'
+      - $ref: '#/components/schemas/TestsArrayTestLevelItem'
+      type: object
+    RunTestsResult:
+      example:
+        apexLogId: apexLogId
+        codeCoverageWarnings:
+        - name: name
+          namespace: namespace
+          id: id
+          message: message
+        - name: name
+          namespace: namespace
+          id: id
+          message: message
+        numFailures: 6
+        failures:
+        - "{}"
+        - "{}"
+        successes:
+        - name: name
+          namespace: namespace
+          methodName: methodName
+          id: id
+          time: 3
+          seeAllData: true
+        - name: name
+          namespace: namespace
+          methodName: methodName
+          id: id
+          time: 3
+          seeAllData: true
+        numTestsRun: 1
+        totalTime: 5.962133916683182
+        flowCoverageWarnings:
+        - flowNamespace: flowNamespace
+          message: message
+          flowId: flowId
+          flowName: flowName
+        - flowNamespace: flowNamespace
+          message: message
+          flowId: flowId
+          flowName: flowName
+        codeCoverage:
+        - dmlInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          soqlInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          name: name
+          namespace: namespace
+          id: id
+          methodInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          type: type
+          locationsNotCovered:
+          - line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          - line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          numLocations: 0
+          soslInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+        - dmlInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          soqlInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          name: name
+          namespace: namespace
+          id: id
+          methodInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          type: type
+          locationsNotCovered:
+          - line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          - line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+          numLocations: 0
+          soslInfo:
+            line: 6
+            numExecutions: 1
+            column: 0
+            time: 5.962133916683182
+        flowCoverage:
+        - elementsNotCovered:
+          - elementsNotCovered
+          - elementsNotCovered
+          flowNamespace: flowNamespace
+          numElementsNotCovered: 2
+          processType: null
+          flowId: flowId
+          flowName: flowName
+          numElements: 5
+        - elementsNotCovered:
+          - elementsNotCovered
+          - elementsNotCovered
+          flowNamespace: flowNamespace
+          numElementsNotCovered: 2
+          processType: null
+          flowId: flowId
+          flowName: flowName
+          numElements: 5
+      properties:
+        apexLogId:
+          type: string
+        codeCoverage:
+          items:
+            $ref: '#/components/schemas/CodeCoverageResult'
+          type: array
+        codeCoverageWarnings:
+          items:
+            $ref: '#/components/schemas/CodeCoverageWarning'
+          type: array
+        failures:
+          items:
+            type: object
+          type: array
+        flowCoverage:
+          items:
+            $ref: '#/components/schemas/FlowCoverageResult'
+          type: array
+        flowCoverageWarnings:
+          items:
+            $ref: '#/components/schemas/FlowCoverageWarning'
+          type: array
+        numFailures:
+          format: int32
+          type: integer
+        numTestsRun:
+          format: int32
+          type: integer
+        successes:
+          items:
+            $ref: '#/components/schemas/TestResultsSuccess'
+          type: array
+        totalTime:
+          format: double
+          type: number
+      required:
+      - apexLogId
+      - numFailures
+      - numTestsRun
+      - totalTime
+      type: object
+    CodeCoverageResult:
+      example:
+        dmlInfo:
+          line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        soqlInfo:
+          line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        name: name
+        namespace: namespace
+        id: id
+        methodInfo:
+          line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        type: type
+        locationsNotCovered:
+        - line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        - line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+        numLocations: 0
+        soslInfo:
+          line: 6
+          numExecutions: 1
+          column: 0
+          time: 5.962133916683182
+      properties:
+        dmlInfo:
+          $ref: '#/components/schemas/CodeLocation'
+        id:
+          type: string
+        locationsNotCovered:
+          items:
+            $ref: '#/components/schemas/CodeLocation'
+          type: array
+        methodInfo:
+          $ref: '#/components/schemas/CodeLocation'
+        name:
+          type: string
+        namespace:
+          type: string
+        numLocations:
+          format: int32
+          type: integer
+        soqlInfo:
+          $ref: '#/components/schemas/CodeLocation'
+        soslInfo:
+          $ref: '#/components/schemas/CodeLocation'
+        type:
+          type: string
+      required:
+      - id
+      - name
+      - namespace
+      - numLocations
+      - type
+      type: object
+    CodeCoverageWarning:
+      example:
+        name: name
+        namespace: namespace
+        id: id
+        message: message
+      properties:
+        id:
+          type: string
+        message:
+          type: string
+        name:
+          type: string
+        namespace:
+          format: nullable
+          type: string
+      required:
+      - id
+      - message
+      - name
+      type: object
+    FlowCoverageResult:
+      example:
+        elementsNotCovered:
+        - elementsNotCovered
+        - elementsNotCovered
+        flowNamespace: flowNamespace
+        numElementsNotCovered: 2
+        processType: null
+        flowId: flowId
+        flowName: flowName
+        numElements: 5
+      properties:
+        elementsNotCovered:
+          items:
+            type: string
+          type: array
+        flowId:
+          type: string
+        flowName:
+          type: string
+        flowNamespace:
+          format: nullable
+          type: string
+        numElements:
+          format: int32
+          type: integer
+        numElementsNotCovered:
+          format: int32
+          type: integer
+        processType:
+          $ref: '#/components/schemas/FlowProcessType'
+      required:
+      - flowId
+      - flowName
+      - numElements
+      - numElementsNotCovered
+      type: object
+    CodeLocation:
+      example:
+        line: 6
+        numExecutions: 1
+        column: 0
+        time: 5.962133916683182
+      properties:
+        column:
+          format: int32
+          type: integer
+        line:
+          format: int32
+          type: integer
+        numExecutions:
+          format: int32
+          type: integer
+        time:
+          format: double
+          type: number
+      required:
+      - column
+      - line
+      - numExecutions
+      - time
+      type: object
+    TestResultsSuccess:
+      properties:
+        id:
+          type: string
+        methodName:
+          type: string
+        name:
+          type: string
+        namespace:
+          format: nullable
+          type: string
+        seeAllData:
+          type: boolean
+        time:
+          format: double
+          type: number
+      required:
+      - id
+      - methodName
+      - name
+      - seeAllData
+      - time
+      type: object
+    FlowProcessType:
+      enum:
+      - ActionCadenceAutolaunchedFlow
+      - ActionCadenceStepFlow
+      - Appointments
+      - AutoLaunchedFlow
+      - CheckoutFlow
+      - ContactRequestFlow
+      - CustomerLifecycle
+      - CustomEvent
+      - EvaluationFlow
+      - FieldServiceMobile
+      - FieldServiceWeb
+      - Flow
+      - FSCLending
+      - InvocableProcess
+      - LoginFlow
+      - LoyaltyManagementFlow
+      - Orchestrator
+      - RoutingFlow
+      - Survey
+      - SurveyEnrich
+      - Workflow
+      type: string
+    FlowCoverageWarning:
+      example:
+        flowNamespace: flowNamespace
+        message: message
+        flowId: flowId
+        flowName: flowName
+      properties:
+        flowId:
+          type: string
+        flowName:
+          type: string
+        flowNamespace:
+          nullable: true
+          type: string
+        message:
+          type: string
+      required:
+      - flowId
+      - flowName
+      - message
+  securitySchemes:
+    oAuth:
+      description: This API uses OAuth 2 with various flows
+      flows:
+        clientCredentials:
+          scopes: {}
+          tokenUrl: /services/oauth2/token
+        password:
+          scopes: {}
+          tokenUrl: /services/oauth2/token
+      type: oauth2
