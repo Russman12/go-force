@@ -111,6 +111,22 @@ type DefaultApi interface {
 	QueryExecute(r ApiQueryRequest) (*QueryResult, *http.Response, error)
 
 	/*
+	RetrieveRecord Retrieve records or fields
+
+	Retrieve records or fields based on the specified object ID.
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param sObjectName
+	@param id Record Id
+	@return ApiRetrieveRecordRequest
+	*/
+	RetrieveRecord(ctx context.Context, sObjectName string, id string) ApiRetrieveRecordRequest
+
+	// RetrieveRecordExecute executes the request
+	//  @return map[string]interface{}
+	RetrieveRecordExecute(r ApiRetrieveRecordRequest) (map[string]interface{}, *http.Response, error)
+
+	/*
 	RunTestsAsync Run tests asynchronously
 
 	Runs one or more methods within one or more Apex classes, using the asynchronous test execution mechanism. In the request body, you can specify test class names and IDs, suite names and IDs, the maximum number of failed tests to allow, and the test level, as comma-separated lists or as an array. You can also indicate whether to opt out of collecting code coverage information during the test run (available in API version 43.0 and later).
@@ -834,6 +850,134 @@ func (a *DefaultApiService) QueryExecute(r ApiQueryRequest) (*QueryResult, *http
 	}
 
 	localVarQueryParams.Add("q", parameterToString(*r.q, ""))
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+    token.SetAuthHeader(req)
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+
+    respBodyReadCloser := localVarHTTPResponse.Body
+    if localVarHTTPResponse.Header.Get("Content-Encoding") == "gzip" {
+        respBodyReadCloser, err = gzip.NewReader(localVarHTTPResponse.Body)
+    }
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+        localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+        localVarHTTPResponse.Body.Close()
+        respBodyReadCloser.Close()
+        localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+        if err != nil {
+            return localVarReturnValue, localVarHTTPResponse, err
+        }
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+    localVarBody, err := ioutil.ReadAll(respBodyReadCloser)
+    localVarHTTPResponse.Body.Close()
+    respBodyReadCloser.Close()
+    localVarHTTPResponse.Body = ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+    if err != nil {
+        return localVarReturnValue, localVarHTTPResponse, err
+    }
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+    return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRetrieveRecordRequest struct {
+	ctx context.Context
+	ApiService DefaultApi
+	sObjectName string
+	id string
+}
+
+func (r ApiRetrieveRecordRequest) Execute() (map[string]interface{}, *http.Response, error) {
+	return r.ApiService.RetrieveRecordExecute(r)
+}
+
+/*
+RetrieveRecord Retrieve records or fields
+
+Retrieve records or fields based on the specified object ID.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param sObjectName
+ @param id Record Id
+ @return ApiRetrieveRecordRequest
+*/
+func (a *DefaultApiService) RetrieveRecord(ctx context.Context, sObjectName string, id string) ApiRetrieveRecordRequest {
+	return ApiRetrieveRecordRequest{
+		ApiService: a,
+		ctx: ctx,
+		sObjectName: sObjectName,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return map[string]interface{}
+func (a *DefaultApiService) RetrieveRecordExecute(r ApiRetrieveRecordRequest) (map[string]interface{}, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  map[string]interface{}
+	)
+
+    token, err := a.client.TokenSrc.Token()
+    if err != nil {
+        return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+    }
+
+    activeServer := a.client.cfg.GetActiveServer()
+    activeServer.SetServerVariable("instanceUrl", token.Extra("instance_url").(string))
+
+	localVarPath := activeServer.GetURL() + "/sobjects/{SObjectName}/{id}"
+    pathParams := map[string]string {
+        "SObjectName": url.PathEscape(parameterToString(strings.Trim(r.sObjectName, " "), "")),
+        "id": url.PathEscape(parameterToString(strings.Trim(r.id, " "), "")),
+    }
+    localVarPath = injectUrlVars(localVarPath, pathParams)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

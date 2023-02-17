@@ -21,6 +21,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 | *DefaultApi* | [**GetSObject**](docs/DefaultApi.md#getsobject) | **Get** /sobjects/{SObjectName} | Describe SObject metadata |
 | *DefaultApi* | [**GetSObjects**](docs/DefaultApi.md#getsobjects) | **Get** /sobjects | List SObjects |
 | *DefaultApi* | [**Query**](docs/DefaultApi.md#query) | **Get** /query | Executes query |
+| *DefaultApi* | [**RetrieveRecord**](docs/DefaultApi.md#retrieverecord) | **Get** /sobjects/{SObjectName}/{id} | Retrieve records or fields |
 | *DefaultApi* | [**RunTestsAsync**](docs/DefaultApi.md#runtestsasync) | **Post** /runTestsAsynchronous | Run tests asynchronously |
 | *DefaultApi* | [**RunTestsSync**](docs/DefaultApi.md#runtestssync) | **Post** /runTestsSynchronous | Run tests synchronously |
 | *DefaultApi* | [**Search**](docs/DefaultApi.md#search) | **Get** /search | Executes SOSL |
