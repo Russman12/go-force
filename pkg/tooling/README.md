@@ -15,6 +15,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 
 | Class        | Method        | HTTP request  | Summary       |
 | ------------ | ------------- | ------------- | ------------- |
+| *DefaultApi* | [**DescribeSObject**](docs/DefaultApi.md#describesobject) | **Get** /sobjects/{SObjectName}/describe | Completely describe SObject metadata |
 | *DefaultApi* | [**ExecuteAnonymous**](docs/DefaultApi.md#executeanonymous) | **Get** /executeAnonymous | Executes anonymous Apex |
 | *DefaultApi* | [**GetCompletions**](docs/DefaultApi.md#getcompletions) | **Get** /completions | Retrieve available code completions |
 | *DefaultApi* | [**GetSObject**](docs/DefaultApi.md#getsobject) | **Get** /sobjects/{SObjectName} | Describe SObject metadata |
@@ -27,24 +28,34 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 
 ## Documentation For Models
 
+ - [ActionOverride](docs/ActionOverride.md)
  - [AsyncTestRequest](docs/AsyncTestRequest.md)
  - [AsyncTestSimpleRequest](docs/AsyncTestSimpleRequest.md)
+ - [ChildRelationship](docs/ChildRelationship.md)
  - [CodeCoverageResult](docs/CodeCoverageResult.md)
  - [CodeCoverageWarning](docs/CodeCoverageWarning.md)
  - [CodeLocation](docs/CodeLocation.md)
  - [CompletionType](docs/CompletionType.md)
  - [DescribeGlobalResult](docs/DescribeGlobalResult.md)
+ - [DescribeSObjectResult](docs/DescribeSObjectResult.md)
+ - [DescribeSObjectResultExt](docs/DescribeSObjectResultExt.md)
  - [EncodingType](docs/EncodingType.md)
  - [ExecuteAnonymousResult](docs/ExecuteAnonymousResult.md)
+ - [Field](docs/Field.md)
+ - [FieldType](docs/FieldType.md)
  - [FlowCoverageResult](docs/FlowCoverageResult.md)
  - [FlowCoverageWarning](docs/FlowCoverageWarning.md)
  - [FlowProcessType](docs/FlowProcessType.md)
+ - [NamedLayoutInfo](docs/NamedLayoutInfo.md)
+ - [PicklistEntry](docs/PicklistEntry.md)
  - [QueryResult](docs/QueryResult.md)
+ - [RecordTypeInfo](docs/RecordTypeInfo.md)
  - [RunTestsResult](docs/RunTestsResult.md)
  - [SOSLResult](docs/SOSLResult.md)
  - [SObjectDescribe](docs/SObjectDescribe.md)
  - [SObjectDescribeURL](docs/SObjectDescribeURL.md)
  - [SObjectResult](docs/SObjectResult.md)
+ - [ScopeInfo](docs/ScopeInfo.md)
  - [TestLevel](docs/TestLevel.md)
  - [TestRequest](docs/TestRequest.md)
  - [TestResultsSuccess](docs/TestResultsSuccess.md)
