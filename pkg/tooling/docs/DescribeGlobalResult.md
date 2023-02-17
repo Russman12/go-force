@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Encoding** | Pointer to **string** |  | [optional] 
 **MaxBatchSize** | Pointer to **int32** |  | [optional] 
-**Sobjects** | Pointer to [**[]DescribeSObject**](DescribeSObject.md) |  | [optional] 
+**Sobjects** | Pointer to [**[]SObjectDescribe**](SObjectDescribe.md) |  | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasMaxBatchSize returns a boolean if a field has been set.
 
 ### GetSobjects
 
-`func (o *DescribeGlobalResult) GetSobjects() []DescribeSObject`
+`func (o *DescribeGlobalResult) GetSobjects() []SObjectDescribe`
 
 GetSobjects returns the Sobjects field if non-nil, zero value otherwise.
 
 ### GetSobjectsOk
 
-`func (o *DescribeGlobalResult) GetSobjectsOk() (*[]DescribeSObject, bool)`
+`func (o *DescribeGlobalResult) GetSobjectsOk() (*[]SObjectDescribe, bool)`
 
 GetSobjectsOk returns a tuple with the Sobjects field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSobjects
 
-`func (o *DescribeGlobalResult) SetSobjects(v []DescribeSObject)`
+`func (o *DescribeGlobalResult) SetSobjects(v []SObjectDescribe)`
 
 SetSobjects sets Sobjects field to given value.
 

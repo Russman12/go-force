@@ -15,32 +15,32 @@ import (
 	"encoding/json"
 )
 
-// DescribeSObjectURL struct for DescribeSObjectURL
-type DescribeSObjectURL struct {
+// SObjectDescribeURL struct for SObjectDescribeURL
+type SObjectDescribeURL struct {
 	RowTemplate *string `json:"rowTemplate,omitempty"`
 	Describe *string `json:"describe,omitempty"`
 	Sobject *string `json:"sobject,omitempty"`
 }
 
-// NewDescribeSObjectURL instantiates a new DescribeSObjectURL object
+// NewSObjectDescribeURL instantiates a new SObjectDescribeURL object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDescribeSObjectURL() *DescribeSObjectURL {
-	this := DescribeSObjectURL{}
+func NewSObjectDescribeURL() *SObjectDescribeURL {
+	this := SObjectDescribeURL{}
 	return &this
 }
 
-// NewDescribeSObjectURLWithDefaults instantiates a new DescribeSObjectURL object
+// NewSObjectDescribeURLWithDefaults instantiates a new SObjectDescribeURL object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewDescribeSObjectURLWithDefaults() *DescribeSObjectURL {
-	this := DescribeSObjectURL{}
+func NewSObjectDescribeURLWithDefaults() *SObjectDescribeURL {
+	this := SObjectDescribeURL{}
 	return &this
 }
 
 // GetRowTemplate returns the RowTemplate field value if set, zero value otherwise.
-func (o *DescribeSObjectURL) GetRowTemplate() string {
+func (o *SObjectDescribeURL) GetRowTemplate() string {
 	if o == nil || isNil(o.RowTemplate) {
 		var ret string
 		return ret
@@ -50,7 +50,7 @@ func (o *DescribeSObjectURL) GetRowTemplate() string {
 
 // GetRowTemplateOk returns a tuple with the RowTemplate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DescribeSObjectURL) GetRowTemplateOk() (*string, bool) {
+func (o *SObjectDescribeURL) GetRowTemplateOk() (*string, bool) {
 	if o == nil || isNil(o.RowTemplate) {
     return nil, false
 	}
@@ -58,7 +58,7 @@ func (o *DescribeSObjectURL) GetRowTemplateOk() (*string, bool) {
 }
 
 // HasRowTemplate returns a boolean if a field has been set.
-func (o *DescribeSObjectURL) HasRowTemplate() bool {
+func (o *SObjectDescribeURL) HasRowTemplate() bool {
 	if o != nil && !isNil(o.RowTemplate) {
 		return true
 	}
@@ -67,12 +67,12 @@ func (o *DescribeSObjectURL) HasRowTemplate() bool {
 }
 
 // SetRowTemplate gets a reference to the given string and assigns it to the RowTemplate field.
-func (o *DescribeSObjectURL) SetRowTemplate(v string) {
+func (o *SObjectDescribeURL) SetRowTemplate(v string) {
 	o.RowTemplate = &v
 }
 
 // GetDescribe returns the Describe field value if set, zero value otherwise.
-func (o *DescribeSObjectURL) GetDescribe() string {
+func (o *SObjectDescribeURL) GetDescribe() string {
 	if o == nil || isNil(o.Describe) {
 		var ret string
 		return ret
@@ -82,7 +82,7 @@ func (o *DescribeSObjectURL) GetDescribe() string {
 
 // GetDescribeOk returns a tuple with the Describe field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DescribeSObjectURL) GetDescribeOk() (*string, bool) {
+func (o *SObjectDescribeURL) GetDescribeOk() (*string, bool) {
 	if o == nil || isNil(o.Describe) {
     return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *DescribeSObjectURL) GetDescribeOk() (*string, bool) {
 }
 
 // HasDescribe returns a boolean if a field has been set.
-func (o *DescribeSObjectURL) HasDescribe() bool {
+func (o *SObjectDescribeURL) HasDescribe() bool {
 	if o != nil && !isNil(o.Describe) {
 		return true
 	}
@@ -99,12 +99,12 @@ func (o *DescribeSObjectURL) HasDescribe() bool {
 }
 
 // SetDescribe gets a reference to the given string and assigns it to the Describe field.
-func (o *DescribeSObjectURL) SetDescribe(v string) {
+func (o *SObjectDescribeURL) SetDescribe(v string) {
 	o.Describe = &v
 }
 
 // GetSobject returns the Sobject field value if set, zero value otherwise.
-func (o *DescribeSObjectURL) GetSobject() string {
+func (o *SObjectDescribeURL) GetSobject() string {
 	if o == nil || isNil(o.Sobject) {
 		var ret string
 		return ret
@@ -114,7 +114,7 @@ func (o *DescribeSObjectURL) GetSobject() string {
 
 // GetSobjectOk returns a tuple with the Sobject field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DescribeSObjectURL) GetSobjectOk() (*string, bool) {
+func (o *SObjectDescribeURL) GetSobjectOk() (*string, bool) {
 	if o == nil || isNil(o.Sobject) {
     return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *DescribeSObjectURL) GetSobjectOk() (*string, bool) {
 }
 
 // HasSobject returns a boolean if a field has been set.
-func (o *DescribeSObjectURL) HasSobject() bool {
+func (o *SObjectDescribeURL) HasSobject() bool {
 	if o != nil && !isNil(o.Sobject) {
 		return true
 	}
@@ -131,11 +131,11 @@ func (o *DescribeSObjectURL) HasSobject() bool {
 }
 
 // SetSobject gets a reference to the given string and assigns it to the Sobject field.
-func (o *DescribeSObjectURL) SetSobject(v string) {
+func (o *SObjectDescribeURL) SetSobject(v string) {
 	o.Sobject = &v
 }
 
-func (o DescribeSObjectURL) MarshalJSON() ([]byte, error) {
+func (o SObjectDescribeURL) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if !isNil(o.RowTemplate) {
 		toSerialize["rowTemplate"] = o.RowTemplate
@@ -149,38 +149,38 @@ func (o DescribeSObjectURL) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableDescribeSObjectURL struct {
-	value *DescribeSObjectURL
+type NullableSObjectDescribeURL struct {
+	value *SObjectDescribeURL
 	isSet bool
 }
 
-func (v NullableDescribeSObjectURL) Get() *DescribeSObjectURL {
+func (v NullableSObjectDescribeURL) Get() *SObjectDescribeURL {
 	return v.value
 }
 
-func (v *NullableDescribeSObjectURL) Set(val *DescribeSObjectURL) {
+func (v *NullableSObjectDescribeURL) Set(val *SObjectDescribeURL) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableDescribeSObjectURL) IsSet() bool {
+func (v NullableSObjectDescribeURL) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableDescribeSObjectURL) Unset() {
+func (v *NullableSObjectDescribeURL) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableDescribeSObjectURL(val *DescribeSObjectURL) *NullableDescribeSObjectURL {
-	return &NullableDescribeSObjectURL{value: val, isSet: true}
+func NewNullableSObjectDescribeURL(val *SObjectDescribeURL) *NullableSObjectDescribeURL {
+	return &NullableSObjectDescribeURL{value: val, isSet: true}
 }
 
-func (v NullableDescribeSObjectURL) MarshalJSON() ([]byte, error) {
+func (v NullableSObjectDescribeURL) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableDescribeSObjectURL) UnmarshalJSON(src []byte) error {
+func (v *NullableSObjectDescribeURL) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

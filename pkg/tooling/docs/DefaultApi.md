@@ -6,6 +6,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 | ------------- | ------------- | ------------- |
 | [**ExecuteAnonymous**](#executeanonymous) | **Get** /executeAnonymous | Executes anonymous Apex |
 | [**GetCompletions**](#getcompletions) | **Get** /completions | Retrieve available code completions |
+| [**GetSObject**](#getsobject) | **Get** /sobjects/{SObjectName} | Describe SObject metadata |
 | [**GetSObjects**](#getsobjects) | **Get** /sobjects | List SObjects |
 | [**Query**](#query) | **Get** /query | Executes query |
 | [**RunTestsAsync**](#runtestsasync) | **Post** /runTestsAsynchronous | Run tests asynchronously |
@@ -151,6 +152,86 @@ Other parameters are passed through a pointer to a apiGetCompletionsRequest stru
 ### Return type
 
 **interface{}**
+
+### Authorization
+
+[oAuth (password)](../README.md#oauth--password-), [oAuth (application)](../README.md#oauth--application-)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSObject
+
+> SObjectResult GetSObject(ctx, sObjectName).Execute()
+
+Describes the individual metadata for the specified object.
+
+For more details see [Salesforce Documentation](https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm)
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    "golang.org/x/oauth2"
+    "github.com/russman12/go-force/pkg/tooling"
+)
+
+func main() {
+    // auth against salesforce
+    oAuthCfg := oauth2.Config{}
+    token, err := oAuthCfg.PasswordCredentialsToken(context.Background(), "username", "password")
+    if err != nil {
+        panic(err)
+    }
+    tokenSrc := oAuthCfg.TokenSource(context.Background(), token)
+
+    configuration := tooling.NewConfiguration()
+    apiClient := tooling.NewAPIClient(configuration, tokenSrc)
+
+    sObjectName := "sObjectName_example" // string | 
+
+    resp, r, err := apiClient.DefaultApi.GetSObject(context.Background(), sObjectName).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DefaultApi.GetSObject``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSObject`: SObjectResult
+    fmt.Fprintf(os.Stdout, "Response from `DefaultApi.GetSObject`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+| Name         | Type          | Description   | Notes        |
+| ------------ | ------------- | ------------- | ------------ |
+| **ctx** | **context.Context** | context for logging, cancellation, deadlines, tracing, etc. | |
+| **sObjectName** | **string** |  |  |
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSObjectRequest struct via the builder pattern
+
+
+| Name          | Type          | Description   | Notes         |
+| ------------- | ------------- | ------------- | ------------- |
+|  |
+
+### Return type
+
+[**SObjectResult**](SObjectResult.md)
 
 ### Authorization
 

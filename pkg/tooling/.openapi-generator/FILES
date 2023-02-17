@@ -11,8 +11,6 @@ docs/CodeLocation.md
 docs/CompletionType.md
 docs/DefaultApi.md
 docs/DescribeGlobalResult.md
-docs/DescribeSObject.md
-docs/DescribeSObjectURL.md
 docs/EncodingType.md
 docs/ExecuteAnonymousResult.md
 docs/FlowCoverageResult.md
@@ -21,6 +19,9 @@ docs/FlowProcessType.md
 docs/QueryResult.md
 docs/RunTestsResult.md
 docs/SOSLResult.md
+docs/SObjectDescribe.md
+docs/SObjectDescribeURL.md
+docs/SObjectResult.md
 docs/TestLevel.md
 docs/TestRequest.md
 docs/TestResultsSuccess.md
@@ -36,8 +37,6 @@ model_code_coverage_warning.go
 model_code_location.go
 model_completion_type.go
 model_describe_global_result.go
-model_describe_s_object.go
-model_describe_s_object_url.go
 model_encoding_type.go
 model_execute_anonymous_result.go
 model_flow_coverage_result.go
@@ -45,6 +44,9 @@ model_flow_coverage_warning.go
 model_flow_process_type.go
 model_query_result.go
 model_run_tests_result.go
+model_s_object_describe.go
+model_s_object_describe_url.go
+model_s_object_result.go
 model_sosl_result.go
 model_test_level.go
 model_test_request.go

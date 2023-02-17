@@ -227,6 +227,35 @@ paths:
           content: {}
           description: Bad Request
       summary: List SObjects
+  /sobjects/{SObjectName}:
+    get:
+      description: Describes the individual metadata for the specified object.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: getSObject
+      parameters:
+      - explode: false
+        in: path
+        name: SObjectName
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SObjectResult'
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Describe SObject metadata
 components:
   schemas:
     CompletionType:
@@ -860,9 +889,9 @@ components:
           type: integer
         sobjects:
           items:
-            $ref: '#/components/schemas/DescribeSObject'
+            $ref: '#/components/schemas/SObjectDescribe'
           type: array
-    DescribeSObjectURL:
+    SObjectDescribeURL:
       example:
         rowTemplate: rowTemplate
         describe: describe
@@ -875,7 +904,7 @@ components:
         sobject:
           type: string
       type: object
-    DescribeSObject:
+    SObjectDescribe:
       example:
         mruEnabled: true
         updateable: true
@@ -966,8 +995,52 @@ components:
         updateable:
           type: boolean
         urls:
-          $ref: '#/components/schemas/DescribeSObjectURL'
+          $ref: '#/components/schemas/SObjectDescribeURL'
       type: object
+    SObjectResult:
+      example:
+        objectDescribe:
+          mruEnabled: true
+          updateable: true
+          activateable: true
+          deprecatedAndHidden: true
+          deletable: true
+          replicateable: true
+          isSubtype: true
+          mergeable: true
+          urls:
+            rowTemplate: rowTemplate
+            describe: describe
+            sobject: sobject
+          feedEnabled: true
+          customSetting: true
+          isInterface: true
+          deepCloneable: true
+          layoutable: true
+          custom: true
+          associateParentEntity: associateParentEntity
+          undeletable: true
+          label: label
+          keyPrefix: keyPrefix
+          searchable: true
+          queryable: true
+          createable: true
+          retrieveable: true
+          associateEntityType: associateEntityType
+          hasSubtypes: true
+          name: name
+          labelPlural: labelPlural
+          triggerable: true
+        recentItems:
+        - "{}"
+        - "{}"
+      properties:
+        objectDescribe:
+          $ref: '#/components/schemas/SObjectDescribe'
+        recentItems:
+          items:
+            type: object
+          type: array
   securitySchemes:
     oAuth:
       description: This API uses OAuth 2 with various flows

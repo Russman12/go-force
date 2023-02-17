@@ -19,7 +19,7 @@ import (
 type DescribeGlobalResult struct {
 	Encoding *string `json:"encoding,omitempty"`
 	MaxBatchSize *int32 `json:"maxBatchSize,omitempty"`
-	Sobjects []DescribeSObject `json:"sobjects,omitempty"`
+	Sobjects []SObjectDescribe `json:"sobjects,omitempty"`
 }
 
 // NewDescribeGlobalResult instantiates a new DescribeGlobalResult object
@@ -104,9 +104,9 @@ func (o *DescribeGlobalResult) SetMaxBatchSize(v int32) {
 }
 
 // GetSobjects returns the Sobjects field value if set, zero value otherwise.
-func (o *DescribeGlobalResult) GetSobjects() []DescribeSObject {
+func (o *DescribeGlobalResult) GetSobjects() []SObjectDescribe {
 	if o == nil || isNil(o.Sobjects) {
-		var ret []DescribeSObject
+		var ret []SObjectDescribe
 		return ret
 	}
 	return o.Sobjects
@@ -114,7 +114,7 @@ func (o *DescribeGlobalResult) GetSobjects() []DescribeSObject {
 
 // GetSobjectsOk returns a tuple with the Sobjects field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DescribeGlobalResult) GetSobjectsOk() ([]DescribeSObject, bool) {
+func (o *DescribeGlobalResult) GetSobjectsOk() ([]SObjectDescribe, bool) {
 	if o == nil || isNil(o.Sobjects) {
     return nil, false
 	}
@@ -130,8 +130,8 @@ func (o *DescribeGlobalResult) HasSobjects() bool {
 	return false
 }
 
-// SetSobjects gets a reference to the given []DescribeSObject and assigns it to the Sobjects field.
-func (o *DescribeGlobalResult) SetSobjects(v []DescribeSObject) {
+// SetSobjects gets a reference to the given []SObjectDescribe and assigns it to the Sobjects field.
+func (o *DescribeGlobalResult) SetSobjects(v []SObjectDescribe) {
 	o.Sobjects = v
 }
 
