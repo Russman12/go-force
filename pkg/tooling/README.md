@@ -16,6 +16,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 | Class        | Method        | HTTP request  | Summary       |
 | ------------ | ------------- | ------------- | ------------- |
 | *DefaultApi* | [**CreateRecord**](docs/DefaultApi.md#createrecord) | **Post** /sobjects/{SObjectName} | Create a new record |
+| *DefaultApi* | [**DeleteRecord**](docs/DefaultApi.md#deleterecord) | **Delete** /sobjects/{SObjectName}/{id} | Delete record |
 | *DefaultApi* | [**DescribeSObject**](docs/DefaultApi.md#describesobject) | **Get** /sobjects/{SObjectName}/describe | Completely describe SObject metadata |
 | *DefaultApi* | [**ExecuteAnonymous**](docs/DefaultApi.md#executeanonymous) | **Get** /executeAnonymous | Executes anonymous Apex |
 | *DefaultApi* | [**GetCompletions**](docs/DefaultApi.md#getcompletions) | **Get** /completions | Retrieve available code completions |
@@ -26,7 +27,7 @@ All URIs are relative to *https://myorg.lightning.force.com/services/data/v56.0/
 | *DefaultApi* | [**RunTestsAsync**](docs/DefaultApi.md#runtestsasync) | **Post** /runTestsAsynchronous | Run tests asynchronously |
 | *DefaultApi* | [**RunTestsSync**](docs/DefaultApi.md#runtestssync) | **Post** /runTestsSynchronous | Run tests synchronously |
 | *DefaultApi* | [**Search**](docs/DefaultApi.md#search) | **Get** /search | Executes SOSL |
-| *DefaultApi* | [**UpdateRecord**](docs/DefaultApi.md#updaterecord) | **Patch** /sobjects/{SObjectName}/{id} | Update records |
+| *DefaultApi* | [**UpdateRecord**](docs/DefaultApi.md#updaterecord) | **Patch** /sobjects/{SObjectName}/{id} | Update record |
 
 
 ## Documentation For Models

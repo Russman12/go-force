@@ -321,6 +321,38 @@ paths:
           description: Bad Request
       summary: Completely describe SObject metadata
   /sobjects/{SObjectName}/{id}:
+    delete:
+      description: Delete records based on the specified object ID.
+      externalDocs:
+        description: Salesforce Documentation
+        url: https://developer.salesforce.com/docs/atlas.en-us.api_tooling.meta/api_tooling/intro_rest_resources.htm
+      operationId: deleteRecord
+      parameters:
+      - explode: false
+        in: path
+        name: SObjectName
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Record Id
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Successful response
+        "401":
+          content: {}
+          description: Unauthorized
+        "400":
+          content: {}
+          description: Bad Request
+      summary: Delete record
     get:
       description: Retrieve records or fields based on the specified object ID.
       externalDocs:
@@ -393,7 +425,7 @@ paths:
         "400":
           content: {}
           description: Bad Request
-      summary: Update records
+      summary: Update record
 components:
   schemas:
     CompletionType:
