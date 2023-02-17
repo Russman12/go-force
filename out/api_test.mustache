@@ -16,13 +16,15 @@ import (
     "github.com/stretchr/testify/assert"
     "github.com/stretchr/testify/require"
     "testing"
+
     {{goImportAlias}} "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}{{#isGoSubmodule}}/pkg/{{packageName}}{{/isGoSubmodule}}"
+    "{{gitHost}}/{{gitUserId}}/{{gitRepoId}}/mocks"
 )
 
 func Test_{{packageName}}_{{classname}}Service(t *testing.T) {
 
     configuration := {{goImportAlias}}.NewConfiguration()
-    apiClient := {{goImportAlias}}.NewAPIClient(configuration)
+    apiClient := {{goImportAlias}}.NewAPIClient(configuration, mocks.NewTokenSource(t))
 
 {{#operations}}
 {{#operation}}

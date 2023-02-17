@@ -14,13 +14,15 @@ import (
     "github.com/stretchr/testify/assert"
     "github.com/stretchr/testify/require"
     "testing"
+
     openapiclient "github.com/russman12/go-force/pkg/tooling"
+    "github.com/russman12/go-force/mocks"
 )
 
 func Test_tooling_DefaultApiService(t *testing.T) {
 
     configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
+    apiClient := openapiclient.NewAPIClient(configuration, mocks.NewTokenSource(t))
 
     t.Run("Test DefaultApiService CreateRecord", func(t *testing.T) {
 

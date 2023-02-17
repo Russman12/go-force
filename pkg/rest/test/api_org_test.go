@@ -11,16 +11,18 @@ package rest
 
 import (
 	"context"
-	openapiclient "github.com/russman12/go-force/pkg/rest"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
+
+	"github.com/russman12/go-force/mocks"
+	openapiclient "github.com/russman12/go-force/pkg/rest"
 )
 
 func Test_rest_OrgApiService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	apiClient := openapiclient.NewAPIClient(configuration, mocks.NewTokenSource(t))
 
 	t.Run("Test OrgApiService GetLimits", func(t *testing.T) {
 

@@ -11,16 +11,18 @@ package bulkv2
 
 import (
 	"context"
-	openapiclient "github.com/russman12/go-force/pkg/bulkv2"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
+
+	"github.com/russman12/go-force/mocks"
+	openapiclient "github.com/russman12/go-force/pkg/bulkv2"
 )
 
 func Test_bulkv2_QueryApiService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
+	apiClient := openapiclient.NewAPIClient(configuration, mocks.NewTokenSource(t))
 
 	t.Run("Test QueryApiService AbortQueryJob", func(t *testing.T) {
 
